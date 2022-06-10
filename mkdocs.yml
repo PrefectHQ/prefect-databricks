@@ -37,3 +37,19 @@ plugins:
 nav:
     - Home: index.md
     - Credentials: credentials.md
+    - Accounts: accounts.md
+    - Dashboards: dashboards.md
+    - Git Credentials: git_credentials.md
+    - Global Init Scripts: global_init_scripts.md
+    - Ip Access Lists: ip_access_lists.md
+    - Mlflow: mlflow.md
+    - Permissions: permissions.md
+    - Queries: queries.md
+    - Repos: repos.md
+    - Rest: rest.md
+    - Sql: sql.md
+    - Token Management: token_management.md
+    - V2dot0: v2dot0.md
+    - V2dot1: v2dot1.md
+    - Workspace Conf: workspace_conf.md
+    
