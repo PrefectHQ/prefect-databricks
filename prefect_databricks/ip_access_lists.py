@@ -41,6 +41,7 @@ async def post_ip_access_lists(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/ip-access-lists?](
     https://{databricks_instance}/api/2.0/ip-access-lists?)
 
@@ -51,7 +52,7 @@ async def post_ip_access_lists(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists"  # noqa
     responses = {
-        200: "An IP access list was successfully created.",
+        200: "An IP access list was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -79,6 +80,7 @@ async def get_ip_access_lists(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/ip-access-lists?](
     https://{databricks_instance}/api/2.0/ip-access-lists?)
 
@@ -89,7 +91,7 @@ async def get_ip_access_lists(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists"  # noqa
     responses = {
-        200: "IP access lists were successfully returned.",
+        200: "IP access lists were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -119,6 +121,7 @@ async def get_ip_access_lists_ip_access_list_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?](
     https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?)
 
@@ -129,7 +132,7 @@ async def get_ip_access_lists_ip_access_list_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
-        200: "An IP access list was successfully returned.",
+        200: "An IP access list was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -170,6 +173,7 @@ async def put_ip_access_lists_ip_access_list_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?](
     https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?)
 
@@ -180,7 +184,7 @@ async def put_ip_access_lists_ip_access_list_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
-        200: "The IP access list was successfully replaced.",
+        200: "The IP access list was successfully replaced.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -210,6 +214,7 @@ async def delete_ip_access_lists_ip_access_list_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?](
     https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?)
 
@@ -220,7 +225,7 @@ async def delete_ip_access_lists_ip_access_list_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
-        200: "The IP access list was successfully deleted.",
+        200: "The IP access list was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -261,6 +266,7 @@ async def patch_ip_access_lists_ip_access_list_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?](
     https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}?)
 
@@ -271,7 +277,7 @@ async def patch_ip_access_lists_ip_access_list_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
-        200: "The IP access list was successfully updated.",
+        200: "The IP access list was successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(

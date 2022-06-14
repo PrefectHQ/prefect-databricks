@@ -34,6 +34,7 @@ async def get_permissions_authorization_tokens_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens/permissionLevels?)
 
@@ -44,7 +45,7 @@ async def get_permissions_authorization_tokens_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens/permissionLevels"  # noqa
     responses = {
-        200: "Token permission levels were successfully returned.",
+        200: "Token permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -72,6 +73,7 @@ async def get_permissions_authorization_passwords_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords/permissionLevels?)
 
@@ -82,7 +84,7 @@ async def get_permissions_authorization_passwords_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords/permissionLevels"  # noqa
     responses = {
-        200: "Password permission levels were successfully returned.",
+        200: "Password permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -112,6 +114,7 @@ async def get_permissions_clusters_cluster_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}/permissionLevels?)
 
@@ -122,7 +125,7 @@ async def get_permissions_clusters_cluster_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}/permissionLevels"  # noqa
     responses = {
-        200: "Cluster permission levels were successfully returned.",
+        200: "Cluster permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -152,6 +155,7 @@ async def get_permissions_instance_pools_instance_pool_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}/permissionLevels?)
 
@@ -162,7 +166,7 @@ async def get_permissions_instance_pools_instance_pool_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}/permissionLevels"  # noqa
     responses = {
-        200: "Pool permission levels were successfully returned.",
+        200: "Pool permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -192,6 +196,7 @@ async def get_permissions_jobs_job_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}/permissionLevels?)
 
@@ -202,7 +207,7 @@ async def get_permissions_jobs_job_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}/permissionLevels"  # noqa
     responses = {
-        200: "Job permission levels were successfully returned.",
+        200: "Job permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -232,6 +237,7 @@ async def get_permissions_pipelines_pipeline_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}/permissionLevels?)
 
@@ -242,7 +248,7 @@ async def get_permissions_pipelines_pipeline_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}/permissionLevels"  # noqa
     responses = {
-        200: "Pipeline permission levels were successfully returned.",
+        200: "Pipeline permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -272,6 +278,7 @@ async def get_permissions_notebooks_notebook_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}/permissionLevels?)
 
@@ -282,7 +289,7 @@ async def get_permissions_notebooks_notebook_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}/permissionLevels"  # noqa
     responses = {
-        200: "Notebook permission levels were successfully returned.",
+        200: "Notebook permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -313,6 +320,7 @@ async def get_permissions_directories_directory_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}/permissionLevels?)
 
@@ -323,7 +331,7 @@ async def get_permissions_directories_directory_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}/permissionLevels"  # noqa
     responses = {
-        200: "Directory permission levels were successfully returned.",
+        200: "Directory permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -353,6 +361,7 @@ async def get_permissions_experiments_experiment_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}/permissionLevels?)
 
@@ -363,7 +372,7 @@ async def get_permissions_experiments_experiment_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}/permissionLevels"  # noqa
     responses = {
-        200: "Experiment permission levels were successfully returned.",
+        200: "Experiment permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -394,6 +403,7 @@ async def get_permissions_registered_models_registered_model_id_permission_level
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}/permissionLevels?)
 
@@ -404,7 +414,7 @@ async def get_permissions_registered_models_registered_model_id_permission_level
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}/permissionLevels"  # noqa
     responses = {
-        200: "Registered model permission levels were successfully returned.",
+        200: "Registered model permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -435,6 +445,7 @@ async def get_permissions_sql_endpoints_endpoint_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}/permissionLevels?)
 
@@ -445,7 +456,7 @@ async def get_permissions_sql_endpoints_endpoint_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}/permissionLevels"  # noqa
     responses = {
-        200: "SQL endpoint permission levels were successfully returned.",
+        200: "SQL endpoint permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -475,6 +486,7 @@ async def get_permissions_repos_repo_id_permission_levels(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}/permissionLevels?](
     https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}/permissionLevels?)
 
@@ -485,7 +497,7 @@ async def get_permissions_repos_repo_id_permission_levels(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}/permissionLevels"  # noqa
     responses = {
-        200: "Repo permission levels were successfully returned.",
+        200: "Repo permission levels were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -515,6 +527,7 @@ async def get_permissions_authorization_tokens(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens?)
 
@@ -525,7 +538,7 @@ async def get_permissions_authorization_tokens(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens"  # noqa
     responses = {
-        200: "Tokens were successfully returned.",
+        200: "Tokens were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -569,6 +582,7 @@ async def patch_permissions_authorization_tokens(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens?)
 
@@ -579,7 +593,7 @@ async def patch_permissions_authorization_tokens(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens"  # noqa
     responses = {
-        200: "The token permissions for specified entities were successfully updated.",
+        200: "The token permissions for specified entities were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -636,6 +650,7 @@ async def put_permissions_authorization_tokens(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens?)
 
@@ -646,7 +661,7 @@ async def put_permissions_authorization_tokens(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/tokens"  # noqa
     responses = {
-        200: "The permissions for the workspace were successfully updated.",
+        200: "The permissions for the workspace were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -674,6 +689,7 @@ async def get_permissions_authorization_passwords(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords?)
 
@@ -684,7 +700,7 @@ async def get_permissions_authorization_passwords(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords"  # noqa
     responses = {
-        200: "Permissions for passwords were successfully returned.",
+        200: "Permissions for passwords were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -717,6 +733,7 @@ async def patch_permissions_authorization_passwords(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords?)
 
@@ -727,7 +744,7 @@ async def patch_permissions_authorization_passwords(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords"  # noqa
     responses = {
-        200: "The token permissions for specified items were updated successfully.",
+        200: "The token permissions for specified items were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -758,6 +775,7 @@ async def put_permissions_authorization_passwords(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords?](
     https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords?)
 
@@ -768,7 +786,7 @@ async def put_permissions_authorization_passwords(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/authorization/passwords"  # noqa
     responses = {
-        200: "The permissions for the workspace were successfully updated.",
+        200: "The permissions for the workspace were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -798,6 +816,7 @@ async def get_permissions_clusters_cluster_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}?)
 
@@ -808,7 +827,7 @@ async def get_permissions_clusters_cluster_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}"  # noqa
     responses = {
-        200: "Permissions for the cluster were successfully returned.",
+        200: "Permissions for the cluster were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -841,6 +860,7 @@ async def patch_permissions_clusters_cluster_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}?)
 
@@ -851,7 +871,7 @@ async def patch_permissions_clusters_cluster_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}"  # noqa
     responses = {
-        200: "The cluster permissions for specified items were successfully updated.",
+        200: "The cluster permissions for specified items were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -884,6 +904,7 @@ async def put_permissions_clusters_cluster_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}?)
 
@@ -894,7 +915,7 @@ async def put_permissions_clusters_cluster_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/clusters/{cluster_id}"  # noqa
     responses = {
-        200: "The permissions for the cluster were successfully updated.",
+        200: "The permissions for the cluster were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -924,6 +945,7 @@ async def get_permissions_instance_pools_instance_pool_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}?)
 
@@ -934,7 +956,7 @@ async def get_permissions_instance_pools_instance_pool_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}"  # noqa
     responses = {
-        200: "Permissions for the pool were successfully returned.",
+        200: "Permissions for the pool were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -967,6 +989,7 @@ async def patch_permissions_instance_pools_instance_pool_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}?)
 
@@ -977,7 +1000,7 @@ async def patch_permissions_instance_pools_instance_pool_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}"  # noqa
     responses = {
-        200: "The pool permissions were updated successfully.",
+        200: "The pool permissions were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1010,6 +1033,7 @@ async def put_permissions_instance_pools_instance_pool_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}?)
 
@@ -1020,7 +1044,7 @@ async def put_permissions_instance_pools_instance_pool_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/instance-pools/{instance_pool_id}"  # noqa
     responses = {
-        200: "The permissions for the workspace were successfully updated.",
+        200: "The permissions for the workspace were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1050,6 +1074,7 @@ async def get_permissions_jobs_job_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}?)
 
@@ -1060,7 +1085,7 @@ async def get_permissions_jobs_job_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}"  # noqa
     responses = {
-        200: "Permissions for the job were successfully returned.",
+        200: "Permissions for the job were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1093,6 +1118,7 @@ async def patch_permissions_jobs_job_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}?)
 
@@ -1103,7 +1129,7 @@ async def patch_permissions_jobs_job_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}"  # noqa
     responses = {
-        200: "The job permissions for specified items were successfully updated.",
+        200: "The job permissions for specified items were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1136,6 +1162,7 @@ async def put_permissions_jobs_job_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}?)
 
@@ -1146,7 +1173,7 @@ async def put_permissions_jobs_job_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/jobs/{job_id}"  # noqa
     responses = {
-        200: "The permissions for the workspace were updated successfully.",
+        200: "The permissions for the workspace were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1177,6 +1204,7 @@ async def get_permissions_pipelines_pipeline_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}?)
 
@@ -1187,7 +1215,7 @@ async def get_permissions_pipelines_pipeline_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}"  # noqa
     responses = {
-        200: "Permissions for the pipeline were successfully returned.",
+        200: "Permissions for the pipeline were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1220,6 +1248,7 @@ async def patch_permissions_pipelines_pipeline_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}?)
 
@@ -1230,7 +1259,7 @@ async def patch_permissions_pipelines_pipeline_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}"  # noqa
     responses = {
-        200: "The permissions for specified pipelines were successfully updated.",
+        200: "The permissions for specified pipelines were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1263,6 +1292,7 @@ async def put_permissions_pipelines_pipeline_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}?)
 
@@ -1273,7 +1303,7 @@ async def put_permissions_pipelines_pipeline_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/pipelines/{pipeline_id}"  # noqa
     responses = {
-        200: "The permissions for the pipeline were updated successfully.",
+        200: "The permissions for the pipeline were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1303,6 +1333,7 @@ async def get_permissions_notebooks_notebook_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}?)
 
@@ -1313,7 +1344,7 @@ async def get_permissions_notebooks_notebook_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}"  # noqa
     responses = {
-        200: "Permissions for the notebook were successfully returned.",
+        200: "Permissions for the notebook were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1346,6 +1377,7 @@ async def patch_permissions_notebooks_notebook_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}?)
 
@@ -1356,7 +1388,7 @@ async def patch_permissions_notebooks_notebook_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}"  # noqa
     responses = {
-        200: "The notebook permissions for specified items were updated successfully.",
+        200: "The notebook permissions for specified items were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1389,6 +1421,7 @@ async def put_permissions_notebooks_notebook_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}?)
 
@@ -1399,7 +1432,7 @@ async def put_permissions_notebooks_notebook_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/notebooks/{notebook_id}"  # noqa
     responses = {
-        200: "The permissions for the notebook were successfully updated.",
+        200: "The permissions for the notebook were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1429,6 +1462,7 @@ async def get_permissions_directories_directory_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}?)
 
@@ -1439,7 +1473,7 @@ async def get_permissions_directories_directory_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}"  # noqa
     responses = {
-        200: "Permissions for the directory were successfully returned.",
+        200: "Permissions for the directory were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1472,6 +1506,7 @@ async def patch_permissions_directories_directory_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}?)
 
@@ -1482,7 +1517,7 @@ async def patch_permissions_directories_directory_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}"  # noqa
     responses = {
-        200: "The directory permissions for specified items were successfully updated.",
+        200: "The directory permissions for specified items were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1515,6 +1550,7 @@ async def put_permissions_directories_directory_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}?)
 
@@ -1525,7 +1561,7 @@ async def put_permissions_directories_directory_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/directories/{directory_id}"  # noqa
     responses = {
-        200: "The permissions for the directory were successfully updated.",
+        200: "The permissions for the directory were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1555,6 +1591,7 @@ async def get_permissions_experiments_experiment_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}?)
 
@@ -1565,7 +1602,7 @@ async def get_permissions_experiments_experiment_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}"  # noqa
     responses = {
-        200: "Permissions for the experiment were successfully returned.",
+        200: "Permissions for the experiment were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1598,6 +1635,7 @@ async def patch_permissions_experiments_experiment_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}?)
 
@@ -1608,7 +1646,7 @@ async def patch_permissions_experiments_experiment_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}"  # noqa
     responses = {
-        200: "The experiment permissions for specified items were updated successfully.",
+        200: "The experiment permissions for specified items were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1641,6 +1679,7 @@ async def put_permissions_experiments_experiment_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}?)
 
@@ -1651,7 +1690,7 @@ async def put_permissions_experiments_experiment_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/experiments/{experiment_id}"  # noqa
     responses = {
-        200: "The permissions for the experiment were successfully updated.",
+        200: "The permissions for the experiment were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1681,6 +1720,7 @@ async def get_permissions_registered_models_registered_model_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}?)
 
@@ -1691,7 +1731,7 @@ async def get_permissions_registered_models_registered_model_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}"  # noqa
     responses = {
-        200: "Permissions for the registered model were successfully returned.",
+        200: "Permissions for the registered model were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1722,6 +1762,7 @@ async def patch_permissions_registered_models_registered_model_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}?)
 
@@ -1732,7 +1773,7 @@ async def patch_permissions_registered_models_registered_model_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}"  # noqa
     responses = {
-        200: "The registered model permissions for specified items were updated successfully.",
+        200: "The registered model permissions for specified items were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1765,6 +1806,7 @@ async def put_permissions_registered_models_registered_model_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}?)
 
@@ -1775,7 +1817,7 @@ async def put_permissions_registered_models_registered_model_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/registered-models/{registered_model_id}"  # noqa
     responses = {
-        200: "The permissions for the registered model were successfully updated.",
+        200: "The permissions for the registered model were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1805,6 +1847,7 @@ async def get_permissions_sql_endpoints_endpoint_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}?)
 
@@ -1815,7 +1858,7 @@ async def get_permissions_sql_endpoints_endpoint_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}"  # noqa
     responses = {
-        200: "Permissions for the SQL endpoints were successfully returned.",
+        200: "Permissions for the SQL endpoints were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1848,6 +1891,7 @@ async def patch_permissions_sql_endpoints_endpoint_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}?)
 
@@ -1858,7 +1902,7 @@ async def patch_permissions_sql_endpoints_endpoint_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}"  # noqa
     responses = {
-        200: "The SQL endpoint permissions for specified items were successfully updated.",
+        200: "The SQL endpoint permissions for specified items were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1891,6 +1935,7 @@ async def put_permissions_sql_endpoints_endpoint_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}?)
 
@@ -1901,7 +1946,7 @@ async def put_permissions_sql_endpoints_endpoint_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/sql/endpoints/{endpoint_id}"  # noqa
     responses = {
-        200: "The permissions for the SQL endpoint were successfully updated.",
+        200: "The permissions for the SQL endpoint were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1931,6 +1976,7 @@ async def get_permissions_repos_repo_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}?)
 
@@ -1941,7 +1987,7 @@ async def get_permissions_repos_repo_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}"  # noqa
     responses = {
-        200: "Permissions for the repo were successfully returned.",
+        200: "Permissions for the repo were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1974,6 +2020,7 @@ async def patch_permissions_repos_repo_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}?)
 
@@ -1984,7 +2031,7 @@ async def patch_permissions_repos_repo_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}"  # noqa
     responses = {
-        200: "The repo permissions for specified items were updated successfully.",
+        200: "The repo permissions for specified items were updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -2017,6 +2064,7 @@ async def put_permissions_repos_repo_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}?](
     https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}?)
 
@@ -2027,7 +2075,7 @@ async def put_permissions_repos_repo_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/permissions/repos/{repo_id}"  # noqa
     responses = {
-        200: "The permissions for the repo were successfully updated.",
+        200: "The permissions for the repo were successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(

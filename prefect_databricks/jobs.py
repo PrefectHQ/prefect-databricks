@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 @task
-async def post_2dot1_jobs_create(
+async def post_2_1_jobs_create(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -30,6 +30,7 @@ async def post_2dot1_jobs_create(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/create?](
     https://{databricks_instance}/api//2.1/jobs/create?)
 
@@ -40,7 +41,7 @@ async def post_2dot1_jobs_create(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/create"  # noqa
     responses = {
-        200: "Job was created successfully.",
+        200: "Job was created successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -53,7 +54,7 @@ async def post_2dot1_jobs_create(
 
 
 @task
-async def get_2dot1_jobs_list(
+async def get_2_1_jobs_list(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     limit: str = None,
@@ -76,6 +77,7 @@ async def get_2dot1_jobs_list(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s](
     https://{databricks_instance}/api//2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s)
 
@@ -86,7 +88,7 @@ async def get_2dot1_jobs_list(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/list"  # noqa
     responses = {
-        200: "List of jobs was retrieved successfully.",
+        200: "List of jobs was retrieved successfully.",  # noqa
     }
 
     params = {
@@ -105,7 +107,7 @@ async def get_2dot1_jobs_list(
 
 
 @task
-async def get_2dot1_jobs_get(
+async def get_2_1_jobs_get(
     databricks_instance: str,
     job_id: str,
     databricks_credentials: "DatabricksCredentials",
@@ -123,6 +125,7 @@ async def get_2dot1_jobs_get(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/get?&job_id=%s](
     https://{databricks_instance}/api//2.1/jobs/get?&job_id=%s)
 
@@ -133,7 +136,7 @@ async def get_2dot1_jobs_get(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/get"  # noqa
     responses = {
-        200: "Job was retrieved successfully.",
+        200: "Job was retrieved successfully.",  # noqa
     }
 
     params = {
@@ -150,7 +153,7 @@ async def get_2dot1_jobs_get(
 
 
 @task
-async def post_2dot1_jobs_reset(
+async def post_2_1_jobs_reset(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -166,6 +169,7 @@ async def post_2dot1_jobs_reset(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/reset?](
     https://{databricks_instance}/api//2.1/jobs/reset?)
 
@@ -176,7 +180,7 @@ async def post_2dot1_jobs_reset(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/reset"  # noqa
     responses = {
-        200: "Job was overwritten successfully.",
+        200: "Job was overwritten successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -189,7 +193,7 @@ async def post_2dot1_jobs_reset(
 
 
 @task
-async def post_2dot1_jobs_update(
+async def post_2_1_jobs_update(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -205,6 +209,7 @@ async def post_2dot1_jobs_update(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/update?](
     https://{databricks_instance}/api//2.1/jobs/update?)
 
@@ -215,7 +220,7 @@ async def post_2dot1_jobs_update(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/update"  # noqa
     responses = {
-        200: "Job was updated successfully.",
+        200: "Job was updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -228,7 +233,7 @@ async def post_2dot1_jobs_update(
 
 
 @task
-async def post_2dot1_jobs_delete(
+async def post_2_1_jobs_delete(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -243,6 +248,7 @@ async def post_2dot1_jobs_delete(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/delete?](
     https://{databricks_instance}/api//2.1/jobs/delete?)
 
@@ -253,7 +259,7 @@ async def post_2dot1_jobs_delete(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/delete"  # noqa
     responses = {
-        200: "Job was deleted successfully.",
+        200: "Job was deleted successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -266,7 +272,7 @@ async def post_2dot1_jobs_delete(
 
 
 @task
-async def post_2dot1_jobs_run_now(
+async def post_2_1_jobs_run_now(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -281,6 +287,7 @@ async def post_2dot1_jobs_run_now(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/run-now?](
     https://{databricks_instance}/api//2.1/jobs/run-now?)
 
@@ -291,7 +298,7 @@ async def post_2dot1_jobs_run_now(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/run-now"  # noqa
     responses = {
-        200: "Run was started successfully.",
+        200: "Run was started successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -304,7 +311,7 @@ async def post_2dot1_jobs_run_now(
 
 
 @task
-async def post_2dot1_jobs_runs_submit(
+async def post_2_1_jobs_runs_submit(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -322,6 +329,7 @@ async def post_2dot1_jobs_runs_submit(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/submit?](
     https://{databricks_instance}/api//2.1/jobs/runs/submit?)
 
@@ -332,7 +340,7 @@ async def post_2dot1_jobs_runs_submit(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/submit"  # noqa
     responses = {
-        200: "Run was created and started successfully.",
+        200: "Run was created and started successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -345,7 +353,7 @@ async def post_2dot1_jobs_runs_submit(
 
 
 @task
-async def get_2dot1_jobs_runs_list(
+async def get_2_1_jobs_runs_list(
     databricks_instance: str,
     active_only: str,
     completed_only: str,
@@ -393,6 +401,7 @@ async def get_2dot1_jobs_runs_list(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s](
     https://{databricks_instance}/api//2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s)
 
@@ -403,7 +412,7 @@ async def get_2dot1_jobs_runs_list(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/list"  # noqa
     responses = {
-        200: "List of runs was retrieved successfully.",
+        200: "List of runs was retrieved successfully.",  # noqa
     }
 
     params = {
@@ -428,7 +437,7 @@ async def get_2dot1_jobs_runs_list(
 
 
 @task
-async def get_2dot1_jobs_runs_get(
+async def get_2_1_jobs_runs_get(
     databricks_instance: str,
     run_id: str,
     databricks_credentials: "DatabricksCredentials",
@@ -448,6 +457,7 @@ async def get_2dot1_jobs_runs_get(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/get?&run_id=%s&include_history=%s](
     https://{databricks_instance}/api//2.1/jobs/runs/get?&run_id=%s&include_history=%s)
 
@@ -458,7 +468,7 @@ async def get_2dot1_jobs_runs_get(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/get"  # noqa
     responses = {
-        200: "Run was retrieved successfully.",
+        200: "Run was retrieved successfully.",  # noqa
     }
 
     params = {
@@ -476,7 +486,55 @@ async def get_2dot1_jobs_runs_get(
 
 
 @task
-async def post_2dot1_jobs_runs_cancel(
+async def get_2_0_jobs_runs_export(
+    databricks_instance: str,
+    run_id: str,
+    views_to_export: str,
+    databricks_credentials: "DatabricksCredentials",
+) -> Dict[str, Any]:
+    """
+    Export and retrieve the job run task.
+
+    Args:
+        databricks_instance: Databricks instance used in formatting the endpoint URL.
+        run_id: The canonical identifier for the run. This field is required.
+        views_to_export: Which views to export (CODE, DASHBOARDS, or ALL). Defaults to CODE.
+        databricks_credentials: Credentials to use for authentication with Databricks.
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api//2.0/jobs/runs/export?&run_id=%s&views_to_export=%s](
+    https://{databricks_instance}/api//2.0/jobs/runs/export?&run_id=%s&views_to_export=%s)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | Run was exported successfully. |
+    """  # noqa
+    url = f"https://{databricks_instance}/api//2.0/jobs/runs/export"  # noqa
+    responses = {
+        200: "Run was exported successfully.",  # noqa
+    }
+
+    params = {
+        "run_id": run_id,
+        "views_to_export": views_to_export,
+    }
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        responses=responses,
+        **params,
+    )
+    return result
+
+
+@task
+async def post_2_1_jobs_runs_cancel(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -493,6 +551,7 @@ async def post_2dot1_jobs_runs_cancel(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/cancel?](
     https://{databricks_instance}/api//2.1/jobs/runs/cancel?)
 
@@ -503,7 +562,7 @@ async def post_2dot1_jobs_runs_cancel(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/cancel"  # noqa
     responses = {
-        200: "Run was cancelled successfully.",
+        200: "Run was cancelled successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -516,7 +575,7 @@ async def post_2dot1_jobs_runs_cancel(
 
 
 @task
-async def get_2dot1_jobs_runs_get_output(
+async def get_2_1_jobs_runs_get_output(
     databricks_instance: str,
     run_id: str,
     databricks_credentials: "DatabricksCredentials",
@@ -542,6 +601,7 @@ async def get_2dot1_jobs_runs_get_output(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/get-output?&run_id=%s](
     https://{databricks_instance}/api//2.1/jobs/runs/get-output?&run_id=%s)
 
@@ -552,7 +612,7 @@ async def get_2dot1_jobs_runs_get_output(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/get-output"  # noqa
     responses = {
-        200: "Run output was retrieved successfully.",
+        200: "Run output was retrieved successfully.",  # noqa
     }
 
     params = {
@@ -569,7 +629,7 @@ async def get_2dot1_jobs_runs_get_output(
 
 
 @task
-async def post_2dot1_jobs_runs_delete(
+async def post_2_1_jobs_runs_delete(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -584,6 +644,7 @@ async def post_2dot1_jobs_runs_delete(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/delete?](
     https://{databricks_instance}/api//2.1/jobs/runs/delete?)
 
@@ -594,7 +655,7 @@ async def post_2dot1_jobs_runs_delete(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/delete"  # noqa
     responses = {
-        200: "Run was deleted successfully.",
+        200: "Run was deleted successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -607,7 +668,7 @@ async def post_2dot1_jobs_runs_delete(
 
 
 @task
-async def post_2dot1_jobs_runs_repair(
+async def post_2_1_jobs_runs_repair(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -624,6 +685,7 @@ async def post_2dot1_jobs_runs_repair(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api//2.1/jobs/runs/repair?](
     https://{databricks_instance}/api//2.1/jobs/runs/repair?)
 
@@ -634,7 +696,7 @@ async def post_2dot1_jobs_runs_repair(
     """  # noqa
     url = f"https://{databricks_instance}/api//2.1/jobs/runs/repair"  # noqa
     responses = {
-        200: "Run repair was initiated.",
+        200: "Run repair was initiated.",  # noqa
     }
 
     result = await execute_endpoint.fn(

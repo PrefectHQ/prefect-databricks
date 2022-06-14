@@ -42,6 +42,7 @@ nav:
     - Git Credentials: git_credentials.md
     - Global Init Scripts: global_init_scripts.md
     - Ip Access Lists: ip_access_lists.md
+    - Jobs: jobs.md
     - Mlflow: mlflow.md
     - Permissions: permissions.md
     - Queries: queries.md
@@ -49,7 +50,5 @@ nav:
     - Rest: rest.md
     - Sql: sql.md
     - Token Management: token_management.md
-    - V2dot0: v2dot0.md
-    - V2dot1: v2dot1.md
     - Workspace Conf: workspace_conf.md
     

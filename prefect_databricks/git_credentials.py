@@ -31,6 +31,7 @@ async def get_git_credentials(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/git-credentials?](
     https://{databricks_instance}/api/2.0/git-credentials?)
 
@@ -41,7 +42,7 @@ async def get_git_credentials(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/git-credentials"  # noqa
     responses = {
-        200: "Git credentials were successfully returned.",
+        200: "Git credentials were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -72,6 +73,7 @@ async def post_git_credentials(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/git-credentials?](
     https://{databricks_instance}/api/2.0/git-credentials?)
 
@@ -82,7 +84,7 @@ async def post_git_credentials(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/git-credentials"  # noqa
     responses = {
-        200: "The credential was successfully configured.",
+        200: "The credential was successfully configured.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -112,6 +114,7 @@ async def get_git_credentials_credential_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/git-credentials/{credential_id}?](
     https://{databricks_instance}/api/2.0/git-credentials/{credential_id}?)
 
@@ -124,7 +127,7 @@ async def get_git_credentials_credential_id(
         f"https://{databricks_instance}/api/2.0/git-credentials/{credential_id}"  # noqa
     )
     responses = {
-        200: "The credential was successfully returned.",
+        200: "The credential was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -154,6 +157,7 @@ async def patch_git_credentials_credential_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/git-credentials/{credential_id}?](
     https://{databricks_instance}/api/2.0/git-credentials/{credential_id}?)
 
@@ -166,7 +170,7 @@ async def patch_git_credentials_credential_id(
         f"https://{databricks_instance}/api/2.0/git-credentials/{credential_id}"  # noqa
     )
     responses = {
-        200: "The credential was successfully updated.",
+        200: "The credential was successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -196,6 +200,7 @@ async def delete_git_credentials_credential_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/git-credentials/{credential_id}?](
     https://{databricks_instance}/api/2.0/git-credentials/{credential_id}?)
 
@@ -208,7 +213,7 @@ async def delete_git_credentials_credential_id(
         f"https://{databricks_instance}/api/2.0/git-credentials/{credential_id}"  # noqa
     )
     responses = {
-        200: "The credential was successfully deleted.",
+        200: "The credential was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(

@@ -38,6 +38,7 @@ async def get_dashboards(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/dashboards?&page_size=%s&page=%s&order=%s&q=%s](
     https://{databricks_instance}/api/2.0/preview/sql/dashboards?&page_size=%s&page=%s&order=%s&q=%s)
 
@@ -80,6 +81,7 @@ async def post_dashboards(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/dashboards?](
     https://{databricks_instance}/api/2.0/preview/sql/dashboards?)
 
@@ -90,7 +92,7 @@ async def post_dashboards(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/sql/dashboards"  # noqa
     responses = {
-        200: "A dashboard object was successfully created.",
+        200: "A dashboard object was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -120,6 +122,7 @@ async def post_dashboards_trash_dashboard_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/dashboards/trash/{dashboard_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/dashboards/trash/{dashboard_id}?)
 
@@ -130,7 +133,7 @@ async def post_dashboards_trash_dashboard_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/sql/dashboards/trash/{dashboard_id}"  # noqa
     responses = {
-        200: "Dashboard restored successfully.",
+        200: "Dashboard restored successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -160,6 +163,7 @@ async def delete_dashboards_dashboard_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/dashboards/{dashboard_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/dashboards/{dashboard_id}?)
 
@@ -170,7 +174,7 @@ async def delete_dashboards_dashboard_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/sql/dashboards/{dashboard_id}"  # noqa
     responses = {
-        200: "Dashboard successfully moved to trash.",
+        200: "Dashboard successfully moved to trash.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -201,6 +205,7 @@ async def get_dashboards_dashboard_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/dashboards/{dashboard_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/dashboards/{dashboard_id}?)
 
@@ -211,7 +216,7 @@ async def get_dashboards_dashboard_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/sql/dashboards/{dashboard_id}"  # noqa
     responses = {
-        200: "Dashboard fetched successfully.",
+        200: "Dashboard fetched successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(

@@ -69,9 +69,11 @@ async def execute_endpoint(
     try:
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
-        helpful_error_response = responses.get(response.status_code, "")
+        helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
-            raise RuntimeError(helpful_error_response) from exc
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
         else:
             raise
 

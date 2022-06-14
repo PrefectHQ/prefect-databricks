@@ -32,6 +32,7 @@ async def post_mlflow_comments_create(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/comments/create?](
     https://{databricks_instance}/api/2.0/mlflow/comments/create?)
 
@@ -42,7 +43,7 @@ async def post_mlflow_comments_create(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/comments/create"  # noqa
     responses = {
-        200: "Comment was made successfully.",
+        200: "Comment was made successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -70,6 +71,7 @@ async def delete_mlflow_comments_delete(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/comments/delete?](
     https://{databricks_instance}/api/2.0/mlflow/comments/delete?)
 
@@ -80,7 +82,7 @@ async def delete_mlflow_comments_delete(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/comments/delete"  # noqa
     responses = {
-        200: "Comment was deleted successfully.",
+        200: "Comment was deleted successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -108,6 +110,7 @@ async def post_mlflow_comments_update(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/comments/update?](
     https://{databricks_instance}/api/2.0/mlflow/comments/update?)
 
@@ -118,7 +121,7 @@ async def post_mlflow_comments_update(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/comments/update"  # noqa
     responses = {
-        200: "Comment was updated successfully.",
+        200: "Comment was updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -149,6 +152,7 @@ async def post_mlflow_databricks_model_versions_transition_stage(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/databricks/model-versions/transition-stage?](
     https://{databricks_instance}/api/2.0/mlflow/databricks/model-versions/transition-stage?)
 
@@ -159,7 +163,7 @@ async def post_mlflow_databricks_model_versions_transition_stage(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/databricks/model-versions/transition-stage"  # noqa
     responses = {
-        200: "Model version's stage was updated successfully.",
+        200: "Model version's stage was updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -190,6 +194,7 @@ async def get_mlflow_databricks_registered_models_get(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get?](
     https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get?)
 
@@ -200,7 +205,7 @@ async def get_mlflow_databricks_registered_models_get(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get"  # noqa
     responses = {
-        200: "Model details were returned successfully.",
+        200: "Model details were returned successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -228,6 +233,7 @@ async def post_mlflow_registry_webhooks_create(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/create?](
     https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/create?)
 
@@ -240,7 +246,7 @@ async def post_mlflow_registry_webhooks_create(
         f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/create"  # noqa
     )
     responses = {
-        200: "Registry webhook was created successfully.",
+        200: "Registry webhook was created successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -268,6 +274,7 @@ async def delete_mlflow_registry_webhooks_delete(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/delete?](
     https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/delete?)
 
@@ -280,7 +287,7 @@ async def delete_mlflow_registry_webhooks_delete(
         f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/delete"  # noqa
     )
     responses = {
-        200: "Registry webhook was deleted successfully.",
+        200: "Registry webhook was deleted successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -308,6 +315,7 @@ async def get_mlflow_registry_webhooks_list(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/list?](
     https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/list?)
 
@@ -318,7 +326,7 @@ async def get_mlflow_registry_webhooks_list(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/list"  # noqa
     responses = {
-        200: "Registry webhooks listed successfully.",
+        200: "Registry webhooks listed successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -346,6 +354,7 @@ async def post_mlflow_registry_webhooks_test(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/test?](
     https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/test?)
 
@@ -356,7 +365,7 @@ async def post_mlflow_registry_webhooks_test(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/test"  # noqa
     responses = {
-        200: "Registry webhook was tested successfully.",
+        200: "Registry webhook was tested successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -384,6 +393,7 @@ async def patch_mlflow_registry_webhooks_update(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/update?](
     https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/update?)
 
@@ -396,7 +406,7 @@ async def patch_mlflow_registry_webhooks_update(
         f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/update"  # noqa
     )
     responses = {
-        200: "Registry webhook was updated successfully.",
+        200: "Registry webhook was updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -424,6 +434,7 @@ async def post_mlflow_transition_requests_approve(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/transition-requests/approve?](
     https://{databricks_instance}/api/2.0/mlflow/transition-requests/approve?)
 
@@ -434,7 +445,7 @@ async def post_mlflow_transition_requests_approve(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/approve"  # noqa
     responses = {
-        200: "Model version's stage was updated successfully.",
+        200: "Model version's stage was updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -462,6 +473,7 @@ async def post_mlflow_transition_requests_create(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/transition-requests/create?](
     https://{databricks_instance}/api/2.0/mlflow/transition-requests/create?)
 
@@ -472,7 +484,7 @@ async def post_mlflow_transition_requests_create(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/create"  # noqa
     responses = {
-        200: "Transition request was made successfully.",
+        200: "Transition request was made successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -509,6 +521,7 @@ async def delete_mlflow_transition_requests_delete(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete?&stage=%s&creator=%s](
     https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete?&stage=%s&creator=%s)
 
@@ -519,7 +532,7 @@ async def delete_mlflow_transition_requests_delete(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete"  # noqa
     responses = {
-        200: "Transition request was deleted successfully.",
+        200: "Transition request was deleted successfully.",  # noqa
     }
 
     params = {
@@ -552,6 +565,7 @@ async def get_mlflow_transition_requests_list(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/transition-requests/list?](
     https://{databricks_instance}/api/2.0/mlflow/transition-requests/list?)
 
@@ -564,7 +578,7 @@ async def get_mlflow_transition_requests_list(
         f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/list"  # noqa
     )
     responses = {
-        200: "Fetched all open requests successfully.",
+        200: "Fetched all open requests successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -592,6 +606,7 @@ async def post_mlflow_transition_requests_reject(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/mlflow/transition-requests/reject?](
     https://{databricks_instance}/api/2.0/mlflow/transition-requests/reject?)
 
@@ -602,7 +617,7 @@ async def post_mlflow_transition_requests_reject(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/reject"  # noqa
     responses = {
-        200: "Transition request was rejected successfully.",
+        200: "Transition request was rejected successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(

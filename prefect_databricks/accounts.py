@@ -31,6 +31,7 @@ async def get_accounts_account_id_credentials(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials?)
 
@@ -41,7 +42,7 @@ async def get_accounts_account_id_credentials(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials"  # noqa
     responses = {
-        200: "Credential configurations were returned successfully.",
+        200: "Credential configurations were returned successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -78,6 +79,7 @@ async def post_accounts_account_id_credentials(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials?)
 
@@ -88,7 +90,7 @@ async def post_accounts_account_id_credentials(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials"  # noqa
     responses = {
-        201: "The credential configuration creation request succeeded.",
+        201: "The credential configuration creation request succeeded.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -119,6 +121,7 @@ async def get_accounts_account_id_credentials_credentials_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials/{credentials_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials/{credentials_id}?)
 
@@ -129,7 +132,7 @@ async def get_accounts_account_id_credentials_credentials_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials/{credentials_id}"  # noqa
     responses = {
-        200: "The credential configuration was successfully returned.",
+        200: "The credential configuration was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -161,6 +164,7 @@ async def delete_accounts_account_id_credentials_credentials_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials/{credentials_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials/{credentials_id}?)
 
@@ -171,7 +175,7 @@ async def delete_accounts_account_id_credentials_credentials_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/credentials/{credentials_id}"  # noqa
     responses = {
-        200: "The credential configuration was successfully deleted.",
+        200: "The credential configuration was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -200,6 +204,7 @@ async def get_accounts_account_id_storage_configurations(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations?)
 
@@ -210,7 +215,7 @@ async def get_accounts_account_id_storage_configurations(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations"  # noqa
     responses = {
-        200: "The storage configurations were successfully returned.",
+        200: "The storage configurations were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -245,6 +250,7 @@ async def post_accounts_account_id_storage_configurations(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations?)
 
@@ -255,7 +261,7 @@ async def post_accounts_account_id_storage_configurations(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations"  # noqa
     responses = {
-        201: "The storage configuration was successfully created.",
+        201: "The storage configuration was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -285,6 +291,7 @@ async def get_accounts_account_id_storage_configurations_storage_configuration_i
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations/{storage_configuration_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations/{storage_configuration_id}?)
 
@@ -295,7 +302,7 @@ async def get_accounts_account_id_storage_configurations_storage_configuration_i
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations/{storage_configuration_id}"  # noqa
     responses = {
-        200: "The storage configuration was successfully returned.",
+        200: "The storage configuration was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -326,6 +333,7 @@ async def delete_accounts_account_id_storage_configurations_storage_configuratio
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations/{storage_configuration_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations/{storage_configuration_id}?)
 
@@ -336,7 +344,7 @@ async def delete_accounts_account_id_storage_configurations_storage_configuratio
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/storage-configurations/{storage_configuration_id}"  # noqa
     responses = {
-        200: "The storage configuration was successfully deleted.",
+        200: "The storage configuration was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -366,6 +374,7 @@ async def get_accounts_account_id_networks(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks?)
 
@@ -376,7 +385,7 @@ async def get_accounts_account_id_networks(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks"  # noqa
     responses = {
-        200: "The network configurations were successfully returned.",
+        200: "The network configurations were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -420,6 +429,7 @@ async def post_accounts_account_id_networks(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks?)
 
@@ -430,7 +440,7 @@ async def post_accounts_account_id_networks(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks"  # noqa
     responses = {
-        201: "The network configuration was successfully created.",
+        201: "The network configuration was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -465,6 +475,7 @@ async def get_accounts_account_id_networks_network_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks/{network_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks/{network_id}?)
 
@@ -475,7 +486,7 @@ async def get_accounts_account_id_networks_network_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks/{network_id}"  # noqa
     responses = {
-        200: "The network configuration was successfully returned.",
+        200: "The network configuration was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -508,6 +519,7 @@ async def delete_accounts_account_id_networks_network_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks/{network_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks/{network_id}?)
 
@@ -518,7 +530,7 @@ async def delete_accounts_account_id_networks_network_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/networks/{network_id}"  # noqa
     responses = {
-        200: "The network configuration was successfully deleted.",
+        200: "The network configuration was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -555,6 +567,7 @@ async def get_accounts_account_id_customer_managed_keys(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys?)
 
@@ -565,7 +578,7 @@ async def get_accounts_account_id_customer_managed_keys(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys"  # noqa
     responses = {
-        200: "The encryption key configurations were successfully returned.",
+        200: "The encryption key configurations were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -605,6 +618,7 @@ async def post_accounts_account_id_customer_managed_keys(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys?)
 
@@ -615,7 +629,7 @@ async def post_accounts_account_id_customer_managed_keys(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys"  # noqa
     responses = {
-        201: "The encryption key configuration was successfully created.",
+        201: "The encryption key configuration was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -655,6 +669,7 @@ async def get_accounts_account_id_customer_managed_keys_customer_managed_key_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys/{customer_managed_key_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys/{customer_managed_key_id}?)
 
@@ -665,7 +680,7 @@ async def get_accounts_account_id_customer_managed_keys_customer_managed_key_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys/{customer_managed_key_id}"  # noqa
     responses = {
-        200: "The encryption key configuration was successfully returned.",
+        200: "The encryption key configuration was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -696,6 +711,7 @@ async def delete_accounts_account_id_customer_managed_keys_customer_managed_key_
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys/{customer_managed_key_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys/{customer_managed_key_id}?)
 
@@ -706,7 +722,7 @@ async def delete_accounts_account_id_customer_managed_keys_customer_managed_key_
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-keys/{customer_managed_key_id}"  # noqa
     responses = {
-        200: "The encryption key configuration was successfully deleted.",
+        200: "The encryption key configuration was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -737,6 +753,7 @@ async def get_accounts_account_id_customer_managed_key_history(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-key-history?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-key-history?)
 
@@ -747,7 +764,7 @@ async def get_accounts_account_id_customer_managed_key_history(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/customer-managed-key-history"  # noqa
     responses = {
-        200: "The key's workspace association history was successfully returned.",
+        200: "The key's workspace association history was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -778,6 +795,7 @@ async def get_accounts_account_id_workspaces(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces?)
 
@@ -788,7 +806,7 @@ async def get_accounts_account_id_workspaces(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces"  # noqa
     responses = {
-        200: "The workspaces were returned successfully.",
+        200: "The workspaces were returned successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -844,6 +862,7 @@ async def post_accounts_account_id_workspaces(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces?)
 
@@ -854,7 +873,7 @@ async def post_accounts_account_id_workspaces(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces"  # noqa
     responses = {
-        201: "Workspace creation request was received. Check workspace status.",
+        201: "Workspace creation request was received. Check workspace status.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -894,6 +913,7 @@ async def get_accounts_account_id_workspaces_workspace_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}?)
 
@@ -904,7 +924,7 @@ async def get_accounts_account_id_workspaces_workspace_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}"  # noqa
     responses = {
-        200: "The workspace configuration was successfully returned.",
+        200: "The workspace configuration was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1019,6 +1039,7 @@ async def patch_accounts_account_id_workspaces_workspace_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}?)
 
@@ -1029,7 +1050,7 @@ async def patch_accounts_account_id_workspaces_workspace_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}"  # noqa
     responses = {
-        200: "The workspace update request is accepted.",
+        200: "The workspace update request is accepted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1064,6 +1085,7 @@ async def delete_accounts_account_id_workspaces_workspace_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}?)
 
@@ -1074,7 +1096,7 @@ async def delete_accounts_account_id_workspaces_workspace_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}"  # noqa
     responses = {
-        200: "The workspace was successfully deleted.",
+        200: "The workspace was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1113,6 +1135,7 @@ async def get_accounts_account_id_workspaces_workspace_id_customer_managed_key_h
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}/customer-managed-key-history?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}/customer-managed-key-history?)
 
@@ -1123,7 +1146,7 @@ async def get_accounts_account_id_workspaces_workspace_id_customer_managed_key_h
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/workspaces/{workspace_id}/customer-managed-key-history"  # noqa
     responses = {
-        200: "The workspace's key history was successfully returned.",
+        200: "The workspace's key history was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1158,6 +1181,7 @@ async def get_accounts_account_id_log_delivery(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery?&status=%s&credentials_id=%s&storage_configuration_id=%s](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery?&status=%s&credentials_id=%s&storage_configuration_id=%s)
 
@@ -1168,7 +1192,7 @@ async def get_accounts_account_id_log_delivery(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery"  # noqa
     responses = {
-        200: "Log delivery configurations were returned successfully.",
+        200: "Log delivery configurations were returned successfully.",  # noqa
     }
 
     params = {
@@ -1223,6 +1247,7 @@ async def post_accounts_account_id_log_delivery(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery?)
 
@@ -1233,7 +1258,7 @@ async def post_accounts_account_id_log_delivery(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery"  # noqa
     responses = {
-        200: "The log delivery configuration creation request succeeded.",
+        200: "The log delivery configuration creation request succeeded.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1264,6 +1289,7 @@ async def get_accounts_account_id_log_delivery_log_delivery_configuration_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery/{log_delivery_configuration_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery/{log_delivery_configuration_id}?)
 
@@ -1274,7 +1300,7 @@ async def get_accounts_account_id_log_delivery_log_delivery_configuration_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery/{log_delivery_configuration_id}"  # noqa
     responses = {
-        200: "The log delivery configuration was successfully returned.",
+        200: "The log delivery configuration was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1309,6 +1335,7 @@ async def patch_accounts_account_id_log_delivery_log_delivery_configuration_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery/{log_delivery_configuration_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery/{log_delivery_configuration_id}?)
 
@@ -1319,7 +1346,7 @@ async def patch_accounts_account_id_log_delivery_log_delivery_configuration_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/log-delivery/{log_delivery_configuration_id}"  # noqa
     responses = {
-        200: "The log delivery configuration was successfully updated.",
+        200: "The log delivery configuration was successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1362,6 +1389,7 @@ async def get_accounts_account_id_usage_download(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/usage/download?&start_month=%s&end_month=%s&personal_data=%s](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/usage/download?&start_month=%s&end_month=%s&personal_data=%s)
 
@@ -1372,7 +1400,7 @@ async def get_accounts_account_id_usage_download(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/usage/download"  # noqa
     responses = {
-        200: "Billable usage data was returned successfully.",
+        200: "Billable usage data was returned successfully.",  # noqa
     }
 
     params = {
@@ -1406,6 +1434,7 @@ async def post_accounts_account_id_budget(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget?)
 
@@ -1416,7 +1445,7 @@ async def post_accounts_account_id_budget(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget"  # noqa
     responses = {
-        200: "The budget was successfully created.",
+        200: "The budget was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1445,6 +1474,7 @@ async def get_accounts_account_id_budget(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget?)
 
@@ -1455,7 +1485,7 @@ async def get_accounts_account_id_budget(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget"  # noqa
     responses = {
-        200: "The list of budgets was successfully returned.",
+        200: "The list of budgets was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1486,6 +1516,7 @@ async def get_accounts_account_id_budget_budget_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}?)
 
@@ -1496,7 +1527,7 @@ async def get_accounts_account_id_budget_budget_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}"  # noqa
     responses = {
-        200: "The budget was successfully returned.",
+        200: "The budget was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1526,6 +1557,7 @@ async def delete_accounts_account_id_budget_budget_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}?)
 
@@ -1536,7 +1568,7 @@ async def delete_accounts_account_id_budget_budget_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}"  # noqa
     responses = {
-        200: "The budget that was successfully deleted.",
+        200: "The budget that was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1566,6 +1598,7 @@ async def patch_accounts_account_id_budget_budget_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/budget/{budget_id}?)
 
@@ -1605,6 +1638,7 @@ async def get_accounts_account_id_private_access_settings(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings?)
 
@@ -1615,7 +1649,7 @@ async def get_accounts_account_id_private_access_settings(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings"  # noqa
     responses = {
-        200: "The private access settings object was successfully returned.",
+        200: "The private access settings object was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1656,6 +1690,7 @@ async def post_accounts_account_id_private_access_settings(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings?)
 
@@ -1666,7 +1701,7 @@ async def post_accounts_account_id_private_access_settings(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings"  # noqa
     responses = {
-        200: "The private access settings object was successfully created.",
+        200: "The private access settings object was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1703,6 +1738,7 @@ async def get_accounts_account_id_private_access_settings_private_access_setting
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}?)
 
@@ -1713,7 +1749,7 @@ async def get_accounts_account_id_private_access_settings_private_access_setting
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}"  # noqa
     responses = {
-        200: "The private access settings object was successfully returned.",
+        200: "The private access settings object was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1750,6 +1786,7 @@ async def delete_accounts_account_id_private_access_settings_private_access_sett
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}?)
 
@@ -1760,7 +1797,7 @@ async def delete_accounts_account_id_private_access_settings_private_access_sett
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}"  # noqa
     responses = {
-        200: "The private access settings was successfully deleted.",
+        200: "The private access settings was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1808,6 +1845,7 @@ async def put_accounts_account_id_private_access_settings_private_access_setting
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}?)
 
@@ -1818,7 +1856,7 @@ async def put_accounts_account_id_private_access_settings_private_access_setting
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/private-access-settings/{private_access_settings_id}"  # noqa
     responses = {
-        200: "The private access settings object was successfully updated.",
+        200: "The private access settings object was successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1852,6 +1890,7 @@ async def get_accounts_account_id_vpc_endpoints(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints?)
 
@@ -1862,7 +1901,7 @@ async def get_accounts_account_id_vpc_endpoints(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints"  # noqa
     responses = {
-        200: "The VPC endpoints were successfully returned.",
+        200: "The VPC endpoints were successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1912,6 +1951,7 @@ async def post_accounts_account_id_vpc_endpoints(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints?)
 
@@ -1922,7 +1962,7 @@ async def post_accounts_account_id_vpc_endpoints(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints"  # noqa
     responses = {
-        200: "The VPC endpoint configuration was successfully created.",
+        200: "The VPC endpoint configuration was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -1958,6 +1998,7 @@ async def get_accounts_account_id_vpc_endpoints_vpc_endpoint_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints/{vpc_endpoint_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints/{vpc_endpoint_id}?)
 
@@ -1968,7 +2009,7 @@ async def get_accounts_account_id_vpc_endpoints_vpc_endpoint_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints/{vpc_endpoint_id}"  # noqa
     responses = {
-        200: "The VPC endpoint was successfully returned.",
+        200: "The VPC endpoint was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -2009,6 +2050,7 @@ async def delete_accounts_account_id_vpc_endpoints_vpc_endpoint_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints/{vpc_endpoint_id}?](
     https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints/{vpc_endpoint_id}?)
 
@@ -2019,7 +2061,7 @@ async def delete_accounts_account_id_vpc_endpoints_vpc_endpoint_id(
     """  # noqa
     url = f"https://accounts.cloud.databricks.com/api/2.0/accounts/{account_id}/vpc-endpoints/{vpc_endpoint_id}"  # noqa
     responses = {
-        200: "The VPC endpoint configuration was successfully deleted.",
+        200: "The VPC endpoint configuration was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(

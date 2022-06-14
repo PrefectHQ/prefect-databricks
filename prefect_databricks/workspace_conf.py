@@ -51,6 +51,7 @@ async def get_workspace_conf(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/workspace-conf?&keys=%s](
     https://{databricks_instance}/api/2.0/workspace-conf?&keys=%s)
 
@@ -61,7 +62,7 @@ async def get_workspace_conf(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/workspace-conf"  # noqa
     responses = {
-        200: "Getting token lifetime status was returned successfully.",
+        200: "Getting token lifetime status was returned successfully.",  # noqa
     }
 
     params = {
@@ -95,6 +96,7 @@ async def patch_workspace_conf(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/workspace-conf?](
     https://{databricks_instance}/api/2.0/workspace-conf?)
 
@@ -105,7 +107,7 @@ async def patch_workspace_conf(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/workspace-conf"  # noqa
     responses = {
-        204: "Configuring maximum token lifetime was successful.",
+        204: "Configuring maximum token lifetime was successful.",  # noqa
     }
 
     result = await execute_endpoint.fn(

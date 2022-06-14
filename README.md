@@ -2,7 +2,11 @@
 
 ## Welcome!
 
-Prefect integrations for interacting with Databricks
+Prefect tasks and subflows for interacting with Databricks.
+
+The tasks within this collection were created by a code generator using the service's OpenAPI spec.
+
+The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/index.html).
 
 ## Getting Started
 

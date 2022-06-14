@@ -30,6 +30,7 @@ async def post_token_management_on_behalf_of_tokens(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/token-management/on-behalf-of/tokens?](
     https://{databricks_instance}/api/2.0/token-management/on-behalf-of/tokens?)
 
@@ -40,7 +41,7 @@ async def post_token_management_on_behalf_of_tokens(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/on-behalf-of/tokens"  # noqa
     responses = {
-        200: "A on-behalf token was successfully created for the service principal.",
+        200: "A on-behalf token was successfully created for the service principal.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -72,6 +73,7 @@ async def get_token_management_tokens(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/token-management/tokens?&created_by_id=%s&created_by_username=%s](
     https://{databricks_instance}/api/2.0/token-management/tokens?&created_by_id=%s&created_by_username=%s)
 
@@ -82,7 +84,7 @@ async def get_token_management_tokens(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/tokens"  # noqa
     responses = {
-        200: "Tokens were successfully returned.",
+        200: "Tokens were successfully returned.",  # noqa
     }
 
     params = {
@@ -117,6 +119,7 @@ async def delete_token_management_tokens_token_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}?](
     https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}?)
 
@@ -127,7 +130,7 @@ async def delete_token_management_tokens_token_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}"  # noqa
     responses = {
-        200: "The token was successfully deleted.",
+        200: "The token was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -157,6 +160,7 @@ async def get_token_management_tokens_token_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}?](
     https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}?)
 
@@ -167,7 +171,7 @@ async def get_token_management_tokens_token_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}"  # noqa
     responses = {
-        200: "Token with specified Token ID was successfully returned.",
+        200: "Token with specified Token ID was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(

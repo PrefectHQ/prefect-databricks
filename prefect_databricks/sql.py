@@ -31,6 +31,7 @@ async def get_sql_history_queries(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/sql/history/queries?](
     https://{databricks_instance}/api/2.0/sql/history/queries?)
 

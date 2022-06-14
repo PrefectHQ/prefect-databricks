@@ -50,6 +50,7 @@ async def get_queries(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/queries?&page_size=%s&page=%s&order=%s&q=%s](
     https://{databricks_instance}/api/2.0/preview/sql/queries?&page_size=%s&page=%s&order=%s&q=%s)
 
@@ -94,6 +95,7 @@ async def post_queries(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/queries?](
     https://{databricks_instance}/api/2.0/preview/sql/queries?)
 
@@ -104,7 +106,7 @@ async def post_queries(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/sql/queries"  # noqa
     responses = {
-        200: "Query created successfully.",
+        200: "Query created successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -135,6 +137,7 @@ async def post_queries_trash_query_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/queries/trash/{query_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/queries/trash/{query_id}?)
 
@@ -145,7 +148,7 @@ async def post_queries_trash_query_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/preview/sql/queries/trash/{query_id}"  # noqa
     responses = {
-        200: "Query restored successfully.",
+        200: "Query restored successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -176,6 +179,7 @@ async def delete_queries_query_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?)
 
@@ -188,7 +192,7 @@ async def delete_queries_query_id(
         f"https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}"  # noqa
     )
     responses = {
-        200: "Query moved to trash.",
+        200: "Query moved to trash.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -219,6 +223,7 @@ async def get_queries_query_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?)
 
@@ -231,7 +236,7 @@ async def get_queries_query_id(
         f"https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}"  # noqa
     )
     responses = {
-        200: "Query fetched successfully.",
+        200: "Query fetched successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -261,6 +266,7 @@ async def post_queries_query_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?](
     https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?)
 
@@ -273,7 +279,7 @@ async def post_queries_query_id(
         f"https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}"  # noqa
     )
     responses = {
-        200: "Query changed successfully.",
+        200: "Query changed successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(

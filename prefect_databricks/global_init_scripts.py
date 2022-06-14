@@ -33,6 +33,7 @@ async def get_global_init_scripts(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/global-init-scripts?](
     https://{databricks_instance}/api/2.0/global-init-scripts?)
 
@@ -68,6 +69,7 @@ async def post_global_init_scripts(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/global-init-scripts?](
     https://{databricks_instance}/api/2.0/global-init-scripts?)
 
@@ -105,6 +107,7 @@ async def delete_global_init_scripts_script_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}?](
     https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}?)
 
@@ -117,7 +120,7 @@ async def delete_global_init_scripts_script_id(
         f"https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}"  # noqa
     )
     responses = {
-        200: "The script was deleted successfully.",
+        200: "The script was deleted successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -147,6 +150,7 @@ async def get_global_init_scripts_script_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}?](
     https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}?)
 
@@ -187,6 +191,7 @@ async def patch_global_init_scripts_script_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}?](
     https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}?)
 
@@ -199,7 +204,7 @@ async def patch_global_init_scripts_script_id(
         f"https://{databricks_instance}/api/2.0/global-init-scripts/{script_id}"  # noqa
     )
     responses = {
-        200: "The script was updated successfully.",
+        200: "The script was updated successfully.",  # noqa
     }
 
     result = await execute_endpoint.fn(

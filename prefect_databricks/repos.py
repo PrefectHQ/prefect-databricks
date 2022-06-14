@@ -37,6 +37,7 @@ async def get_repos(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/repos?&path_prefix=%s&next_page_token=%s](
     https://{databricks_instance}/api/2.0/repos?&path_prefix=%s&next_page_token=%s)
 
@@ -47,7 +48,7 @@ async def get_repos(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos"  # noqa
     responses = {
-        200: "Repos were successfully returned.",
+        200: "Repos were successfully returned.",  # noqa
     }
 
     params = {
@@ -82,6 +83,7 @@ async def post_repos(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/repos?](
     https://{databricks_instance}/api/2.0/repos?)
 
@@ -92,7 +94,7 @@ async def post_repos(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos"  # noqa
     responses = {
-        200: "The repo was successfully created.",
+        200: "The repo was successfully created.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -122,6 +124,7 @@ async def get_repos_repo_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/repos/{repo_id}?](
     https://{databricks_instance}/api/2.0/repos/{repo_id}?)
 
@@ -132,7 +135,7 @@ async def get_repos_repo_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos/{repo_id}"  # noqa
     responses = {
-        200: "The repo was successfully returned.",
+        200: "The repo was successfully returned.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -163,6 +166,7 @@ async def patch_repos_repo_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/repos/{repo_id}?](
     https://{databricks_instance}/api/2.0/repos/{repo_id}?)
 
@@ -173,7 +177,7 @@ async def patch_repos_repo_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos/{repo_id}"  # noqa
     responses = {
-        200: "The repo was successfully updated.",
+        200: "The repo was successfully updated.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -203,6 +207,7 @@ async def delete_repos_repo_id(
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
     [https://{databricks_instance}/api/2.0/repos/{repo_id}?](
     https://{databricks_instance}/api/2.0/repos/{repo_id}?)
 
@@ -213,7 +218,7 @@ async def delete_repos_repo_id(
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos/{repo_id}"  # noqa
     responses = {
-        200: "The repo was successfully deleted.",
+        200: "The repo was successfully deleted.",  # noqa
     }
 
     result = await execute_endpoint.fn(
