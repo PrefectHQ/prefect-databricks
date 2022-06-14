@@ -18,8 +18,8 @@ if TYPE_CHECKING:
 async def get_queries(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
-    page_size: str = None,
-    page: str = None,
+    page_size: int = None,
+    page: int = None,
     order: str = None,
     q: str = None,
 ) -> Dict[str, Any]:
@@ -84,8 +84,11 @@ async def post_queries(
 ) -> Dict[str, Any]:
     """
     Queries created with this endpoint belong to the authenticated user making the
-    request.
-    **Note**: You cannot add a visualization until you create the query.
+    request.  The `data_source_id` field specifies the id of the SQL Endpoint
+    against which this query will run. You can use the Data Sources API to see a
+    complete list of available SQL Endpoints. Or you can copy the
+    `data_source_id` from an existing query.  **Note**: You cannot add a
+    visualization until you create the query.
 
     Args:
         databricks_instance: Databricks instance used in formatting the endpoint URL.

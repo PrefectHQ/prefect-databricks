@@ -1363,8 +1363,8 @@ async def get_accounts_account_id_usage_download(
     account_id: str,
     start_month: str,
     end_month: str,
-    personal_data: str,
     databricks_credentials: "DatabricksCredentials",
+    personal_data: bool = False,
 ) -> Dict[str, Any]:
     """
     Return billable usage logs in CSV format for the specified account and date
@@ -1379,11 +1379,11 @@ async def get_accounts_account_id_usage_download(
             field is required.
         end_month: Format: `YYYY-MM`. Last month to return billable usage logs for. This
             field is required.
+        databricks_credentials: Credentials to use for authentication with Databricks.
         personal_data: Specify whether to include personally identifiable information in the
             billable usage logs, for example the email addresses of
             cluster creators. Handle this information with care.
             Defaults to false.
-        databricks_credentials: Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.

@@ -51,4 +51,5 @@ nav:
     - Sql: sql.md
     - Token Management: token_management.md
     - Workspace Conf: workspace_conf.md
+    - Data Sources: data_sources.md
     

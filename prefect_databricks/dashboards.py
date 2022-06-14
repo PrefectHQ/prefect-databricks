@@ -18,8 +18,8 @@ if TYPE_CHECKING:
 async def get_dashboards(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
-    page_size: str = None,
-    page: str = None,
+    page_size: int = None,
+    page: int = None,
     order: str = None,
     q: str = None,
 ) -> Dict[str, Any]:

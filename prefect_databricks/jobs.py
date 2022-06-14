@@ -31,15 +31,15 @@ async def post_2_1_jobs_create(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/create?](
-    https://{databricks_instance}/api//2.1/jobs/create?)
+    [https://{databricks_instance}/api/2.1/jobs/create?](
+    https://{databricks_instance}/api/2.1/jobs/create?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was created successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/create"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/create"  # noqa
     responses = {
         200: "Job was created successfully.",  # noqa
     }
@@ -57,9 +57,9 @@ async def post_2_1_jobs_create(
 async def get_2_1_jobs_list(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
-    limit: str = None,
-    offset: str = None,
-    expand_tasks: str = None,
+    limit: int = 20,
+    offset: int = 0,
+    expand_tasks: bool = False,
 ) -> Dict[str, Any]:
     """
     Retrieves a list of jobs.
@@ -78,15 +78,15 @@ async def get_2_1_jobs_list(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s](
-    https://{databricks_instance}/api//2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s)
+    [https://{databricks_instance}/api/2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s](
+    https://{databricks_instance}/api/2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | List of jobs was retrieved successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/list"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/list"  # noqa
     responses = {
         200: "List of jobs was retrieved successfully.",  # noqa
     }
@@ -109,7 +109,7 @@ async def get_2_1_jobs_list(
 @task
 async def get_2_1_jobs_get(
     databricks_instance: str,
-    job_id: str,
+    job_id: int,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -126,15 +126,15 @@ async def get_2_1_jobs_get(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/get?&job_id=%s](
-    https://{databricks_instance}/api//2.1/jobs/get?&job_id=%s)
+    [https://{databricks_instance}/api/2.1/jobs/get?&job_id=%s](
+    https://{databricks_instance}/api/2.1/jobs/get?&job_id=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was retrieved successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/get"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/get"  # noqa
     responses = {
         200: "Job was retrieved successfully.",  # noqa
     }
@@ -170,15 +170,15 @@ async def post_2_1_jobs_reset(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/reset?](
-    https://{databricks_instance}/api//2.1/jobs/reset?)
+    [https://{databricks_instance}/api/2.1/jobs/reset?](
+    https://{databricks_instance}/api/2.1/jobs/reset?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was overwritten successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/reset"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/reset"  # noqa
     responses = {
         200: "Job was overwritten successfully.",  # noqa
     }
@@ -210,15 +210,15 @@ async def post_2_1_jobs_update(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/update?](
-    https://{databricks_instance}/api//2.1/jobs/update?)
+    [https://{databricks_instance}/api/2.1/jobs/update?](
+    https://{databricks_instance}/api/2.1/jobs/update?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was updated successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/update"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/update"  # noqa
     responses = {
         200: "Job was updated successfully.",  # noqa
     }
@@ -249,15 +249,15 @@ async def post_2_1_jobs_delete(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/delete?](
-    https://{databricks_instance}/api//2.1/jobs/delete?)
+    [https://{databricks_instance}/api/2.1/jobs/delete?](
+    https://{databricks_instance}/api/2.1/jobs/delete?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was deleted successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/delete"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/delete"  # noqa
     responses = {
         200: "Job was deleted successfully.",  # noqa
     }
@@ -288,15 +288,15 @@ async def post_2_1_jobs_run_now(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/run-now?](
-    https://{databricks_instance}/api//2.1/jobs/run-now?)
+    [https://{databricks_instance}/api/2.1/jobs/run-now?](
+    https://{databricks_instance}/api/2.1/jobs/run-now?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was started successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/run-now"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/run-now"  # noqa
     responses = {
         200: "Run was started successfully.",  # noqa
     }
@@ -330,15 +330,15 @@ async def post_2_1_jobs_runs_submit(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/submit?](
-    https://{databricks_instance}/api//2.1/jobs/runs/submit?)
+    [https://{databricks_instance}/api/2.1/jobs/runs/submit?](
+    https://{databricks_instance}/api/2.1/jobs/runs/submit?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was created and started successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/submit"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/submit"  # noqa
     responses = {
         200: "Run was created and started successfully.",  # noqa
     }
@@ -355,22 +355,29 @@ async def post_2_1_jobs_runs_submit(
 @task
 async def get_2_1_jobs_runs_list(
     databricks_instance: str,
-    active_only: str,
-    completed_only: str,
-    job_id: str,
-    offset: str,
-    limit: str,
+    job_id: int,
     run_type: str,
     databricks_credentials: "DatabricksCredentials",
-    expand_tasks: str = None,
-    start_time_from: str = None,
-    start_time_to: str = None,
+    active_only: bool = False,
+    completed_only: bool = False,
+    offset: int = 0,
+    limit: int = 25,
+    expand_tasks: bool = False,
+    start_time_from: int = None,
+    start_time_to: int = None,
 ) -> Dict[str, Any]:
     """
     List runs in descending order by start time.
 
     Args:
         databricks_instance: Databricks instance used in formatting the endpoint URL.
+        job_id: The job for which to list runs. If omitted, the Jobs service lists runs
+            from all jobs.
+        run_type: The type of runs to return. For a description of run types, see
+            [Run](https://docs.databricks.com/dev-
+            tools/api/latest/jobs.html
+            operation/JobsRunsGet).
+        databricks_credentials: Credentials to use for authentication with Databricks.
         active_only: If active_only is `true`, only active runs are included in the results;
             otherwise, lists both active and completed runs. An active
             run is a run in the `PENDING`, `RUNNING`, or `TERMINATING`.
@@ -378,17 +385,10 @@ async def get_2_1_jobs_runs_list(
         completed_only: If completed_only is `true`, only completed runs are included in the
             results; otherwise, lists both active and completed runs.
             This field cannot be `true` when active_only is `true`.
-        job_id: The job for which to list runs. If omitted, the Jobs service lists runs
-            from all jobs.
         offset: The offset of the first run to return, relative to the most recent run.
         limit: The number of runs to return. This value must be greater than 0 and less
             than 25\. The default value is 25\. If a request specifies a
             limit of 0, the service instead uses the maximum limit.
-        run_type: The type of runs to return. For a description of run types, see
-            [Run](https://docs.databricks.com/dev-
-            tools/api/latest/jobs.html
-            operation/JobsRunsGet).
-        databricks_credentials: Credentials to use for authentication with Databricks.
         expand_tasks: Whether to include task and cluster details in the response.
         start_time_from: Show runs that started _at or after_ this value. The value must be a UTC
             timestamp in milliseconds. Can be combined with
@@ -402,15 +402,15 @@ async def get_2_1_jobs_runs_list(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s](
-    https://{databricks_instance}/api//2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s)
+    [https://{databricks_instance}/api/2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s](
+    https://{databricks_instance}/api/2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | List of runs was retrieved successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/list"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/list"  # noqa
     responses = {
         200: "List of runs was retrieved successfully.",  # noqa
     }
@@ -439,9 +439,9 @@ async def get_2_1_jobs_runs_list(
 @task
 async def get_2_1_jobs_runs_get(
     databricks_instance: str,
-    run_id: str,
+    run_id: int,
     databricks_credentials: "DatabricksCredentials",
-    include_history: str = None,
+    include_history: bool = None,
 ) -> Dict[str, Any]:
     """
     Retrieve the metadata of a run.
@@ -458,15 +458,15 @@ async def get_2_1_jobs_runs_get(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/get?&run_id=%s&include_history=%s](
-    https://{databricks_instance}/api//2.1/jobs/runs/get?&run_id=%s&include_history=%s)
+    [https://{databricks_instance}/api/2.1/jobs/runs/get?&run_id=%s&include_history=%s](
+    https://{databricks_instance}/api/2.1/jobs/runs/get?&run_id=%s&include_history=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was retrieved successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/get"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/get"  # noqa
     responses = {
         200: "Run was retrieved successfully.",  # noqa
     }
@@ -488,7 +488,7 @@ async def get_2_1_jobs_runs_get(
 @task
 async def get_2_0_jobs_runs_export(
     databricks_instance: str,
-    run_id: str,
+    run_id: int,
     views_to_export: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
@@ -506,15 +506,15 @@ async def get_2_0_jobs_runs_export(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.0/jobs/runs/export?&run_id=%s&views_to_export=%s](
-    https://{databricks_instance}/api//2.0/jobs/runs/export?&run_id=%s&views_to_export=%s)
+    [https://{databricks_instance}/api/2.0/jobs/runs/export?&run_id=%s&views_to_export=%s](
+    https://{databricks_instance}/api/2.0/jobs/runs/export?&run_id=%s&views_to_export=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was exported successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.0/jobs/runs/export"  # noqa
+    url = f"https://{databricks_instance}/api/2.0/jobs/runs/export"  # noqa
     responses = {
         200: "Run was exported successfully.",  # noqa
     }
@@ -552,15 +552,15 @@ async def post_2_1_jobs_runs_cancel(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/cancel?](
-    https://{databricks_instance}/api//2.1/jobs/runs/cancel?)
+    [https://{databricks_instance}/api/2.1/jobs/runs/cancel?](
+    https://{databricks_instance}/api/2.1/jobs/runs/cancel?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was cancelled successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/cancel"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/cancel"  # noqa
     responses = {
         200: "Run was cancelled successfully.",  # noqa
     }
@@ -577,7 +577,7 @@ async def post_2_1_jobs_runs_cancel(
 @task
 async def get_2_1_jobs_runs_get_output(
     databricks_instance: str,
-    run_id: str,
+    run_id: int,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -602,15 +602,15 @@ async def get_2_1_jobs_runs_get_output(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/get-output?&run_id=%s](
-    https://{databricks_instance}/api//2.1/jobs/runs/get-output?&run_id=%s)
+    [https://{databricks_instance}/api/2.1/jobs/runs/get-output?&run_id=%s](
+    https://{databricks_instance}/api/2.1/jobs/runs/get-output?&run_id=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run output was retrieved successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/get-output"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/get-output"  # noqa
     responses = {
         200: "Run output was retrieved successfully.",  # noqa
     }
@@ -645,15 +645,15 @@ async def post_2_1_jobs_runs_delete(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/delete?](
-    https://{databricks_instance}/api//2.1/jobs/runs/delete?)
+    [https://{databricks_instance}/api/2.1/jobs/runs/delete?](
+    https://{databricks_instance}/api/2.1/jobs/runs/delete?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was deleted successfully. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/delete"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/delete"  # noqa
     responses = {
         200: "Run was deleted successfully.",  # noqa
     }
@@ -686,15 +686,15 @@ async def post_2_1_jobs_runs_repair(
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api//2.1/jobs/runs/repair?](
-    https://{databricks_instance}/api//2.1/jobs/runs/repair?)
+    [https://{databricks_instance}/api/2.1/jobs/runs/repair?](
+    https://{databricks_instance}/api/2.1/jobs/runs/repair?)
 
     <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run repair was initiated. |
     """  # noqa
-    url = f"https://{databricks_instance}/api//2.1/jobs/runs/repair"  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/repair"  # noqa
     responses = {
         200: "Run repair was initiated.",  # noqa
     }
