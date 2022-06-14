@@ -30,18 +30,18 @@ pip install prefect-databricks
 
 ```python
 from prefect import flow
-from prefect_databricks.tasks import (
-    goodbye_prefect_databricks,
-    hello_prefect_databricks,
-)
-
+from prefect_databricks import DatabricksCredentials
+from prefect_databricks.jobs import get_2_1_jobs_list
 
 @flow
-def example_flow():
-    hello_prefect_databricks
-    goodbye_prefect_databricks
+def get_2_1_jobs_list_flow():
+    token = "dapi..."
+    databricks_instance = "dbc-ab1c23d4-567e.cloud.databricks.com"
+    databricks_credentials = DatabricksCredentials(token=token)
+    params = dict(limit="5", offset="0", expand_tasks=True)
+    return get_2_1_jobs_list(databricks_instance, databricks_credentials, **params)
 
-example_flow()
+get_2_1_jobs_list_flow()
 ```
 
 ## Resources
