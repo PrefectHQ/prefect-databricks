@@ -40,10 +40,20 @@ async def post_mlflow_comments_create(
     | Response | Description |
     | --- | --- |
     | 200 | Comment was made successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 409 | The request conflicts with the current state of the resource. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/comments/create"  # noqa
     responses = {
         200: "Comment was made successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        409: "The request conflicts with the current state of the resource.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -79,10 +89,18 @@ async def delete_mlflow_comments_delete(
     | Response | Description |
     | --- | --- |
     | 200 | Comment was deleted successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/comments/delete"  # noqa
     responses = {
         200: "Comment was deleted successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -118,10 +136,18 @@ async def post_mlflow_comments_update(
     | Response | Description |
     | --- | --- |
     | 200 | Comment was updated successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/comments/update"  # noqa
     responses = {
         200: "Comment was updated successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -160,10 +186,20 @@ async def post_mlflow_databricks_model_versions_transition_stage(
     | Response | Description |
     | --- | --- |
     | 200 | Model version's stage was updated successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 409 | The request conflicts with the current state of the resource. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/databricks/model-versions/transition-stage"  # noqa
     responses = {
         200: "Model version's stage was updated successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        409: "The request conflicts with the current state of the resource.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -202,10 +238,16 @@ async def get_mlflow_databricks_registered_models_get(
     | Response | Description |
     | --- | --- |
     | 200 | Model details were returned successfully. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get"  # noqa
     responses = {
         200: "Model details were returned successfully.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -241,12 +283,20 @@ async def post_mlflow_registry_webhooks_create(
     | Response | Description |
     | --- | --- |
     | 200 | Registry webhook was created successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = (
         f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/create"  # noqa
     )
     responses = {
         200: "Registry webhook was created successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -282,12 +332,20 @@ async def delete_mlflow_registry_webhooks_delete(
     | Response | Description |
     | --- | --- |
     | 200 | Registry webhook was deleted successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = (
         f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/delete"  # noqa
     )
     responses = {
         200: "Registry webhook was deleted successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -323,10 +381,18 @@ async def get_mlflow_registry_webhooks_list(
     | Response | Description |
     | --- | --- |
     | 200 | Registry webhooks listed successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/list"  # noqa
     responses = {
         200: "Registry webhooks listed successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -362,10 +428,18 @@ async def post_mlflow_registry_webhooks_test(
     | Response | Description |
     | --- | --- |
     | 200 | Registry webhook was tested successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/test"  # noqa
     responses = {
         200: "Registry webhook was tested successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -401,12 +475,20 @@ async def patch_mlflow_registry_webhooks_update(
     | Response | Description |
     | --- | --- |
     | 200 | Registry webhook was updated successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = (
         f"https://{databricks_instance}/api/2.0/mlflow/registry-webhooks/update"  # noqa
     )
     responses = {
         200: "Registry webhook was updated successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -442,10 +524,18 @@ async def post_mlflow_transition_requests_approve(
     | Response | Description |
     | --- | --- |
     | 200 | Model version's stage was updated successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/approve"  # noqa
     responses = {
         200: "Model version's stage was updated successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -481,10 +571,20 @@ async def post_mlflow_transition_requests_create(
     | Response | Description |
     | --- | --- |
     | 200 | Transition request was made successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 409 | The request conflicts with the current state of the resource. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/create"  # noqa
     responses = {
         200: "Transition request was made successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        409: "The request conflicts with the current state of the resource.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -511,10 +611,11 @@ async def delete_mlflow_transition_requests_delete(
         stage: Target stage of the transition request. Valid values are:  * `None`: The
             initial stage of a model version.  * `Staging`: Staging or
             pre-production stage.  * `Production`: Production stage.  *
-            `Archived`: Archived stage.
+            `Archived`: Archived stage, e.g. `Staging`.
         creator: Username of the user who created this request. Of the transition
             requests matching the specified details, only the one
-            transition created by this user will be deleted.
+            transition created by this user will be deleted, e.g.
+            `jane.doe@example.com`.
         databricks_credentials: Credentials to use for authentication with Databricks.
 
     Returns:
@@ -529,22 +630,31 @@ async def delete_mlflow_transition_requests_delete(
     | Response | Description |
     | --- | --- |
     | 200 | Transition request was deleted successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete"  # noqa
     responses = {
         200: "Transition request was deleted successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     params = {
         "stage": stage,
         "creator": creator,
     }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.DELETE,
+        params=params,
         responses=responses,
-        **params,
     )
     return result
 
@@ -573,12 +683,20 @@ async def get_mlflow_transition_requests_list(
     | Response | Description |
     | --- | --- |
     | 200 | Fetched all open requests successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = (
         f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/list"  # noqa
     )
     responses = {
         200: "Fetched all open requests successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -614,10 +732,18 @@ async def post_mlflow_transition_requests_reject(
     | Response | Description |
     | --- | --- |
     | 200 | Transition request was rejected successfully. |
+    | 400 | The request is malformed. |
+    | 403 | The request is forbidden. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/mlflow/transition-requests/reject"  # noqa
     responses = {
         200: "Transition request was rejected successfully.",  # noqa
+        400: "The request is malformed.",  # noqa
+        403: "The request is forbidden.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(

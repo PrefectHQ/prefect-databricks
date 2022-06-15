@@ -67,12 +67,13 @@ async def get_queries(
         "order": order,
         "q": q,
     }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
-        **params,
     )
     return result
 

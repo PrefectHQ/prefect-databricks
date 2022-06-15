@@ -44,7 +44,7 @@ async def get_workspace_conf(
             value, including unlimited lifetime. Such tokens may have
             been created before the current maximum token lifetime was
             set. To review existing tokens, see the [get tokens API](
-            operation/get-tokens).
+            operation/get-tokens), e.g. `maxTokenLifetimeDays`.
         databricks_credentials: Credentials to use for authentication with Databricks.
 
     Returns:
@@ -59,21 +59,24 @@ async def get_workspace_conf(
     | Response | Description |
     | --- | --- |
     | 200 | Getting token lifetime status was returned successfully. |
+    | 400 | The request is malformed. See the error code and message for details. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/workspace-conf"  # noqa
     responses = {
         200: "Getting token lifetime status was returned successfully.",  # noqa
+        400: "The request is malformed. See the error code and message for details.",  # noqa
     }
 
     params = {
         "keys": keys,
     }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
-        **params,
     )
     return result
 
@@ -104,10 +107,16 @@ async def patch_workspace_conf(
     | Response | Description |
     | --- | --- |
     | 204 | Configuring maximum token lifetime was successful. |
+    | 400 | The request is malformed. See the error code and message for details. |
+    | 401 | The request is unauthorized. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/workspace-conf"  # noqa
     responses = {
         204: "Configuring maximum token lifetime was successful.",  # noqa
+        400: "The request is malformed. See the error code and message for details.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(

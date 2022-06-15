@@ -45,22 +45,27 @@ async def get_repos(
     | Response | Description |
     | --- | --- |
     | 200 | Repos were successfully returned. |
+    | 404 | Repos is not enabled for the workspace. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos"  # noqa
     responses = {
         200: "Repos were successfully returned.",  # noqa
+        404: "Repos is not enabled for the workspace.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     params = {
         "path_prefix": path_prefix,
         "next_page_token": next_page_token,
     }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
-        **params,
     )
     return result
 
@@ -91,10 +96,16 @@ async def post_repos(
     | Response | Description |
     | --- | --- |
     | 200 | The repo was successfully created. |
+    | 400 | The request is invalid. |
+    | 404 | The specified directory does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos"  # noqa
     responses = {
         200: "The repo was successfully created.",  # noqa
+        400: "The request is invalid.",  # noqa
+        404: "The specified directory does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -132,10 +143,16 @@ async def get_repos_repo_id(
     | Response | Description |
     | --- | --- |
     | 200 | The repo was successfully returned. |
+    | 403 | The user does not have access to the requested resource. |
+    | 404 | The specified repo does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos/{repo_id}"  # noqa
     responses = {
         200: "The repo was successfully returned.",  # noqa
+        403: "The user does not have access to the requested resource.",  # noqa
+        404: "The specified repo does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -174,10 +191,18 @@ async def patch_repos_repo_id(
     | Response | Description |
     | --- | --- |
     | 200 | The repo was successfully updated. |
+    | 400 | The specified ref is invalid. |
+    | 403 | The user does not have access to the requested resource. |
+    | 404 | The specified repo does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos/{repo_id}"  # noqa
     responses = {
         200: "The repo was successfully updated.",  # noqa
+        400: "The specified ref is invalid.",  # noqa
+        403: "The user does not have access to the requested resource.",  # noqa
+        404: "The specified repo does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -215,10 +240,16 @@ async def delete_repos_repo_id(
     | Response | Description |
     | --- | --- |
     | 200 | The repo was successfully deleted. |
+    | 403 | The user does not have access to the requested resource. |
+    | 404 | The specified repo does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/repos/{repo_id}"  # noqa
     responses = {
         200: "The repo was successfully deleted.",  # noqa
+        403: "The user does not have access to the requested resource.",  # noqa
+        404: "The specified repo does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(

@@ -27,8 +27,9 @@ async def execute_endpoint(
     url: str,
     databricks_credentials: "DatabricksCredentials",
     http_method: HTTPMethod = HTTPMethod.GET,
+    params: Dict[str, Any] = None,
     responses: Dict[int, str] = None,
-    **params: Dict[str, Any],
+    **kwargs
 ) -> Dict[str, Any]:
     """
     Generic function for executing GraphQL operations.
@@ -38,6 +39,8 @@ async def execute_endpoint(
         databricks_credentials: Credentials to use for authentication with Databricks.
         http_method: Either GET, POST, PUT, DELETE, or PATCH.
         responses: Status codes mapped to the corresponding descriptions.
+        params: URL query parameters in the request.
+        **kwargs: Additional keyword arguments to pass.
 
     Returns:
         A dict of the returned fields.
@@ -54,7 +57,7 @@ async def execute_endpoint(
             url = "https://api.aviationapi.com/v1/weather/metar"
             aviationapi_credentials = AviationAPICredentials()
             params = dict(apt="KORD,KSEA")
-            result = execute_endpoint(url, aviationapi_credentials, **params)
+            result = execute_endpoint(url, aviationapi_credentials, params=params)
             return result
 
         example_execute_endpoint_flow()
@@ -64,7 +67,7 @@ async def execute_endpoint(
         http_method = http_method.value
 
     async with databricks_credentials.get_client() as client:
-        response = await getattr(client, http_method)(url, params=params)
+        response = await getattr(client, http_method)(url, params=params, **kwargs)
 
     try:
         response.raise_for_status()

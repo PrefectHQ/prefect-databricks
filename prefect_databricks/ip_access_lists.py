@@ -49,10 +49,18 @@ async def post_ip_access_lists(
     | Response | Description |
     | --- | --- |
     | 200 | An IP access list was successfully created. |
+    | 400 | The request is malformed. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists"  # noqa
     responses = {
         200: "An IP access list was successfully created.",  # noqa
+        400: "The request is malformed.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -88,10 +96,16 @@ async def get_ip_access_lists(
     | Response | Description |
     | --- | --- |
     | 200 | IP access lists were successfully returned. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists"  # noqa
     responses = {
         200: "IP access lists were successfully returned.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -129,10 +143,18 @@ async def get_ip_access_lists_ip_access_list_id(
     | Response | Description |
     | --- | --- |
     | 200 | An IP access list was successfully returned. |
+    | 400 | The request is malformed. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
         200: "An IP access list was successfully returned.",  # noqa
+        400: "The request is malformed.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -181,10 +203,18 @@ async def put_ip_access_lists_ip_access_list_id(
     | Response | Description |
     | --- | --- |
     | 200 | The IP access list was successfully replaced. |
+    | 400 | The request is malformed. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
         200: "The IP access list was successfully replaced.",  # noqa
+        400: "The request is malformed.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -222,10 +252,18 @@ async def delete_ip_access_lists_ip_access_list_id(
     | Response | Description |
     | --- | --- |
     | 200 | The IP access list was successfully deleted. |
+    | 400 | The request is malformed. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
         200: "The IP access list was successfully deleted.",  # noqa
+        400: "The request is malformed.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -274,10 +312,18 @@ async def patch_ip_access_lists_ip_access_list_id(
     | Response | Description |
     | --- | --- |
     | 200 | The IP access list was successfully updated. |
+    | 400 | The request is malformed. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/ip-access-lists/{ip_access_list_id}"  # noqa
     responses = {
         200: "The IP access list was successfully updated.",  # noqa
+        400: "The request is malformed.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(

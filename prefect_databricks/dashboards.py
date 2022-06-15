@@ -55,12 +55,13 @@ async def get_dashboards(
         "order": order,
         "q": q,
     }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
-        **params,
     )
     return result
 
@@ -68,14 +69,36 @@ async def get_dashboards(
 @task
 async def post_dashboards(
     databricks_instance: str,
+    name: str,
     databricks_credentials: "DatabricksCredentials",
+    dashboard_filters_enabled: bool = False,
+    is_draft: bool = None,
+    is_trashed: bool = None,
+    layout: list = None,
+    tags: list = None,
+    widgets: list = None,
 ) -> Dict[str, Any]:
     """
     Create a new dashboard object.
 
     Args:
         databricks_instance: Databricks instance used in formatting the endpoint URL.
+        name: The title of this dashboard which appears in list views and at the top
+            of the dashboard page, e.g. `Sales Dashboard`.
         databricks_credentials: Credentials to use for authentication with Databricks.
+        dashboard_filters_enabled: In the web application, query filters that share a name are coupled to a
+            single selection box if this value is true.
+        is_draft: Draft dashboards only appear in list views for their owners.
+        is_trashed: Whether the dashboard is trashed. Trashed dashboards won't appear in
+            list views.
+        layout: Currently unused. In a previous version of this API `layout` contained
+            information for arranging widgets on the grid.
+        tags:
+        widgets: An array of widget objects. A complete description of widget objects can
+            be found in the response to [Retrieve A Dashboard
+            Definition](
+            operation/sql-analytics-fetch-dashboard). Databricks does
+            not recommend creating new widgets via this API.
 
     Returns:
         A dict of the response.
@@ -95,11 +118,22 @@ async def post_dashboards(
         200: "A dashboard object was successfully created.",  # noqa
     }
 
+    data = {
+        "dashboard_filters_enabled": dashboard_filters_enabled,
+        "is_draft": is_draft,
+        "is_trashed": is_trashed,
+        "layout": layout,
+        "name": name,
+        "tags": tags,
+        "widgets": widgets,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 

@@ -38,7 +38,7 @@ def get_2_1_jobs_list_flow():
     token = "dapi..."
     databricks_instance = "dbc-ab1c23d4-567e.cloud.databricks.com"
     databricks_credentials = DatabricksCredentials(token=token)
-    params = dict(limit="5", offset="0", expand_tasks=True)
+    params = dict(limit=5, offset=0, expand_tasks=True)
     return get_2_1_jobs_list(databricks_instance, databricks_credentials, **params)
 
 get_2_1_jobs_list_flow()

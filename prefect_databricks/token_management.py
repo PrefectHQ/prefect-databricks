@@ -38,10 +38,14 @@ async def post_token_management_on_behalf_of_tokens(
     | Response | Description |
     | --- | --- |
     | 200 | A on-behalf token was successfully created for the service principal. |
+    | 400 | The request is malformed. |
+    | 500 | The request is not handled correctly due to a server error. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/on-behalf-of/tokens"  # noqa
     responses = {
         200: "A on-behalf token was successfully created for the service principal.",  # noqa
+        400: "The request is malformed.",  # noqa
+        500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -81,22 +85,27 @@ async def get_token_management_tokens(
     | Response | Description |
     | --- | --- |
     | 200 | Tokens were successfully returned. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested feature is not available. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/tokens"  # noqa
     responses = {
         200: "Tokens were successfully returned.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested feature is not available.",  # noqa
     }
 
     params = {
         "created_by_id": created_by_id,
         "created_by_username": created_by_username,
     }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
-        **params,
     )
     return result
 
@@ -127,10 +136,14 @@ async def delete_token_management_tokens_token_id(
     | Response | Description |
     | --- | --- |
     | 200 | The token was successfully deleted. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}"  # noqa
     responses = {
         200: "The token was successfully deleted.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
     }
 
     result = await execute_endpoint.fn(
@@ -168,10 +181,14 @@ async def get_token_management_tokens_token_id(
     | Response | Description |
     | --- | --- |
     | 200 | Token with specified Token ID was successfully returned. |
+    | 401 | The request is unauthorized. |
+    | 404 | The requested resource does not exist. |
     """  # noqa
     url = f"https://{databricks_instance}/api/2.0/token-management/tokens/{token_id}"  # noqa
     responses = {
         200: "Token with specified Token ID was successfully returned.",  # noqa
+        401: "The request is unauthorized.",  # noqa
+        404: "The requested resource does not exist.",  # noqa
     }
 
     result = await execute_endpoint.fn(
