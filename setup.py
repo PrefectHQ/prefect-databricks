@@ -13,7 +13,7 @@ with open("README.md") as readme_file:
 
 setup(
     name="prefect-databricks",
-    description="Prefect integrations for interacting with Databricks",
+    description="Prefect integrations interacting with Databricks",
     license="Apache License 2.0",
     author="Prefect Technologies, Inc.",
     author_email="help@prefect.io",
