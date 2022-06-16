@@ -17,14 +17,27 @@ if TYPE_CHECKING:
 @task
 async def post_token_management_on_behalf_of_tokens(
     databricks_instance: str,
+    application_id: str,
+    comment: str,
+    lifetime_seconds: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Create a token on behalf of a service principal.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        application_id:
+            Application ID of the service principal, e.g.
+            `6f5ccf28-d83a-4957-9bfb-5bbfac551410`.
+        comment:
+            Comment that describes the purpose of the token, e.g. `This is for the
+            ABC department automation scripts.`.
+        lifetime_seconds:
+            The number of seconds before the token expires, e.g. `3600`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -48,11 +61,18 @@ async def post_token_management_on_behalf_of_tokens(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "application_id": application_id,
+        "comment": comment,
+        "lifetime_seconds": lifetime_seconds,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -68,10 +88,14 @@ async def get_token_management_tokens(
     List all tokens belonging to a workspace or a user.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
-        created_by_id: User ID of the user that created the token.
-        created_by_username: Username of the user that created the token.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        created_by_id:
+            User ID of the user that created the token.
+        created_by_username:
+            Username of the user that created the token.
 
     Returns:
         A dict of the response.
@@ -120,9 +144,12 @@ async def delete_token_management_tokens_token_id(
     Delete a token, specified by its ID.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        token_id: Token id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        token_id:
+            Token id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -165,9 +192,12 @@ async def get_token_management_tokens_token_id(
     Get a token, specified by its ID.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        token_id: Token id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        token_id:
+            Token id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.

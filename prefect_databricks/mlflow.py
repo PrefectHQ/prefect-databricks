@@ -17,6 +17,9 @@ if TYPE_CHECKING:
 @task
 async def post_mlflow_comments_create(
     databricks_instance: str,
+    comment: str,
+    name: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -25,8 +28,16 @@ async def post_mlflow_comments_create(
     example, test results or deployment errors.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -56,11 +67,18 @@ async def post_mlflow_comments_create(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "comment": comment,
+        "name": name,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -68,14 +86,20 @@ async def post_mlflow_comments_create(
 @task
 async def delete_mlflow_comments_delete(
     databricks_instance: str,
+    id: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Delete a comment on a model version.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        id:
+            Unique identifier of an activity, e.g.
+            `6fc74c92704341aaa49e74dcc6031057`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -103,11 +127,16 @@ async def delete_mlflow_comments_delete(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "id": id,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.DELETE,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -115,14 +144,23 @@ async def delete_mlflow_comments_delete(
 @task
 async def post_mlflow_comments_update(
     databricks_instance: str,
+    comment: str,
+    id: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Edit a comment on a model version.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        id:
+            Unique identifier of an activity, e.g.
+            `6fc74c92704341aaa49e74dcc6031057`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -150,11 +188,17 @@ async def post_mlflow_comments_update(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "comment": comment,
+        "id": id,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -162,6 +206,11 @@ async def post_mlflow_comments_update(
 @task
 async def post_mlflow_databricks_model_versions_transition_stage(
     databricks_instance: str,
+    archive_existing_versions: str,
+    comment: str,
+    name: str,
+    stage: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -171,8 +220,24 @@ async def post_mlflow_databricks_model_versions_transition_stage(
     the transition to be recorded.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        archive_existing_versions:
+            Specifies whether to archive all current model versions in the target
+            stage, e.g. `True`.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        stage:
+            Target stage of the transition. Valid values are:  * `None`: The initial
+            stage of a model version.  * `Staging`: Staging or pre-
+            production stage.  * `Production`: Production stage.  *
+            `Archived`: Archived stage.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -202,11 +267,20 @@ async def post_mlflow_databricks_model_versions_transition_stage(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "archive_existing_versions": archive_existing_versions,
+        "comment": comment,
+        "name": name,
+        "stage": stage,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -214,6 +288,7 @@ async def post_mlflow_databricks_model_versions_transition_stage(
 @task
 async def get_mlflow_databricks_registered_models_get(
     databricks_instance: str,
+    name: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -223,16 +298,20 @@ async def get_mlflow_databricks_registered_models_get(
     permission level of the requesting user on the model.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get?](
-    https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get?)
+    [https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get?&name=%s](
+    https://{databricks_instance}/api/2.0/mlflow/databricks/registered-models/get?&name=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -250,10 +329,15 @@ async def get_mlflow_databricks_registered_models_get(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    params = {
+        "name": name,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
     )
     return result
@@ -268,8 +352,10 @@ async def post_mlflow_registry_webhooks_create(
     This endpoint is in Public Preview.  Create a registry webhook.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -311,14 +397,28 @@ async def post_mlflow_registry_webhooks_create(
 @task
 async def delete_mlflow_registry_webhooks_delete(
     databricks_instance: str,
+    id: str,
+    comment: str,
+    name: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     This endpoint is in Public Preview.  Delete a registry webhook.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        id:
+            Webhook ID, e.g. `124323`.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -348,11 +448,25 @@ async def delete_mlflow_registry_webhooks_delete(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "id": id,
+        "comment": comment,
+        "name": name,
+        "version": version,
+        "comment": comment,
+        "name": name,
+        "version": version,
+        "comment": comment,
+        "name": name,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.DELETE,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -360,14 +474,27 @@ async def delete_mlflow_registry_webhooks_delete(
 @task
 async def get_mlflow_registry_webhooks_list(
     databricks_instance: str,
+    events: str,
+    model_name: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     This endpoint is in Public Preview.  List registry webhooks.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        events:
+            If `events` is specified, any webhook with one or more of the specified
+            trigger events is included in the output. If `events` is not
+            specified, webhooks of all event types are included in the
+            output.
+        model_name:
+            If `model_name` is not specified, all webhooks associated with the
+            specified events are listed, regardless of their associated
+            model.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -395,11 +522,17 @@ async def get_mlflow_registry_webhooks_list(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "events": events,
+        "model_name": model_name,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -407,14 +540,24 @@ async def get_mlflow_registry_webhooks_list(
 @task
 async def post_mlflow_registry_webhooks_test(
     databricks_instance: str,
+    event: str,
+    id: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     This endpoint is in Public Preview.  Test a registry webhook.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        event:
+            If `event` is specified, the test trigger uses the specified event. If
+            `event` is not specified, the test trigger uses a randomly
+            chosen event associated with the webhook.
+        id:
+            Webhook ID, e.g. `124323`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -442,11 +585,17 @@ async def post_mlflow_registry_webhooks_test(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "event": event,
+        "id": id,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -454,14 +603,101 @@ async def post_mlflow_registry_webhooks_test(
 @task
 async def patch_mlflow_registry_webhooks_update(
     databricks_instance: str,
+    description: str,
+    events: str,
+    http_url_spec: str,
+    id: str,
+    job_spec: str,
+    status: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     This endpoint is in Public Preview.  Update a registry webhook.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        description:
+            User-specified description for the webhook, e.g. `Webhook for comment
+            creation`.
+        events:
+            Events that can trigger a registry webhook: * `MODEL_VERSION_CREATED`: A
+            new model version was created for the associated model.  *
+            `MODEL_VERSION_TRANSITIONED_STAGE`: A model version’s stage
+            was changed.  * `TRANSITION_REQUEST_CREATED`: A user
+            requested a model version’s stage be transitioned.  *
+            `COMMENT_CREATED`: A user wrote a comment on a registered
+            model.  * `REGISTERED_MODEL_CREATED`: A new registered model
+            was created. This event type can only be specified for a
+            registry-wide webhook, which can be created by not
+            specifying a model name in the create request.  *
+            `MODEL_VERSION_TAG_SET`: A user set a tag on the model
+            version.  * `MODEL_VERSION_TRANSITIONED_TO_STAGING`: A model
+            version was transitioned to staging.  *
+            `MODEL_VERSION_TRANSITIONED_TO_PRODUCTION`: A model version
+            was transitioned to production.  *
+            `MODEL_VERSION_TRANSITIONED_TO_ARCHIVED`: A model version
+            was archived.  * `TRANSITION_REQUEST_TO_STAGING_CREATED`: A
+            user requested a model version be transitioned to staging.
+            * `TRANSITION_REQUEST_TO_PRODUCTION_CREATED`: A user
+            requested a model version be transitioned to production.  *
+            `TRANSITION_REQUEST_TO_ARCHIVED_CREATED`: A user requested a
+            model version be archived, e.g.
+            ```
+            [
+                "MODEL_VERSION_CREATED",
+                "MODEL_VERSION_TRANSITIONED_TO_STAGING",
+                "COMMENT_CREATED",
+            ]
+            ```
+        http_url_spec:
+             Key-values:
+            - authorization:
+                Value of the authorization header that should be sent in the
+                request sent by the wehbook. It should be of the form
+                `"<auth type> <credentials>"`. If set to an empty string, no
+                authorization header will be included in the request, e.g.
+                `Bearer <access_token>`.
+            - enable_ssl_verification:
+                Enable/disable SSL certificate validation. Default is true.
+                For self-signed certificates, this field must be false AND
+                the destination server must disable certificate validation
+                as well. For security purposes, it is encouraged to perform
+                secret validation with the HMAC-encoded portion of the
+                payload and acknowledge the risk associated with disabling
+                hostname validation whereby it becomes more likely that
+                requests can be maliciously routed to an unintended host.
+            - secret:
+                Shared secret required for HMAC encoding payload. The HMAC-
+                encoded payload will be sent in the header as: {
+                "X-Databricks-Signature": $encoded_payload }, e.g.
+                `anyRandomString`.
+            - url:
+                External HTTPS URL called on event trigger (by using a POST
+                request), e.g. `https://hooks.slack.com/services/...`.
+        id:
+            Webhook ID, e.g. `124323`.
+        job_spec:
+             Key-values:
+            - access_token:
+                The personal access token used to authorize webhook's job
+                runs, e.g. `dapi12345678935845824`.
+            - job_id:
+                ID of the job that the webhook runs, e.g. `1`.
+            - workspace_url:
+                URL of the workspace containing the job that this webhook
+                runs. If not specified, the job’s workspace URL is assumed
+                to be the same as the workspace where the webhook is
+                created, e.g. `<databricks-instance>.cloud.databricks.com`.
+        status:
+            Enable or disable triggering the webhook, or put the webhook into test
+            mode. The default is `ACTIVE`: * `ACTIVE`: Webhook is
+            triggered when an associated event happens.  * `DISABLED`:
+            Webhook is not triggered.  * `TEST_MODE`: Webhook can be
+            triggered through the test endpoint, but is not triggered on
+            a real event, e.g. `ACTIVE`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -491,11 +727,21 @@ async def patch_mlflow_registry_webhooks_update(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "description": description,
+        "events": events,
+        "http_url_spec": http_url_spec,
+        "id": id,
+        "job_spec": job_spec,
+        "status": status,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.PATCH,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -503,14 +749,35 @@ async def patch_mlflow_registry_webhooks_update(
 @task
 async def post_mlflow_transition_requests_approve(
     databricks_instance: str,
+    archive_existing_versions: str,
+    comment: str,
+    name: str,
+    stage: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Approve model version stage transition request.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        archive_existing_versions:
+            Specifies whether to archive all current model versions in the target
+            stage, e.g. `True`.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        stage:
+            Target stage of the transition. Valid values are:  * `None`: The initial
+            stage of a model version.  * `Staging`: Staging or pre-
+            production stage.  * `Production`: Production stage.  *
+            `Archived`: Archived stage.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -538,11 +805,20 @@ async def post_mlflow_transition_requests_approve(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "archive_existing_versions": archive_existing_versions,
+        "comment": comment,
+        "name": name,
+        "stage": stage,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -550,14 +826,31 @@ async def post_mlflow_transition_requests_approve(
 @task
 async def post_mlflow_transition_requests_create(
     databricks_instance: str,
+    comment: str,
+    name: str,
+    stage: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Make a model version stage transition request.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        stage:
+            Target stage of the transition. Valid values are:  * `None`: The initial
+            stage of a model version.  * `Staging`: Staging or pre-
+            production stage.  * `Production`: Production stage.  *
+            `Archived`: Archived stage.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -587,11 +880,19 @@ async def post_mlflow_transition_requests_create(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "comment": comment,
+        "name": name,
+        "stage": stage,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -599,32 +900,45 @@ async def post_mlflow_transition_requests_create(
 @task
 async def delete_mlflow_transition_requests_delete(
     databricks_instance: str,
+    name: str,
+    version: str,
     stage: str,
     creator: str,
+    comment: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Cancel model version stage transition request.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        stage: Target stage of the transition request. Valid values are:  * `None`: The
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        version:
+            Version of the model, e.g. `1`.
+        stage:
+            Target stage of the transition request. Valid values are:  * `None`: The
             initial stage of a model version.  * `Staging`: Staging or
             pre-production stage.  * `Production`: Production stage.  *
             `Archived`: Archived stage, e.g. `Staging`.
-        creator: Username of the user who created this request. Of the transition
+        creator:
+            Username of the user who created this request. Of the transition
             requests matching the specified details, only the one
             transition created by this user will be deleted, e.g.
             `jane.doe@example.com`.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete?&stage=%s&creator=%s](
-    https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete?&stage=%s&creator=%s)
+    [https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete?&name=%s&version=%s&stage=%s&creator=%s&comment=%s](
+    https://{databricks_instance}/api/2.0/mlflow/transition-requests/delete?&name=%s&version=%s&stage=%s&creator=%s&comment=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -645,8 +959,11 @@ async def delete_mlflow_transition_requests_delete(
     }
 
     params = {
+        "name": name,
+        "version": version,
         "stage": stage,
         "creator": creator,
+        "comment": comment,
     }
 
     result = await execute_endpoint.fn(
@@ -662,22 +979,30 @@ async def delete_mlflow_transition_requests_delete(
 @task
 async def get_mlflow_transition_requests_list(
     databricks_instance: str,
+    name: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Get all open stage transition requests for the model version.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
 
     <h4>API Endpoint URL Format:</h4>
     To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.0/mlflow/transition-requests/list?](
-    https://{databricks_instance}/api/2.0/mlflow/transition-requests/list?)
+    [https://{databricks_instance}/api/2.0/mlflow/transition-requests/list?&name=%s&version=%s](
+    https://{databricks_instance}/api/2.0/mlflow/transition-requests/list?&name=%s&version=%s)
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -699,10 +1024,16 @@ async def get_mlflow_transition_requests_list(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    params = {
+        "name": name,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.GET,
+        params=params,
         responses=responses,
     )
     return result
@@ -711,14 +1042,31 @@ async def get_mlflow_transition_requests_list(
 @task
 async def post_mlflow_transition_requests_reject(
     databricks_instance: str,
+    comment: str,
+    name: str,
+    stage: str,
+    version: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Reject model version stage transition request.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        comment:
+            User-provided comment on the action, e.g. `This version is great!`.
+        name:
+            Name of the model, e.g. `search_ads_model`.
+        stage:
+            Target stage of the transition. Valid values are:  * `None`: The initial
+            stage of a model version.  * `Staging`: Staging or pre-
+            production stage.  * `Production`: Production stage.  *
+            `Archived`: Archived stage.
+        version:
+            Version of the model, e.g. `1`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -746,10 +1094,18 @@ async def post_mlflow_transition_requests_reject(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "comment": comment,
+        "name": name,
+        "stage": stage,
+        "version": version,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result

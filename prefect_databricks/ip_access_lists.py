@@ -17,6 +17,9 @@ if TYPE_CHECKING:
 @task
 async def post_ip_access_lists(
     databricks_instance: str,
+    label: str,
+    list_type: str,
+    ip_addresses: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -34,8 +37,24 @@ async def post_ip_access_lists(
     operation/set-status).
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        label:
+            Label for the IP access list. This **cannot** be empty, e.g. `Office
+            VPN`.
+        list_type:
+            Type of IP access list. Valid values are as follows and are case-
+            sensitive: * `ALLOW` — An allow list. Include this IP or
+            range.  * `BLOCK` — A block list. Exclude this IP or range.
+            IP addresses in the block list are excluded even if they are
+            included in an allow list, e.g. `ALLOW`.
+        ip_addresses:
+            Array of IP addresses or CIDR values to be added to the IP access list, e.g.
+            ```
+            ["32.19.112.0", "192.168.100.0/22"]
+            ```
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -63,11 +82,18 @@ async def post_ip_access_lists(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "label": label,
+        "list_type": list_type,
+        "ip_addresses": ip_addresses,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -81,8 +107,10 @@ async def get_ip_access_lists(
     Get all IP access lists.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -127,9 +155,12 @@ async def get_ip_access_lists_ip_access_list_id(
     Get an IP access list, specified by its list ID.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        ip_access_list_id: Ip access list id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        ip_access_list_id:
+            Ip access list id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -170,6 +201,11 @@ async def get_ip_access_lists_ip_access_list_id(
 async def put_ip_access_lists_ip_access_list_id(
     databricks_instance: str,
     ip_access_list_id: str,
+    list_id: str,
+    label: str,
+    list_type: str,
+    ip_addresses: str,
+    enabled: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -187,9 +223,30 @@ async def put_ip_access_lists_ip_access_list_id(
     operation/set-status).
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        ip_access_list_id: Ip access list id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        ip_access_list_id:
+            Ip access list id used in formatting the endpoint URL.
+        list_id:
+            UUID of the IP access list.
+        label:
+            Label for the IP access list. This **cannot** be empty, e.g. `Office
+            VPN`.
+        list_type:
+            Type of IP access list. Valid values are as follows and are case-
+            sensitive: * `ALLOW` — An allow list. Include this IP or
+            range.  * `BLOCK` — A block list. Exclude this IP or range.
+            IP addresses in the block list are excluded even if they are
+            included in an allow list, e.g. `ALLOW`.
+        ip_addresses:
+            Array of IP addresses or CIDR values to be added to the IP access list, e.g.
+            ```
+            ["32.19.112.0", "192.168.100.0/22"]
+            ```
+        enabled:
+            Specifies whether this IP access list is enabled.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -217,11 +274,20 @@ async def put_ip_access_lists_ip_access_list_id(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "list_id": list_id,
+        "label": label,
+        "list_type": list_type,
+        "ip_addresses": ip_addresses,
+        "enabled": enabled,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.PUT,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -236,9 +302,12 @@ async def delete_ip_access_lists_ip_access_list_id(
     Delete an IP access list, specified by its list ID.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        ip_access_list_id: Ip access list id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        ip_access_list_id:
+            Ip access list id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -279,6 +348,11 @@ async def delete_ip_access_lists_ip_access_list_id(
 async def patch_ip_access_lists_ip_access_list_id(
     databricks_instance: str,
     ip_access_list_id: str,
+    list_id: str,
+    label: str,
+    list_type: str,
+    ip_addresses: str,
+    enabled: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -296,9 +370,30 @@ async def patch_ip_access_lists_ip_access_list_id(
     operation/set-status).
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        ip_access_list_id: Ip access list id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        ip_access_list_id:
+            Ip access list id used in formatting the endpoint URL.
+        list_id:
+            UUID of the IP access list.
+        label:
+            Label for the IP access list. This **cannot** be empty, e.g. `Office
+            VPN`.
+        list_type:
+            Type of IP access list. Valid values are as follows and are case-
+            sensitive: * `ALLOW` — An allow list. Include this IP or
+            range.  * `BLOCK` — A block list. Exclude this IP or range.
+            IP addresses in the block list are excluded even if they are
+            included in an allow list, e.g. `ALLOW`.
+        ip_addresses:
+            Array of IP addresses or CIDR values to be added to the IP access list, e.g.
+            ```
+            ["32.19.112.0", "192.168.100.0/22"]
+            ```
+        enabled:
+            Specifies whether this IP access list is enabled.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -326,10 +421,19 @@ async def patch_ip_access_lists_ip_access_list_id(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "list_id": list_id,
+        "label": label,
+        "list_type": list_type,
+        "ip_addresses": ip_addresses,
+        "enabled": enabled,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.PATCH,
         responses=responses,
+        data=data,
     )
     return result

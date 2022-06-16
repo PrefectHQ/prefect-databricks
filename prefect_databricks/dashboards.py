@@ -27,12 +27,18 @@ async def get_dashboards(
 
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
-        page_size: Number of dashboards to return per page.
-        page: Page number to retrieve.
-        order: Name of dashboard attribute to order by.
-        q: Full text search term.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        page_size:
+            Number of dashboards to return per page.
+        page:
+            Page number to retrieve.
+        order:
+            Name of dashboard attribute to order by.
+        q:
+            Full text search term.
 
     Returns:
         A dict of the response.
@@ -82,19 +88,28 @@ async def post_dashboards(
     Create a new dashboard object.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        name: The title of this dashboard which appears in list views and at the top
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        name:
+            The title of this dashboard which appears in list views and at the top
             of the dashboard page, e.g. `Sales Dashboard`.
-        databricks_credentials: Credentials to use for authentication with Databricks.
-        dashboard_filters_enabled: In the web application, query filters that share a name are coupled to a
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        dashboard_filters_enabled:
+            In the web application, query filters that share a name are coupled to a
             single selection box if this value is true.
-        is_draft: Draft dashboards only appear in list views for their owners.
-        is_trashed: Whether the dashboard is trashed. Trashed dashboards won't appear in
+        is_draft:
+            Draft dashboards only appear in list views for their owners.
+        is_trashed:
+            Whether the dashboard is trashed. Trashed dashboards won't appear in
             list views.
-        layout: Currently unused. In a previous version of this API `layout` contained
+        layout:
+            Currently unused. In a previous version of this API `layout` contained
             information for arranging widgets on the grid.
         tags:
-        widgets: An array of widget objects. A complete description of widget objects can
+
+        widgets:
+            An array of widget objects. A complete description of widget objects can
             be found in the response to [Retrieve A Dashboard
             Definition](
             operation/sql-analytics-fetch-dashboard). Databricks does
@@ -148,9 +163,12 @@ async def post_dashboards_trash_dashboard_id(
     A restored dashboard appears in list views and searches and can be shared.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        dashboard_id: Dashboard id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        dashboard_id:
+            Dashboard id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -189,9 +207,12 @@ async def delete_dashboards_dashboard_id(
     Trashed dashboards do not appear in list views or searches and cannot be shared.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        dashboard_id: Dashboard id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        dashboard_id:
+            Dashboard id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -231,9 +252,12 @@ async def get_dashboards_dashboard_id(
     and query objects.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        dashboard_id: Dashboard id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        dashboard_id:
+            Dashboard id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.

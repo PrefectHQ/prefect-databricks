@@ -19,26 +19,16 @@ async def post_2_1_jobs_create(
     databricks_instance: str,
     tasks: list,
     job_clusters: list,
+    email_notifications: str,
     timeout_seconds: int,
+    schedule: str,
     max_concurrent_runs: int,
+    git_source: str,
     format: str,
     access_control_list: list,
     databricks_credentials: "DatabricksCredentials",
     name: str = "Untitled",
     tags: dict = None,
-    on_start: list = None,
-    on_success: list = None,
-    on_failure: list = None,
-    no_alert_for_skipped_runs: bool = None,
-    quartz_cron_expression: str = None,
-    timezone_id: str = None,
-    pause_status: str = None,
-    git_url: str = None,
-    git_provider: str = None,
-    git_branch: str = None,
-    git_tag: str = None,
-    git_commit: str = None,
-    git_snapshot: str = None,
 ) -> Dict[str, Any]:
     """
     Create a new job.
@@ -130,9 +120,61 @@ async def post_2_1_jobs_create(
                 }
             ]
             ```
+        email_notifications:
+            An optional set of email addresses that is notified when runs of this
+            job begin or complete as well as when this job is deleted.
+            The default behavior is to not send any emails. Key-values:
+            - on_start:
+                A list of email addresses to be notified when a run begins.
+                If not specified on job creation, reset, or update, the list
+                is empty, and notifications are not sent, e.g.
+                ```
+                ["user.name@databricks.com"]
+                ```
+            - on_success:
+                A list of email addresses to be notified when a run
+                successfully completes. A run is considered to have
+                completed successfully if it ends with a `TERMINATED`
+                `life_cycle_state` and a `SUCCESSFUL` result_state. If not
+                specified on job creation, reset, or update, the list is
+                empty, and notifications are not sent, e.g.
+                ```
+                ["user.name@databricks.com"]
+                ```
+            - on_failure:
+                A list of email addresses to be notified when a run
+                unsuccessfully completes. A run is considered to have
+                completed unsuccessfully if it ends with an `INTERNAL_ERROR`
+                `life_cycle_state` or a `SKIPPED`, `FAILED`, or `TIMED_OUT`
+                result_state. If this is not specified on job creation,
+                reset, or update the list is empty, and notifications are
+                not sent, e.g.
+                ```
+                ["user.name@databricks.com"]
+                ```
+            - no_alert_for_skipped_runs:
+                If true, do not send email to recipients specified in
+                `on_failure` if the run is skipped.
         timeout_seconds:
             An optional timeout applied to each run of this job. The default
             behavior is to have no timeout, e.g. `86400`.
+        schedule:
+            An optional periodic schedule for this job. The default behavior is that
+            the job only runs when triggered by clicking “Run Now” in
+            the Jobs UI or sending an API request to `runNow`. Key-values:
+            - quartz_cron_expression:
+                A Cron expression using Quartz syntax that describes the
+                schedule for a job. See [Cron Trigger](http://www.quartz-
+                scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)
+                for details. This field is required, e.g. `20 30 * * * ?`.
+            - timezone_id:
+                A Java timezone ID. The schedule for a job is resolved with
+                respect to this timezone. See [Java
+                TimeZone](https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html)
+                for details. This field is required, e.g. `Europe/London`.
+            - pause_status:
+                Indicate whether this schedule is paused or not, e.g.
+                `PAUSED`.
         max_concurrent_runs:
             An optional maximum allowed number of concurrent runs of the job.  Set
             this value if you want to be able to execute multiple runs
@@ -148,6 +190,35 @@ async def post_2_1_jobs_create(
             runs.  This value cannot exceed 1000\. Setting this value to
             0 causes all new runs to be skipped. The default behavior is
             to allow only 1 concurrent run, e.g. `10`.
+        git_source:
+            This functionality is in Public Preview.  An optional specification for
+            a remote repository containing the notebooks used by this
+            job's notebook tasks. Key-values:
+            - git_url:
+                URL of the repository to be cloned by this job. The maximum
+                length is 300 characters, e.g.
+                `https://github.com/databricks/databricks-cli`.
+            - git_provider:
+                Unique identifier of the service used to host the Git
+                repository. The value is case insensitive, e.g. `github`.
+            - git_branch:
+                Name of the branch to be checked out and used by this job.
+                This field cannot be specified in conjunction with git_tag
+                or git_commit. The maximum length is 255 characters, e.g.
+                `main`.
+            - git_tag:
+                Name of the tag to be checked out and used by this job. This
+                field cannot be specified in conjunction with git_branch or
+                git_commit. The maximum length is 255 characters, e.g.
+                `release-1.0.0`.
+            - git_commit:
+                Commit to be checked out and used by this job. This field
+                cannot be specified in conjunction with git_branch or
+                git_tag. The maximum length is 64 characters, e.g.
+                `e0056d01`.
+            - git_snapshot:
+                Read-only state of the remote repository at the time the job was run.
+                            This field is only included on job runs.
         format:
             Used to tell what is the format of the job. This field is ignored in
             Create/Update/Reset calls. When using the Jobs API 2.1 this
@@ -166,73 +237,6 @@ async def post_2_1_jobs_create(
             ```
             {"cost-center": "engineering", "team": "jobs"}
             ```
-        on_start:
-            A list of email addresses to be notified when a run begins. If not
-            specified on job creation, reset, or update, the list is
-            empty, and notifications are not sent, e.g.
-            ```
-            ["user.name@databricks.com"]
-            ```
-        on_success:
-            A list of email addresses to be notified when a run successfully
-            completes. A run is considered to have completed
-            successfully if it ends with a `TERMINATED`
-            `life_cycle_state` and a `SUCCESSFUL` result_state. If not
-            specified on job creation, reset, or update, the list is
-            empty, and notifications are not sent, e.g.
-            ```
-            ["user.name@databricks.com"]
-            ```
-        on_failure:
-            A list of email addresses to be notified when a run unsuccessfully
-            completes. A run is considered to have completed
-            unsuccessfully if it ends with an `INTERNAL_ERROR`
-            `life_cycle_state` or a `SKIPPED`, `FAILED`, or `TIMED_OUT`
-            result_state. If this is not specified on job creation,
-            reset, or update the list is empty, and notifications are
-            not sent, e.g.
-            ```
-            ["user.name@databricks.com"]
-            ```
-        no_alert_for_skipped_runs:
-            If true, do not send email to recipients specified in `on_failure` if
-            the run is skipped.
-        quartz_cron_expression:
-            A Cron expression using Quartz syntax that describes the schedule for a
-            job. See [Cron Trigger](http://www.quartz-
-            scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)
-            for details. This field is required, e.g. `20 30 * * * ?`.
-        timezone_id:
-            A Java timezone ID. The schedule for a job is resolved with respect to
-            this timezone. See [Java
-            TimeZone](https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html)
-            for details. This field is required, e.g. `Europe/London`.
-        pause_status:
-            Indicate whether this schedule is paused or not, e.g. `PAUSED`.
-        git_url:
-            URL of the repository to be cloned by this job. The maximum length is
-            300 characters, e.g.
-            `https://github.com/databricks/databricks-cli`.
-        git_provider:
-            Unique identifier of the service used to host the Git repository. The
-            value is case insensitive, e.g. `github`.
-        git_branch:
-            Name of the branch to be checked out and used by this job. This field
-            cannot be specified in conjunction with git_tag or
-            git_commit. The maximum length is 255 characters, e.g.
-            `main`.
-        git_tag:
-            Name of the tag to be checked out and used by this job. This field
-            cannot be specified in conjunction with git_branch or
-            git_commit. The maximum length is 255 characters, e.g.
-            `release-1.0.0`.
-        git_commit:
-            Commit to be checked out and used by this job. This field cannot be
-            specified in conjunction with git_branch or git_tag. The
-            maximum length is 64 characters, e.g. `e0056d01`.
-        git_snapshot:
-            Read-only state of the remote repository at the time the job was run.
-            This field is only included on job runs.
 
     Returns:
         A dict of the response.
@@ -263,21 +267,11 @@ async def post_2_1_jobs_create(
         "tags": tags,
         "tasks": tasks,
         "job_clusters": job_clusters,
-        "on_start": on_start,
-        "on_success": on_success,
-        "on_failure": on_failure,
-        "no_alert_for_skipped_runs": no_alert_for_skipped_runs,
+        "email_notifications": email_notifications,
         "timeout_seconds": timeout_seconds,
-        "quartz_cron_expression": quartz_cron_expression,
-        "timezone_id": timezone_id,
-        "pause_status": pause_status,
+        "schedule": schedule,
         "max_concurrent_runs": max_concurrent_runs,
-        "git_url": git_url,
-        "git_provider": git_provider,
-        "git_branch": git_branch,
-        "git_tag": git_tag,
-        "git_commit": git_commit,
-        "git_snapshot": git_snapshot,
+        "git_source": git_source,
         "format": format,
         "access_control_list": access_control_list,
     }
@@ -434,7 +428,157 @@ async def post_2_1_jobs_reset(
             The new settings of the job. These settings completely replace the old
             settings.  Changes to the field
             `JobSettings.timeout_seconds` are applied to active runs.
-            Changes to other fields are applied to future runs only.
+            Changes to other fields are applied to future runs only. Key-values:
+            - name:
+                An optional name for the job, e.g. `A multitask job`.
+            - tags:
+                A map of tags associated with the job. These are forwarded
+                to the cluster as cluster tags for jobs clusters, and are
+                subject to the same limitations as cluster tags. A maximum
+                of 25 tags can be added to the job, e.g.
+                ```
+                {"cost-center": "engineering", "team": "jobs"}
+                ```
+            - tasks:
+                A list of task specifications to be executed by this job, e.g.
+                ```
+                [
+                    {
+                        "task_key": "Sessionize",
+                        "description": "Extracts session data from events",
+                        "depends_on": [],
+                        "existing_cluster_id": "0923-164208-meows279",
+                        "spark_jar_task": {
+                            "main_class_name": "com.databricks.Sessionize",
+                            "parameters": [
+                                "--data",
+                                "dbfs:/path/to/data.json",
+                            ],
+                        },
+                        "libraries": [
+                            {"jar": "dbfs:/mnt/databricks/Sessionize.jar"}
+                        ],
+                        "timeout_seconds": 86400,
+                        "max_retries": 3,
+                        "min_retry_interval_millis": 2000,
+                        "retry_on_timeout": False,
+                    },
+                    {
+                        "task_key": "Orders_Ingest",
+                        "description": "Ingests order data",
+                        "depends_on": [],
+                        "job_cluster_key": "auto_scaling_cluster",
+                        "spark_jar_task": {
+                            "main_class_name": "com.databricks.OrdersIngest",
+                            "parameters": [
+                                "--data",
+                                "dbfs:/path/to/order-data.json",
+                            ],
+                        },
+                        "libraries": [
+                            {"jar": "dbfs:/mnt/databricks/OrderIngest.jar"}
+                        ],
+                        "timeout_seconds": 86400,
+                        "max_retries": 3,
+                        "min_retry_interval_millis": 2000,
+                        "retry_on_timeout": False,
+                    },
+                    {
+                        "task_key": "Match",
+                        "description": "Matches orders with user sessions",
+                        "depends_on": [
+                            {"task_key": "Orders_Ingest"},
+                            {"task_key": "Sessionize"},
+                        ],
+                        "new_cluster": {
+                            "spark_version": "7.3.x-scala2.12",
+                            "node_type_id": "i3.xlarge",
+                            "spark_conf": {"spark.speculation": True},
+                            "aws_attributes": {
+                                "availability": "SPOT",
+                                "zone_id": "us-west-2a",
+                            },
+                            "autoscale": {
+                                "min_workers": 2,
+                                "max_workers": 16,
+                            },
+                        },
+                        "notebook_task": {
+                            "notebook_path": "/Users/user.name@databricks.com/Match",
+                            "base_parameters": {
+                                "name": "John Doe",
+                                "age": "35",
+                            },
+                        },
+                        "timeout_seconds": 86400,
+                        "max_retries": 3,
+                        "min_retry_interval_millis": 2000,
+                        "retry_on_timeout": False,
+                    },
+                ]
+                ```
+            - job_clusters:
+                A list of job cluster specifications that can be shared and
+                reused by tasks of this job. Libraries cannot be declared in
+                a shared job cluster. You must declare dependent libraries
+                in task settings, e.g.
+                ```
+                [
+                    {
+                        "job_cluster_key": "auto_scaling_cluster",
+                        "new_cluster": {
+                            "spark_version": "7.3.x-scala2.12",
+                            "node_type_id": "i3.xlarge",
+                            "spark_conf": {"spark.speculation": True},
+                            "aws_attributes": {
+                                "availability": "SPOT",
+                                "zone_id": "us-west-2a",
+                            },
+                            "autoscale": {
+                                "min_workers": 2,
+                                "max_workers": 16,
+                            },
+                        },
+                    }
+                ]
+                ```
+            - email_notifications:
+                An optional set of email addresses that is notified when
+                runs of this job begin or complete as well as when this job
+                is deleted. The default behavior is to not send any emails.
+            - timeout_seconds:
+                An optional timeout applied to each run of this job. The
+                default behavior is to have no timeout, e.g. `86400`.
+            - schedule:
+                An optional periodic schedule for this job. The default
+                behavior is that the job only runs when triggered by
+                clicking “Run Now” in the Jobs UI or sending an API request
+                to `runNow`.
+            - max_concurrent_runs:
+                An optional maximum allowed number of concurrent runs of the
+                job.  Set this value if you want to be able to execute
+                multiple runs of the same job concurrently. This is useful
+                for example if you trigger your job on a frequent schedule
+                and want to allow consecutive runs to overlap with each
+                other, or if you want to trigger multiple runs which differ
+                by their input parameters.  This setting affects only new
+                runs. For example, suppose the job’s concurrency is 4 and
+                there are 4 concurrent active runs. Then setting the
+                concurrency to 3 won’t kill any of the active runs. However,
+                from then on, new runs are skipped unless there are fewer
+                than 3 active runs.  This value cannot exceed 1000\. Setting
+                this value to 0 causes all new runs to be skipped. The
+                default behavior is to allow only 1 concurrent run, e.g.
+                `10`.
+            - git_source:
+                This functionality is in Public Preview.  An optional
+                specification for a remote repository containing the
+                notebooks used by this job's notebook tasks.
+            - format:
+                Used to tell what is the format of the job. This field is
+                ignored in Create/Update/Reset calls. When using the Jobs
+                API 2.1 this value is always set to `"MULTI_TASK"`, e.g.
+                `MULTI_TASK`.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
 
@@ -500,7 +644,157 @@ async def post_2_1_jobs_update(
             `new_settings` are completely replaced. Partially updating
             nested fields is not supported.  Changes to the field
             `JobSettings.timeout_seconds` are applied to active runs.
-            Changes to other fields are applied to future runs only.
+            Changes to other fields are applied to future runs only. Key-values:
+            - name:
+                An optional name for the job, e.g. `A multitask job`.
+            - tags:
+                A map of tags associated with the job. These are forwarded
+                to the cluster as cluster tags for jobs clusters, and are
+                subject to the same limitations as cluster tags. A maximum
+                of 25 tags can be added to the job, e.g.
+                ```
+                {"cost-center": "engineering", "team": "jobs"}
+                ```
+            - tasks:
+                A list of task specifications to be executed by this job, e.g.
+                ```
+                [
+                    {
+                        "task_key": "Sessionize",
+                        "description": "Extracts session data from events",
+                        "depends_on": [],
+                        "existing_cluster_id": "0923-164208-meows279",
+                        "spark_jar_task": {
+                            "main_class_name": "com.databricks.Sessionize",
+                            "parameters": [
+                                "--data",
+                                "dbfs:/path/to/data.json",
+                            ],
+                        },
+                        "libraries": [
+                            {"jar": "dbfs:/mnt/databricks/Sessionize.jar"}
+                        ],
+                        "timeout_seconds": 86400,
+                        "max_retries": 3,
+                        "min_retry_interval_millis": 2000,
+                        "retry_on_timeout": False,
+                    },
+                    {
+                        "task_key": "Orders_Ingest",
+                        "description": "Ingests order data",
+                        "depends_on": [],
+                        "job_cluster_key": "auto_scaling_cluster",
+                        "spark_jar_task": {
+                            "main_class_name": "com.databricks.OrdersIngest",
+                            "parameters": [
+                                "--data",
+                                "dbfs:/path/to/order-data.json",
+                            ],
+                        },
+                        "libraries": [
+                            {"jar": "dbfs:/mnt/databricks/OrderIngest.jar"}
+                        ],
+                        "timeout_seconds": 86400,
+                        "max_retries": 3,
+                        "min_retry_interval_millis": 2000,
+                        "retry_on_timeout": False,
+                    },
+                    {
+                        "task_key": "Match",
+                        "description": "Matches orders with user sessions",
+                        "depends_on": [
+                            {"task_key": "Orders_Ingest"},
+                            {"task_key": "Sessionize"},
+                        ],
+                        "new_cluster": {
+                            "spark_version": "7.3.x-scala2.12",
+                            "node_type_id": "i3.xlarge",
+                            "spark_conf": {"spark.speculation": True},
+                            "aws_attributes": {
+                                "availability": "SPOT",
+                                "zone_id": "us-west-2a",
+                            },
+                            "autoscale": {
+                                "min_workers": 2,
+                                "max_workers": 16,
+                            },
+                        },
+                        "notebook_task": {
+                            "notebook_path": "/Users/user.name@databricks.com/Match",
+                            "base_parameters": {
+                                "name": "John Doe",
+                                "age": "35",
+                            },
+                        },
+                        "timeout_seconds": 86400,
+                        "max_retries": 3,
+                        "min_retry_interval_millis": 2000,
+                        "retry_on_timeout": False,
+                    },
+                ]
+                ```
+            - job_clusters:
+                A list of job cluster specifications that can be shared and
+                reused by tasks of this job. Libraries cannot be declared in
+                a shared job cluster. You must declare dependent libraries
+                in task settings, e.g.
+                ```
+                [
+                    {
+                        "job_cluster_key": "auto_scaling_cluster",
+                        "new_cluster": {
+                            "spark_version": "7.3.x-scala2.12",
+                            "node_type_id": "i3.xlarge",
+                            "spark_conf": {"spark.speculation": True},
+                            "aws_attributes": {
+                                "availability": "SPOT",
+                                "zone_id": "us-west-2a",
+                            },
+                            "autoscale": {
+                                "min_workers": 2,
+                                "max_workers": 16,
+                            },
+                        },
+                    }
+                ]
+                ```
+            - email_notifications:
+                An optional set of email addresses that is notified when
+                runs of this job begin or complete as well as when this job
+                is deleted. The default behavior is to not send any emails.
+            - timeout_seconds:
+                An optional timeout applied to each run of this job. The
+                default behavior is to have no timeout, e.g. `86400`.
+            - schedule:
+                An optional periodic schedule for this job. The default
+                behavior is that the job only runs when triggered by
+                clicking “Run Now” in the Jobs UI or sending an API request
+                to `runNow`.
+            - max_concurrent_runs:
+                An optional maximum allowed number of concurrent runs of the
+                job.  Set this value if you want to be able to execute
+                multiple runs of the same job concurrently. This is useful
+                for example if you trigger your job on a frequent schedule
+                and want to allow consecutive runs to overlap with each
+                other, or if you want to trigger multiple runs which differ
+                by their input parameters.  This setting affects only new
+                runs. For example, suppose the job’s concurrency is 4 and
+                there are 4 concurrent active runs. Then setting the
+                concurrency to 3 won’t kill any of the active runs. However,
+                from then on, new runs are skipped unless there are fewer
+                than 3 active runs.  This value cannot exceed 1000\. Setting
+                this value to 0 causes all new runs to be skipped. The
+                default behavior is to allow only 1 concurrent run, e.g.
+                `10`.
+            - git_source:
+                This functionality is in Public Preview.  An optional
+                specification for a remote repository containing the
+                notebooks used by this job's notebook tasks.
+            - format:
+                Used to tell what is the format of the job. This field is
+                ignored in Create/Update/Reset calls. When using the Jobs
+                API 2.1 this value is always set to `"MULTI_TASK"`, e.g.
+                `MULTI_TASK`.
         fields_to_remove:
             Remove top-level fields in the job settings. Removing nested fields is
             not supported. This field is optional, e.g.
@@ -767,16 +1061,11 @@ async def post_2_1_jobs_runs_submit(
     databricks_instance: str,
     tasks: list,
     run_name: str,
+    git_source: str,
     timeout_seconds: int,
     idempotency_token: str,
     access_control_list: list,
     databricks_credentials: "DatabricksCredentials",
-    git_url: str = None,
-    git_provider: str = None,
-    git_branch: str = None,
-    git_tag: str = None,
-    git_commit: str = None,
-    git_snapshot: str = None,
 ) -> Dict[str, Any]:
     """
     Submit a one-time run. This endpoint allows you to submit a workload directly
@@ -843,6 +1132,35 @@ async def post_2_1_jobs_runs_submit(
         run_name:
             An optional name for the run. The default value is `Untitled`, e.g. `A
             multitask job run`.
+        git_source:
+            This functionality is in Public Preview.  An optional specification for
+            a remote repository containing the notebooks used by this
+            job's notebook tasks. Key-values:
+            - git_url:
+                URL of the repository to be cloned by this job. The maximum
+                length is 300 characters, e.g.
+                `https://github.com/databricks/databricks-cli`.
+            - git_provider:
+                Unique identifier of the service used to host the Git
+                repository. The value is case insensitive, e.g. `github`.
+            - git_branch:
+                Name of the branch to be checked out and used by this job.
+                This field cannot be specified in conjunction with git_tag
+                or git_commit. The maximum length is 255 characters, e.g.
+                `main`.
+            - git_tag:
+                Name of the tag to be checked out and used by this job. This
+                field cannot be specified in conjunction with git_branch or
+                git_commit. The maximum length is 255 characters, e.g.
+                `release-1.0.0`.
+            - git_commit:
+                Commit to be checked out and used by this job. This field
+                cannot be specified in conjunction with git_branch or
+                git_tag. The maximum length is 64 characters, e.g.
+                `e0056d01`.
+            - git_snapshot:
+                Read-only state of the remote repository at the time the job was run.
+                            This field is only included on job runs.
         timeout_seconds:
             An optional timeout applied to each run of this job. The default
             behavior is to have no timeout, e.g. `86400`.
@@ -862,30 +1180,6 @@ async def post_2_1_jobs_runs_submit(
             List of permissions to set on the job.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
-        git_url:
-            URL of the repository to be cloned by this job. The maximum length is
-            300 characters, e.g.
-            `https://github.com/databricks/databricks-cli`.
-        git_provider:
-            Unique identifier of the service used to host the Git repository. The
-            value is case insensitive, e.g. `github`.
-        git_branch:
-            Name of the branch to be checked out and used by this job. This field
-            cannot be specified in conjunction with git_tag or
-            git_commit. The maximum length is 255 characters, e.g.
-            `main`.
-        git_tag:
-            Name of the tag to be checked out and used by this job. This field
-            cannot be specified in conjunction with git_branch or
-            git_commit. The maximum length is 255 characters, e.g.
-            `release-1.0.0`.
-        git_commit:
-            Commit to be checked out and used by this job. This field cannot be
-            specified in conjunction with git_branch or git_tag. The
-            maximum length is 64 characters, e.g. `e0056d01`.
-        git_snapshot:
-            Read-only state of the remote repository at the time the job was run.
-            This field is only included on job runs.
 
     Returns:
         A dict of the response.
@@ -914,12 +1208,7 @@ async def post_2_1_jobs_runs_submit(
     data = {
         "tasks": tasks,
         "run_name": run_name,
-        "git_url": git_url,
-        "git_provider": git_provider,
-        "git_branch": git_branch,
-        "git_tag": git_tag,
-        "git_commit": git_commit,
-        "git_snapshot": git_snapshot,
+        "git_source": git_source,
         "timeout_seconds": timeout_seconds,
         "idempotency_token": idempotency_token,
         "access_control_list": access_control_list,

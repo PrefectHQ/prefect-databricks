@@ -26,12 +26,16 @@ async def get_repos(
     paginated with each page containing twenty repos.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        path_prefix: Filters repos that have paths starting with the given path prefix.
-        next_page_token: Token used to get the next page of results. If not specified, returns
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        path_prefix:
+            Filters repos that have paths starting with the given path prefix.
+        next_page_token:
+            Token used to get the next page of results. If not specified, returns
             the first page of results as well as a next page token if
             there are more results.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -73,6 +77,9 @@ async def get_repos(
 @task
 async def post_repos(
     databricks_instance: str,
+    url: str,
+    provider: str,
+    path: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -81,8 +88,22 @@ async def post_repos(
     repo, unlike repos created in the browser.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        url:
+            URL of the Git repository to be linked, e.g.
+            `https://github.com/jsmith/test`.
+        provider:
+            Git provider. This field is case-insensitive. The available Git
+            providers are gitHub, bitbucketCloud, gitLab,
+            azureDevOpsServices, gitHubEnterprise, bitbucketServer,
+            gitLabEnterpriseEdition and awsCodeCommit, e.g. `gitHub`.
+        path:
+            Desired path for the repo in the workspace. Must be in the format
+            /Repos/{folder}/{repo-name}, e.g.
+            `/Repos/Production/testrepo`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -108,11 +129,18 @@ async def post_repos(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "url": url,
+        "provider": provider,
+        "path": path,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -127,9 +155,12 @@ async def get_repos_repo_id(
     Returns the repo with the given repo ID.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        repo_id: Repo id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        repo_id:
+            Repo id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -168,6 +199,8 @@ async def get_repos_repo_id(
 async def patch_repos_repo_id(
     databricks_instance: str,
     repo_id: str,
+    branch: str,
+    tag: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -175,9 +208,19 @@ async def patch_repos_repo_id(
     commit on the same branch.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        repo_id: Repo id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        repo_id:
+            Repo id used in formatting the endpoint URL.
+        branch:
+            Branch that the local version of the repo is checked out to, e.g. `main`.
+        tag:
+            Tag that the local version of the repo is checked out to. Updating the
+            repo to a tag puts the repo in a detached HEAD state. Before
+            committing new changes, you must update the repo to a branch
+            instead of the detached HEAD, e.g. `v1.0`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -205,11 +248,17 @@ async def patch_repos_repo_id(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "branch": branch,
+        "tag": tag,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.PATCH,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -224,9 +273,12 @@ async def delete_repos_repo_id(
     Deletes the specified repo.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        repo_id: Repo id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        repo_id:
+            Repo id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.

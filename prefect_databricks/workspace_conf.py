@@ -33,8 +33,10 @@ async def get_workspace_conf(
     operation/get-tokens).
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        keys: Pass one of the following:  * `enableTokensConfig` — Enable or disable
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        keys:
+            Pass one of the following:  * `enableTokensConfig` — Enable or disable
             personal access tokens for this workspace.  *
             `maxTokenLifetimeDays` — Get the maximum token lifetime in
             days that a new token can have in a workspace. If set, users
@@ -45,7 +47,8 @@ async def get_workspace_conf(
             been created before the current maximum token lifetime was
             set. To review existing tokens, see the [get tokens API](
             operation/get-tokens), e.g. `maxTokenLifetimeDays`.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -84,6 +87,8 @@ async def get_workspace_conf(
 @task
 async def patch_workspace_conf(
     databricks_instance: str,
+    enableTokensConfig: bool,
+    maxTokenLifetimeDays: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -92,8 +97,22 @@ async def patch_workspace_conf(
     token lifetime for new tokens. See parameters for details.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        enableTokensConfig:
+            Enable or disable personal access tokens for this workspace.
+        maxTokenLifetimeDays:
+            Maximum token lifetime of new tokens in days, as an integer. If zero,
+            new tokens are permitted to have no lifetime limit. Negative
+            numbers are unsupported. **WARNING:** This limit only
+            applies to new tokens, so there may be tokens with lifetimes
+            longer than this value, including unlimited lifetime. Such
+            tokens may have been created before the current maximum
+            token lifetime was set. To review existing tokens, see the
+            [get tokens API](             operation/get-tokens), e.g.
+            `90`.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -119,10 +138,16 @@ async def patch_workspace_conf(
         500: "The request is not handled correctly due to a server error.",  # noqa
     }
 
+    data = {
+        "enableTokensConfig": enableTokensConfig,
+        "maxTokenLifetimeDays": maxTokenLifetimeDays,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.PATCH,
         responses=responses,
+        data=data,
     )
     return result

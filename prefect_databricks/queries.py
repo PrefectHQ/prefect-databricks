@@ -27,11 +27,16 @@ async def get_queries(
     Optionally this list can be filtered by a search term.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
-        page_size: Number of queries to return per page.
-        page: Page number to retrieve.
-        order: Name of query attribute to order by. Default sort order is ascending.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        page_size:
+            Number of queries to return per page.
+        page:
+            Page number to retrieve.
+        order:
+            Name of query attribute to order by. Default sort order is ascending.
             Append a dash (`-`) to order descending instead.
             - `name`: The name of the query.
             - `created_at`: The timestamp the query was created.
@@ -44,7 +49,8 @@ async def get_queries(
             - `executed_at`: The timestamp when the query was last run.
             - `created_by`: The user name of the user that created the
             query.
-        q: Full text search term.
+        q:
+            Full text search term.
 
     Returns:
         A dict of the response.
@@ -81,6 +87,12 @@ async def get_queries(
 @task
 async def post_queries(
     databricks_instance: str,
+    data_source_id: str,
+    description: str,
+    name: str,
+    options: dict,
+    query: str,
+    schedule: dict,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -92,8 +104,53 @@ async def post_queries(
     visualization until you create the query.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        data_source_id:
+            The ID of the data source / SQL Endpoint where this query will run, e.g.
+            `2cca1687-60ff-4886-a445-0230578c864d`.
+        description:
+            General description that can convey additional information about this
+            query such as usage notes, e.g. `Summarizes total order
+            dollars for customers in the Europe/Asia region.`.
+        name:
+            The name or title of this query to display in list views, e.g. `Orders
+            by month by customer`.
+        options:
+            Exclusively used for storing a list parameter definitions. A parameter
+            is an object with `title`, `name`, `type`, and `value`
+            properties. The `value` field here is the default value. It
+            can be overridden at runtime, e.g.
+            ```
+            {
+                "parameters": [
+                    {
+                        "name": "param",
+                        "title": "customer",
+                        "type": "text",
+                        "value": "acme",
+                    }
+                ]
+            }
+            ```
+        query:
+            The text of the query, e.g. `SELECT field FROM table WHERE field = {{
+            param }}`.
+        schedule:
+            JSON object that describes the scheduled execution frequency. A schedule
+            object includes `interval`, `time`, `day_of_week`, and
+            `until` fields. If a scheduled is supplied, then only
+            `interval` is required. All other field can be `null`, e.g.
+            ```
+            {
+                "day_of_week": "Wednesday",
+                "interval": 86400,
+                "time": "06:15",
+                "until": "1991-08-03",
+            }
+            ```
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -113,11 +170,21 @@ async def post_queries(
         200: "Query created successfully.",  # noqa
     }
 
+    data = {
+        "data_source_id": data_source_id,
+        "description": description,
+        "name": name,
+        "options": options,
+        "query": query,
+        "schedule": schedule,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
 
@@ -133,9 +200,12 @@ async def post_queries_trash_query_id(
     queries for alerts.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        query_id: Query id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -175,9 +245,12 @@ async def delete_queries_query_id(
     used for alerts. The trash is deleted after 30 days.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        query_id: Query id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -219,9 +292,12 @@ async def get_queries_query_id(
     about the currently authenticated user.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        query_id: Query id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -256,15 +332,67 @@ async def get_queries_query_id(
 async def post_queries_query_id(
     databricks_instance: str,
     query_id: str,
+    data_source_id: str,
+    description: str,
+    name: str,
+    options: dict,
+    query: str,
+    schedule: dict,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
     Modify this query definition.  **Note**: You cannot undo this operation.
 
     Args:
-        databricks_instance: Databricks instance used in formatting the endpoint URL.
-        query_id: Query id used in formatting the endpoint URL.
-        databricks_credentials: Credentials to use for authentication with Databricks.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        query_id:
+            Query id used in formatting the endpoint URL.
+        data_source_id:
+            The ID of the data source / SQL Endpoint where this query will run, e.g.
+            `2cca1687-60ff-4886-a445-0230578c864d`.
+        description:
+            General description that can convey additional information about this
+            query such as usage notes, e.g. `Summarizes total order
+            dollars for customers in the Europe/Asia region.`.
+        name:
+            The name or title of this query to display in list views, e.g. `Orders
+            by month by customer`.
+        options:
+            Exclusively used for storing a list parameter definitions. A parameter
+            is an object with `title`, `name`, `type`, and `value`
+            properties. The `value` field here is the default value. It
+            can be overridden at runtime, e.g.
+            ```
+            {
+                "parameters": [
+                    {
+                        "name": "param",
+                        "title": "customer",
+                        "type": "text",
+                        "value": "acme",
+                    }
+                ]
+            }
+            ```
+        query:
+            The text of the query, e.g. `SELECT field FROM table WHERE field = {{
+            param }}`.
+        schedule:
+            JSON object that describes the scheduled execution frequency. A schedule
+            object includes `interval`, `time`, `day_of_week`, and
+            `until` fields. If a scheduled is supplied, then only
+            `interval` is required. All other field can be `null`, e.g.
+            ```
+            {
+                "day_of_week": "Wednesday",
+                "interval": 86400,
+                "time": "06:15",
+                "until": "1991-08-03",
+            }
+            ```
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
@@ -286,10 +414,20 @@ async def post_queries_query_id(
         200: "Query changed successfully.",  # noqa
     }
 
+    data = {
+        "data_source_id": data_source_id,
+        "description": description,
+        "name": name,
+        "options": options,
+        "query": query,
+        "schedule": schedule,
+    }
+
     result = await execute_endpoint.fn(
         url,
         databricks_credentials,
         http_method=HTTPMethod.POST,
         responses=responses,
+        data=data,
     )
     return result
