@@ -2,7 +2,7 @@
 
 ## Welcome!
 
-Prefect integrations for interacting with Databricks
+Prefect integrations interacting with Databricks
 
 ## Getting Started
 
