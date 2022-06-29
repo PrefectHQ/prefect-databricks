@@ -1,0 +1,465 @@
+components:
+  ListQueries:
+    request:
+      description: A list of SQL queries.
+      properties:
+        filter_by:
+          $ref: '#/components/schemas/QueryFilter'
+        include_metrics:
+          $ref: '#/components/schemas/common/include_metrics'
+        max_results:
+          $ref: '#/components/schemas/common/max_results'
+        page_token:
+          description: A token that can be used to get the next page of results.
+          example: Ei0KJDU4NjEwZjY5LTgzNzUtNDdiMS04YTg1LWYxNTU5ODI5MDYyMhDdobu
+          type: string
+      type: object
+    response:
+      content:
+        application/json:
+          schema:
+            properties:
+              has_next_page:
+                description: Whether there is another page of results.
+                example: true
+                type: boolean
+              next_page_token:
+                description: A token that can be used to get the next page of results.
+                example: Ci0KJDU4NjEwZjY5LTgzNzUtNDdiMS04YTg1LWYxNTU5ODI5MDYyMhDdobu
+                type: string
+              res:
+                items:
+                  $ref: '#/components/schemas/QueryInfo'
+                type: array
+            type: object
+      description: The list of SQL queries.
+  responses:
+    InternalError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request failed due to a server error.
+    TemporarilyUnavailable:
+      content:
+        application/json:
+          example:
+            error_code: TEMPORARILY_UNAVAILABLE
+            message: The service is temporarily unavailable. Try again later.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Temporarily unavailable due to a server error.
+  schemas:
+    Error:
+      properties:
+        error_code:
+          description: Error code
+          example: INTERNAL_ERROR
+          type: string
+        message:
+          description: Human-readable error message that describes the cause of the
+            error.
+          example: Unexpected error.
+          type: string
+      type: object
+    QueryFilter:
+      description: A filter to limit query history results. This field is optional.
+      properties:
+        endpoint_id:
+          deprecated: true
+          description: 'Use `warehouse_ids: [<id>]` instead.'
+          example: 098765321fedcba
+          type: string
+        endpoint_ids:
+          $ref: '#/components/schemas/common/endpoint_ids'
+        query_start_time_range:
+          $ref: '#/components/schemas/TimeRange'
+        status:
+          deprecated: true
+          description: 'Use `statuses: [<status>]` instead.'
+          type: string
+        statuses:
+          description: 'Query status with one the following values:
+
+
+            `QUEUED`
+
+            : Query has been received and queued.
+
+
+            `RUNNING`
+
+            : Query has started.
+
+
+            `CANCELED`
+
+            : Query has been cancelled by the user.
+
+
+            `FAILED`
+
+            : Query has failed.
+
+
+            `FINISHED`
+
+            : Query has completed.
+
+            '
+          example:
+          - FINISHED
+          - FAILED
+          items:
+            $ref: '#/components/schemas/QueryStatus'
+          type: array
+        user_id:
+          deprecated: true
+          description: 'Use `user_ids: [<id>]` instead.'
+          example: 01234567890123456
+          type: integer
+        user_ids:
+          $ref: '#/components/schemas/common/user_ids'
+        warehouse_ids:
+          $ref: '#/components/schemas/common/warehouse_ids'
+      type: object
+    QueryInfo:
+      properties:
+        endpoint_id:
+          $ref: '#/components/schemas/common/endpoint_id'
+        error_message:
+          $ref: '#/components/schemas/common/error_message'
+        execution_end_time_ms:
+          $ref: '#/components/schemas/common/execution_end_time_ms'
+        is_final:
+          description: Whether more updates for the query are expected.
+          example: true
+          type: boolean
+        lookup_key:
+          $ref: '#/components/schemas/common/lookup_key'
+        metrics:
+          $ref: '#/components/schemas/QueryMetrics'
+        query_end_time_ms:
+          $ref: '#/components/schemas/common/query_end_time_ms'
+        query_id:
+          $ref: '#/components/schemas/common/query_id'
+        query_start_time_ms:
+          $ref: '#/components/schemas/common/query_start_time_ms'
+        query_text:
+          $ref: '#/components/schemas/common/query_text'
+        rows_produced:
+          $ref: '#/components/schemas/common/rows_produced'
+        spark_ui_url:
+          $ref: '#/components/schemas/common/sparkui_url'
+        status:
+          $ref: '#/components/schemas/QueryStatus'
+        user_id:
+          $ref: '#/components/schemas/common/user_id'
+        user_name:
+          $ref: '#/components/schemas/common/user_name'
+        warehouse_id:
+          $ref: '#/components/schemas/common/warehouse_id'
+      type: object
+    QueryMetrics:
+      description: Metrics about query execution.
+      properties:
+        compilation_time_ms:
+          description: Time spent loading metadata and optimizing the query, in milliseconds.
+          example: 1000
+          type: integer
+        execution_time_ms:
+          description: Time spent executing the query, in milliseconds.
+          example: 1000
+          type: integer
+        network_sent_bytes:
+          description: Total amount of data sent over the network, in bytes.
+          example: 1024
+          type: integer
+        photon_total_time_ms:
+          description: Total execution time for all individual Photon query engine
+            tasks in the query, in milliseconds.
+          example: 1000
+          type: integer
+        queued_overload_time_ms:
+          description: Time spent waiting to execute the query because the SQL warehouse
+            is already running the maximum number of concurrent queries, in milliseconds.
+          example: 1000
+          type: integer
+        queued_provisioning_time_ms:
+          description: Time waiting for compute resources to be provisioned for the
+            SQL warehouse, in milliseconds.
+          example: 1000
+          type: integer
+        read_bytes:
+          description: Total size of data read by the query, in bytes.
+          example: 1024
+          type: integer
+        read_cache_bytes:
+          description: Size of persistent data read from the cache, in bytes.
+          example: 1024
+          type: integer
+        read_files_count:
+          description: Number of files read after pruning.
+          example: 1
+          type: integer
+        read_partitions_count:
+          description: Number of partitions read after pruning.
+          example: 1
+          type: integer
+        read_remote_bytes:
+          description: Size of persistent data read from cloud object storage on your
+            cloud tenant, in bytes.
+          example: 1024
+          type: integer
+        result_fetch_time_ms:
+          description: Time spent fetching the query results after the execution finished,
+            in milliseconds.
+          example: 100000
+          type: integer
+        result_from_cache:
+          description: true if the query result was fetched from cache, false otherwise.
+          example: false
+          type: boolean
+        rows_produced_count:
+          description: Total number of rows returned by the query.
+          example: 100000
+          type: integer
+        rows_read_count:
+          description: Total number of rows read by the query.
+          example: 10000
+          type: integer
+        spill_to_disk_bytes:
+          description: Size of data temporarily written to disk while executing the
+            query, in bytes.
+          example: 1024
+          type: integer
+        task_total_time_ms:
+          description: "Sum of execution time for all of the query\u2019s tasks, in\
+            \ milliseconds."
+          example: 100000
+          type: integer
+        total_files_count:
+          description: Number of files that would have been read without pruning.
+          example: 10
+          type: integer
+        total_partitions_count:
+          description: Number of partitions that would have been read without pruning.
+          example: 10
+          type: integer
+        total_time_ms:
+          description: "Total execution time of the query from the client\u2019s point\
+            \ of view, in milliseconds."
+          example: 1000
+          type: integer
+        write_remote_bytes:
+          description: Size pf persistent data written to cloud object storage in
+            your cloud tenant, in bytes.
+          example: 1024
+          type: integer
+      type: object
+    QueryStatus:
+      description: 'Query status with one the following values:
+
+
+        `QUEUED`
+
+        : Query has been received and queued.
+
+
+        `RUNNING`
+
+        : Query has started.
+
+
+        `CANCELED`
+
+        : Query has been cancelled by the user.
+
+
+        `FAILED`
+
+        : Query has failed.
+
+
+        `FINISHED`
+
+        : Query has completed.
+
+        '
+      enum:
+      - QUEUED
+      - RUNNING
+      - CANCELED
+      - FAILED
+      - FINISHED
+      example: FINISHED
+      type: string
+    TimeRange:
+      properties:
+        end_time_ms:
+          description: Limit results to queries that started before this time.
+          example: 1595357086500
+          type: integer
+        start_time_ms:
+          description: Limit results to queries that started after this time.
+          example: 1595357086200
+          type: integer
+      type: object
+    common:
+      endpoint_id:
+        deprecated: true
+        description: Alias for `warehouse_id`.
+        example: 098765321fedcba
+        type: string
+      endpoint_ids:
+        deprecated: true
+        description: Alias for `warehouse_ids`.
+        items:
+          $ref: '#/components/schemas/common/endpoint_id'
+        type: array
+      error_message:
+        description: Message describing why the query could not complete.
+        example: "Table or view not found: customers; line 1 pos 14;\n'GlobalLimit\
+          \ 1000\n+- 'LocalLimit 1000\n   +- 'Project [*]\n      +- 'UnresolvedRelation\
+          \ [sales]\n"
+        type: string
+      execution_end_time_ms:
+        description: The time execution of the query ended.
+        example: 1595357086373
+        type: integer
+      include_metrics:
+        description: Whether to include metrics about query.
+        example: true
+        type: boolean
+      lookup_key:
+        description: A key that can be used to look up query details.
+        example: CiQ3OGFkYmQ2Zi00ZGUwLTRlNTYtOTkxZC05Y2I5OTNlZTViYjcQ4N6r/dguGhBlM2VlYTVlOTExMjFkMzNjILPbh9OK6uoL
+        type: string
+      max_results:
+        description: Limit the number of results returned in one page. The default
+          is 100.
+        example: 100
+        type: integer
+      query_end_time_ms:
+        description: The time the query ended.
+        example: 1595357087200
+        type: integer
+      query_id:
+        description: The query ID.
+        example: f996b47c-6672-4763-9668-d491a82099f5
+        type: string
+      query_start_time_ms:
+        description: The time the query started.
+        example: 1595357086200
+        type: integer
+      query_text:
+        description: The text of the query.
+        example: SELECT * FROM customers;
+        type: string
+      rows_produced:
+        description: The number of results returned by the query.
+        example: 100
+        type: integer
+      sparkui_url:
+        description: URL to the query plan.
+        example: https://<databricks-instance>/sparkui/1234-567890-test123/driver-1234567890123456789/SQL/execution/?id=0
+        type: string
+      user_id:
+        description: The ID of the user who ran the query.
+        example: 1234567890123456
+        type: integer
+      user_ids:
+        description: A list of user IDs who ran the queries.
+        example:
+        - 1234567890123456
+        - 6789012345678901
+        items:
+          $ref: '#/components/schemas/common/user_id'
+        type: array
+      user_name:
+        description: The email address or username of the user who ran the query.
+        example: user@example.com
+        type: string
+      warehouse_id:
+        description: Warehouse ID.
+        example: 098765321fedcba
+        type: string
+      warehouse_ids:
+        description: A list of warehouse IDs.
+        example:
+        - 098765321fedcba
+        - 1234567890abcdef
+        items:
+          $ref: '#/components/schemas/common/warehouse_id'
+        type: array
+  security:
+  - bearerAuth: []
+  - basicAuth: []
+  securitySchemes:
+    basicAuth:
+      description: HTTP Basic authentication with a name and password for native (non-SSO)
+        authentication.
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: String
+      description: You can authenticate with a Databricks personal access token that
+        you create for yourself within the application user interface.
+      in: header
+      name: Token
+      scheme: bearer
+      type: http
+info:
+  description: Access the history of queries through SQL warehouses. Note - The query
+    history is retained only for the last 30 days.
+  title: Query History API
+  version: '2.0'
+openapi: 3.0.0
+paths:
+  /sql/history/queries:
+    get:
+      description: List the history of queries through SQL warehouses. You can filter
+        by user ID, warehouse ID, status, and time range.
+      operationId: get-sql-queries
+      requestBody:
+        content:
+          application/json:
+            examples:
+              firstCall:
+                summary: Start listing matching query history.
+                value:
+                  filter_by:
+                    query_start_time_range:
+                      end_time_ms: 1595357086500
+                      start_time_ms: 1595357086200
+                    statuses:
+                    - FINISHED
+                    - FAILED
+                    user_ids:
+                    - 1234567890123456
+                    - 6789012345678901
+                    warehouse_ids:
+                    - 098765321fedcba
+                    - 1234567890abcdef
+                  include_metrics: true
+                  max_results: 100
+              subsequentCall:
+                summary: Continue listing the next page of query history.
+                value:
+                  include_metrics: true
+                  max_results: 100
+                  page_token: Ei0KJDU4NjEwZjY5LTgzNzUtNDdiMS04YTg1LWYxNTU5ODI5MDYyMhDdobu
+            schema:
+              $ref: '#/components/ListQueries/request'
+      responses:
+        '200':
+          $ref: '#/components/ListQueries/response'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '503':
+          $ref: '#/components/responses/TemporarilyUnavailable'
+      summary: List
+servers:
+- description: In the URL, substitute `<databricks-instance>` with the domain name
+    of your deployment. Use the form `<account>.cloud.databricks.com`.
+  url: https://<databricks-instance>/api/2.0

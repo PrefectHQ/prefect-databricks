@@ -1,0 +1,1642 @@
+components:
+  examples:
+    HTTPRegistryWebhookDisabledExample:
+      value:
+        webhook:
+          creation_timestamp: 1594437249910
+          description: Webhook for comment creation
+          events:
+          - MODEL_VERSION_CREATED
+          - MODEL_VERSION_TRANSITIONED_TO_STAGING
+          - COMMENT_CREATED
+          http_url_spec:
+            enable_ssl_verification: true
+            url: https://hooks.slack.com/services/...
+          id: '124323'
+          last_updated_timestamp: 1639707520991
+          model_name: registered-model-1
+          status: DISABLED
+    HTTPRegistryWebhookExample:
+      value:
+        webhook:
+          creation_timestamp: 1594437249910
+          description: Webhook for comment creation
+          events:
+          - MODEL_VERSION_CREATED
+          - MODEL_VERSION_TRANSITIONED_TO_STAGING
+          - COMMENT_CREATED
+          http_url_spec:
+            enable_ssl_verification: true
+            url: https://hooks.slack.com/services/...
+          id: '124323'
+          last_updated_timestamp: 1594437549910
+          model_name: registered-model-1
+          status: ACTIVE
+    JobRegistryWebhookExample:
+      value:
+        webhook:
+          creation_timestamp: 1594437248910
+          description: Webhook for comment creation
+          events:
+          - MODEL_VERSION_CREATED
+          - MODEL_VERSION_TRANSITIONED_TO_STAGING
+          - COMMENT_CREATED
+          id: '126324'
+          job_spec:
+            job_id: '1'
+            workspace_url: <databricks-instance>.cloud.databricks.com
+          last_updated_timestamp: 1594437549915
+          model_name: registered-model-1
+          status: ACTIVE
+    RegistryWebhookExamples:
+      value:
+        webhooks:
+        - creation_timestamp: 1594437249910
+          description: Webhook for comment creation
+          events:
+          - MODEL_VERSION_CREATED
+          - MODEL_VERSION_TRANSITIONED_TO_STAGING
+          - COMMENT_CREATED
+          http_url_spec:
+            enable_ssl_verification: true
+            url: https://hooks.slack.com/services/...
+          id: '124323'
+          last_updated_timestamp: 1594437549910
+          model_name: registered-model-1
+          status: ACTIVE
+        - creation_timestamp: 1594437248910
+          description: Webhook for comment creation
+          events:
+          - MODEL_VERSION_CREATED
+          - MODEL_VERSION_TRANSITIONED_TO_STAGING
+          - COMMENT_CREATED
+          id: '126324'
+          job_spec:
+            job_id: '1'
+            workspace_url: <databricks-instance>.cloud.databricks.com
+          last_updated_timestamp: 1594437549915
+          model_name: registered-model-1
+          status: ACTIVE
+    UpdateHTTPRegistryWebhookExample:
+      value:
+        id: '124323'
+        status: DISABLED
+    UpdateJobRegistryWebhookExample:
+      value:
+        events:
+        - MODEL_VERSION_TAG_SET
+        - TRANSITION_REQUEST_TO_PRODUCTION_CREATED
+        id: '126324'
+    UpdatedJobRegistryWebhookExample:
+      value:
+        webhook:
+          creation_timestamp: 1594437248910
+          description: Webhook for comment creation
+          events:
+          - MODEL_VERSION_TAG_SET
+          - TRANSITION_REQUEST_TO_PRODUCTION_CREATED
+          id: '126324'
+          job_spec:
+            job_id: '1'
+            workspace_url: <databricks-instance>.cloud.databricks.com
+          last_updated_timestamp: 1639707520991
+          model_name: registered-model-1
+          status: ACTIVE
+  parameters:
+    comment:
+      description: User-provided comment on the action.
+      example: This version is great!
+      in: query
+      name: comment
+      schema:
+        type: string
+    name:
+      description: Name of the model.
+      example: search_ads_model
+      in: query
+      name: name
+      required: true
+      schema:
+        type: string
+    version:
+      description: Version of the model.
+      example: '1'
+      in: query
+      name: version
+      required: true
+      schema:
+        type: string
+  responses:
+    BadRequest-InvalidParameterValue:
+      content:
+        application/json:
+          example:
+            error_code: INVALID_PARAMETER_VALUE
+            message: Got an invalid version number '0'. Model version numbers are
+              integers, starting from 1.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed.
+    BadRequest-ResourceAlreadyExists:
+      content:
+        application/json:
+          example:
+            error_code: RESOURCE_ALREADY_EXISTS
+            message: Transition request already exists
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed.
+    Conflict:
+      content:
+        application/json:
+          example:
+            error_code: INVALID_STATE_TRANSITION
+            message: This operation cannot be performed. Model 'search-ads-model'
+              version 1 is pending registration.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request conflicts with the current state of the resource.
+    Forbidden:
+      content:
+        application/json:
+          example:
+            error_code: PERMISSION_DENIED
+            message: Request failed access control checks.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is forbidden.
+    InternalError:
+      content:
+        application/json:
+          example:
+            error_code: INTERNAL_ERROR
+            message: Something went wrong
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is not handled correctly due to a server error.
+    NotFound:
+      content:
+        application/json:
+          example:
+            error_code: RESOURCE_DOES_NOT_EXIST
+            message: RegisteredModel 'search-ads-model' does not exist. It might have
+              been deleted.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The requested resource does not exist.
+  schemas:
+    Activity:
+      description: Activity recorded for the action.
+      properties:
+        activity_type:
+          $ref: '#/components/schemas/ActivityType'
+        comment:
+          $ref: '#/components/schemas/activity_comment'
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        from_stage:
+          allOf:
+          - $ref: '#/components/schemas/stage'
+          description: 'Source stage of the transition (if the activity is stage transition
+            related). Valid values are:
+
+
+            * `None`: The initial stage of a model version.
+
+
+            * `Staging`: Staging or pre-production stage.
+
+
+            * `Production`: Production stage.
+
+
+            * `Archived`: Archived stage.'
+        id:
+          $ref: '#/components/schemas/id'
+        last_updated_timestamp:
+          $ref: '#/components/schemas/last_updated_timestamp'
+        system_comment:
+          description: Comment made by system, for example explaining an activity
+            of type `SYSTEM_TRANSITION`. It usually describes a side effect, such
+            as a version being archived as part of another version's stage transition,
+            and may not be returned for some activity types.
+          type: string
+        to_stage:
+          allOf:
+          - $ref: '#/components/schemas/to_stage'
+          description: 'Target stage of the transition (if the activity is stage transition
+            related). Valid values are:
+
+
+            * `None`: The initial stage of a model version.
+
+
+            * `Staging`: Staging or pre-production stage.
+
+
+            * `Production`: Production stage.
+
+
+            * `Archived`: Archived stage.'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/user_id'
+          description: Username of the user who created the activity, e.g. the user
+            who made the stage transition request.
+      type: object
+    ActivityAction:
+      description: 'An action that a user (with sufficient permissions) could take
+        on an activity. Valid values are:
+
+        * `APPROVE_TRANSITION_REQUEST`: Approve a transition request
+
+
+        * `REJECT_TRANSITION_REQUEST`: Reject a transition request
+
+
+        * `CANCEL_TRANSITION_REQUEST`: Cancel (delete) a transition request'
+      enum:
+      - APPROVE_TRANSITION_REQUEST
+      - REJECT_TRANSITION_REQUEST
+      - CANCEL_TRANSITION_REQUEST
+      example: CANCEL_TRANSITION_REQUEST
+      type: string
+    ActivityType:
+      description: 'Type of activity. Valid values are:
+
+        * `APPLIED_TRANSITION`: User applied the corresponding stage transition.
+
+
+        * `REQUESTED_TRANSITION`: User requested the corresponding stage transition.
+
+
+        * `CANCELLED_REQUEST`: User cancelled an existing transition request.
+
+
+        * `APPROVED_REQUEST`: User approved the corresponding stage transition.
+
+
+        * `REJECTED_REQUEST`: User rejected the coressponding stage transition.
+
+
+        * `SYSTEM_TRANSITION`: For events performed as a side effect, such as archiving
+        existing model versions in a stage.'
+      enum:
+      - APPLIED_TRANSITION
+      - REQUESTED_TRANSITION
+      - CANCELLED_REQUEST
+      - APPROVED_REQUEST
+      - REJECTED_REQUEST
+      - NEW_COMMENT
+      - SYSTEM_TRANSITION
+      example: REQUESTED_TRANSITION
+      type: string
+    ApproveTransitionRequestRequest:
+      properties:
+        archive_existing_versions:
+          $ref: '#/components/schemas/archive_existing_versions'
+        comment:
+          $ref: '#/components/schemas/comment'
+        name:
+          $ref: '#/components/schemas/name'
+        stage:
+          $ref: '#/components/schemas/to_stage'
+        version:
+          $ref: '#/components/schemas/version'
+      required:
+      - name
+      - version
+      - stage
+      - archive_existing_versions
+      type: object
+    BaseRegistryWebhook:
+      description: Details of the webhook. It does not contain the shared secret value.
+      properties:
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        description:
+          $ref: '#/components/schemas/webhook_description'
+        events:
+          $ref: '#/components/schemas/RegistryWebhookEvents'
+        id:
+          $ref: '#/components/schemas/webhook_id'
+        last_updated_timestamp:
+          $ref: '#/components/schemas/last_updated_timestamp'
+        model_name:
+          $ref: '#/components/schemas/model_name'
+        status:
+          $ref: '#/components/schemas/RegistryWebhookStatus'
+      type: object
+    CommentActivityAction:
+      description: 'An action that a user (with sufficient permissions) could take
+        on a comment. Valid values are:
+
+        * `EDIT_COMMENT`: Edit the comment
+
+
+        * `DELETE_COMMENT`: Delete the comment'
+      enum:
+      - EDIT_COMMENT
+      - DELETE_COMMENT
+      example: EDIT_COMMENT
+      type: string
+    CommentObject:
+      description: Comment details.
+      properties:
+        available_actions:
+          description: Array of actions on the activity allowed for the current viewer.
+          items:
+            $ref: '#/components/schemas/CommentActivityAction'
+          type: array
+        comment:
+          $ref: '#/components/schemas/comment'
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        last_updated_timestamp:
+          $ref: '#/components/schemas/last_updated_timestamp'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/user_id'
+          description: Username of the user who made the comment.
+      type: object
+    CreateBaseRegistryWebhook:
+      properties:
+        description:
+          $ref: '#/components/schemas/webhook_description'
+        events:
+          $ref: '#/components/schemas/RegistryWebhookEvents'
+        model_name:
+          allOf:
+          - $ref: '#/components/schemas/model_name'
+          description: If model name is not specified, a registry-wide webhook is
+            created that listens for the specified events across all versions of all
+            registered models.
+        status:
+          $ref: '#/components/schemas/RegistryWebhookStatus'
+      required:
+      - events
+      type: object
+    CreateCommentRequest:
+      properties:
+        comment:
+          $ref: '#/components/schemas/comment'
+        name:
+          $ref: '#/components/schemas/name'
+        version:
+          $ref: '#/components/schemas/version'
+      required:
+      - name
+      - version
+      - comment
+      type: object
+    CreateHTTPRegistryWebhook:
+      allOf:
+      - required:
+        - http_url_spec
+      - properties:
+          http_url_spec:
+            $ref: '#/components/schemas/HttpUrlSpec'
+      - $ref: '#/components/schemas/CreateBaseRegistryWebhook'
+    CreateJobRegistryWebhook:
+      allOf:
+      - required:
+        - job_spec
+      - properties:
+          job_spec:
+            $ref: '#/components/schemas/JobSpec'
+      - $ref: '#/components/schemas/CreateBaseRegistryWebhook'
+    CreateRegistryWebhookRequest:
+      oneOf:
+      - $ref: '#/components/schemas/CreateHTTPRegistryWebhook'
+      - $ref: '#/components/schemas/CreateJobRegistryWebhook'
+    CreateTransitionRequestRequest:
+      properties:
+        comment:
+          $ref: '#/components/schemas/comment'
+        name:
+          $ref: '#/components/schemas/name'
+        stage:
+          $ref: '#/components/schemas/to_stage'
+        version:
+          $ref: '#/components/schemas/version'
+      required:
+      - name
+      - version
+      - stage
+      type: object
+    DeleteCommentRequest:
+      properties:
+        id:
+          $ref: '#/components/schemas/activity_id'
+      required:
+      - id
+      type: object
+    Error:
+      properties:
+        error_code:
+          description: Error code.
+          type: string
+        message:
+          description: Human-readable error message that describes the cause of the
+            error.
+          type: string
+      type: object
+    HTTPRegistryWebhook:
+      allOf:
+      - $ref: '#/components/schemas/BaseRegistryWebhook'
+      - properties:
+          http_url_spec:
+            $ref: '#/components/schemas/HttpUrlSpecWithoutSecret'
+    HttpUrlSpec:
+      properties:
+        authorization:
+          description: Value of the authorization header that should be sent in the
+            request sent by the wehbook. It should be of the form `"<auth type> <credentials>"`.
+            If set to an empty string, no authorization header will be included in
+            the request.
+          example: Bearer <access_token>
+          type: string
+        enable_ssl_verification:
+          description: Enable/disable SSL certificate validation. Default is true.
+            For self-signed certificates, this field must be false AND the destination
+            server must disable certificate validation as well. For security purposes,
+            it is encouraged to perform secret validation with the HMAC-encoded portion
+            of the payload and acknowledge the risk associated with disabling hostname
+            validation whereby it becomes more likely that requests can be maliciously
+            routed to an unintended host.
+          type: boolean
+        secret:
+          description: 'Shared secret required for HMAC encoding payload. The HMAC-encoded
+            payload will be sent in the header as: { "X-Databricks-Signature": $encoded_payload
+            }.'
+          example: anyRandomString
+          type: string
+        url:
+          description: External HTTPS URL called on event trigger (by using a POST
+            request).
+          example: https://hooks.slack.com/services/...
+          type: string
+      required:
+      - url
+      type: object
+    HttpUrlSpecWithoutSecret:
+      properties:
+        enable_ssl_verification:
+          description: Enable/disable SSL certificate validation. Default is true.
+            For self-signed certificates, this field must be false AND the destination
+            server must disable certificate validation as well. For security purposes,
+            it is encouraged to perform secret validation with the HMAC-encoded portion
+            of the payload and acknowledge the risk associated with disabling hostname
+            validation whereby it becomes more likely that requests can be maliciously
+            routed to an unintended host.
+          type: boolean
+        url:
+          description: External HTTPS URL called on event trigger (by using a POST
+            request).
+          example: https://hooks.slack.com/services/...
+          type: string
+      type: object
+    JobRegistryWebhook:
+      allOf:
+      - $ref: '#/components/schemas/BaseRegistryWebhook'
+      - properties:
+          job_spec:
+            $ref: '#/components/schemas/JobSpecWithoutSecret'
+    JobSpec:
+      properties:
+        access_token:
+          description: The personal access token used to authorize webhook's job runs.
+          example: dapi12345678935845824
+          type: string
+        job_id:
+          description: ID of the job that the webhook runs.
+          example: '1'
+          type: string
+        workspace_url:
+          description: "URL of the workspace containing the job that this webhook\
+            \ runs. If not specified, the job\u2019s workspace URL is assumed to be\
+            \ the same as the workspace where the webhook is created."
+          example: <databricks-instance>.cloud.databricks.com
+          type: string
+      required:
+      - job_id
+      - access_token
+      type: object
+    JobSpecWithoutSecret:
+      properties:
+        job_id:
+          description: ID of the job that the webhook runs.
+          example: '1'
+          type: string
+        workspace_url:
+          description: "URL of the workspace containing the job that this webhook\
+            \ runs. Defaults to the workspace URL in which the webhook is created.\
+            \ If not specified, the job\u2019s workspace is assumed to be the same\
+            \ as the webhook\u2019s."
+          example: <databricks-instance>.cloud.databricks.com
+          type: string
+      type: object
+    ListRegistryWebhooksRequest:
+      properties:
+        events:
+          allOf:
+          - $ref: '#/components/schemas/RegistryWebhookEvents'
+          description: If `events` is specified, any webhook with one or more of the
+            specified trigger events is included in the output. If `events` is not
+            specified, webhooks of all event types are included in the output.
+        model_name:
+          allOf:
+          - $ref: '#/components/schemas/model_name'
+          description: If `model_name` is not specified, all webhooks associated with
+            the specified events are listed, regardless of their associated model.
+      type: object
+    ModelVersion:
+      properties:
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        current_stage:
+          $ref: '#/components/schemas/stage'
+        description:
+          $ref: '#/components/schemas/description'
+        last_updated_timestamp:
+          $ref: '#/components/schemas/last_updated_timestamp'
+        name:
+          $ref: '#/components/schemas/name'
+        run_id:
+          $ref: '#/components/schemas/run_id'
+        run_link:
+          $ref: '#/components/schemas/run_link'
+        source:
+          $ref: '#/components/schemas/source'
+        status:
+          $ref: '#/components/schemas/status'
+        status_message:
+          $ref: '#/components/schemas/status_message'
+        tags:
+          $ref: '#/components/schemas/version_tags'
+        user_id:
+          $ref: '#/components/schemas/user_id'
+        version:
+          $ref: '#/components/schemas/version'
+      type: object
+    ModelVersionDatabricks:
+      properties:
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        current_stage:
+          $ref: '#/components/schemas/stage'
+        description:
+          $ref: '#/components/schemas/description'
+        last_updated_timestamp:
+          $ref: '#/components/schemas/last_updated_timestamp'
+        name:
+          $ref: '#/components/schemas/name'
+        permission_level:
+          $ref: '#/components/schemas/PermissionLevel'
+        run_id:
+          $ref: '#/components/schemas/run_id'
+        run_link:
+          $ref: '#/components/schemas/run_link'
+        source:
+          $ref: '#/components/schemas/source'
+        status:
+          $ref: '#/components/schemas/status'
+        status_message:
+          $ref: '#/components/schemas/status_message'
+        tags:
+          $ref: '#/components/schemas/version_tags'
+        user_id:
+          $ref: '#/components/schemas/user_id'
+        version:
+          $ref: '#/components/schemas/version'
+      type: object
+    ModelVersionTag:
+      properties:
+        key:
+          $ref: '#/components/schemas/key'
+        value:
+          $ref: '#/components/schemas/value'
+      type: object
+    PermissionLevel:
+      description: Permission level of the requesting user on the object. For what
+        is allowed at each level, see [MLflow Model permissions](https://docs.databricks.com/security/access-control/workspace-acl.html#mlflow-model-permissions).
+      enum:
+      - CAN_MANAGE
+      - CAN_EDIT
+      - CAN_READ
+      - CAN_MANAGE_STAGING_VERSIONS
+      - CAN_MANAGE_PRODUCTION_VERSIONS
+      example: CAN_READ
+      name: permission_level
+      type: string
+    RegisteredModelDatabricks:
+      properties:
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        description:
+          $ref: '#/components/schemas/description'
+        id:
+          $ref: '#/components/schemas/id'
+        last_updated_timestamp:
+          $ref: '#/components/schemas/last_updated_timestamp'
+        latest_versions:
+          description: Array of model versions, each the latest version for its stage.
+          items:
+            $ref: '#/components/schemas/ModelVersion'
+          type: array
+        name:
+          $ref: '#/components/schemas/name'
+        permission_level:
+          $ref: '#/components/schemas/PermissionLevel'
+        tags:
+          description: Array of tags associated with the model.
+          items:
+            $ref: '#/components/schemas/RegisteredModelTag'
+          type: array
+        user_id:
+          $ref: '#/components/schemas/user_id'
+      type: object
+    RegisteredModelTag:
+      properties:
+        key:
+          $ref: '#/components/schemas/key'
+        value:
+          $ref: '#/components/schemas/value'
+      type: object
+    RegistryWebhook:
+      oneOf:
+      - $ref: '#/components/schemas/HTTPRegistryWebhook'
+      - $ref: '#/components/schemas/JobRegistryWebhook'
+    RegistryWebhookEvent:
+      enum:
+      - MODEL_VERSION_CREATED
+      - MODEL_VERSION_TRANSITIONED_STAGE
+      - TRANSITION_REQUEST_CREATED
+      - COMMENT_CREATED
+      - REGISTERED_MODEL_CREATED
+      - MODEL_VERSION_TAG_SET
+      - MODEL_VERSION_TRANSITIONED_TO_STAGING
+      - MODEL_VERSION_TRANSITIONED_TO_PRODUCTION
+      - MODEL_VERSION_TRANSITIONED_TO_ARCHIVED
+      - TRANSITION_REQUEST_TO_STAGING_CREATED
+      - TRANSITION_REQUEST_TO_PRODUCTION_CREATED
+      - TRANSITION_REQUEST_TO_ARCHIVED_CREATED
+      example: MODEL_VERSION_CREATED
+      type: string
+    RegistryWebhookEvents:
+      description: "Events that can trigger a registry webhook:\n* `MODEL_VERSION_CREATED`:\
+        \ A new model version was created for the associated model.\n\n* `MODEL_VERSION_TRANSITIONED_STAGE`:\
+        \ A model version\u2019s stage was changed.\n\n* `TRANSITION_REQUEST_CREATED`:\
+        \ A user requested a model version\u2019s stage be transitioned.\n\n* `COMMENT_CREATED`:\
+        \ A user wrote a comment on a registered model.\n\n* `REGISTERED_MODEL_CREATED`:\
+        \ A new registered model was created. This event type can only be specified\
+        \ for a registry-wide webhook, which can be created by not specifying a model\
+        \ name in the create request.\n\n* `MODEL_VERSION_TAG_SET`: A user set a tag\
+        \ on the model version.\n\n* `MODEL_VERSION_TRANSITIONED_TO_STAGING`: A model\
+        \ version was transitioned to staging.\n\n* `MODEL_VERSION_TRANSITIONED_TO_PRODUCTION`:\
+        \ A model version was transitioned to production.\n\n* `MODEL_VERSION_TRANSITIONED_TO_ARCHIVED`:\
+        \ A model version was archived.\n\n* `TRANSITION_REQUEST_TO_STAGING_CREATED`:\
+        \ A user requested a model version be transitioned to staging.\n\n* `TRANSITION_REQUEST_TO_PRODUCTION_CREATED`:\
+        \ A user requested a model version be transitioned to production.\n\n* `TRANSITION_REQUEST_TO_ARCHIVED_CREATED`:\
+        \ A user requested a model version be archived."
+      example:
+      - MODEL_VERSION_CREATED
+      - MODEL_VERSION_TRANSITIONED_TO_STAGING
+      - COMMENT_CREATED
+      items:
+        $ref: '#/components/schemas/RegistryWebhookEvent'
+      type: array
+    RegistryWebhookStatus:
+      description: 'Enable or disable triggering the webhook, or put the webhook into
+        test mode. The default is `ACTIVE`:
+
+        * `ACTIVE`: Webhook is triggered when an associated event happens.
+
+
+        * `DISABLED`: Webhook is not triggered.
+
+
+        * `TEST_MODE`: Webhook can be triggered through the test endpoint, but is
+        not triggered on a real event.'
+      enum:
+      - ACTIVE
+      - DISABLED
+      - TEST_MODE
+      example: ACTIVE
+      type: string
+    RejectTransitionRequestRequest:
+      properties:
+        comment:
+          $ref: '#/components/schemas/comment'
+        name:
+          $ref: '#/components/schemas/name'
+        stage:
+          $ref: '#/components/schemas/to_stage'
+        version:
+          $ref: '#/components/schemas/version'
+      required:
+      - name
+      - version
+      - stage
+      type: object
+    TestRegistryWebhook:
+      description: Test webhook response object.
+      properties:
+        body:
+          description: Body of the response from the webhook URL
+          example: OK
+          type: string
+        status_code:
+          description: Status code returned by the webhook URL
+          example: 200
+          format: int32
+          type: integer
+      type: object
+    TestRegistryWebhookRequest:
+      properties:
+        event:
+          allOf:
+          - $ref: '#/components/schemas/RegistryWebhookEvent'
+          description: If `event` is specified, the test trigger uses the specified
+            event. If `event` is not specified, the test trigger uses a randomly chosen
+            event associated with the webhook.
+        id:
+          $ref: '#/components/schemas/webhook_id'
+      required:
+      - id
+      type: object
+    TransitionModelVersionStageRequest:
+      properties:
+        archive_existing_versions:
+          $ref: '#/components/schemas/archive_existing_versions'
+        comment:
+          $ref: '#/components/schemas/comment'
+        name:
+          $ref: '#/components/schemas/name'
+        stage:
+          $ref: '#/components/schemas/to_stage'
+        version:
+          $ref: '#/components/schemas/version'
+      required:
+      - name
+      - version
+      - stage
+      - archive_existing_versions
+      type: object
+    TransitionRequest:
+      description: Transition request details.
+      properties:
+        available_actions:
+          description: Array of actions on the activity allowed for the current viewer.
+          items:
+            $ref: '#/components/schemas/ActivityAction'
+          type: array
+        comment:
+          $ref: '#/components/schemas/request_comment'
+        creation_timestamp:
+          $ref: '#/components/schemas/creation_timestamp'
+        to_stage:
+          allOf:
+          - $ref: '#/components/schemas/to_stage'
+          description: 'Target stage of the transition (if the activity is stage transition
+            related). Valid values are:
+
+
+            * `None`: The initial stage of a model version.
+
+
+            * `Staging`: Staging or pre-production stage.
+
+
+            * `Production`: Production stage.
+
+
+            * `Archived`: Archived stage.'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/user_id'
+          description: Username of the user who made the stage transition request.
+      type: object
+    UpdateCommentRequest:
+      properties:
+        comment:
+          $ref: '#/components/schemas/comment'
+        id:
+          $ref: '#/components/schemas/activity_id'
+      required:
+      - id
+      - comment
+      type: object
+    UpdateRegistryWebhookRequest:
+      properties:
+        description:
+          $ref: '#/components/schemas/webhook_description'
+        events:
+          $ref: '#/components/schemas/RegistryWebhookEvents'
+        http_url_spec:
+          $ref: '#/components/schemas/HttpUrlSpec'
+        id:
+          $ref: '#/components/schemas/webhook_id'
+        job_spec:
+          $ref: '#/components/schemas/JobSpec'
+        status:
+          $ref: '#/components/schemas/RegistryWebhookStatus'
+      required:
+      - id
+      type: object
+    activity_comment:
+      description: User-provided comment associated with the activity.
+      example: This version is great!
+      name: comment
+      type: string
+    activity_id:
+      description: Unique identifier of an activity
+      example: 6fc74c92704341aaa49e74dcc6031057
+      format: uuid
+      name: id
+      type: string
+    archive_existing_versions:
+      description: Specifies whether to archive all current model versions in the
+        target stage.
+      example: true
+      name: archive_existing_versions
+      type: boolean
+    comment:
+      description: User-provided comment on the action.
+      example: This version is great!
+      maxLength: 65535
+      minLength: 1
+      name: comment
+      type: string
+    creation_timestamp:
+      description: Creation time of the object, as a Unix timestamp in milliseconds.
+      example: 1594437249910
+      format: int64
+      name: creation_timestamp
+      type: integer
+    description:
+      description: User-specified description for the object.
+      example: Here's some extra info.
+      maxLength: 65535
+      name: description
+      type: string
+    id:
+      description: Unique identifier for the object.
+      example: 6fc74c92704341aaa49e74dcc6031057
+      format: uuid
+      name: id
+      type: string
+    key:
+      description: Key for the tag.
+      example: owner_team
+      name: key
+      type: string
+    last_updated_timestamp:
+      description: Time of the object at last update, as a Unix timestamp in milliseconds.
+      example: 1594437549910
+      format: int64
+      name: last_updated_timestamp
+      type: integer
+    model_name:
+      description: Name of the model whose events would trigger this webhook.
+      example: registered-model-1
+      name: model_name
+      type: string
+    name:
+      description: Name of the model.
+      example: search_ads_model
+      maxLength: 100
+      minLength: 1
+      name: name
+      type: string
+    request_comment:
+      description: User-provided comment associated with the transition request.
+      example: This version is great!
+      name: comment
+      type: string
+    run_id:
+      description: Unique identifier for the MLflow tracking run associated with the
+        source model artifacts.
+      example: 6fc74c92704341aaa49e74dcc6031057
+      format: uuid
+      name: run_id
+      type: string
+    run_link:
+      description: URL of the run associated with the model artifacts, potentially
+        in another workspace.
+      example: https://<databricks-instance>/#mlflow/experiments/28774367/runs/6fc74c92704341aaa49e74dcc6031057
+      name: run_link
+      type: string
+    source:
+      description: URI that indicates the location of the source model artifacts.
+        This is used when creating the model version.
+      example: dbfs:/databricks/mlflow-tracking/run123/model
+      name: source
+      type: string
+    stage:
+      description: 'Stage of the model version. Valid values are:
+
+
+        * `None`: The initial stage of a model version.
+
+
+        * `Staging`: Staging or pre-production stage.
+
+
+        * `Production`: Production stage.
+
+
+        * `Archived`: Archived stage.'
+      enum:
+      - None
+      - Staging
+      - Production
+      - Archived
+      example: Staging
+      name: stage
+      type: string
+    status:
+      description: 'The status of the model version. Valid values are:
+
+        * `PENDING_REGISTRATION`: Request to register a new model version is pending
+        as server performs background tasks.
+
+
+        * `FAILED_REGISTRATION`: Request to register a new model version has failed.
+
+
+        * `READY`: Model version is ready for use.'
+      enum:
+      - PENDING_REGISTRATION
+      - FAILED_REGISTRATION
+      - READY
+      example: PENDING_REGISTRATION
+      type: string
+    status_message:
+      description: Details on the current status, for example why registration failed.
+      example: Source could not be found.
+      name: status_message
+      type: string
+    to_stage:
+      allOf:
+      - $ref: '#/components/schemas/stage'
+      description: 'Target stage of the transition. Valid values are:
+
+
+        * `None`: The initial stage of a model version.
+
+
+        * `Staging`: Staging or pre-production stage.
+
+
+        * `Production`: Production stage.
+
+
+        * `Archived`: Archived stage.'
+    user_id:
+      description: The username of the user that created the object.
+      example: jane.doe@example.com
+      format: email
+      name: user_id
+      type: string
+    value:
+      description: Value for the tag.
+      example: ml-team@example.com
+      name: value
+      type: string
+    version:
+      description: Version of the model.
+      example: '1'
+      name: version
+      type: string
+    version_tags:
+      description: Array of tags that are associated with the model version.
+      items:
+        $ref: '#/components/schemas/ModelVersionTag'
+      type: array
+    webhook_description:
+      description: User-specified description for the webhook.
+      example: Webhook for comment creation
+      name: description
+      type: string
+    webhook_id:
+      description: Webhook ID
+      example: '124323'
+      name: webhook_id
+      type: string
+  securitySchemes:
+    basicAuth:
+      description: HTTP Basic authentication with a name and password for native (non-SSO)
+        authentication.
+      in: header
+      name: HTTP Basic authentication
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: String
+      description: You can authenticate with a Databricks personal access token (PAT)
+        that you create for yourself within the application user interface.
+      in: header
+      name: Token
+      scheme: bearer
+      type: http
+info:
+  description: "Databricks provides a managed version of the [MLflow](https://docs.databricks.com/applications/mlflow/index.html)\
+    \ server, which includes [experiment tracking](https://docs.databricks.com/applications/mlflow/tracking.html)\
+    \ and the [Model Registry](https://docs.databricks.com/applications/mlflow/model-registry.html).\
+    \ Its REST API endpoints can be classified into several groups:\n\n* **[The MLflow\
+    \ REST API](https://mlflow.org/docs/latest/rest-api.html)**: These endpoints are\
+    \ available in both the open-source MLflow server as well as the Databricks-managed\
+    \ server. You can invoke the MLflow REST API using URLs of the form `https://<databricks-instance>/api/2.0/mlflow/<api-endpoint>`\
+    \ replacing `<databricks-instance>` with the [workspace URL](https://docs.databricks.com/workspace/workspace-details.html#workspace-url)\
+    \ of your Databricks deployment. This API reference does not cover these endpoints.\n\
+    \n* **[Databricks versions of MLflow API endpoints](#tag/Databricks-versions-of-MLflow-API-endpoints)**:\
+    \ These endpoints are modified versions of the MLflow API that accept additional\
+    \ input parameters or return additional information. This API reference covers\
+    \ these endpoints.\n\n* **[Databricks-only API endpoints](#tag/Databricks-only-API-endpoints)**:\
+    \ These endpoints are available in the Databricks-hosted MLflow server but not\
+    \ in the open source server. This API reference covers these endpoints.\n\nFor\
+    \ a reference of which MLflow release is packaged in each Databricks Runtime version\
+    \ and a link to the respective documentation, see the [MLflow compatibility matrix](https://docs.databricks.com/release-notes/runtime/releases.html#mlflow-compatibility-matrix).\n\
+    \n### Rate limits\n\nRate limits for MLflow APIs fall into two groups, based on\
+    \ their function and maximum throughput. The API groups and respective limits\
+    \ in queries per second (qps) are:\n\n* List experiments, search experiments,\
+    \ and search runs: 7 qps\n\n* All other APIs: 120 qps\n\nIn addition, there is\
+    \ a limit of 20 concurrent model versions in Pending status (in creation) per\
+    \ workspace.\n\nIf the rate limit is reached, subsequent API calls return HTTP\
+    \ status code 429. All MLflow clients (including the UI) automatically retry these\
+    \ errors with an exponential backoff.\n\n### Size limits\n\n In addition to rate\
+    \ limits, there are a few size limits for certain MLflow APIs. If a size limit\
+    \ is exceeded, the request throws an error specifying the limit that was exceeded.\n\
+    \n* Number of artifact credentials written (artifacts/credentials-for-write):\
+    \ Up to 1000 credentials per request.\n\n* Number of artifact credentials read\
+    \ (artifacts/credentials-for-read): Up to 1000 credentials per request.\n\n* Number\
+    \ of tags per experiment (experiments/create): Up to 100 tags.\n\n* Number of\
+    \ tags per run (runs/create): Up to 100 tags."
+  title: MLflow API
+  version: 2.0.0
+openapi: 3.0.0
+paths:
+  /mlflow/comments/create:
+    post:
+      description: Make a comment on a model version. A comment can be submitted either
+        by a user or programmatically to display relevant information about the model.
+        For example, test results or deployment errors.
+      operationId: create-comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+        description: Details required to create a comment on a model version.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/CommentObject'
+                type: object
+          description: Comment was made successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Make a comment on a model version
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/comments/delete:
+    delete:
+      description: Delete a comment on a model version.
+      operationId: delete-comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCommentRequest'
+        description: Details required to delete a comment on a model version.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+          description: Comment was deleted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Delete a comment on a model version
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/comments/update:
+    post:
+      description: Edit a comment on a model version.
+      operationId: update-comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCommentRequest'
+        description: Details required to edit a comment on a model version.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/CommentObject'
+                type: object
+          description: Comment was updated successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Edit a comment on a model version
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/databricks/model-versions/transition-stage:
+    post:
+      description: Transition a model version's stage. This is a Databricks version
+        of the [MLflow endpoint](https://www.mlflow.org/docs/latest/rest-api.html#transition-modelversion-stage)
+        that also accepts a comment associated with the transition to be recorded.
+      operationId: transition-model-version-stage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransitionModelVersionStageRequest'
+        description: Details required to transition a model version's stage.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  model_version:
+                    $ref: '#/components/schemas/ModelVersionDatabricks'
+                type: object
+          description: Model version's stage was updated successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Transition a model version's stage
+      tags:
+      - Databricks versions of MLflow API endpoints
+  /mlflow/databricks/registered-models/get:
+    get:
+      description: Get the details of a model. This is a Databricks version of the
+        [MLflow endpoint](https://www.mlflow.org/docs/latest/rest-api.html#get-registeredmodel)
+        that also returns the model's Databricks ID and the permission level of the
+        requesting user on the model.
+      operationId: get-registered-model
+      parameters:
+      - $ref: '#/components/parameters/name'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  registered_model:
+                    $ref: '#/components/schemas/RegisteredModelDatabricks'
+                type: object
+          description: Model details were returned successfully.
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Get registered model details
+      tags:
+      - Databricks versions of MLflow API endpoints
+  /mlflow/registry-webhooks/create:
+    post:
+      description: 'This endpoint is in Public Preview.
+
+
+        Create a registry webhook.'
+      operationId: create-registry-webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRegistryWebhookRequest'
+        description: Details required to create a registry webhook.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                HTTPRegistryWebhook:
+                  $ref: '#/components/examples/HTTPRegistryWebhookExample'
+                JobRegistryWebhook:
+                  $ref: '#/components/examples/JobRegistryWebhookExample'
+              schema:
+                properties:
+                  webhook:
+                    $ref: '#/components/schemas/RegistryWebhook'
+                type: object
+          description: Registry webhook was created successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Create a registry webhook
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/registry-webhooks/delete:
+    delete:
+      description: 'This endpoint is in Public Preview.
+
+
+        Delete a registry webhook.'
+      operationId: delete-registry-webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  $ref: '#/components/schemas/webhook_id'
+              required:
+              - id
+              type: object
+        description: Webhook ID required to delete a registry webhook.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+          description: Registry webhook was deleted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Delete a registry webhook
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/registry-webhooks/list:
+    get:
+      description: 'This endpoint is in Public Preview.
+
+
+        List registry webhooks.'
+      operationId: list-registry-webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRegistryWebhooksRequest'
+        description: Details required to list registry webhooks.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                webhooks:
+                  $ref: '#/components/examples/RegistryWebhookExamples'
+              schema:
+                properties:
+                  webhooks:
+                    description: Array of registry webhooks.
+                    items:
+                      $ref: '#/components/schemas/RegistryWebhook'
+                    type: array
+                type: object
+          description: Registry webhooks listed successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: List registry webhooks
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/registry-webhooks/test:
+    post:
+      description: 'This endpoint is in Public Preview.
+
+
+        Test a registry webhook.'
+      operationId: test-registry-webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRegistryWebhookRequest'
+        description: Details required to test a registry webhook.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  webhook:
+                    $ref: '#/components/schemas/TestRegistryWebhook'
+                type: object
+          description: Registry webhook was tested successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Test a registry webhook
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/registry-webhooks/update:
+    patch:
+      description: 'This endpoint is in Public Preview.
+
+
+        Update a registry webhook.'
+      operationId: update-registry-webhook
+      requestBody:
+        content:
+          application/json:
+            examples:
+              HTTPRegistryWebhook:
+                $ref: '#/components/examples/UpdateHTTPRegistryWebhookExample'
+              JobRegistryWebhook:
+                $ref: '#/components/examples/UpdateJobRegistryWebhookExample'
+            schema:
+              $ref: '#/components/schemas/UpdateRegistryWebhookRequest'
+        description: Details required to update a registry webhook. Only the fields
+          that need to be updated should be specified, and both `http_url_spec` and
+          `job_spec` should not be specified in the same request.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                HTTPRegistryWebhook:
+                  $ref: '#/components/examples/HTTPRegistryWebhookDisabledExample'
+                JobRegistryWebhook:
+                  $ref: '#/components/examples/UpdatedJobRegistryWebhookExample'
+              schema:
+                properties:
+                  webhook:
+                    $ref: '#/components/schemas/RegistryWebhook'
+                type: object
+          description: Registry webhook was updated successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Update a registry webhook
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/transition-requests/approve:
+    post:
+      description: Approve model version stage transition request.
+      operationId: approve-transition-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApproveTransitionRequestRequest'
+        description: Details required to identify and approve a model version stage
+          transition request.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  activity:
+                    $ref: '#/components/schemas/Activity'
+                type: object
+          description: Model version's stage was updated successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Approve model version stage transition request
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/transition-requests/create:
+    post:
+      description: Make a model version stage transition request.
+      operationId: create-transition-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransitionRequestRequest'
+        description: Details required to create a model version stage transition request.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  request:
+                    $ref: '#/components/schemas/TransitionRequest'
+                type: object
+          description: Transition request was made successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-ResourceAlreadyExists'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Make a model version stage transition request
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/transition-requests/delete:
+    delete:
+      description: Cancel model version stage transition request.
+      operationId: delete-transition-request
+      parameters:
+      - $ref: '#/components/parameters/name'
+      - $ref: '#/components/parameters/version'
+      - description: 'Target stage of the transition request. Valid values are:
+
+
+          * `None`: The initial stage of a model version.
+
+
+          * `Staging`: Staging or pre-production stage.
+
+
+          * `Production`: Production stage.
+
+
+          * `Archived`: Archived stage.'
+        enum:
+        - None
+        - Staging
+        - Production
+        - Archived
+        example: Staging
+        in: query
+        name: stage
+        required: true
+        schema:
+          type: string
+      - description: Username of the user who created this request. Of the transition
+          requests matching the specified details, only the one transition created
+          by this user will be deleted.
+        example: jane.doe@example.com
+        in: query
+        name: creator
+        required: true
+        schema:
+          format: email
+          type: string
+      - $ref: '#/components/parameters/comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+          description: Transition request was deleted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Delete a model version stage transition request
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/transition-requests/list:
+    get:
+      description: Get all open stage transition requests for the model version.
+      operationId: get-transition-requests
+      parameters:
+      - $ref: '#/components/parameters/name'
+      - $ref: '#/components/parameters/version'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  requests:
+                    description: Array of open transition requests.
+                    items:
+                      $ref: '#/components/schemas/TransitionRequest'
+                    type: array
+                type: object
+          description: Fetched all open requests successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Get all open stage transition requests for the model version
+      tags:
+      - Databricks-only API endpoints
+  /mlflow/transition-requests/reject:
+    post:
+      description: Reject model version stage transition request.
+      operationId: reject-transition-request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectTransitionRequestRequest'
+        description: Details required to identify and reject a model version stage
+          transition request.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  activity:
+                    $ref: '#/components/schemas/Activity'
+                type: object
+          description: Transition request was rejected successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest-InvalidParameterValue'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Reject model version stage transition request
+      tags:
+      - Databricks-only API endpoints
+security:
+- bearerAuth: []
+- basicAuth: []
+servers:
+- description: In the URL, substitute `<databricks-instance>` with the domain name
+    of your deployment. Use the form `<databricks-instance>.cloud.databricks.com`.
+  url: https://<databricks-instance>/api/2.0
+tags:
+- description: These endpoints are modified versions of the MLflow API that accept
+    additional input parameters or return additional information.
+  name: Databricks versions of MLflow API endpoints
+- description: These endpoints are available in the Databricks-hosted MLflow server
+    but not in the open source server.
+  name: Databricks-only API endpoints

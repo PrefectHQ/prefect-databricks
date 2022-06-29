@@ -1,0 +1,447 @@
+"""
+This is a module for interacting with Databricks REST tasks.
+It was auto-generated using prefect-collection-generator so
+manually editing this file is not recommended.
+
+OpenAPI spec: queries-dashboards-2.0-aws.yaml
+Updated at: 2022-06-29T19:47:27.574115
+"""
+
+from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
+
+from prefect import task
+
+from prefect_databricks.rest import HTTPMethod, execute_endpoint
+
+if TYPE_CHECKING:
+    from prefect_databricks import DatabricksCredentials
+    from prefect_databricks.models import queries as models
+
+
+@task
+async def sql_analytics_get_queries(
+    databricks_instance: str,
+    databricks_credentials: "DatabricksCredentials",
+    page_size: int = None,
+    page: int = None,
+    order: str = None,
+    q: str = None,
+) -> Dict[str, Any]:
+    """
+    Optionally this list can be filtered by a search term.
+
+    Args:
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        page_size:
+            Number of queries to return per page.
+        page:
+            Page number to retrieve.
+        order:
+            Name of query attribute to order by. Default sort order is ascending.
+            Append a dash (`-`) to order descending instead.
+            - `name`: The name of the query.
+            - `created_at`: The timestamp the query was created.
+            - `schedule`: The refresh interval for each query. For
+            example: 'Every 5 Hours' or 'Every 5 Minutes'. 'Never' is
+            treated as the highest value for sorting.
+            - `runtime`: The time it took to run this query. This will
+            be blank for parameterized queries. A blank value is treated
+            as the highest value for sorting.
+            - `executed_at`: The timestamp when the query was last run.
+            - `created_by`: The user name of the user that created the
+            query.
+        q:
+            Full text search term.
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.0/preview/sql/queries?&page_size=%s&page=%s&order=%s&q=%s](
+    https://{databricks_instance}/api/2.0/preview/sql/queries?&page_size=%s&page=%s&order=%s&q=%s)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    """  # noqa
+    url = f"https://{databricks_instance}/api/2.0/preview/sql/queries"  # noqa
+    responses = {}
+
+    params = {
+        "page_size": page_size,
+        "page": page,
+        "order": order,
+        "q": q,
+    }
+
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+        responses=responses,
+    )
+    return result
+
+
+@task
+async def post_queries(
+    databricks_instance: str,
+    databricks_credentials: "DatabricksCredentials",
+    data_source_id: str = None,
+    description: str = None,
+    name: str = None,
+    options: Dict = None,
+    query: str = None,
+    schedule: Dict = None,
+) -> Dict[str, Any]:
+    """
+    Queries created with this endpoint belong to the authenticated user making the
+    request.  The `data_source_id` field specifies the id of the SQL warehouse
+    against which this query will run. You can use the Data Sources API to see a
+    complete list of available SQL warehouses. Or you can copy the
+    `data_source_id` from an existing query.  **Note**: You cannot add a
+    visualization until you create the query.
+
+    Args:
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        data_source_id:
+            The ID of the data source / SQL warehouse where this query will run,
+            e.g. `2cca1687-60ff-4886-a445-0230578c864d`.
+        description:
+            General description that can convey additional information about this
+            query such as usage notes, e.g. `Summarizes total order
+            dollars for customers in the Europe/Asia region.`.
+        name:
+            The name or title of this query to display in list views, e.g. `Orders
+            by month by customer`.
+        options:
+            Exclusively used for storing a list parameter definitions. A parameter
+            is an object with `title`, `name`, `type`, and `value`
+            properties. The `value` field here is the default value. It
+            can be overridden at runtime, e.g.
+            ```
+            {
+                "parameters": [
+                    {
+                        "name": "param",
+                        "title": "customer",
+                        "type": "text",
+                        "value": "acme",
+                    }
+                ]
+            }
+            ```
+        query:
+            The text of the query, e.g. `SELECT field FROM table WHERE field = {{
+            param }}`.
+        schedule:
+            JSON object that describes the scheduled execution frequency. A schedule
+            object includes `interval`, `time`, `day_of_week`, and
+            `until` fields. If a scheduled is supplied, then only
+            `interval` is required. All other field can be `null`, e.g.
+            ```
+            {
+                "day_of_week": "Wednesday",
+                "interval": 86400,
+                "time": "06:15",
+                "until": "1991-08-03",
+            }
+            ```
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.0/preview/sql/queries?](
+    https://{databricks_instance}/api/2.0/preview/sql/queries?)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | Query created successfully. |
+    """  # noqa
+    url = f"https://{databricks_instance}/api/2.0/preview/sql/queries"  # noqa
+    responses = {
+        200: "Query created successfully.",  # noqa
+    }
+
+    data = {
+        "data_source_id": data_source_id,
+        "description": description,
+        "name": name,
+        "options": options,
+        "query": query,
+        "schedule": schedule,
+    }
+
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        responses=responses,
+        data=data,
+    )
+    return result
+
+
+@task
+async def sql_analytics_restore_trashed_query(
+    databricks_instance: str,
+    query_id: str,
+    databricks_credentials: "DatabricksCredentials",
+) -> Dict[str, Any]:
+    """
+    A restored query appears in list views and searches. You can use restored
+    queries for alerts.
+
+    Args:
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.0/preview/sql/queries/trash/{query_id}?](
+    https://{databricks_instance}/api/2.0/preview/sql/queries/trash/{query_id}?)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | Query restored successfully. |
+    """  # noqa
+    url = f"https://{databricks_instance}/api/2.0/preview/sql/queries/trash/{query_id}"  # noqa
+    responses = {
+        200: "Query restored successfully.",  # noqa
+    }
+
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        responses=responses,
+    )
+    return result
+
+
+@task
+async def sql_analytics_trash_query(
+    databricks_instance: str,
+    query_id: str,
+    databricks_credentials: "DatabricksCredentials",
+) -> Dict[str, Any]:
+    """
+    Trashed queries immediately disappear from searches and list views and cannot be
+    used for alerts. The trash is deleted after 30 days.
+
+    Args:
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?](
+    https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | Query moved to trash. |
+    """  # noqa
+    url = (
+        f"https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}"  # noqa
+    )
+    responses = {
+        200: "Query moved to trash.",  # noqa
+    }
+
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.DELETE,
+        responses=responses,
+    )
+    return result
+
+
+@task
+async def sql_analytics_get_query(
+    query_id: str,
+    databricks_instance: str,
+    databricks_credentials: "DatabricksCredentials",
+) -> Dict[str, Any]:
+    """
+    Retrieve a query object definition along with contextual permissions information
+    about the currently authenticated user.
+
+    Args:
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?&query_id=%s](
+    https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?&query_id=%s)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | Query fetched successfully. |
+    """  # noqa
+    url = (
+        f"https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}"  # noqa
+    )
+    responses = {
+        200: "Query fetched successfully.",  # noqa
+    }
+
+    params = {
+        "query_id": query_id,
+    }
+
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+        responses=responses,
+    )
+    return result
+
+
+@task
+async def sql_analytics_change_query(
+    query_id: str,
+    databricks_instance: str,
+    databricks_credentials: "DatabricksCredentials",
+    data_source_id: str = None,
+    description: str = None,
+    name: str = None,
+    options: Dict = None,
+    query: str = None,
+    schedule: Dict = None,
+) -> Dict[str, Any]:
+    """
+    Modify this query definition.  **Note**: You cannot undo this operation.
+
+    Args:
+        query_id:
+            Query id used in formatting the endpoint URL.
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        data_source_id:
+            The ID of the data source / SQL warehouse where this query will run,
+            e.g. `2cca1687-60ff-4886-a445-0230578c864d`.
+        description:
+            General description that can convey additional information about this
+            query such as usage notes, e.g. `Summarizes total order
+            dollars for customers in the Europe/Asia region.`.
+        name:
+            The name or title of this query to display in list views, e.g. `Orders
+            by month by customer`.
+        options:
+            Exclusively used for storing a list parameter definitions. A parameter
+            is an object with `title`, `name`, `type`, and `value`
+            properties. The `value` field here is the default value. It
+            can be overridden at runtime, e.g.
+            ```
+            {
+                "parameters": [
+                    {
+                        "name": "param",
+                        "title": "customer",
+                        "type": "text",
+                        "value": "acme",
+                    }
+                ]
+            }
+            ```
+        query:
+            The text of the query, e.g. `SELECT field FROM table WHERE field = {{
+            param }}`.
+        schedule:
+            JSON object that describes the scheduled execution frequency. A schedule
+            object includes `interval`, `time`, `day_of_week`, and
+            `until` fields. If a scheduled is supplied, then only
+            `interval` is required. All other field can be `null`, e.g.
+            ```
+            {
+                "day_of_week": "Wednesday",
+                "interval": 86400,
+                "time": "06:15",
+                "until": "1991-08-03",
+            }
+            ```
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?&query_id=%s](
+    https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}?&query_id=%s)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | Query changed successfully. |
+    """  # noqa
+    url = (
+        f"https://{databricks_instance}/api/2.0/preview/sql/queries/{query_id}"  # noqa
+    )
+    responses = {
+        200: "Query changed successfully.",  # noqa
+    }
+
+    params = {
+        "query_id": query_id,
+    }
+
+    data = {
+        "data_source_id": data_source_id,
+        "description": description,
+        "name": name,
+        "options": options,
+        "query": query,
+        "schedule": schedule,
+    }
+
+    result = await execute_endpoint.fn(
+        url,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        params=params,
+        responses=responses,
+        data=data,
+    )
+    return result

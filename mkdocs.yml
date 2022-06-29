@@ -1,10 +1,22 @@
 site_name: prefect-databricks
+site_url: https://PrefectHQ.github.io/prefect-databricks
 repo_url: https://github.com/PrefectHQ/prefect-databricks
+edit_uri: /edit/main/docs/
 theme:
   name: material
+  favicon: img/favicon.ico
   palette:
     primary: blue
     accent: blue
+  icon:
+    repo: fontawesome/brands/github
+  logo:
+    img/prefect-logo-white.png
+  font:
+    text: Inter
+    code: Source Code Pro
+extra_css:
+    - stylesheets/extra.css
 markdown_extensions:
     - admonition
     - attr_list
@@ -37,3 +49,20 @@ plugins:
 nav:
     - Home: index.md
     - Credentials: credentials.md
+    - Accounts: accounts.md
+    - Dashboards: dashboards.md
+    - Data Sources: data_sources.md
+    - Git Credentials: git_credentials.md
+    - Global Init Scripts: global_init_scripts.md
+    - Ip Access Lists: ip_access_lists.md
+    - Jobs: jobs.md
+    - Mlflow: mlflow.md
+    - Permissions: permissions.md
+    - Queries: queries.md
+    - Repos: repos.md
+    - Rest: rest.md
+    - Sql: sql.md
+    - Token Management: token_management.md
+    - Workspace Conf: workspace_conf.md
+    - Models: models.md
+    

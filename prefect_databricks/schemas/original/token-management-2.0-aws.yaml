@@ -1,0 +1,443 @@
+components:
+  responses:
+    FeatureDisabled:
+      content:
+        application/json:
+          examples:
+            Feature disabled:
+              value:
+                error_code: FEATURE_DISABLED
+                message: <feature-name> is not enabled for this feature tier
+            feature_disabled:
+              value:
+                error_code: FEATURE_DISABLED
+                message: On-behalf-of token creation for service principals is not
+                  enabled for this workspace
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The requested feature is not available
+    InternalError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is not handled correctly due to a server error.
+    NotFound:
+      content:
+        application/json:
+          examples:
+            Feature disabled:
+              value:
+                error_code: FEATURE_DISABLED
+                message: <feature-name> is not enabled for this feature tier
+            Resource does not exist:
+              value:
+                error_code: RESOURCE_DOES_NOT_EXIST
+                message: Token with ID <token-id> does not exist
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The requested resource does not exist.
+    OboBadRequest:
+      content:
+        application/json:
+          examples:
+          - invalid_parameter_value_not_found:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: <application-id> does not exist
+          - invalid_parameter_value_not_sp:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: User <id> is not a service principal
+          - invalid_parameter_value_token_lifetime:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: Token lifetime must be less than or equal to the workspace
+                  max of <max-lifetime>
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed.
+    PermissionsBadRequest:
+      content:
+        application/json:
+          examples:
+            bad_request:
+              value:
+                error_code: BAD_REQUEST
+                message: 'Bad object ID: <error-message>'
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed.
+    PermissionsUnauthorized:
+      content:
+        application/json:
+          example:
+            error_code: PERMISSION_DENIED
+            message: Please contact the owner or an administrator for access.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is unauthorized.
+    Unauthorized:
+      content:
+        application/json:
+          example:
+            error_code: PERMISSION_DENIED
+            message: Only Admins can access token management APIs
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is unauthorized.
+    WorkspaceConfBadRequest:
+      content:
+        application/json:
+          examples:
+            Bad Request - Invalid Keys:
+              value:
+                error_code: BAD_REQUEST
+                message:
+                - 'Invalid keys: <key-name>'
+            Bad Request - Invalid Values:
+              value:
+                error_code: BAD_REQUEST
+                message:
+                - 'Some values are not allowed: <message>'
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed. See the error code and message for details.
+  schemas:
+    CreateOboTokenRequest:
+      properties:
+        application_id:
+          $ref: '#/components/schemas/application_id'
+        comment:
+          $ref: '#/components/schemas/comment_input'
+        lifetime_seconds:
+          $ref: '#/components/schemas/lifetime_seconds'
+      required:
+      - application_id
+      - comment
+      - lifetime_seconds
+      type: object
+    Error:
+      properties:
+        error_code:
+          description: Error code
+          type: string
+        message:
+          description: Human-readable error message that describes the cause of the
+            error.
+          type: string
+      type: object
+    GetTokenManagementResponse:
+      properties:
+        token_infos:
+          items:
+            $ref: '#/components/schemas/TokenInfoObject'
+          type: array
+      type: object
+    TokenInfoObject:
+      properties:
+        comment:
+          $ref: '#/components/schemas/comment'
+        created_by_id:
+          $ref: '#/components/schemas/created_by_id'
+        created_by_username:
+          $ref: '#/components/schemas/created_by_username'
+        creation_time:
+          $ref: '#/components/schemas/creation_time'
+        expiry_time:
+          $ref: '#/components/schemas/expiry_time'
+        owner_id:
+          $ref: '#/components/schemas/owner_id'
+        token_id:
+          $ref: '#/components/schemas/token_id'
+      type: object
+    WorkspaceConfObject:
+      properties:
+        enableTokensConfig:
+          description: Enable or disable personal access tokens for this workspace.
+          type: boolean
+        maxTokenLifetimeDays:
+          description: Maximum token lifetime of new tokens in days, as an integer.
+            If zero, new tokens are permitted to have no lifetime limit. Negative
+            numbers are unsupported. **WARNING:** This limit only applies to new tokens,
+            so there may be tokens with lifetimes longer than this value, including
+            unlimited lifetime. Such tokens may have been created before the current
+            maximum token lifetime was set. To review existing tokens, see the [get
+            tokens API](#operation/get-tokens).
+          example: '90'
+          type: string
+      type: object
+    application_id:
+      description: Application ID of the service principal.
+      example: 6f5ccf28-d83a-4957-9bfb-5bbfac551410
+      format: string
+      type: string
+    comment:
+      description: Comment that describes the purpose of the token, specified by the
+        token creator.
+      example: This is for the ABC department automation scripts.
+      type: string
+    comment_input:
+      description: Comment that describes the purpose of the token.
+      example: This is for the ABC department automation scripts.
+      format: string
+      type: string
+    created_by_id:
+      description: User ID of the user that created the token.[" Typically matches
+        owner_id, except for a token created on behalf of a service principal."]
+      example: 202480738464078
+      type: number
+    created_by_username:
+      description: Username of the user that created the token.
+      example: jsmith@example.com
+      type: string
+    creation_time:
+      description: Timestamp when the token was created
+      example: 1580265020299
+      type: number
+    expiry_time:
+      description: Timestamp when the token expires
+      example: 1580265020299
+      type: number
+    lifetime_seconds:
+      description: The number of seconds before the token expires.
+      example: 3600
+      type: number
+    object_id:
+      description: Always the value `authorization/tokens`. This field is returned
+        for consistency with other Databricks object permissions APIs.
+      enum:
+      - authorization/tokens
+      example: authorization/tokens
+      type: string
+    object_type:
+      description: Always the value `tokens`. This field is returned for consistency
+        with other Databricks object permissions APIs.
+      enum:
+      - tokens
+      example: tokens
+      type: string
+    owner_id:
+      description: User ID of the user that owns the token.[" Typically matches owner_id,
+        except for a token created on behalf of a service principal."]
+      example: 202480738464078
+      type: number
+    token_id:
+      description: ID of the token
+      example: 5684c955822ac792a51ae2aeb80190f13457bab3e2e2934c133a08b38454816c
+      format: string
+      type: string
+info:
+  description: "The Token Management API has several groups of endpoints:\n* **[Workspace\
+    \ configuration for tokens](#tag/Workspace-configuration-for-tokens)** \u2014\_\
+    Set maximum lifetime for a token. Enable or disable personal access tokens for\
+    \ the workspace.\n\n* **[Token management](#tag/Token-management)** \u2014\_View\
+    \ or revoke existing tokens.\n\n**IMPORTANT:** To grant or revoke user and group\
+    \ permissions to use tokens, use the [Permissions API](https://docs.databricks.com/dev-tools/api/latest/permissions.html).\n\
+    \n**Important:** To access Databricks REST APIs, you must [authenticate](https://docs.databricks.com/dev-tools/api/latest/authentication.html)."
+  title: Token Management API
+  version: '2.0'
+openapi: 3.0.0
+paths:
+  /token-management/on-behalf-of/tokens:
+    description: This endpoint enables admins to create tokens on behalf of service
+      principals.
+    post:
+      description: Create a token on behalf of a service principal.
+      operationId: create-obo-token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOboTokenRequest'
+        description: Configuration details for creating on-behalf tokens.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfoObject'
+          description: A on-behalf token was successfully created for the service
+            principal.
+        '400':
+          $ref: '#/components/responses/OboBadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Create a token on behalf of a service principal.
+  /token-management/tokens:
+    description: This endpoint enables administrators to get all tokens and delete
+      tokens for other users. Admins can either get every token, get a specific token
+      by ID, or get all tokens for a particular user.
+    get:
+      description: List all tokens belonging to a workspace or a user.
+      operationId: get-tokens
+      parameters:
+      - description: User ID of the user that created the token.
+        in: query
+        name: created_by_id
+        required: false
+        schema:
+          type: string
+      - description: Username of the user that created the token.
+        in: query
+        name: created_by_username
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTokenManagementResponse'
+          description: Tokens were successfully returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/FeatureDisabled'
+      summary: Get all tokens in this workspace (optionally filter by user).
+      tags:
+      - Token management
+  /token-management/tokens/{token_id}:
+    delete:
+      description: Delete a token, specified by its ID.
+      operationId: delete-token
+      responses:
+        '200':
+          description: The token was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      summary: Delete a token
+      tags:
+      - Token management
+    description: This endpoint enables admins to get a specific token.
+    get:
+      description: Get a token, specified by its ID.
+      operationId: get-token
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfoObject'
+          description: Token with specified Token ID was successfully returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      summary: Get a token
+      tags:
+      - Token management
+    parameters:
+    - description: The ID of the token to get.
+      in: path
+      name: token_id
+      required: true
+      schema:
+        type: string
+  /workspace-conf:
+    description: This endpoint configures the maximum token lifetime for any token
+      in a workspace.
+    get:
+      description: "This request gets different information based on what you pass\
+        \ to `keys` parameter:\n\n* `enableTokensConfig` \u2014\_Enable or disable\
+        \ personal access tokens for this workspace.\n\n* `maxTokenLifetimeDays` \u2014\
+        \ Get the maximum token lifetime in days that a new token can have in a workspace.\
+        \ If set, users cannot create new tokens with a lifetime greater than this\
+        \ value. **WARNING:** This limit only applies to new tokens, so there may\
+        \ be tokens with lifetimes longer than this value, including unlimited lifetime.\
+        \ Such tokens may have been created before the current maximum token lifetime\
+        \ was set. To review existing tokens, see the [get tokens API](#operation/get-tokens)."
+      operationId: get-configuration
+      parameters:
+      - description: "Pass one of the following:\n\n* `enableTokensConfig` \u2014\_\
+          Enable or disable personal access tokens for this workspace.\n\n* `maxTokenLifetimeDays`\
+          \ \u2014 Get the maximum token lifetime in days that a new token can have\
+          \ in a workspace. If set, users cannot create new tokens with a lifetime\
+          \ greater than this value. **WARNING:** This limit only applies to new tokens,\
+          \ so there may be tokens with lifetimes longer than this value, including\
+          \ unlimited lifetime. Such tokens may have been created before the current\
+          \ maximum token lifetime was set. To review existing tokens, see the [get\
+          \ tokens API](#operation/get-tokens)."
+        example: maxTokenLifetimeDays
+        in: query
+        name: keys
+        required: true
+        schema:
+          enum:
+          - maxTokenLifetimeDays
+          - enableTokensConfig
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceConfObject'
+          description: Getting token lifetime status was returned successfully.
+        '400':
+          $ref: '#/components/responses/WorkspaceConfBadRequest'
+      summary: Get workspace config for tokens (max lifetime, enabled/disabled)
+      tags:
+      - Workspace configuration for tokens
+    patch:
+      description: This request sets different workspace settings based on the parameters
+        that you set. For example, enable or disable personal access tokens, or set
+        maximum token lifetime for new tokens. See parameters for details.
+      operationId: set-configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceConfObject'
+        description: To configure maximum token lifetime in days set an integer value
+          for the number of days.
+        required: true
+      responses:
+        '204':
+          description: Configuring maximum token lifetime was successful.
+        '400':
+          $ref: '#/components/responses/WorkspaceConfBadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Set workspace config for tokens (max lifetime, enabled/disabled)
+      tags:
+      - Workspace configuration for tokens
+security:
+- bearerAuth: []
+- basicAuth: []
+securitySchemes:
+  basicAuth:
+    description: HTTP Basic authentication with a name and password for native (non-SSO)
+      authentication.
+    scheme: basic
+    type: http
+  bearerAuth:
+    bearerFormat: String
+    description: You can authenticate with a Databricks personal access token (PAT)
+      that you create for yourself within the application user interface.
+    scheme: bearer
+    type: http
+servers:
+- description: In the URL, substitute `<databricks-instance>` with the domain name
+    of your deployment. Use the form `<databricks-instance>.cloud.databricks.com`.
+  url: https://<databricks-instance>/api/2.0
+tags:
+- description: 'There are multiple token management tasks you can do with the APIs
+    in this group:
+
+    * Manage the lifetime of new tokens. **WARNING:** This limit only applies to new
+    tokens, so there may be tokens with lifetimes longer than this value, including
+    unlimited lifetime. Such tokens may have been created before the current maximum
+    token lifetime was set. To review existing tokens, see the [get tokens API](#operation/get-tokens).
+
+
+    * Enable or disable personal access tokens for this workspace.'
+  name: Workspace configuration for tokens
+- description: Manage all the tokens in this workspace.
+  name: Token management

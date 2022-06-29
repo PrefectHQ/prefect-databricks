@@ -1,0 +1,502 @@
+components:
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          examples:
+            bad_request:
+              value:
+                error_code: BAD_REQUEST
+                message: 'Invalid IP address: <ip-address>'
+            invalid_state:
+              value:
+                error_code: INVALID_STATE
+                message: Your current IP will not be allowed to access the workspace
+                  under current configuration
+            quota_exceeded:
+              value:
+                error_code: QUOTA_EXCEEDED
+                message: IP access list quota exceeded (<quota> IP/CIDR values)
+            resource_already_exists:
+              value:
+                error_code: RESOURCE_ALREADY_EXISTS
+                message: IP access list with type (`ALLOW`|`BLOCK`) and label (<list-label>)
+                  already exists
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed.
+    InternalError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is not handled correctly due to a server error.
+    NotFound:
+      content:
+        application/json:
+          examples:
+            bad_request:
+              value:
+                error_code: FEATURE_DISABLED
+                message: IP access list is not available in the pricing tier of this
+                  workspace
+            invalid_state:
+              value:
+                error_code: RESOURCE_DOES_NOT_EXIST
+                message: 'Cannot find an IP access list with ID: <uuid>'
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The requested resource does not exist.
+    Unauthorized:
+      content:
+        application/json:
+          example:
+            error_code: PERMISSION_DENIED
+            message: IP access list can only be managed by admins
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is unauthorized.
+    WorkspaceConfBadRequest:
+      content:
+        application/json:
+          examples:
+            bad_request:
+              value:
+                error_code: BAD_REQUEST
+                message: 'Invalid keys: <keyname>'
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request is malformed. See the error code and message for details.
+  schemas:
+    CreateIPAccessListRequest:
+      properties:
+        ip_addresses:
+          $ref: '#/components/schemas/ip_addresses'
+        label:
+          $ref: '#/components/schemas/label'
+        list_type:
+          $ref: '#/components/schemas/list_type'
+      required:
+      - label
+      - list_type
+      - ip_addresses
+      type: object
+    CreateIPAccessListResponse:
+      properties:
+        address_count:
+          $ref: '#/components/schemas/address_count'
+        created_at:
+          $ref: '#/components/schemas/created_at'
+        created_by:
+          $ref: '#/components/schemas/created_by'
+        enabled:
+          $ref: '#/components/schemas/enabled'
+        ip_addresses:
+          $ref: '#/components/schemas/ip_addresses'
+        label:
+          $ref: '#/components/schemas/label'
+        list_id:
+          $ref: '#/components/schemas/list_id'
+        list_type:
+          $ref: '#/components/schemas/list_type'
+        updated_at:
+          $ref: '#/components/schemas/updated_at'
+        updated_by:
+          $ref: '#/components/schemas/updated_by'
+      type: object
+    Error:
+      properties:
+        error_code:
+          description: Error code
+          type: string
+        message:
+          description: Human-readable error message describe the cause of the error.
+          type: string
+      type: object
+    GetIPAccessListResponse:
+      properties:
+        ip_access_lists:
+          items:
+            $ref: '#/components/schemas/CreateIPAccessListResponse'
+          type: array
+      type: object
+    ReplaceIPAccessListRequest:
+      properties:
+        enabled:
+          $ref: '#/components/schemas/enabled'
+        ip_addresses:
+          $ref: '#/components/schemas/ip_addresses'
+        label:
+          $ref: '#/components/schemas/label'
+        list_id:
+          $ref: '#/components/schemas/list_id'
+        list_type:
+          $ref: '#/components/schemas/list_type'
+      required:
+      - label
+      - list_type
+      - ip_addresses
+      - enabled
+      type: object
+    UpdateIPAccessListRequest:
+      properties:
+        enabled:
+          $ref: '#/components/schemas/enabled'
+        ip_addresses:
+          $ref: '#/components/schemas/ip_addresses'
+        label:
+          $ref: '#/components/schemas/label'
+        list_id:
+          $ref: '#/components/schemas/list_id'
+        list_type:
+          $ref: '#/components/schemas/list_type'
+      type: object
+    WorkspaceConf:
+      properties:
+        enableIpAccessLists:
+          description: The IP access list feature is enabled for the workspace if
+            `true` and it is disabled if `false`. Note that these are String values,
+            not booleans.
+          enum:
+          - true
+          - false
+          example: 'false'
+          type: string
+      type: object
+    address_count:
+      description: Total number of IP or CIDR values.
+      example: 2
+      type: number
+    created_at:
+      description: Creation timestamp in milliseconds
+      example: 1580265020299
+      type: number
+    created_by:
+      description: User ID of the user who created this list
+      example: 202480738464078
+      type: number
+    enabled:
+      description: Specifies whether this IP access list is enabled.
+      type: boolean
+    ip_addresses:
+      description: Array of IP addresses or CIDR values to be added to the IP access
+        list.
+      example:
+      - 32.19.112.0
+      - 192.168.100.0/22
+      items:
+        description: IP addresses or CIDR values to be added to the IP access list.
+        example: 192.168.100.0/22
+        format: string
+      minLength: 1
+      type: array
+    label:
+      description: Label for the IP access list. This **cannot** be empty.
+      example: Office VPN
+      type: string
+    list_id:
+      description: UUID of the IP access list
+      format: uuid
+      type: string
+    list_type:
+      description: "Type of IP access list. Valid values are as follows and are case-sensitive:\n\
+        * `ALLOW` \u2014\_An allow list. Include this IP or range.\n\n* `BLOCK` \u2014\
+        \_A block list. Exclude this IP or range. IP addresses in the block list are\
+        \ excluded even if they are included in an allow list."
+      enum:
+      - ALLOW
+      - BLOCK
+      example: ALLOW
+      type: string
+    updated_at:
+      description: Update timestamp in milliseconds
+      example: 1580265020299
+      type: number
+    updated_by:
+      description: User ID of the user who updated this list
+      example: 202480738464089
+      type: number
+  securitySchemes:
+    basicAuth:
+      description: HTTP Basic authentication with a name and password for native (non-SSO)
+        authentication.
+      in: header
+      name: HTTP Basic authentication
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: String
+      description: You can authenticate with a Databricks personal access token (PAT)
+        that you create for yourself within the application user interface.
+      in: header
+      name: Token
+      scheme: bearer
+      type: http
+info:
+  description: 'The IP Access List API enables Databricks admins to configure IP access
+    lists for a workspace. IP access lists affect web application access and REST
+    API access to this workspace only. If the feature is disabled for a workspace,
+    all access is allowed for this workspace. There is support for allow lists (inclusion)
+    and block lists (exclusion).
+
+
+    When a connection is attempted:
+
+
+    1. **First, all block lists are checked.** If the connection IP address matches
+    any block list, the connection is rejected.
+
+
+    2. **If the connection was not rejected by block lists**, the IP address is compared
+    with the allow lists. If there is at least one allow list for the workspace, the
+    connection is allowed only if the IP address matches an allow list. If there are
+    no allow lists for the workspace, all IP addresses are allowed.
+
+
+    For all allow lists and block lists combined, the workspace supports a maximum
+    of 1000 IP/CIDR values, where one CIDR counts as a single value.
+
+
+    After changes to the IP access list feature, it can take a few minutes for changes
+    to take effect.
+
+
+    **Important:** To access Databricks REST APIs, you must [authenticate](https://docs.databricks.com/dev-tools/api/latest/authentication.html).'
+  title: IP Access List API
+  version: 2.0.0
+openapi: 3.0.0
+paths:
+  /ip-access-lists:
+    description: This endpoint manages IP access lists for a workspace.
+    get:
+      operationId: get-lists
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIPAccessListResponse'
+          description: IP access lists were successfully returned.
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: Get all IP access lists
+    post:
+      description: "Add an IP access list for this workspace. A list can be an allow\
+        \ list or a block list. See the top of this file for a description of how\
+        \ the server treats allow lists and block lists at run time.\n\nWhen creating/updating\
+        \ an IP access list:\n\n* For all allow lists and block lists combined, the\
+        \ API supports a maximum of 1000\_IP/CIDR values, where one CIDR counts as\
+        \ a single value. Attempts to exceed that number return error 400 with `error_code`\
+        \ value `QUOTA_EXCEEDED`.\n\n* If the new list would block the calling user\u2019\
+        s current IP, error 400 is returned with `error_code` value `INVALID_STATE`.\n\
+        \nIt can take a few minutes for the changes to take effect.\n\nNote that your\
+        \ new IP access list has no effect until you enable the feature. See [`/workspace-conf`](#operation/set-status)"
+      operationId: add-list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIPAccessListRequest'
+        description: Details required to configure a block list or allow list
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIPAccessListResponse'
+          description: An IP access list was successfully created.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: Add an IP access list
+  /ip-access-lists/{ip_access_list_id}:
+    delete:
+      description: Delete an IP access list, specified by its list ID.
+      responses:
+        200:
+          description: The IP access list was successfully deleted.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: Delete an IP access list
+    description: This endpoint manages a specific IP access list.
+    get:
+      description: Get an IP access list, specified by its list ID.
+      operationId: get-list
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIPAccessListResponse'
+          description: An IP access list was successfully returned.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: Get an IP access list
+    parameters:
+    - description: The ID for the corresponding IP access list to modify.
+      in: path
+      name: ip_access_list_id
+      required: true
+      schema:
+        type: string
+    patch:
+      description: "Modify an existing IP access list, specified by its ID. A list\
+        \ can include allow lists and block lists. See the top of this file for a\
+        \ description of how the server treats allow lists and block lists at run\
+        \ time.\n\nWhen updating an IP access list:\n\n* For all allow lists and block\
+        \ lists combined, the API supports a maximum of 1000 IP/CIDR values, where\
+        \ one CIDR counts as a single value. Attempts to exceed that number return\
+        \ error 400 with `error_code` value `QUOTA_EXCEEDED`.\n\n* If the updated\
+        \ list would block the calling user\u2019s current IP, error 400 is returned\
+        \ with `error_code` value `INVALID_STATE`.\n\nIt can take a few minutes for\
+        \ the changes to take effect.\n\nNote that your resulting IP access list has\
+        \ no effect until you enable the feature. See [`/workspace-conf`](#operation/set-status)"
+      operationId: update-list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIPAccessListRequest'
+        description: Details required to update an IP access list
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIPAccessListResponse'
+          description: The IP access list was successfully updated.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: Update an existing IP access list
+    put:
+      description: "Replace an IP access list, specified by its ID. A list can include\
+        \ allow lists and block lists. See the top of this file for a description\
+        \ of how the server treats allow lists and block lists at run time.\n\nWhen\
+        \ replacing an IP access list:\n\n* For all allow lists and block lists combined,\
+        \ the API supports a maximum of 1000\_IP/CIDR values, where one CIDR counts\
+        \ as a single value. Attempts to exceed that number return error 400 with\
+        \ `error_code` value `QUOTA_EXCEEDED`.\n\n* If the resulting list would block\
+        \ the calling user\u2019s current IP, error 400 is returned with `error_code`\
+        \ value `INVALID_STATE`.\n\nIt can take a few minutes for the changes to take\
+        \ effect.\n\nNote that your resulting IP access list has no effect until you\
+        \ enable the feature. See [`/workspace-conf`](#operation/set-status)"
+      operationId: replace-list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceIPAccessListRequest'
+        description: Details required to replace an IP access list
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIPAccessListResponse'
+          description: The IP access list was successfully replaced.
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: Replace an IP access list
+  /workspace-conf:
+    description: This endpoint manages enabling and disabling the feature for a workspace.
+    get:
+      description: 'Get the IP access list feature status for this Databricks workspace.
+        If the feature is disabled for a workspace, access is allowed for this workspace
+        for all IP addresses for the web application and REST APIs.
+
+
+        Use the separate `/ip-access-lists` endpoint to add a allow list or block
+        list.'
+      operationId: get-status
+      parameters:
+      - description: Always set the value `enableIpAccessLists`.
+        example: enableIpAccessLists
+        in: query
+        name: keys
+        required: true
+        schema:
+          enum:
+          - enableIpAccessLists
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceConf'
+          description: Status was returned successfully.
+        400:
+          $ref: '#/components/responses/WorkspaceConfBadRequest'
+      summary: "Check if IP\_access\_list is enabled"
+    patch:
+      description: 'Enable or disable the IP access list feature for this workspace.
+        IP access lists affect both web application access and REST API access. If
+        the feature is disabled for a workspace, all access is allowed for this workspace.
+
+
+        To add an allow list or block list, see [`/ip-access-lists`](#operation/add-list).
+
+        It can take a few minutes for the changes to take effect.'
+      operationId: set-status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceConf'
+        description: To enable the IP access list feature on this workspace, set `enableIpAccessLists`
+          value to the String value `true` (not the Boolean value). To disable the
+          feature, set it to the String value `false`.
+        required: true
+      responses:
+        204:
+          description: Enabling or disabling IP access list was successful.
+        400:
+          $ref: '#/components/responses/WorkspaceConfBadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        500:
+          $ref: '#/components/responses/InternalError'
+      summary: "Enable or disable IP\_access\_lists for this workspace"
+security:
+- bearerAuth: []
+- basicAuth: []
+servers:
+- description: In the URL, substitute `<databricks-instance>` with the domain name
+    of your deployment. Use the form `<account>.cloud.databricks.com`.
+  url: https://<databricks-instance>/api/2.0

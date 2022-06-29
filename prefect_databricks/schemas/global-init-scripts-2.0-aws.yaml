@@ -1,0 +1,374 @@
+components:
+  requests:
+    ScriptIDPathArgument:
+      description: The ID of the global init script.
+      in: path
+      name: script_id
+      required:
+      - true
+      schema:
+        $ref: '#/components/schemas/script_id'
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          examples:
+            Bad request - empty name param:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: '`name` cannot be empty'
+            Bad request - empty script param:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: '`script` cannot be empty'
+            Bad request - invalid name param:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: '`name` can only contain spaces, alphanumeric or ''-'', ''_'',
+                  ''.'' characters'
+            Bad request - invalid position param:
+              value:
+                error_code: INVALID_PARAMETER_VALUE
+                message: '`position` must be a non-negative integer'
+            Bad request - invalid script param:
+              value:
+                error_code: MALFORMED_REQUEST
+                message: 'Could not parse request object: Illegal character ''<char>''
+                  (code 0x<hex-value>) in Base64 content.'
+            Bad request - resource already exists:
+              value:
+                error_code: RESOURCE_ALREADY_EXISTS
+                message: 'There already exists a global init script with name: My
+                  Example Script'
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request was malformed. See JSON response for error details.
+    GlobalInitScriptCreateResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              script_id:
+                allOf:
+                - description: The ID of the new script
+                  type: string
+                - $ref: '#/components/schemas/script_id'
+            type: object
+      description: Script was created successfully.
+    GlobalInitScriptGetDetailedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GlobalInitScriptDetailsWithContent'
+      description: Script was retrieved successfully.
+    GlobalInitScriptListResponse:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/GlobalInitScriptDetails'
+            type: array
+      description: Scripts were retrieved successfully.
+    InternalError:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request was not handled correctly due to a server error
+    NotFound:
+      content:
+        application/json:
+          examples:
+            resource_does_not_exist:
+              value:
+                error_code: RESOURCE_DOES_NOT_EXIST
+                message: The global unit script with ID 173160F64251D16E does not
+                  exist.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The requested resource does not exist
+    Unauthorized:
+      content:
+        application/json:
+          example:
+            error_code: PERMISSION_DENIED
+            message: Unauthorized access.
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The request was unauthorized.
+  schemas:
+    Error:
+      properties:
+        error_code:
+          description: Error code
+          example: INTERNAL_ERROR
+          type: string
+        message:
+          description: Human-readable error message that describes the cause of the
+            error.
+          example: Unexpected error.
+          type: string
+      type: object
+    GlobalInitScriptCreateRequest:
+      properties:
+        enabled:
+          $ref: '#/components/schemas/script_enabled_with_default'
+        name:
+          $ref: '#/components/schemas/script_name'
+        position:
+          $ref: '#/components/schemas/script_position_create'
+        script:
+          $ref: '#/components/schemas/script_content'
+      required:
+      - name
+      - script
+      type: object
+    GlobalInitScriptDetails:
+      properties:
+        created_at:
+          description: When the script was created, as a Unix timestamp in milliseconds.
+          example: 1594437249910
+          type: integer
+        created_by:
+          description: The username of the user who created the script.
+          example: john.doe@databricks.com
+          format: email
+          type: string
+        enabled:
+          $ref: '#/components/schemas/script_enabled'
+        name:
+          $ref: '#/components/schemas/script_name'
+        position:
+          $ref: '#/components/schemas/script_position_output'
+        script_id:
+          $ref: '#/components/schemas/script_id'
+        updated_at:
+          description: When the script was updated, as a Unix timestamp in milliseconds.
+          example: 1594444684786
+          type: integer
+        updated_by:
+          description: The username of the user who last updated the script
+          example: jane.smith@example.com
+          format: email
+          type: string
+      type: object
+    GlobalInitScriptDetailsWithContent:
+      allOf:
+      - $ref: '#/components/schemas/GlobalInitScriptDetails'
+      - properties:
+          script:
+            $ref: '#/components/schemas/script_content'
+        type: object
+    GlobalInitScriptUpdateRequest:
+      properties:
+        enabled:
+          $ref: '#/components/schemas/script_enabled'
+        name:
+          $ref: '#/components/schemas/script_name'
+        position:
+          $ref: '#/components/schemas/script_position_update'
+        script:
+          $ref: '#/components/schemas/script_content'
+      type: object
+    script_content:
+      description: The Base64-encoded content of the script.
+      example: ZWNobyBoZWxsbw==
+      format: byte
+      type: string
+    script_enabled:
+      description: Specifies whether the script is enabled. The script runs only if
+        enabled.
+      example: false
+      type: boolean
+    script_enabled_with_default:
+      default: false
+      description: Specifies whether the script is enabled. The script runs only if
+        enabled.
+      example: false
+      type: boolean
+    script_id:
+      description: The global init script ID.
+      example: 714B166709FBD56F
+      type: string
+    script_name:
+      description: The name of the script
+      example: My example script name
+      maxLength: 100
+      minLength: 1
+      pattern: ^[a-zA-Z0-9_\-\. ]*$
+      type: string
+    script_position_create:
+      description: 'The position of a global init script, where 0 represents the first
+        global init script to run, 1 is the second global init script to run, and
+        so on.
+
+
+        If you omit the position for a new global init script, it gets the last position.
+        It runs after all current global init scripts.
+
+        Setting any value greater than the position of the last script is equivalent
+        to the last position. For example, suppose there are three existing scripts
+        with positions 0, 1 and 2. Any position value of 3 or greater puts the script
+        in the last position (3)
+
+        If an explicit position value conflicts with an existing script, your request
+        succeeds. The original script at that position and all later scripts have
+        their position incremented by 1.'
+      example: 0
+      minimum: 0
+      type: integer
+    script_position_output:
+      description: The position of a script, where 0 represents the first script to
+        run, 1 is the second script to run, and so on.
+      example: 0
+      minimum: 0
+      type: integer
+    script_position_update:
+      description: 'The position of a script, where 0 represents the first script
+        to run, 1 is the second script to run, and so on.
+
+
+        To move the script so that it runs first, set its position to 0.
+
+
+        To move the script to the end, set it to any value greater or equal to the
+        position of the last script. For example, suppose there are three existing
+        scripts with positions 0, 1 and 2. Any position value of 2 or greater puts
+        the script in the last position (2).
+
+
+        If an explicit position value conflicts with an existing script, your request
+        succeeds. The original script at that position and all later scripts have
+        their position incremented by 1.'
+      example: 0
+      minimum: 0
+      type: integer
+  securitySchemes:
+    basicAuth:
+      description: HTTP Basic authentication with a name and password for native (non-SSO)
+        authentication.
+      in: header
+      name: HTTP Basic authentication
+      scheme: basic
+      type: http
+    bearerAuth:
+      bearerFormat: String
+      description: You can authenticate with the Databricks personal access token
+        (PAT) that you create for yourself within the application user interface.
+      in: header
+      name: Token
+      scheme: bearer
+      type: http
+info:
+  description: "The Global Init Scripts API enables Databricks administrators to configure\
+    \ global initialization scripts for their workspace. These scripts run on every\
+    \ node in every cluster in the workspace.\n\n**Important:** Existing clusters\
+    \ must be restarted to pick up any changes made to global init scripts.\n\nGlobal\
+    \ init scripts are run in order. If the init script returns with a bad exit code,\
+    \ the Apache Spark container fails to launch and init scripts with later position\
+    \ are skipped. If enough containers fail, the entire cluster fails with a `GLOBAL_INIT_SCRIPT_FAILURE`\
+    \ error code.\n    \n**Important:** To access Databricks REST APIs, you must [authenticate](https://docs.databricks.com/dev-tools/api/latest/authentication.html)."
+  title: Global Init Scripts API
+  version: '2.0'
+openapi: 3.0.0
+paths:
+  /global-init-scripts:
+    description: Manages global init scripts for this workspace.
+    get:
+      description: Get a list of all global init scripts for this workspace. This
+        returns all properties for each script but **not** the script contents. To
+        retrieve the contents of a script, use the [get a global init script](#operation/get-script)
+        operation.
+      operationId: get-scripts
+      responses:
+        '200':
+          $ref: '#/components/responses/GlobalInitScriptListResponse'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Get all global init scripts (summaries only)
+    post:
+      description: Create a new global init script in this workspace.
+      operationId: create-script
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalInitScriptCreateRequest'
+        required:
+        - true
+      responses:
+        '200':
+          $ref: '#/components/responses/GlobalInitScriptCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Create a global init script
+  /global-init-scripts/{script_id}:
+    delete:
+      description: Delete a global init script.
+      operationId: delete-script
+      parameters:
+      - $ref: '#/components/requests/ScriptIDPathArgument'
+      responses:
+        '200':
+          description: The script was deleted successfully.
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Delete a global init script
+    description: Manage a specific global init script with ID `script_id`.
+    get:
+      description: Get all the details of a script, including its Base64-encoded contents.
+      operationId: get-script
+      parameters:
+      - $ref: '#/components/requests/ScriptIDPathArgument'
+      responses:
+        '200':
+          $ref: '#/components/responses/GlobalInitScriptGetDetailedResponse'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Get a global init script
+    patch:
+      description: Update a global init script, specifying only the fields to change.
+        All fields are optional. Unspecified fields retain their current value.
+      operationId: update-script
+      parameters:
+      - $ref: '#/components/requests/ScriptIDPathArgument'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalInitScriptUpdateRequest'
+        required:
+        - true
+      responses:
+        '200':
+          description: The script was updated successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      summary: Update a global init script
+security:
+- bearerAuth: []
+- basicAuth: []
+servers:
+- description: In the URL, substitute `<databricks-instance>` with the domain name
+    of your deployment. Use the form `<databricks-instance>.cloud.databricks.com`.
+  url: https://<databricks-instance>/api/2.0
