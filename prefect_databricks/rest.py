@@ -86,6 +86,8 @@ async def execute_endpoint(
 
     if params is not None:
         stripped_params = strip_kwargs(**params)
+    else:
+        stripped_params = None
 
     async with databricks_credentials.get_client() as client:
         response = await getattr(client, http_method)(

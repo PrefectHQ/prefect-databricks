@@ -17,7 +17,7 @@ REPO_DIRECTORY = THIS_DIRECTORY.parent
 #     "email": "help@prefect.io",  # e.g. "help@prefect.io",
 #     "github_organization": "PrefectHQ",  # e.g. "PrefectHQ",
 #     "collection_name": "prefect-databricks",
-#     "collection_short_description": "Prefect integrations interacting with prefect-databricks",  # noqa
+#     "collection_short_description": "Prefect integrations interacting with Databricks",  # noqa
 # }
 
 # collection_template_url = "https://github.com/PrefectHQ/prefect-collection-template"
