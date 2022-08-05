@@ -7,7 +7,7 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-05T04:25:04.584670
+Updated at: 2022-08-05T04:41:08.602113
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
@@ -28,15 +28,15 @@ async def jobs_create(
     databricks_credentials: "DatabricksCredentials",
     name: str = "Untitled",
     tags: Dict = None,
-    tasks: List[Union["models.JobTaskSettings", Dict]] = None,
-    job_clusters: List[Union["models.JobCluster", Dict]] = None,
+    tasks: List = None,
+    job_clusters: List = None,
     email_notifications: Union["models.JobEmailNotifications", Dict] = None,
     timeout_seconds: int = None,
     schedule: Union["models.CronSchedule", Dict] = None,
     max_concurrent_runs: int = None,
     git_source: Union["models.GitSource", Dict] = None,
     format: str = None,
-    access_control_list: List[Union["models.AccessControlRequest", Dict]] = None,
+    access_control_list: List = None,
 ) -> Dict[str, Any]:
     """
     Create a new job.
@@ -1150,12 +1150,12 @@ async def jobs_run_now(
 async def jobs_runs_submit(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
-    tasks: List[Union["models.RunSubmitTaskSettings", Dict]] = None,
+    tasks: List = None,
     run_name: str = None,
     git_source: Union["models.GitSource", Dict] = None,
     timeout_seconds: int = None,
     idempotency_token: str = None,
-    access_control_list: List[Union["models.AccessControlRequest", Dict]] = None,
+    access_control_list: List = None,
 ) -> Dict[str, Any]:
     """
     Submit a one-time run. This endpoint allows you to submit a workload directly
