@@ -7,11 +7,12 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-05T00:42:33.397999
+Updated at: 2022-08-05T03:48:50.357506
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
 
+import httpx
 from prefect import task
 
 from prefect_databricks.rest import HTTPMethod, execute_endpoint
@@ -284,12 +285,13 @@ async def jobs_create(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -299,6 +301,7 @@ async def jobs_create(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -358,12 +361,13 @@ async def jobs_list(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -373,6 +377,7 @@ async def jobs_list(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -423,12 +428,13 @@ async def jobs_get(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -438,6 +444,7 @@ async def jobs_get(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -646,12 +653,13 @@ async def jobs_reset(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -661,6 +669,7 @@ async def jobs_reset(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -878,12 +887,13 @@ async def jobs_update(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -893,6 +903,7 @@ async def jobs_update(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -943,12 +954,13 @@ async def jobs_delete(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -958,6 +970,7 @@ async def jobs_delete(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1113,12 +1126,13 @@ async def jobs_run_now(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1128,6 +1142,7 @@ async def jobs_run_now(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1291,12 +1306,13 @@ async def jobs_runs_submit(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1306,6 +1322,7 @@ async def jobs_runs_submit(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1402,12 +1419,13 @@ async def jobs_runs_list(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1417,6 +1435,7 @@ async def jobs_runs_list(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1471,12 +1490,13 @@ async def jobs_runs_get(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1486,6 +1506,7 @@ async def jobs_runs_get(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1539,12 +1560,13 @@ async def jobs_runs_export(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1554,6 +1576,7 @@ async def jobs_runs_export(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1604,12 +1627,13 @@ async def jobs_runs_cancel(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1619,6 +1643,7 @@ async def jobs_runs_cancel(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1670,12 +1695,13 @@ async def jobs_runs_cancel_all(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1685,6 +1711,7 @@ async def jobs_runs_cancel_all(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1743,12 +1770,13 @@ async def jobs_runs_get_output(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1758,6 +1786,7 @@ async def jobs_runs_get_output(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1808,12 +1837,13 @@ async def jobs_runs_delete(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1823,6 +1853,7 @@ async def jobs_runs_delete(
         else:
             raise
 
+    result = response.json()
     return result
 
 
@@ -1980,12 +2011,13 @@ async def jobs_runs_repair(
     }
 
     try:
-        result = await execute_endpoint.fn(
+        response = await execute_endpoint.fn(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             data=data,
         )
+        response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
         if helpful_error_response:
@@ -1995,4 +2027,5 @@ async def jobs_runs_repair(
         else:
             raise
 
+    result = response.json()
     return result

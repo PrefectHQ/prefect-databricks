@@ -75,8 +75,8 @@ async def execute_endpoint(
             url = "https://api.aviationapi.com/v1/weather/metar"
             aviationapi_credentials = AviationAPICredentials()
             params = dict(apt="KORD,KSEA")
-            result = execute_endpoint(url, aviationapi_credentials, params=params)
-            return result
+            response = execute_endpoint(url, aviationapi_credentials, params=params)
+            return response.json()
 
         example_execute_endpoint_flow()
         ```
@@ -92,6 +92,4 @@ async def execute_endpoint(
             url, params=stripped_params, **kwargs
         )
 
-    response.raise_for_status()
-    result = response.json()
-    return result
+    return response
