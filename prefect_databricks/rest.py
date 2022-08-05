@@ -9,7 +9,6 @@ manually editing this file is not recommended.
 from enum import Enum
 from typing import TYPE_CHECKING, Any, Dict
 
-import httpx
 from prefect import task
 
 if TYPE_CHECKING:
@@ -85,7 +84,9 @@ async def execute_endpoint(
     if isinstance(http_method, HTTPMethod):
         http_method = http_method.value
 
-    stripped_params = strip_kwargs(**params)
+    if params is not None:
+        stripped_params = strip_kwargs(**params)
+
     async with databricks_credentials.get_client() as client:
         response = await getattr(client, http_method)(
             url, params=stripped_params, **kwargs
