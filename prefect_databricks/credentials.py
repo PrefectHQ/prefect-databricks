@@ -1,20 +1,26 @@
 """Credential classes used to perform authenticated interactions with Databricks"""
 
-from dataclasses import dataclass
-
 from httpx import AsyncClient
+from prefect.blocks.core import Block
+from pydantic import SecretStr
 
 
-@dataclass
-class DatabricksCredentials:
+class DatabricksCredentials(Block):
     """
-    Dataclass used to manage Databricks authentication.
+    Block used to manage Databricks authentication.
 
     Args:
         token: the token to authenticate into Databricks.
+
+    Examples:
+        Load stored Databricks credentials:
+        ```python
+        from prefect_databricks import DatabricksCredentials
+        databricks_credentials_block = DatabricksCredentials.load("BLOCK_NAME")
+        ```
     """
 
-    token: str = None
+    token: SecretStr = None
 
     def get_client(self) -> AsyncClient:
         """
@@ -32,7 +38,7 @@ class DatabricksCredentials:
             @flow
             def example_get_client_flow():
                 token = "consumer_key"
-                databricks_credentials = DatabricksCredentials(token)
+                databricks_credentials = DatabricksCredentials(token=token)
                 endpoint = databricks_credentials.get_client()
                 return endpoint
 
@@ -40,7 +46,7 @@ class DatabricksCredentials:
             ```
         """
         if self.token is not None:
-            headers = {"Authorization": f"Bearer {self.token}"}
+            headers = {"Authorization": f"Bearer {self.token.get_secret_value()}"}
         else:
             headers = None
         client = AsyncClient(headers=headers)

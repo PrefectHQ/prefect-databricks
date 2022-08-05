@@ -1052,13 +1052,6 @@ components:
           example: 11223344
           format: int64
           type: integer
-        run_as_user_name:
-          description: The user name that the job runs as. `run_as_user_name` is based
-            on the current job settings, and is set to the creator of the job if job
-            access control is disabled, or the `is_owner` permission if job access
-            control is enabled.
-          example: user.name@databricks.com
-          type: string
         settings:
           $ref: '#/components/schemas/JobSettings'
           description: Settings for this job and all of its runs. These settings can
@@ -1740,6 +1733,11 @@ components:
       - $ref: '#/components/schemas/CanView'
     PipelineTask:
       properties:
+        full_refresh:
+          default: false
+          description: If true, a full refresh will be triggered on the delta live
+            table.
+          type: boolean
         pipeline_id:
           description: The full name of the pipeline task to execute.
           example: a12cd3e4-0ab1-1abc-1a2b-1a2bcd3e4fg5
@@ -2159,6 +2157,7 @@ components:
           description: 'An optional token to guarantee the idempotency of job run
             requests. If a run with the provided token already exists, the request
             does not create a new run but returns the ID of the existing run instead.
+            If a run with the provided token is deleted, an error is returned.
 
 
             If you specify the idempotency token, upon failure you can retry until
@@ -2214,6 +2213,11 @@ components:
             age: '35'
             name: john doe
           type: object
+        pipeline_params:
+          properties:
+            full_refresh:
+              description: If true, triggers a full refresh on the delta live table.
+              type: boolean
         python_named_params:
           description: 'A map from keys to values for jobs with Python wheel task,
             for example `"python_named_params": {"name": "task", "data": "dbfs:/path/to/data.json"}`.'
@@ -2317,7 +2321,8 @@ components:
           description: 'An optional token that can be used to guarantee the idempotency
             of job run requests. If a run with the provided token already exists,
             the request does not create a new run but returns the ID of the existing
-            run instead.
+            run instead. If a run with the provided token is deleted, an error is
+            returned.
 
 
             If you specify the idempotency token, upon failure you can retry until
@@ -3321,9 +3326,8 @@ paths:
       summary: Trigger a new job run
   /2.1/jobs/runs/cancel:
     post:
-      description: Cancels a run. The run is canceled asynchronously, so when this
-        request completes, the run may still be running. The run are terminated shortly.
-        If the run is already in a terminal `life_cycle_state`, this method is a no-op.
+      description: Cancels a job run. The run is canceled asynchronously, so it may
+        still be running when this request completes.
       operationId: JobsRunsCancel
       requestBody:
         content:
@@ -3356,6 +3360,43 @@ paths:
       security:
       - bearerAuth: []
       summary: Cancel a job run
+  /2.1/jobs/runs/cancel-all:
+    post:
+      description: Cancels all active runs of a job. The runs are canceled asynchronously,
+        so it doesn't prevent new runs from being started.
+      operationId: JobsRunsCancelAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                job_id:
+                  description: The canonical identifier of the job to cancel all runs
+                    of. This field is required.
+                  example: 11223344
+                  format: int64
+                  type: integer
+              required:
+              - job_id
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: All runs were cancelled successfully.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+      security:
+      - bearerAuth: []
+      summary: Cancel all runs of a job
   /2.1/jobs/runs/delete:
     post:
       description: Deletes a non-active run. Returns an error if the run is active.
@@ -3476,12 +3517,15 @@ paths:
                       \ integer division or modulo by zero"
                     type: string
                   logs:
-                    description: The output from tasks that write to cluster logs
-                      such as [SparkJarTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/SparkJarTask)
-                      or [SparkPythonTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/SparkPythonTask.
+                    description: The output from tasks that write to standard streams
+                      (stdout/stderr) such as [SparkJarTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/SparkJarTask),
+                      [SparkPythonTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/SparkPythonTask,
+                      [PythonWheelTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/PythonWheelTask.
+                      It's not supported for the [NotebookTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/NotebookTask,
+                      [PipelineTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/PipelineTask,
+                      or [SparkSubmitTask](https://docs.databricks.com/dev-tools/api/latest/jobs.html#/components/schemas/SparkSubmitTask.
                       Databricks restricts this API to return the last 5 MB of these
-                      logs. To return a larger result, use the [ClusterLogConf](https://docs.databricks.com/dev-tools/api/latest/clusters.html#clusterlogconf)
-                      field to configure log storage for the job cluster.
+                      logs.
                     example: Hello World!
                     type: string
                   logs_truncated:

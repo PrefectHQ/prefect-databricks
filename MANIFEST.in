@@ -1,2 +1,6 @@
 include versioneer.py
 include prefect_databricks/_version.py
+include prefect_databricks/schemas/original/*.json
+include prefect_databricks/schemas/*.json
+include prefect_databricks/schemas/original/*.yaml
+include prefect_databricks/schemas/*.yaml

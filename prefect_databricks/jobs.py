@@ -1,10 +1,13 @@
 """
-This is a module for interacting with Databricks REST tasks.
+This is a module containing:
+Databricks REST tasks
+
 It was auto-generated using prefect-collection-generator so
-manually editing this file is not recommended.
+manually editing this file is not recommended. If this module
+is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-06-29T20:07:33.386958
+Updated at: 2022-08-05T00:42:33.397999
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
@@ -280,13 +283,22 @@ async def jobs_create(
         "access_control_list": access_control_list,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -345,13 +357,22 @@ async def jobs_list(
         "expand_tasks": expand_tasks,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.GET,
-        params=params,
-        responses=responses,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.GET,
+            params=params,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -401,13 +422,22 @@ async def jobs_get(
         "job_id": job_id,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.GET,
-        params=params,
-        responses=responses,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.GET,
+            params=params,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -615,13 +645,22 @@ async def jobs_reset(
         "new_settings": new_settings,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -838,13 +877,22 @@ async def jobs_update(
         "fields_to_remove": fields_to_remove,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -894,13 +942,22 @@ async def jobs_delete(
         "job_id": job_id,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -915,6 +972,7 @@ async def jobs_run_now(
     python_params: List = None,
     spark_submit_params: List = None,
     python_named_params: Dict = None,
+    pipeline_params: str = None,
 ) -> Dict[str, Any]:
     """
     Run a job and return the `run_id` of the triggered run.
@@ -930,10 +988,11 @@ async def jobs_run_now(
             An optional token to guarantee the idempotency of job run requests. If a
             run with the provided token already exists, the request does
             not create a new run but returns the ID of the existing run
-            instead.  If you specify the idempotency token, upon failure
-            you can retry until the request succeeds. Databricks
-            guarantees that exactly one run is launched with that
-            idempotency token.  This token must have at most 64
+            instead. If a run with the provided token is deleted, an
+            error is returned.  If you specify the idempotency token,
+            upon failure you can retry until the request succeeds.
+            Databricks guarantees that exactly one run is launched with
+            that idempotency token.  This token must have at most 64
             characters.  For more information, see [How to ensure
             idempotency for jobs](https://kb.databricks.com/jobs/jobs-
             idempotency.html), e.g.
@@ -1015,6 +1074,8 @@ async def jobs_run_now(
             ```
             {"name": "task", "data": "dbfs:/path/to/data.json"}
             ```
+        pipeline_params:
+
 
     Returns:
         A dict of the response.
@@ -1048,15 +1109,25 @@ async def jobs_run_now(
         "python_params": python_params,
         "spark_submit_params": spark_submit_params,
         "python_named_params": python_named_params,
+        "pipeline_params": pipeline_params,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1174,12 +1245,13 @@ async def jobs_runs_submit(
             An optional token that can be used to guarantee the idempotency of job
             run requests. If a run with the provided token already
             exists, the request does not create a new run but returns
-            the ID of the existing run instead.  If you specify the
-            idempotency token, upon failure you can retry until the
-            request succeeds. Databricks guarantees that exactly one run
-            is launched with that idempotency token.  This token must
-            have at most 64 characters.  For more information, see [How
-            to ensure idempotency for
+            the ID of the existing run instead. If a run with the
+            provided token is deleted, an error is returned.  If you
+            specify the idempotency token, upon failure you can retry
+            until the request succeeds. Databricks guarantees that
+            exactly one run is launched with that idempotency token.
+            This token must have at most 64 characters.  For more
+            information, see [How to ensure idempotency for
             jobs](https://kb.databricks.com/jobs/jobs-idempotency.html),
             e.g. `8f018174-4792-40d5-bcbc-3e6a527352c8`.
         access_control_list:
@@ -1218,13 +1290,22 @@ async def jobs_runs_submit(
         "access_control_list": access_control_list,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1320,13 +1401,22 @@ async def jobs_runs_list(
         "start_time_to": start_time_to,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.GET,
-        params=params,
-        responses=responses,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.GET,
+            params=params,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1380,13 +1470,22 @@ async def jobs_runs_get(
         "include_history": include_history,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.GET,
-        params=params,
-        responses=responses,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.GET,
+            params=params,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1439,13 +1538,22 @@ async def jobs_runs_export(
         "views_to_export": views_to_export,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.GET,
-        params=params,
-        responses=responses,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.GET,
+            params=params,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1456,9 +1564,8 @@ async def jobs_runs_cancel(
     run_id: int = None,
 ) -> Dict[str, Any]:
     """
-    Cancels a run. The run is canceled asynchronously, so when this request
-    completes, the run may still be running. The run are terminated shortly. If
-    the run is already in a terminal `life_cycle_state`, this method is a no-op.
+    Cancels a job run. The run is canceled asynchronously, so it may still be
+    running when this request completes.
 
     Args:
         databricks_instance:
@@ -1496,13 +1603,88 @@ async def jobs_runs_cancel(
         "run_id": run_id,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
+    return result
+
+
+@task
+async def jobs_runs_cancel_all(
+    databricks_instance: str,
+    databricks_credentials: "DatabricksCredentials",
+    job_id: int = None,
+) -> Dict[str, Any]:
+    """
+    Cancels all active runs of a job. The runs are canceled asynchronously, so it
+    doesn't prevent new runs from being started.
+
+    Args:
+        databricks_instance:
+            Databricks instance used in formatting the endpoint URL.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        job_id:
+            The canonical identifier of the job to cancel all runs of. This field is
+            required, e.g. `11223344`.
+
+    Returns:
+        A dict of the response.
+
+    <h4>API Endpoint URL Format:</h4>
+    To format the URL, replace the placeholders, `%s`, with desired values.<br>
+    [https://{databricks_instance}/api/2.1/jobs/runs/cancel-all?](
+    https://{databricks_instance}/api/2.1/jobs/runs/cancel-all?)
+
+    <h4>API Responses:</h4>
+    | Response | Description |
+    | --- | --- |
+    | 200 | All runs were cancelled successfully. |
+    | 400 | The request was malformed. See JSON response for error details. |
+    | 401 | The request was unauthorized. |
+    | 500 | The request was not handled correctly due to a server error. |
+    """  # noqa
+    url = f"https://{databricks_instance}/api/2.1/jobs/runs/cancel-all"  # noqa
+    responses = {
+        200: "All runs were cancelled successfully.",  # noqa
+        400: "The request was malformed. See JSON response for error details.",  # noqa
+        401: "The request was unauthorized.",  # noqa
+        500: "The request was not handled correctly due to a server error.",  # noqa
+    }
+
+    data = {
+        "job_id": job_id,
+    }
+
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1560,13 +1742,22 @@ async def jobs_runs_get_output(
         "run_id": run_id,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.GET,
-        params=params,
-        responses=responses,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.GET,
+            params=params,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1616,13 +1807,22 @@ async def jobs_runs_delete(
         "run_id": run_id,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result
 
 
@@ -1638,6 +1838,7 @@ async def jobs_runs_repair(
     python_params: List = None,
     spark_submit_params: List = None,
     python_named_params: Dict = None,
+    pipeline_params: str = None,
 ) -> Dict[str, Any]:
     """
     Re-run one or more tasks. Tasks are re-run as part of the original job run, use
@@ -1739,6 +1940,8 @@ async def jobs_runs_repair(
             ```
             {"name": "task", "data": "dbfs:/path/to/data.json"}
             ```
+        pipeline_params:
+
 
     Returns:
         A dict of the response.
@@ -1773,13 +1976,23 @@ async def jobs_runs_repair(
         "python_params": python_params,
         "spark_submit_params": spark_submit_params,
         "python_named_params": python_named_params,
+        "pipeline_params": pipeline_params,
     }
 
-    result = await execute_endpoint.fn(
-        url,
-        databricks_credentials,
-        http_method=HTTPMethod.POST,
-        responses=responses,
-        data=data,
-    )
+    try:
+        result = await execute_endpoint.fn(
+            url,
+            databricks_credentials,
+            http_method=HTTPMethod.POST,
+            data=data,
+        )
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
     return result

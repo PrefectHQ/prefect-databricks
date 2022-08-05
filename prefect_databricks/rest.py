@@ -1,5 +1,7 @@
 """
-This is a module for interacting with generic REST tasks.
+This is a module containing:
+generic REST tasks
+
 It was auto-generated using prefect-collection-generator so
 manually editing this file is not recommended.
 """
@@ -47,7 +49,6 @@ async def execute_endpoint(
     databricks_credentials: "DatabricksCredentials",
     http_method: HTTPMethod = HTTPMethod.GET,
     params: Dict[str, Any] = None,
-    responses: Dict[int, str] = None,
     **kwargs
 ) -> Dict[str, Any]:
     """
@@ -57,7 +58,6 @@ async def execute_endpoint(
         url: The endpoint url.
         databricks_credentials: Credentials to use for authentication with Databricks.
         http_method: Either GET, POST, PUT, DELETE, or PATCH.
-        responses: Status codes mapped to the corresponding descriptions.
         params: URL query parameters in the request.
         **kwargs: Additional keyword arguments to pass.
 
@@ -91,16 +91,6 @@ async def execute_endpoint(
             url, params=stripped_params, **kwargs
         )
 
-    try:
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
-
+    response.raise_for_status()
     result = response.json()
     return result
