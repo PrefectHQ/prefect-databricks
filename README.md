@@ -6,7 +6,7 @@ Prefect integrations interacting with Databricks
 
 The tasks within this collection were created by a code generator using the service's OpenAPI spec.
 
-The service's REST API documentation can be found [here](replace_this_with_link_to_api_docs).
+The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/latest/index.html).
 
 ## Getting Started
 

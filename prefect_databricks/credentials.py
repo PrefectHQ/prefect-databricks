@@ -39,8 +39,8 @@ class DatabricksCredentials(Block):
             def example_get_client_flow():
                 token = "consumer_key"
                 databricks_credentials = DatabricksCredentials(token=token)
-                endpoint = databricks_credentials.get_client()
-                return endpoint
+                client = databricks_credentials.get_client()
+                return client
 
             example_get_client_flow()
             ```

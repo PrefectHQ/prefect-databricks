@@ -48,6 +48,7 @@ async def execute_endpoint(
     databricks_credentials: "DatabricksCredentials",
     http_method: HTTPMethod = HTTPMethod.GET,
     params: Dict[str, Any] = None,
+    json: Dict[str, Any] = None,
     **kwargs: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
@@ -58,6 +59,7 @@ async def execute_endpoint(
         databricks_credentials: Credentials to use for authentication with Databricks.
         http_method: Either GET, POST, PUT, DELETE, or PATCH.
         params: URL query parameters in the request.
+        json: JSON serializable object to include in the body of the request.
         **kwargs: Additional keyword arguments to pass.
 
     Returns:
@@ -91,7 +93,7 @@ async def execute_endpoint(
 
     async with databricks_credentials.get_client() as client:
         response = await getattr(client, http_method)(
-            url, params=stripped_params, **kwargs
+            url, params=stripped_params, json=json, **kwargs
         )
 
     return response

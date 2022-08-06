@@ -7,7 +7,7 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-06T01:28:48.884873
+Updated at: 2022-08-06T04:42:37.838176
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
@@ -28,15 +28,15 @@ async def jobs_create(
     databricks_credentials: "DatabricksCredentials",
     name: str = "Untitled",
     tags: Dict = None,
-    tasks: List = None,
-    job_clusters: List = None,
+    tasks: List["models.JobTaskSettings"] = None,
+    job_clusters: List["models.JobCluster"] = None,
     email_notifications: "models.JobEmailNotifications" = None,
     timeout_seconds: int = None,
     schedule: "models.CronSchedule" = None,
     max_concurrent_runs: int = None,
     git_source: "models.GitSource" = None,
     format: str = None,
-    access_control_list: List = None,
+    access_control_list: List["models.AccessControlRequest"] = None,
 ) -> Dict[str, Any]:
     """
     Create a new job.
@@ -270,7 +270,7 @@ async def jobs_create(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "name": name,
         "tags": tags,
         "tasks": tasks,
@@ -289,7 +289,7 @@ async def jobs_create(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -647,7 +647,7 @@ async def jobs_reset(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "job_id": job_id,
         "new_settings": new_settings,
     }
@@ -657,7 +657,7 @@ async def jobs_reset(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -880,7 +880,7 @@ async def jobs_update(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "job_id": job_id,
         "new_settings": new_settings,
         "fields_to_remove": fields_to_remove,
@@ -891,7 +891,7 @@ async def jobs_update(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -949,7 +949,7 @@ async def jobs_delete(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "job_id": job_id,
     }
 
@@ -958,7 +958,7 @@ async def jobs_delete(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -1114,7 +1114,7 @@ async def jobs_run_now(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "job_id": job_id,
         "idempotency_token": idempotency_token,
         "jar_params": jar_params,
@@ -1130,7 +1130,7 @@ async def jobs_run_now(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -1150,12 +1150,12 @@ async def jobs_run_now(
 async def jobs_runs_submit(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
-    tasks: List = None,
+    tasks: List["models.RunSubmitTaskSettings"] = None,
     run_name: str = None,
     git_source: "models.GitSource" = None,
     timeout_seconds: int = None,
     idempotency_token: str = None,
-    access_control_list: List = None,
+    access_control_list: List["models.AccessControlRequest"] = None,
 ) -> Dict[str, Any]:
     """
     Submit a one-time run. This endpoint allows you to submit a workload directly
@@ -1296,7 +1296,7 @@ async def jobs_runs_submit(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "tasks": tasks,
         "run_name": run_name,
         "git_source": git_source,
@@ -1310,7 +1310,7 @@ async def jobs_runs_submit(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -1622,7 +1622,7 @@ async def jobs_runs_cancel(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "run_id": run_id,
     }
 
@@ -1631,7 +1631,7 @@ async def jobs_runs_cancel(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -1690,7 +1690,7 @@ async def jobs_runs_cancel_all(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "job_id": job_id,
     }
 
@@ -1699,7 +1699,7 @@ async def jobs_runs_cancel_all(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -1832,7 +1832,7 @@ async def jobs_runs_delete(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "run_id": run_id,
     }
 
@@ -1841,7 +1841,7 @@ async def jobs_runs_delete(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
@@ -1998,7 +1998,7 @@ async def jobs_runs_repair(
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
 
-    data = {
+    json_payload = {
         "run_id": run_id,
         "rerun_tasks": rerun_tasks,
         "latest_repair_id": latest_repair_id,
@@ -2015,7 +2015,7 @@ async def jobs_runs_repair(
             url,
             databricks_credentials,
             http_method=HTTPMethod.POST,
-            data=data,
+            json=json_payload,
         )
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
