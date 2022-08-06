@@ -10,7 +10,7 @@ class DatabricksCredentials(Block):
     Block used to manage Databricks authentication.
 
     Args:
-        token: the token to authenticate into Databricks.
+        token: the token to authenticate with Databricks.
 
     Examples:
         Load stored Databricks credentials:

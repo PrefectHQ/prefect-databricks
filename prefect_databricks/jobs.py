@@ -7,7 +7,7 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-05T04:41:08.602113
+Updated at: 2022-08-06T01:28:48.884873
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
@@ -30,11 +30,11 @@ async def jobs_create(
     tags: Dict = None,
     tasks: List = None,
     job_clusters: List = None,
-    email_notifications: Union["models.JobEmailNotifications", Dict] = None,
+    email_notifications: "models.JobEmailNotifications" = None,
     timeout_seconds: int = None,
-    schedule: Union["models.CronSchedule", Dict] = None,
+    schedule: "models.CronSchedule" = None,
     max_concurrent_runs: int = None,
-    git_source: Union["models.GitSource", Dict] = None,
+    git_source: "models.GitSource" = None,
     format: str = None,
     access_control_list: List = None,
 ) -> Dict[str, Any]:
@@ -453,7 +453,7 @@ async def jobs_reset(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
-    new_settings: Union["models.JobSettings", Dict] = None,
+    new_settings: "models.JobSettings" = None,
 ) -> Dict[str, Any]:
     """
     Overwrites all the settings for a specific job. Use the Update endpoint to
@@ -678,7 +678,7 @@ async def jobs_update(
     databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
-    new_settings: Union["models.JobSettings", Dict] = None,
+    new_settings: "models.JobSettings" = None,
     fields_to_remove: List = None,
 ) -> Dict[str, Any]:
     """
@@ -1152,7 +1152,7 @@ async def jobs_runs_submit(
     databricks_credentials: "DatabricksCredentials",
     tasks: List = None,
     run_name: str = None,
-    git_source: Union["models.GitSource", Dict] = None,
+    git_source: "models.GitSource" = None,
     timeout_seconds: int = None,
     idempotency_token: str = None,
     access_control_list: List = None,

@@ -48,7 +48,7 @@ async def execute_endpoint(
     databricks_credentials: "DatabricksCredentials",
     http_method: HTTPMethod = HTTPMethod.GET,
     params: Dict[str, Any] = None,
-    **kwargs
+    **kwargs: Dict[str, Any]
 ) -> Dict[str, Any]:
     """
     Generic function for executing GraphQL operations.
