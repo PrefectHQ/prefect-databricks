@@ -1,58 +1,27 @@
-from unittest.mock import MagicMock
-
 import httpx
 import pytest
-from prefect import flow
 
+from prefect_databricks import DatabricksCredentials
 from prefect_databricks.rest import HTTPMethod, execute_endpoint, strip_kwargs
 
 
-class MockAsyncClient:
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        return self
-
-    def raise_404(self):
-        raise httpx.HTTPStatusError(
-            "Not found",
-            request=httpx.Request("get", "url"),
-            response=httpx.Response(404),
-        )
-
-    def raise_not(self):
-        pass
-
-    async def get(self, url, params):
-        raise_for_status = self.raise_404 if url == "BAD URL" else self.raise_not
-        return MagicMock(
-            json=lambda: {"url": url, "params": params},
-            raise_for_status=raise_for_status,
-            status_code=404,
-        )
-
-
-class MockCredentials(MagicMock):
-    def get_client(self):
-        return MockAsyncClient()
-
-
 @pytest.mark.parametrize("params", [dict(a="A", b="B"), None])
-@pytest.mark.parametrize("http_method", ["get", HTTPMethod.GET])
-async def test_execute_endpoint(params, http_method):
+@pytest.mark.parametrize("http_method", ["get", HTTPMethod.GET, "post"])
+async def test_execute_endpoint(params, http_method, respx_mock):
     url = "https://prefect.io/"
 
-    @flow
-    async def test_flow():
-        credentials = MockCredentials()
-        response = await execute_endpoint(
-            url, credentials, http_method=http_method, params=params
-        )
-        result = response.json()
-        return result
+    respx_mock.get(url).mock(return_value=httpx.Response(200))
+    respx_mock.post(url).mock(return_value=httpx.Response(200))
 
-    assert (await test_flow()) == {"url": url, "params": params}
+    execute_kwargs = dict()
+    if http_method == "post":
+        execute_kwargs["json"] = {"key": "val"}
+
+    credentials = DatabricksCredentials()
+    response = await execute_endpoint.fn(
+        url, credentials, http_method=http_method, params=params, **execute_kwargs
+    )
+    assert response.status_code == 200
 
 
 def test_strip_kwargs():

@@ -91,9 +91,12 @@ async def execute_endpoint(
     else:
         stripped_params = None
 
+    if json is not None:
+        kwargs["json"] = json
+
     async with databricks_credentials.get_client() as client:
         response = await getattr(client, http_method)(
-            url, params=stripped_params, json=json, **kwargs
+            url, params=stripped_params, **kwargs
         )
 
     return response
