@@ -90,18 +90,24 @@ async def execute_endpoint(
         A dict of the returned fields.
 
     Examples:
-        Queries the weather at an airport.
+        Lists jobs on the Databricks instance.
         ```python
         from prefect import flow
-        from prefect_aviationapi import AviationAPICredentials
-        from prefect_aviationapi.rest import execute_endpoint
+        from prefect_databricks import DatabricksCredentials
+        from prefect_databricks.rest import execute_endpoint
 
-        @flow()
+
+        @flow
         def example_execute_endpoint_flow():
-            url = "https://api.aviationapi.com/v1/weather/metar"
-            aviationapi_credentials = AviationAPICredentials()
-            params = dict(apt="KORD,KSEA")
-            response = execute_endpoint(url, aviationapi_credentials, params=params)
+            databricks_instance = "dbc-ab1c23d4-567e.cloud.databricks.com"
+            url = f"https://{databricks_instance}/api/2.1/jobs/list"
+            databricks_credentials = DatabricksCredentials.load("databricks-token")
+            params = {
+                "limit": 5,
+                "offset": None,
+                "expand_tasks": True,
+            }
+            response = execute_endpoint(url, databricks_credentials, params=params)
             return response.json()
 
         example_execute_endpoint_flow()

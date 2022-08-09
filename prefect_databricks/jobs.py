@@ -7,7 +7,7 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-09T03:16:55.234217
+Updated at: 2022-08-06T05:07:14.026408
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
