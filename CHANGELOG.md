@@ -25,4 +25,4 @@ Released on ????? ?th, 20??.
 
 ### Added
 
-- `task_name` task - [#1](https://github.com/PrefectHQ/prefect-databricks/pull/1)
+- `execute_endpoint` and `jobs*` tasks - [#1](https://github.com/PrefectHQ/prefect-databricks/pull/1)
