@@ -122,6 +122,8 @@ def jobs_runs_submit_flow(notebook_path, **base_parameters):
 jobs_runs_submit_flow("/Users/username@gmail.com/example.ipynb", name="Marvin")
 ```
 
+Note, instead of using the built-in models, you may also input valid JSON. For example, `AutoScale(min_workers=1, max_workers=2)` is equivalent to `{"min_workers": 1, "max_workers": 2}`.
+
 ## Resources
 
 If you encounter any bugs while using `prefect-databricks`, feel free to open an issue in the [prefect-databricks](https://github.com/PrefectHQ/prefect-databricks) repository.
