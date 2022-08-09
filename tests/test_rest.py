@@ -1,8 +1,16 @@
+from typing import List
+
 import httpx
 import pytest
+from pydantic import BaseModel, Extra
 
 from prefect_databricks import DatabricksCredentials
-from prefect_databricks.rest import HTTPMethod, execute_endpoint, strip_kwargs
+from prefect_databricks.rest import (
+    HTTPMethod,
+    execute_endpoint,
+    serialize_model,
+    strip_kwargs,
+)
 
 
 @pytest.mark.parametrize("params", [dict(a="A", b="B"), None])
@@ -30,3 +38,52 @@ def test_strip_kwargs():
     assert strip_kwargs(**{"a": "abc", "b": "def"}) == {"a": "abc", "b": "def"}
     assert strip_kwargs(a="abc", b="def") == {"a": "abc", "b": "def"}
     assert strip_kwargs(**dict(a=[])) == {"a": []}
+
+
+class TestAnotherBaseModel(BaseModel):
+
+    some_float: float
+    some_bool: bool
+
+
+class TestBaseModel(BaseModel):
+    class Config:
+        extra = Extra.allow
+        allow_mutation = False
+
+    some_string: str
+    some_int: int
+    another_base_model: TestAnotherBaseModel
+    other_base_models: List[TestAnotherBaseModel]
+
+
+def test_serialize_model():
+    expected = {
+        "base_model": {
+            "some_string": "abc",
+            "some_int": 1,
+            "another_base_model": {"some_float": 2.8, "some_bool": True},
+            "other_base_models": [
+                {"some_float": 8.8, "some_bool": False},
+                {"some_float": 1.8, "some_bool": True},
+            ],
+            "unexpected_value": ["super", "unexpected"],
+        }
+    }
+
+    actual = serialize_model(
+        {
+            "base_model": TestBaseModel(
+                some_string="abc",
+                some_int=1,
+                unexpected_value=["super", "unexpected"],
+                another_base_model=TestAnotherBaseModel(some_float=2.8, some_bool=True),
+                other_base_models=[
+                    TestAnotherBaseModel(some_float=8.8, some_bool=False),
+                    TestAnotherBaseModel(some_float=1.8, some_bool=True),
+                ],
+            )
+        }
+    )
+
+    assert expected == actual

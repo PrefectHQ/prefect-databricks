@@ -10,6 +10,7 @@ from enum import Enum
 from typing import TYPE_CHECKING, Any, Dict
 
 from prefect import task
+from pydantic import BaseModel
 
 if TYPE_CHECKING:
     from prefect_databricks import DatabricksCredentials
@@ -23,9 +24,31 @@ class HTTPMethod(Enum):
     PATCH = "patch"
 
 
+def serialize_model(obj: Any) -> Any:
+    """
+    Recursively serializes `pydantic.BaseModel` into JSON;
+    returns original obj if not a `BaseModel`.
+
+    Args:
+        obj: Input object to serialize.
+
+    Returns:
+        Serialized version of object.
+    """
+    if isinstance(obj, list):
+        return [serialize_model(o) for o in obj]
+    elif isinstance(obj, Dict):
+        return {k: serialize_model(v) for k, v in obj.items()}
+
+    if isinstance(obj, BaseModel):
+        obj = obj.dict()
+    return obj
+
+
 def strip_kwargs(**kwargs: Dict) -> Dict:
     """
-    Drops keyword arguments if value is None.
+    Recursively drops keyword arguments if value is None,
+    and serializes any `pydantic.BaseModel` types.
 
     Args:
         **kwargs: Input keyword arguments.
@@ -35,6 +58,7 @@ def strip_kwargs(**kwargs: Dict) -> Dict:
     """
     stripped_dict = {}
     for k, v in kwargs.items():
+        v = serialize_model(v)
         if isinstance(v, dict):
             v = strip_kwargs(**v)
         if v is not None:
@@ -92,7 +116,7 @@ async def execute_endpoint(
         stripped_params = None
 
     if json is not None:
-        kwargs["json"] = json
+        kwargs["json"] = strip_kwargs(**json)
 
     async with databricks_credentials.get_client() as client:
         response = await getattr(client, http_method)(
