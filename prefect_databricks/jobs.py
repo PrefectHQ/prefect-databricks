@@ -7,7 +7,7 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-06T05:07:14.026408
+Updated at: 2022-08-09T03:51:33.468181
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
@@ -294,6 +294,10 @@ async def jobs_create(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -370,6 +374,10 @@ async def jobs_list(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -437,6 +445,10 @@ async def jobs_get(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -662,6 +674,10 @@ async def jobs_reset(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -896,6 +912,10 @@ async def jobs_update(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -963,6 +983,10 @@ async def jobs_delete(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1135,6 +1159,10 @@ async def jobs_run_now(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1315,6 +1343,10 @@ async def jobs_runs_submit(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1428,6 +1460,10 @@ async def jobs_runs_list(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1499,6 +1535,10 @@ async def jobs_runs_get(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1569,6 +1609,10 @@ async def jobs_runs_export(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1636,6 +1680,10 @@ async def jobs_runs_cancel(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1704,6 +1752,10 @@ async def jobs_runs_cancel_all(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1779,6 +1831,10 @@ async def jobs_runs_get_output(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -1846,6 +1902,10 @@ async def jobs_runs_delete(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
@@ -2020,6 +2080,10 @@ async def jobs_runs_repair(
         response.raise_for_status()
     except httpx.HTTPStatusError as exc:
         helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
         if helpful_error_response:
             raise httpx.HTTPStatusError(
                 helpful_error_response, request=exc.request, response=exc.response
