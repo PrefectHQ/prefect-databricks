@@ -7,7 +7,7 @@ manually editing this file is not recommended. If this module
 is outdated, rerun scripts/generate.py.
 
 OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-12T05:37:48.399940
+Updated at: 2022-08-13T06:07:32.777860
 """
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
@@ -24,7 +24,6 @@ if TYPE_CHECKING:
 
 @task
 async def jobs_create(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     name: str = "Untitled",
     tags: Dict = None,
@@ -42,8 +41,6 @@ async def jobs_create(
     Create a new job.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         name:
@@ -249,10 +246,8 @@ async def jobs_create(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/create?](
-    https://{databricks_instance}/api/2.1/jobs/create?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/create`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -262,7 +257,8 @@ async def jobs_create(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/create"  # noqa
+    endpoint = "/2.1/jobs/create"  # noqa
+
     responses = {
         200: "Job was created successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -286,7 +282,7 @@ async def jobs_create(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -311,7 +307,6 @@ async def jobs_create(
 
 @task
 async def jobs_list(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     limit: int = 20,
     offset: int = 0,
@@ -321,8 +316,6 @@ async def jobs_list(
     Retrieves a list of jobs.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         limit:
@@ -337,10 +330,8 @@ async def jobs_list(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s](
-    https://{databricks_instance}/api/2.1/jobs/list?&limit=%s&offset=%s&expand_tasks=%s)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/list`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -350,7 +341,8 @@ async def jobs_list(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/list"  # noqa
+    endpoint = "/2.1/jobs/list"  # noqa
+
     responses = {
         200: "List of jobs was retrieved successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -366,7 +358,7 @@ async def jobs_list(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
@@ -392,7 +384,6 @@ async def jobs_list(
 @task
 async def jobs_get(
     job_id: int,
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -402,18 +393,14 @@ async def jobs_get(
         job_id:
             The canonical identifier of the job to retrieve information about. This
             field is required.
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/get?&job_id=%s](
-    https://{databricks_instance}/api/2.1/jobs/get?&job_id=%s)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/get`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -423,7 +410,8 @@ async def jobs_get(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/get"  # noqa
+    endpoint = "/2.1/jobs/get"  # noqa
+
     responses = {
         200: "Job was retrieved successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -437,7 +425,7 @@ async def jobs_get(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
@@ -462,7 +450,6 @@ async def jobs_get(
 
 @task
 async def jobs_reset(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
     new_settings: "models.JobSettings" = None,
@@ -472,8 +459,6 @@ async def jobs_reset(
     update job settings partially.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         job_id:
@@ -638,10 +623,8 @@ async def jobs_reset(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/reset?](
-    https://{databricks_instance}/api/2.1/jobs/reset?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/reset`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -651,7 +634,8 @@ async def jobs_reset(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/reset"  # noqa
+    endpoint = "/2.1/jobs/reset"  # noqa
+
     responses = {
         200: "Job was overwritten successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -666,7 +650,7 @@ async def jobs_reset(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -691,7 +675,6 @@ async def jobs_reset(
 
 @task
 async def jobs_update(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
     new_settings: "models.JobSettings" = None,
@@ -702,8 +685,6 @@ async def jobs_update(
     endpoint to overwrite all job settings.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         job_id:
@@ -875,10 +856,8 @@ async def jobs_update(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/update?](
-    https://{databricks_instance}/api/2.1/jobs/update?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/update`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -888,7 +867,8 @@ async def jobs_update(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/update"  # noqa
+    endpoint = "/2.1/jobs/update"  # noqa
+
     responses = {
         200: "Job was updated successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -904,7 +884,7 @@ async def jobs_update(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -929,7 +909,6 @@ async def jobs_update(
 
 @task
 async def jobs_delete(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
 ) -> Dict[str, Any]:
@@ -937,8 +916,6 @@ async def jobs_delete(
     Deletes a job.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         job_id:
@@ -948,10 +925,8 @@ async def jobs_delete(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/delete?](
-    https://{databricks_instance}/api/2.1/jobs/delete?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/delete`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -961,7 +936,8 @@ async def jobs_delete(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/delete"  # noqa
+    endpoint = "/2.1/jobs/delete"  # noqa
+
     responses = {
         200: "Job was deleted successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -975,7 +951,7 @@ async def jobs_delete(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -1000,7 +976,6 @@ async def jobs_delete(
 
 @task
 async def jobs_run_now(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
     idempotency_token: str = None,
@@ -1015,8 +990,6 @@ async def jobs_run_now(
     Run a job and return the `run_id` of the triggered run.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         job_id:
@@ -1117,10 +1090,8 @@ async def jobs_run_now(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/run-now?](
-    https://{databricks_instance}/api/2.1/jobs/run-now?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/run-now`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1130,7 +1101,8 @@ async def jobs_run_now(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/run-now"  # noqa
+    endpoint = "/2.1/jobs/run-now"  # noqa
+
     responses = {
         200: "Run was started successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1151,7 +1123,7 @@ async def jobs_run_now(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -1176,7 +1148,6 @@ async def jobs_run_now(
 
 @task
 async def jobs_runs_submit(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     tasks: List["models.RunSubmitTaskSettings"] = None,
     run_name: str = None,
@@ -1192,8 +1163,6 @@ async def jobs_runs_submit(
     submitted.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         tasks:
@@ -1303,10 +1272,8 @@ async def jobs_runs_submit(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/submit?](
-    https://{databricks_instance}/api/2.1/jobs/runs/submit?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/submit`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1316,7 +1283,8 @@ async def jobs_runs_submit(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/submit"  # noqa
+    endpoint = "/2.1/jobs/runs/submit"  # noqa
+
     responses = {
         200: "Run was created and started successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1335,7 +1303,7 @@ async def jobs_runs_submit(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -1360,7 +1328,6 @@ async def jobs_runs_submit(
 
 @task
 async def jobs_runs_list(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     active_only: bool = False,
     completed_only: bool = False,
@@ -1376,8 +1343,6 @@ async def jobs_runs_list(
     List runs in descending order by start time.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         active_only:
@@ -1417,10 +1382,8 @@ async def jobs_runs_list(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s](
-    https://{databricks_instance}/api/2.1/jobs/runs/list?&active_only=%s&completed_only=%s&job_id=%s&offset=%s&limit=%s&run_type=%s&expand_tasks=%s&start_time_from=%s&start_time_to=%s)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/list`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1430,7 +1393,8 @@ async def jobs_runs_list(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/list"  # noqa
+    endpoint = "/2.1/jobs/runs/list"  # noqa
+
     responses = {
         200: "List of runs was retrieved successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1452,7 +1416,7 @@ async def jobs_runs_list(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
@@ -1478,7 +1442,6 @@ async def jobs_runs_list(
 @task
 async def jobs_runs_get(
     run_id: int,
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     include_history: bool = None,
 ) -> Dict[str, Any]:
@@ -1489,8 +1452,6 @@ async def jobs_runs_get(
         run_id:
             The canonical identifier of the run for which to retrieve the metadata.
             This field is required.
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         include_history:
@@ -1499,10 +1460,8 @@ async def jobs_runs_get(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/get?&run_id=%s&include_history=%s](
-    https://{databricks_instance}/api/2.1/jobs/runs/get?&run_id=%s&include_history=%s)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/get`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1512,7 +1471,8 @@ async def jobs_runs_get(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/get"  # noqa
+    endpoint = "/2.1/jobs/runs/get"  # noqa
+
     responses = {
         200: "Run was retrieved successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1527,7 +1487,7 @@ async def jobs_runs_get(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
@@ -1553,7 +1513,6 @@ async def jobs_runs_get(
 @task
 async def jobs_runs_export(
     run_id: int,
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     views_to_export: str = None,
 ) -> Dict[str, Any]:
@@ -1563,8 +1522,6 @@ async def jobs_runs_export(
     Args:
         run_id:
             The canonical identifier for the run. This field is required.
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         views_to_export:
@@ -1573,10 +1530,8 @@ async def jobs_runs_export(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.0/jobs/runs/export?&run_id=%s&views_to_export=%s](
-    https://{databricks_instance}/api/2.0/jobs/runs/export?&run_id=%s&views_to_export=%s)
+    <h4>API Endpoint:</h4>
+    `/2.0/jobs/runs/export`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1586,7 +1541,8 @@ async def jobs_runs_export(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.0/jobs/runs/export"  # noqa
+    endpoint = "/2.0/jobs/runs/export"  # noqa
+
     responses = {
         200: "Run was exported successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1601,7 +1557,7 @@ async def jobs_runs_export(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
@@ -1626,7 +1582,6 @@ async def jobs_runs_export(
 
 @task
 async def jobs_runs_cancel(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     run_id: int = None,
 ) -> Dict[str, Any]:
@@ -1635,8 +1590,6 @@ async def jobs_runs_cancel(
     running when this request completes.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         run_id:
@@ -1645,10 +1598,8 @@ async def jobs_runs_cancel(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/cancel?](
-    https://{databricks_instance}/api/2.1/jobs/runs/cancel?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/cancel`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1658,7 +1609,8 @@ async def jobs_runs_cancel(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/cancel"  # noqa
+    endpoint = "/2.1/jobs/runs/cancel"  # noqa
+
     responses = {
         200: "Run was cancelled successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1672,7 +1624,7 @@ async def jobs_runs_cancel(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -1697,7 +1649,6 @@ async def jobs_runs_cancel(
 
 @task
 async def jobs_runs_cancel_all(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
 ) -> Dict[str, Any]:
@@ -1706,8 +1657,6 @@ async def jobs_runs_cancel_all(
     doesn't prevent new runs from being started.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         job_id:
@@ -1717,10 +1666,8 @@ async def jobs_runs_cancel_all(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/cancel-all?](
-    https://{databricks_instance}/api/2.1/jobs/runs/cancel-all?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/cancel-all`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1730,7 +1677,8 @@ async def jobs_runs_cancel_all(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/cancel-all"  # noqa
+    endpoint = "/2.1/jobs/runs/cancel-all"  # noqa
+
     responses = {
         200: "All runs were cancelled successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1744,7 +1692,7 @@ async def jobs_runs_cancel_all(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -1770,7 +1718,6 @@ async def jobs_runs_cancel_all(
 @task
 async def jobs_runs_get_output(
     run_id: int,
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
@@ -1788,18 +1735,14 @@ async def jobs_runs_get_output(
     Args:
         run_id:
             The canonical identifier for the run. This field is required.
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
 
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/get-output?&run_id=%s](
-    https://{databricks_instance}/api/2.1/jobs/runs/get-output?&run_id=%s)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/get-output`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1809,7 +1752,8 @@ async def jobs_runs_get_output(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/get-output"  # noqa
+    endpoint = "/2.1/jobs/runs/get-output"  # noqa
+
     responses = {
         200: "Run output was retrieved successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1823,7 +1767,7 @@ async def jobs_runs_get_output(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.GET,
             params=params,
@@ -1848,7 +1792,6 @@ async def jobs_runs_get_output(
 
 @task
 async def jobs_runs_delete(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     run_id: int = None,
 ) -> Dict[str, Any]:
@@ -1856,8 +1799,6 @@ async def jobs_runs_delete(
     Deletes a non-active run. Returns an error if the run is active.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         run_id:
@@ -1867,10 +1808,8 @@ async def jobs_runs_delete(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/delete?](
-    https://{databricks_instance}/api/2.1/jobs/runs/delete?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/delete`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1880,7 +1819,8 @@ async def jobs_runs_delete(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/delete"  # noqa
+    endpoint = "/2.1/jobs/runs/delete"  # noqa
+
     responses = {
         200: "Run was deleted successfully.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -1894,7 +1834,7 @@ async def jobs_runs_delete(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,
@@ -1919,7 +1859,6 @@ async def jobs_runs_delete(
 
 @task
 async def jobs_runs_repair(
-    databricks_instance: str,
     databricks_credentials: "DatabricksCredentials",
     run_id: int = None,
     rerun_tasks: List = None,
@@ -1937,8 +1876,6 @@ async def jobs_runs_repair(
     original job run.
 
     Args:
-        databricks_instance:
-            Databricks instance used in formatting the endpoint URL.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         run_id:
@@ -2037,10 +1974,8 @@ async def jobs_runs_repair(
     Returns:
         A dict of the response.
 
-    <h4>API Endpoint URL Format:</h4>
-    To format the URL, replace the placeholders, `%s`, with desired values.<br>
-    [https://{databricks_instance}/api/2.1/jobs/runs/repair?](
-    https://{databricks_instance}/api/2.1/jobs/runs/repair?)
+    <h4>API Endpoint:</h4>
+    `/2.1/jobs/runs/repair`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -2050,7 +1985,8 @@ async def jobs_runs_repair(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    url = f"https://{databricks_instance}/api/2.1/jobs/runs/repair"  # noqa
+    endpoint = "/2.1/jobs/runs/repair"  # noqa
+
     responses = {
         200: "Run repair was initiated.",  # noqa
         400: "The request was malformed. See JSON response for error details.",  # noqa
@@ -2072,7 +2008,7 @@ async def jobs_runs_repair(
 
     try:
         response = await execute_endpoint.fn(
-            url,
+            endpoint,
             databricks_credentials,
             http_method=HTTPMethod.POST,
             json=json_payload,

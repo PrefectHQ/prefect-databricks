@@ -26,6 +26,14 @@ Install `prefect-databricks` with `pip`:
 pip install prefect-databricks
 ```
 
+Then, register to [view the block](https://orion-docs.prefect.io/ui/blocks/) on Prefect Cloud:
+
+```bash
+prefect block register -m prefect_databricks.credentials
+```
+
+Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
+
 ### Lists jobs on the Databricks instance
 
 ```python
@@ -36,10 +44,8 @@ from prefect_databricks.jobs import jobs_list
 
 @flow
 def example_execute_endpoint_flow():
-    databricks_instance = "dbc-ab1c23d4-567e.cloud.databricks.com"
-    databricks_credentials = DatabricksCredentials.load("databricks-token")
+    databricks_credentials = DatabricksCredentials.load("my-block")
     jobs = jobs_list(
-        databricks_instance,
         databricks_credentials,
         limit=5
     )
@@ -72,12 +78,10 @@ from prefect_databricks.models.jobs import (
     NewCluster,
 )
 
-DATABRICKS_INSTANCE = "dbc-ab1c23d4-567e.cloud.databricks.com"
-
 
 @flow
 def jobs_runs_submit_flow(notebook_path, **base_parameters):
-    databricks_credentials = DatabricksCredentials.load("databricks-token")
+    databricks_credentials = DatabricksCredentials.load("my-block")
 
     # specify new cluster settings
     aws_attributes = AwsAttributes(
@@ -110,7 +114,6 @@ def jobs_runs_submit_flow(notebook_path, **base_parameters):
     )
 
     run = jobs_runs_submit(
-        DATABRICKS_INSTANCE,
         databricks_credentials=databricks_credentials,
         run_name="prefect-job",
         tasks=[job_task_settings]

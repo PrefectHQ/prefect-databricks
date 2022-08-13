@@ -68,7 +68,7 @@ def strip_kwargs(**kwargs: Dict) -> Dict:
 
 @task
 async def execute_endpoint(
-    url: str,
+    endpoint: str,
     databricks_credentials: "DatabricksCredentials",
     http_method: HTTPMethod = HTTPMethod.GET,
     params: Dict[str, Any] = None,
@@ -79,7 +79,7 @@ async def execute_endpoint(
     Generic function for executing GraphQL operations.
 
     Args:
-        url: The endpoint url.
+        endpoint: The endpoint route.
         databricks_credentials: Credentials to use for authentication with Databricks.
         http_method: Either GET, POST, PUT, DELETE, or PATCH.
         params: URL query parameters in the request.
@@ -97,15 +97,18 @@ async def execute_endpoint(
         from prefect_databricks.rest import execute_endpoint
         @flow
         def example_execute_endpoint_flow():
-            databricks_instance = "dbc-ab1c23d4-567e.cloud.databricks.com"
-            url = f"https://{databricks_instance}/api/2.1/jobs/list"
-            databricks_credentials = DatabricksCredentials.load("databricks-token")
+            endpoint = "/2.1/jobs/list"
+            databricks_credentials = DatabricksCredentials.load("my-block")
             params = {
                 "limit": 5,
                 "offset": None,
                 "expand_tasks": True,
             }
-            response = execute_endpoint(url, databricks_credentials, params=params)
+            response = execute_endpoint(
+                endpoint,
+                databricks_credentials,
+                params=params
+            )
             return response.json()
         ```
     """
@@ -122,7 +125,7 @@ async def execute_endpoint(
 
     async with databricks_credentials.get_client() as client:
         response = await getattr(client, http_method)(
-            url, params=stripped_params, **kwargs
+            endpoint, params=stripped_params, **kwargs
         )
 
     return response
