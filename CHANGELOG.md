@@ -25,4 +25,4 @@ Released on August 15th, 2022.
 
 ### Added
 
-- `execute_endpoint` and `jobs*` tasks - [#1](https://github.com/PrefectHQ/prefect-databricks/pull/1)
+- `execute_endpoint` and `jobs*` tasks - [#6](https://github.com/PrefectHQ/prefect-databricks/pull/6)
