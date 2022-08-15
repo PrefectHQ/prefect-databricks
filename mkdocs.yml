@@ -52,5 +52,5 @@ nav:
     - Jobs: jobs.md
     - Rest: rest.md
     - Models: 
-        Jobs: models_jobs.md
+        Jobs: models/jobs.md
     
