@@ -1,7 +1,4 @@
-#
-# This is a module containing:
-# Databricks REST tasks
-
+"""This is a module containing tasks for interacting with Databricks jobs"""
 # It was auto-generated using prefect-collection-generator so
 # manually editing this file is not recommended. If this module
 # is outdated, rerun scripts/generate.py.
