@@ -13,7 +13,7 @@ with open("README.md") as readme_file:
 
 setup(
     name="prefect-databricks",
-    description="Prefect integrations for interacting with Databricks",
+    description="Prefect integrations interacting with Databricks",
     license="Apache License 2.0",
     author="Prefect Technologies, Inc.",
     author_email="help@prefect.io",
@@ -27,6 +27,11 @@ setup(
     python_requires=">=3.7",
     install_requires=install_requires,
     extras_require={"dev": dev_requires},
+    entry_points={
+        "prefect.collections": [
+            "DatabricksCredentials = prefect_databricks.credentials",
+        ]
+    },
     classifiers=[
         "Natural Language :: English",
         "Intended Audience :: Developers",
