@@ -1,10 +1,10 @@
-"""
-This is a module containing:
-generic REST tasks
+#
+# This is a module containing:
+# generic REST tasks
 
-It was auto-generated using prefect-collection-generator so
-manually editing this file is not recommended.
-"""
+# It was auto-generated using prefect-collection-generator so
+# manually editing this file is not recommended.
+#
 
 from enum import Enum
 from typing import TYPE_CHECKING, Any, Dict
