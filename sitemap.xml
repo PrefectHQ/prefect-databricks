@@ -16,12 +16,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://PrefectHQ.github.io/prefect-databricks/models/</loc>
+         <loc>https://PrefectHQ.github.io/prefect-databricks/rest/</loc>
          <lastmod>2022-08-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://PrefectHQ.github.io/prefect-databricks/rest/</loc>
+         <loc>https://PrefectHQ.github.io/prefect-databricks/models/jobs/</loc>
          <lastmod>2022-08-15</lastmod>
          <changefreq>daily</changefreq>
     </url>

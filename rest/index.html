@@ -325,10 +325,43 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Models" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../models/" class="md-nav__link">
-        Models
+      <a href="../models_jobs.md" class="md-nav__link">
+        Jobs
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -410,10 +443,7 @@
 
   <div class="doc doc-contents first">
   
-      <p>This is a module containing:
-generic REST tasks</p>
-<p>It was auto-generated using prefect-collection-generator so
-manually editing this file is not recommended.</p>
+      <p>This is a module containing generic Databricks REST tasks</p>
 
   
 
@@ -561,7 +591,10 @@ manually editing this file is not recommended.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/rest.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 69</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
 <span class="normal"> 70</span>
 <span class="normal"> 71</span>
 <span class="normal"> 72</span>
@@ -620,10 +653,7 @@ manually editing this file is not recommended.</p>
 <span class="normal">125</span>
 <span class="normal">126</span>
 <span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">execute_endpoint</span><span class="p">(</span>
     <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
@@ -751,7 +781,10 @@ returns original obj if not a <code>BaseModel</code>.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/rest.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
@@ -766,10 +799,7 @@ returns original obj if not a <code>BaseModel</code>.</p>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">serialize_model</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">serialize_model</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively serializes `pydantic.BaseModel` into JSON;</span>
 <span class="sd">    returns original obj if not a `BaseModel`.</span>
@@ -853,7 +883,10 @@ and serializes any <code>pydantic.BaseModel</code> types.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/rest.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
@@ -868,10 +901,7 @@ and serializes any <code>pydantic.BaseModel</code> types.</p>
 <span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">strip_kwargs</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">strip_kwargs</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively drops keyword arguments if value is None,</span>
 <span class="sd">    and serializes any `pydantic.BaseModel` types.</span>
@@ -935,21 +965,6 @@ and serializes any <code>pydantic.BaseModel</code> types.</p>
           </div>
         </a>
       
-      
-        
-        <a href="../models/" class="md-footer__link md-footer__link--next" aria-label="Next: Models" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Models
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
       
     </nav>
   
