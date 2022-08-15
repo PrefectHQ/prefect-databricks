@@ -1,14 +1,11 @@
-"""
-This is a module containing:
-Databricks REST tasks
+"""This is a module containing tasks for interacting with Databricks jobs"""
+# It was auto-generated using prefect-collection-generator so
+# manually editing this file is not recommended. If this module
+# is outdated, rerun scripts/generate.py.
 
-It was auto-generated using prefect-collection-generator so
-manually editing this file is not recommended. If this module
-is outdated, rerun scripts/generate.py.
-
-OpenAPI spec: jobs-2.1-aws.yaml
-Updated at: 2022-08-13T06:38:32.109155
-"""
+# OpenAPI spec: jobs-2.1-aws.yaml
+# Updated at: 2022-08-13T06:38:32.109155
+#
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
 
