@@ -1,2 +1,1 @@
-
 ::: prefect_databricks.credentials

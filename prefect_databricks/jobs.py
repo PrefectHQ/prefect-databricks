@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-08-16T00:34:17.633866
+# Updated at: 2022-08-16T00:40:16.899525
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
 
