@@ -2744,6 +2744,141 @@ components:
           description: "A descriptive name for the runtime version, for example \u201C\
             Databricks Runtime 7.3 LTS\u201D."
           type: string
+    SqlAlertOutput:
+      properties:
+        output_link:
+          description: The link to find the output results.
+          type: string
+        query_text:
+          description: The text of the SQL query. Can Run permission of the SQL query
+            associated with the SQL alert is required to view this field.
+          type: string
+        sql_statements:
+          $ref: '#/components/schemas/SqlStatementOutput'
+          description: Information about SQL statements executed in the run.
+        warehouse_id:
+          description: The canonical identifier of the SQL warehouse.
+          type: string
+    SqlDashboardOutput:
+      properties:
+        widgets:
+          $ref: '#/components/schemas/SqlDashboardWidgetOutput'
+          description: Widgets executed in the run. Only SQL query based widgets are
+            listed.
+    SqlDashboardWidgetOutput:
+      properties:
+        end_time:
+          description: Time (in epoch milliseconds) when execution of the SQL widget
+            ends.
+          format: int64
+          type: integer
+        error:
+          $ref: '#/components/schemas/SqlOutputError'
+          description: The information about the error when execution fails.
+        output_link:
+          description: The link to find the output results.
+          type: string
+        start_time:
+          description: Time (in epoch milliseconds) when execution of the SQL widget
+            starts.
+          format: int64
+          type: integer
+        status:
+          description: The execution status of the SQL widget.
+          enum:
+          - PENDING
+          - RUNNING
+          - SUCCESS
+          - FAILED
+          - CANCELLED
+          type: string
+        widget_id:
+          description: The canonical identifier of the SQL widget.
+          type: string
+        widget_title:
+          description: The title of the SQL widget.
+          type: string
+    SqlOutput:
+      properties:
+        alert_output:
+          $ref: '#/components/schemas/SqlAlertOutput'
+          description: The output of a SQL alert task, if available.
+        dashboard_output:
+          $ref: '#/components/schemas/SqlDashboardOutput'
+          description: The output of a SQL dashboard task, if available.
+        query_output:
+          $ref: '#/components/schemas/SqlQueryOutput'
+          description: The output of a SQL query task, if available.
+    SqlOutputError:
+      properties:
+        message:
+          description: The error message when execution fails.
+          type: string
+    SqlQueryOutput:
+      properties:
+        output_link:
+          description: The link to find the output results.
+          type: string
+        query_text:
+          description: The text of the SQL query. Can Run permission of the SQL query
+            is required to view this field.
+          type: string
+        sql_statements:
+          $ref: '#/components/schemas/SqlStatementOutput'
+          description: Information about SQL statements executed in the run.
+        warehouse_id:
+          description: The canonical identifier of the SQL warehouse.
+          type: string
+    SqlStatementOutput:
+      properties:
+        lookup_key:
+          description: A key that can be used to look up query details.
+          type: string
+    SqlTask:
+      properties:
+        alert:
+          $ref: '#/components/schemas/SqlTaskAlert'
+          description: If alert, indicates that this job must execute a SQL alert.
+        dashboard:
+          $ref: '#/components/schemas/SqlTaskDashboard'
+          description: If dashboard, indicates that this job must execute a SQL dashboard.
+        parameters:
+          description: Parameters to be used for each run of this job. The SQL alert
+            task does not support custom parameters.
+          example:
+            age: 35
+            name: John Doe
+          type: object
+        query:
+          $ref: '#/components/schemas/SqlTaskQuery'
+          description: If query, indicates that this job must execute a SQL query.
+        warehouse_id:
+          description: The canonical identifier of the SQL warehouse. Only serverless
+            warehouse is supported.
+          type: string
+      required:
+      - warehouse_id
+    SqlTaskAlert:
+      properties:
+        alert_id:
+          description: The canonical identifier of the SQL alert.
+          type: string
+      required:
+      - alert_id
+    SqlTaskDashboard:
+      properties:
+        dashboard_id:
+          description: The canonical identifier of the SQL dashboard.
+          type: string
+      required:
+      - dashboard_id
+    SqlTaskQuery:
+      properties:
+        query_id:
+          description: The canonical identifier of the SQL query.
+          type: string
+      required:
+      - query_id
     TaskDependencies:
       description: 'An optional array of objects specifying the dependency graph of
         the task. All tasks specified in this field must complete successfully before
@@ -3004,7 +3139,13 @@ components:
       scheme: bearer
       type: http
 info:
-  description: The Jobs API allows you to create, edit, and delete jobs.
+  description: 'The Jobs API allows you to create, edit, and delete jobs.
+
+    You should never hard code secrets or store them in plain text. Use the [Secrets
+    API](https://docs.databricks.com/dev-tools/api/latest/secrets.html) to manage
+    secrets in the [Databricks CLI](https://docs.databricks.com/dev-tools/cli/index.html).
+    Use the [Secrets utility](https://docs.databricks.com/dev-tools/databricks-utils.html#dbutils-secrets)
+    to reference secrets in notebooks and jobs.'
   title: Jobs API 2.1
   version: '2.1'
 openapi: 3.0.0
@@ -3482,11 +3623,11 @@ paths:
       summary: Get a single job run
   /2.1/jobs/runs/get-output:
     get:
-      description: 'Retrieve the output and metadata of a run. When a notebook task
-        returns a value through the dbutils.notebook.exit() call, you can use this
-        endpoint to retrieve that value. Databricks restricts this API to return the
-        first 5 MB of the output. To return a larger result, you can store job results
-        in a cloud storage service.
+      description: 'Retrieve the output and metadata of a single task run. When a
+        notebook task returns a value through the dbutils.notebook.exit() call, you
+        can use this endpoint to retrieve that value. Databricks restricts this API
+        to return the first 5 MB of the output. To return a larger result, you can
+        store job results in a cloud storage service.
 
         This endpoint validates that the run_id parameter is valid and returns an
         HTTP status code 400 if the run_id parameter is invalid.
@@ -3558,7 +3699,16 @@ paths:
                 type: object
           description: Run output was retrieved successfully.
         '400':
-          $ref: '#/components/responses/BadRequest'
+          content:
+            application/json:
+              example:
+                error_code: INVALID_PARAMETER_VALUE
+                message: Retrieving the output of runs with multiple tasks is not
+                  supported. You must retrieve the output of each individual task
+                  run instead.
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: A job run with multiple tasks was provided.
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':

@@ -1,11 +1,14 @@
-"""This is a module containing tasks for interacting with Databricks jobs"""
+"""
+This is a module containing tasks for interacting with:
+Databricks jobs
+"""
+
 # It was auto-generated using prefect-collection-generator so
 # manually editing this file is not recommended. If this module
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-08-13T06:38:32.109155
-#
+# Updated at: 2022-08-16T00:34:17.633866
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
 
@@ -1718,16 +1721,16 @@ async def jobs_runs_get_output(
     databricks_credentials: "DatabricksCredentials",
 ) -> Dict[str, Any]:
     """
-    Retrieve the output and metadata of a run. When a notebook task returns a value
-    through the dbutils.notebook.exit() call, you can use this endpoint to
-    retrieve that value. Databricks restricts this API to return the first 5 MB
-    of the output. To return a larger result, you can store job results in a
-    cloud storage service. This endpoint validates that the run_id parameter is
-    valid and returns an HTTP status code 400 if the run_id parameter is
-    invalid. Runs are automatically removed after 60 days. If you to want to
-    reference them beyond 60 days, you must save old run results before they
-    expire. To export using the UI, see Export job run results. To export using
-    the Jobs API, see Runs export.
+    Retrieve the output and metadata of a single task run. When a notebook task
+    returns a value through the dbutils.notebook.exit() call, you can use this
+    endpoint to retrieve that value. Databricks restricts this API to return the
+    first 5 MB of the output. To return a larger result, you can store job
+    results in a cloud storage service. This endpoint validates that the run_id
+    parameter is valid and returns an HTTP status code 400 if the run_id
+    parameter is invalid. Runs are automatically removed after 60 days. If you
+    to want to reference them beyond 60 days, you must save old run results
+    before they expire. To export using the UI, see Export job run results. To
+    export using the Jobs API, see Runs export.
 
     Args:
         run_id:
@@ -1745,7 +1748,7 @@ async def jobs_runs_get_output(
     | Response | Description |
     | --- | --- |
     | 200 | Run output was retrieved successfully. |
-    | 400 | The request was malformed. See JSON response for error details. |
+    | 400 | A job run with multiple tasks was provided. |
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
@@ -1753,7 +1756,7 @@ async def jobs_runs_get_output(
 
     responses = {
         200: "Run output was retrieved successfully.",  # noqa
-        400: "The request was malformed. See JSON response for error details.",  # noqa
+        400: "A job run with multiple tasks was provided.",  # noqa
         401: "The request was unauthorized.",  # noqa
         500: "The request was not handled correctly due to a server error.",  # noqa
     }
