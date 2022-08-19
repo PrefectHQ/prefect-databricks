@@ -1,8 +1,8 @@
 # SECTION 1
-from prefect import Flow, Parameter, task
-from prefect.client.secrets import Secret
-from prefect.tasks.databricks import DatabricksSubmitMultitaskRun
-from prefect.tasks.databricks.models import (
+from prefect import flow, task
+from prefect_databricks import DatabricksCredentials
+from prefect_databricks.flows import jobs_runs_submit_and_wait_for_completion
+from prefect_databricks.models.jobs import (
     AutoScale,
     AwsAttributes,
     JobTaskSettings,
@@ -11,8 +11,6 @@ from prefect.tasks.databricks.models import (
 )
 
 # SECTION 2
-databricks_conn = Secret("DATABRICKS_CONNECTION_STRING").get()
-
 # SECTION 3
 @task
 def create_job_task_settings(notebook_path, base_parameters):
@@ -47,17 +45,19 @@ def create_job_task_settings(notebook_path, base_parameters):
     return job_task_settings
 
 # SECTION 4
-with Flow("Databricks Flow") as flow:
-    notebook_path = Parameter("notebook_path")
-    base_parameters = Parameter("base_parameters")
+@flow(name="Databricks Flow")
+def jobs_runs_submit_flow(notebook_path, **base_parameters):
+    databricks_credentials = DatabricksCredentials.load("my-block")
     job_task_settings = create_job_task_settings(notebook_path, base_parameters)
-    run = DatabricksSubmitMultitaskRun(databricks_conn_secret=databricks_conn)(
+    run = jobs_runs_submit_and_wait_for_completion(
+        databricks_credentials=databricks_credentials,
         run_name="prefect-job",
         tasks=[job_task_settings],
     )
+    return run
 
 # SECTION 5
-flow.run(
+jobs_runs_submit_flow(
     notebook_path="/Users/username@email.com/example.ipynb",
     base_parameters={"name": "Marvin"},
 )
