@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-08-19T21:28:18.215890
+# Updated at: 2022-08-19T21:33:55.981550
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
 
@@ -35,7 +35,7 @@ async def jobs_create(
     git_source: "models.GitSource" = None,
     format: str = None,
     access_control_list: List["models.AccessControlRequest"] = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Create a new job.
 
@@ -296,7 +296,7 @@ async def jobs_list(
     limit: int = 20,
     offset: int = 0,
     expand_tasks: bool = False,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Retrieves a list of jobs.
 
@@ -356,7 +356,7 @@ async def jobs_list(
 async def jobs_get(
     job_id: int,
     databricks_credentials: "DatabricksCredentials",
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Retrieves the details for a single job.
 
@@ -410,7 +410,7 @@ async def jobs_reset(
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
     new_settings: "models.JobSettings" = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Overwrites all the settings for a specific job. Use the Update endpoint to
     update job settings partially.
@@ -622,7 +622,7 @@ async def jobs_update(
     job_id: int = None,
     new_settings: "models.JobSettings" = None,
     fields_to_remove: List = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Add, update, or remove specific settings of an existing job. Use the Reset
     endpoint to overwrite all job settings.
@@ -840,7 +840,7 @@ async def jobs_update(
 async def jobs_delete(
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Deletes a job.
 
@@ -900,7 +900,7 @@ async def jobs_run_now(
     spark_submit_params: List = None,
     python_named_params: Dict = None,
     pipeline_params: str = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Run a job and return the `run_id` of the triggered run.
 
@@ -1056,7 +1056,7 @@ async def jobs_runs_submit(
     timeout_seconds: int = None,
     idempotency_token: str = None,
     access_control_list: List["models.AccessControlRequest"] = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Submit a one-time run. This endpoint allows you to submit a workload directly
     without creating a job. Runs submitted using this endpoint don’t display in
@@ -1225,7 +1225,7 @@ async def jobs_runs_list(
     expand_tasks: bool = False,
     start_time_from: int = None,
     start_time_to: int = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     List runs in descending order by start time.
 
@@ -1317,7 +1317,7 @@ async def jobs_runs_get(
     run_id: int,
     databricks_credentials: "DatabricksCredentials",
     include_history: bool = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Retrieve the metadata of a run.
 
@@ -1374,7 +1374,7 @@ async def jobs_runs_export(
     run_id: int,
     databricks_credentials: "DatabricksCredentials",
     views_to_export: str = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Export and retrieve the job run task.
 
@@ -1429,7 +1429,7 @@ async def jobs_runs_export(
 async def jobs_runs_cancel(
     databricks_credentials: "DatabricksCredentials",
     run_id: int = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Cancels a job run. The run is canceled asynchronously, so it may still be
     running when this request completes.
@@ -1482,7 +1482,7 @@ async def jobs_runs_cancel(
 async def jobs_runs_cancel_all(
     databricks_credentials: "DatabricksCredentials",
     job_id: int = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Cancels all active runs of a job. The runs are canceled asynchronously, so it
     doesn't prevent new runs from being started.
@@ -1536,7 +1536,7 @@ async def jobs_runs_cancel_all(
 async def jobs_runs_get_output(
     run_id: int,
     databricks_credentials: "DatabricksCredentials",
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Retrieve the output and metadata of a single task run. When a notebook task
     returns a value through the dbutils.notebook.exit() call, you can use this
@@ -1597,7 +1597,7 @@ async def jobs_runs_get_output(
 async def jobs_runs_delete(
     databricks_credentials: "DatabricksCredentials",
     run_id: int = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Deletes a non-active run. Returns an error if the run is active.
 
@@ -1658,7 +1658,7 @@ async def jobs_runs_repair(
     spark_submit_params: List = None,
     python_named_params: Dict = None,
     pipeline_params: str = None,
-) -> Dict[str, Any]:
+) -> Dict[str, Any]:  # pragma: no cover
     """
     Re-run one or more tasks. Tasks are re-run as part of the original job run, use
     the current job and task settings, and can be viewed in the history for the
