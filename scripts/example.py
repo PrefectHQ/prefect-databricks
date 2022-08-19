@@ -1,3 +1,4 @@
+# SECTION 1
 from prefect import Flow, Parameter, task
 from prefect.client.secrets import Secret
 from prefect.tasks.databricks import DatabricksSubmitMultitaskRun
@@ -9,9 +10,10 @@ from prefect.tasks.databricks.models import (
     NotebookTask,
 )
 
+# SECTION 2
 databricks_conn = Secret("DATABRICKS_CONNECTION_STRING").get()
 
-
+# SECTION 3
 @task
 def create_job_task_settings(notebook_path, base_parameters):
     # specify new cluster settings
@@ -44,7 +46,7 @@ def create_job_task_settings(notebook_path, base_parameters):
 
     return job_task_settings
 
-
+# SECTION 4
 with Flow("Databricks Flow") as flow:
     notebook_path = Parameter("notebook_path")
     base_parameters = Parameter("base_parameters")
@@ -54,6 +56,7 @@ with Flow("Databricks Flow") as flow:
         tasks=[job_task_settings],
     )
 
+# SECTION 5
 flow.run(
     notebook_path="/Users/username@email.com/example.ipynb",
     base_parameters={"name": "Marvin"},
