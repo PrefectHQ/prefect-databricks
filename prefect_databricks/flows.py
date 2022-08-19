@@ -183,8 +183,61 @@ async def jobs_runs_submit_and_wait_for_completion(
         A dictionary of task keys to its corresponding notebook output.
 
     Examples:
+        Submit jobs runs and wait.
+        ```python
+        from prefect import flow
+        from prefect_databricks import DatabricksCredentials
+        from prefect_databricks.flows import jobs_runs_submit_and_wait_for_completion
+        from prefect_databricks.models.jobs import (
+            AutoScale,
+            AwsAttributes,
+            JobTaskSettings,
+            NotebookTask,
+            NewCluster,
+        )
 
+        @flow
+        async def jobs_runs_submit_and_wait_for_completion_flow(notebook_path, **base_parameters):
+            databricks_credentials = await DatabricksCredentials.load("BLOCK_NAME")
 
+            # specify new cluster settings
+            aws_attributes = AwsAttributes(
+                availability="SPOT",
+                zone_id="us-west-2a",
+                ebs_volume_type="GENERAL_PURPOSE_SSD",
+                ebs_volume_count=3,
+                ebs_volume_size=100,
+            )
+            auto_scale = AutoScale(min_workers=1, max_workers=2)
+            new_cluster = NewCluster(
+                aws_attributes=aws_attributes,
+                autoscale=auto_scale,
+                node_type_id="m4.large",
+                spark_version="10.4.x-scala2.12",
+                spark_conf={"spark.speculation": True},
+            )
+
+            # specify notebook to use and parameters to pass
+            notebook_task = NotebookTask(
+                notebook_path=notebook_path,
+                base_parameters=base_parameters,
+            )
+
+            # compile job task settings
+            job_task_settings = JobTaskSettings(
+                new_cluster=new_cluster,
+                notebook_task=notebook_task,
+                task_key="prefect-task"
+            )
+
+            multi_task_runs = await jobs_runs_submit_and_wait_for_completion(
+                databricks_credentials=databricks_credentials,
+                run_name="prefect-job",
+                tasks=[job_task_settings]
+            )
+
+            return multi_task_runs
+        ```
     """  # noqa
     logger = get_run_logger()
 
@@ -217,7 +270,7 @@ async def jobs_runs_submit_and_wait_for_completion(
             jobs_runs_result_state = jobs_runs_state.get("result_state", None)
             if jobs_runs_result_state == RunResultState.success.value:
                 task_notebook_outputs = {}
-                for task in jobs_runs_metadata["task"]:
+                for task in jobs_runs_metadata["tasks"]:
                     task_key = task["task_key"]
                     task_run_id = task["run_id"]
                     task_run_output_future = jobs_runs_get_output.submit(
