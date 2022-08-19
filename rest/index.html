@@ -325,22 +325,37 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../flows/" class="md-nav__link">
+        Flows
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           Models
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Models" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           Models
         </label>
@@ -473,7 +488,7 @@
 
   <div class="doc doc-contents ">
   
-      <p>Generic function for executing GraphQL operations.</p>
+      <p>Generic function for executing REST endpoints.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -560,9 +575,9 @@
     <tbody>
         <tr>
           <td>
-                <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
+                <code>httpx.<span title="httpx.Response">Response</span></code>
           </td>
-          <td><p>A dict of the returned fields.</p></td>
+          <td><p>The httpx.Response from interacting with the endpoint.</p></td>
         </tr>
     </tbody>
   </table>
@@ -591,9 +606,7 @@
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/rest.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 70</span>
 <span class="normal"> 71</span>
 <span class="normal"> 72</span>
 <span class="normal"> 73</span>
@@ -653,17 +666,19 @@
 <span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>
-<span class="normal">130</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">execute_endpoint</span><span class="p">(</span>
     <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
     <span class="n">http_method</span><span class="p">:</span> <span class="n">HTTPMethod</span> <span class="o">=</span> <span class="n">HTTPMethod</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span>
     <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">json</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generic function for executing GraphQL operations.</span>
+<span class="sd">    Generic function for executing REST endpoints.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        endpoint: The endpoint route.</span>
@@ -674,7 +689,7 @@
 <span class="sd">        **kwargs: Additional keyword arguments to pass.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A dict of the returned fields.</span>
+<span class="sd">        The httpx.Response from interacting with the endpoint.</span>
 
 <span class="sd">    Examples:</span>
 <span class="sd">        Lists jobs on the Databricks instance.</span>
@@ -781,9 +796,7 @@ returns original obj if not a <code>BaseModel</code>.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/rest.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -799,7 +812,9 @@ returns original obj if not a <code>BaseModel</code>.</p>
 <span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
-<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">serialize_model</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">serialize_model</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively serializes `pydantic.BaseModel` into JSON;</span>
 <span class="sd">    returns original obj if not a `BaseModel`.</span>
@@ -883,9 +898,7 @@ and serializes any <code>pydantic.BaseModel</code> types.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/rest.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
@@ -901,7 +914,9 @@ and serializes any <code>pydantic.BaseModel</code> types.</p>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">strip_kwargs</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">strip_kwargs</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively drops keyword arguments if value is None,</span>
 <span class="sd">    and serializes any `pydantic.BaseModel` types.</span>
@@ -967,13 +982,13 @@ and serializes any <code>pydantic.BaseModel</code> types.</p>
       
       
         
-        <a href="../models/jobs/" class="md-footer__link md-footer__link--next" aria-label="Next: Jobs" rel="next">
+        <a href="../flows/" class="md-footer__link md-footer__link--next" aria-label="Next: Flows" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Jobs
+              Flows
             </div>
           </div>
           <div class="md-footer__button md-icon">

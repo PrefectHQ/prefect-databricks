@@ -1,0 +1,1575 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://PrefectHQ.github.io/prefect-databricks/flows/">
+      
+      <link rel="icon" href="../img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.0">
+    
+    
+      
+        <title>Flows - prefect-databricks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CSource+Code+Pro:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Source Code Pro"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prefect_databricks.flows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="prefect-databricks" class="md-header__button md-logo" aria-label="prefect-databricks" data-md-component="logo">
+      
+  <img src="../img/prefect-logo-white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            prefect-databricks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Flows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/PrefectHQ/prefect-databricks" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="prefect-databricks" class="md-nav__button md-logo" aria-label="prefect-databricks" data-md-component="logo">
+      
+  <img src="../img/prefect-logo-white.png" alt="logo">
+
+    </a>
+    prefect-databricks
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/PrefectHQ/prefect-databricks" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials/" class="md-nav__link">
+        Credentials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobs/" class="md-nav__link">
+        Jobs
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rest/" class="md-nav__link">
+        Rest
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Flows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Flows
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobInternalError" class="md-nav__link">
+    DatabricksJobInternalError
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobRunTimedOut" class="md-nav__link">
+    DatabricksJobRunTimedOut
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobSkipped" class="md-nav__link">
+    DatabricksJobSkipped
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobTerminated" class="md-nav__link">
+    DatabricksJobTerminated
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.jobs_runs_submit_and_wait_for_completion" class="md-nav__link">
+    jobs_runs_submit_and_wait_for_completion()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Models
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Models" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/jobs/" class="md-nav__link">
+        Jobs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobInternalError" class="md-nav__link">
+    DatabricksJobInternalError
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobRunTimedOut" class="md-nav__link">
+    DatabricksJobRunTimedOut
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobSkipped" class="md-nav__link">
+    DatabricksJobSkipped
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.DatabricksJobTerminated" class="md-nav__link">
+    DatabricksJobTerminated
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.flows.jobs_runs_submit_and_wait_for_completion" class="md-nav__link">
+    jobs_runs_submit_and_wait_for_completion()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/edit/main/docs/flows.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h1 id="prefect_databricks.flows" class="doc doc-heading">
+          <code>prefect_databricks.flows</code>
+
+
+</h1>
+
+  <div class="doc doc-contents first">
+  
+      <p>Module containing flows for interacting with Databricks</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="prefect_databricks.flows.DatabricksJobInternalError" class="doc doc-heading">
+        <code>DatabricksJobInternalError</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Raised when Databricks jobs runs submit encounters internal error</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>prefect_databricks/flows.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DatabricksJobInternalError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raised when Databricks jobs runs submit encounters internal error&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="prefect_databricks.flows.DatabricksJobRunTimedOut" class="doc doc-heading">
+        <code>DatabricksJobRunTimedOut</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Raised when Databricks jobs runs does not complete in the configured max
+wait seconds</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>prefect_databricks/flows.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DatabricksJobRunTimedOut</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Raised when Databricks jobs runs does not complete in the configured max</span>
+<span class="sd">    wait seconds</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="prefect_databricks.flows.DatabricksJobSkipped" class="doc doc-heading">
+        <code>DatabricksJobSkipped</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Raised when Databricks jobs runs submit skips</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>prefect_databricks/flows.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DatabricksJobSkipped</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raised when Databricks jobs runs submit skips&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="prefect_databricks.flows.DatabricksJobTerminated" class="doc doc-heading">
+        <code>DatabricksJobTerminated</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Raised when Databricks jobs runs submit terminates</p>
+
+
+        <details class="quote">
+          <summary>Source code in <code>prefect_databricks/flows.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DatabricksJobTerminated</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raised when Databricks jobs runs submit terminates&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</code></pre></div></td></tr></table></div>
+        </details>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="prefect_databricks.flows.jobs_runs_submit_and_wait_for_completion" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">jobs_runs_submit_and_wait_for_completion</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Flow that triggers a job run and waits for the triggered run to complete.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>databricks_credentials</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
+          </td>
+          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>tasks</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.RunSubmitTaskSettings" href="../models/jobs/#prefect_databricks.models.jobs.RunSubmitTaskSettings">RunSubmitTaskSettings</a>]</code>
+          </td>
+          <td><p>Tasks to run, e.g.
+<div class="highlight"><pre><span></span><code>[
+    {
+        &quot;task_key&quot;: &quot;Sessionize&quot;,
+        &quot;description&quot;: &quot;Extracts session data from events&quot;,
+        &quot;depends_on&quot;: [],
+        &quot;existing_cluster_id&quot;: &quot;0923-164208-meows279&quot;,
+        &quot;spark_jar_task&quot;: {
+            &quot;main_class_name&quot;: &quot;com.databricks.Sessionize&quot;,
+            &quot;parameters&quot;: [&quot;--data&quot;, &quot;dbfs:/path/to/data.json&quot;],
+        },
+        &quot;libraries&quot;: [{&quot;jar&quot;: &quot;dbfs:/mnt/databricks/Sessionize.jar&quot;}],
+        &quot;timeout_seconds&quot;: 86400,
+    },
+    {
+        &quot;task_key&quot;: &quot;Orders_Ingest&quot;,
+        &quot;description&quot;: &quot;Ingests order data&quot;,
+        &quot;depends_on&quot;: [],
+        &quot;existing_cluster_id&quot;: &quot;0923-164208-meows279&quot;,
+        &quot;spark_jar_task&quot;: {
+            &quot;main_class_name&quot;: &quot;com.databricks.OrdersIngest&quot;,
+            &quot;parameters&quot;: [&quot;--data&quot;, &quot;dbfs:/path/to/order-data.json&quot;],
+        },
+        &quot;libraries&quot;: [{&quot;jar&quot;: &quot;dbfs:/mnt/databricks/OrderIngest.jar&quot;}],
+        &quot;timeout_seconds&quot;: 86400,
+    },
+    {
+        &quot;task_key&quot;: &quot;Match&quot;,
+        &quot;description&quot;: &quot;Matches orders with user sessions&quot;,
+        &quot;depends_on&quot;: [
+            {&quot;task_key&quot;: &quot;Orders_Ingest&quot;},
+            {&quot;task_key&quot;: &quot;Sessionize&quot;},
+        ],
+        &quot;new_cluster&quot;: {
+            &quot;spark_version&quot;: &quot;7.3.x-scala2.12&quot;,
+            &quot;node_type_id&quot;: &quot;i3.xlarge&quot;,
+            &quot;spark_conf&quot;: {&quot;spark.speculation&quot;: True},
+            &quot;aws_attributes&quot;: {
+                &quot;availability&quot;: &quot;SPOT&quot;,
+                &quot;zone_id&quot;: &quot;us-west-2a&quot;,
+            },
+            &quot;autoscale&quot;: {&quot;min_workers&quot;: 2, &quot;max_workers&quot;: 16},
+        },
+        &quot;notebook_task&quot;: {
+            &quot;notebook_path&quot;: &quot;/Users/user.name@databricks.com/Match&quot;,
+            &quot;base_parameters&quot;: {&quot;name&quot;: &quot;John Doe&quot;, &quot;age&quot;: &quot;35&quot;},
+        },
+        &quot;timeout_seconds&quot;: 86400,
+    },
+]
+</code></pre></div></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>run_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>An optional name for the run. The default value is <code>Untitled</code>, e.g. <code>A
+multitask job run</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>git_source</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.GitSource" href="../models/jobs/#prefect_databricks.models.jobs.GitSource">GitSource</a></code>
+          </td>
+          <td><p>This functionality is in Public Preview.  An optional specification for
+a remote repository containing the notebooks used by this
+job's notebook tasks. Key-values:
+- git_url:
+    URL of the repository to be cloned by this job. The maximum
+    length is 300 characters, e.g.
+    <code>https://github.com/databricks/databricks-cli</code>.
+- git_provider:
+    Unique identifier of the service used to host the Git
+    repository. The value is case insensitive, e.g. <code>github</code>.
+- git_branch:
+    Name of the branch to be checked out and used by this job.
+    This field cannot be specified in conjunction with git_tag
+    or git_commit. The maximum length is 255 characters, e.g.
+    <code>main</code>.
+- git_tag:
+    Name of the tag to be checked out and used by this job. This
+    field cannot be specified in conjunction with git_branch or
+    git_commit. The maximum length is 255 characters, e.g.
+    <code>release-1.0.0</code>.
+- git_commit:
+    Commit to be checked out and used by this job. This field
+    cannot be specified in conjunction with git_branch or
+    git_tag. The maximum length is 64 characters, e.g.
+    <code>e0056d01</code>.
+- git_snapshot:
+    Read-only state of the remote repository at the time the job was run.
+                This field is only included on job runs.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeout_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>An optional timeout applied to each run of this job. The default
+behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>idempotency_token</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>An optional token that can be used to guarantee the idempotency of job
+run requests. If a run with the provided token already
+exists, the request does not create a new run but returns
+the ID of the existing run instead. If a run with the
+provided token is deleted, an error is returned.  If you
+specify the idempotency token, upon failure you can retry
+until the request succeeds. Databricks guarantees that
+exactly one run is launched with that idempotency token.
+This token must have at most 64 characters.  For more
+information, see <a href="https://kb.databricks.com/jobs/jobs-idempotency.html">How to ensure idempotency for
+jobs</a>,
+e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>access_control_list</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.AccessControlRequest" href="../models/jobs/#prefect_databricks.models.jobs.AccessControlRequest">AccessControlRequest</a>]</code>
+          </td>
+          <td><p>List of permissions to set on the job.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_wait_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Maximum number of seconds to wait for the entire flow to complete.</p></td>
+          <td>
+                <code>900</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>poll_frequency_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Number of seconds to wait in between checks for
+run completion.</p></td>
+          <td>
+                <code>10</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**jobs_runs_submit_kwargs</code></td>
+          <td>
+                <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
+          </td>
+          <td><p>Additional keyword arguments to pass to <code>jobs_runs_submit</code>.</p></td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Dict">Dict</span></code>
+          </td>
+          <td><p>A dictionary of task keys to its corresponding notebook output.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+<p><strong>Examples:</strong></p>
+    <p>Submit jobs runs and wait.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
+<span class="kn">from</span> <span class="nn">prefect_databricks</span> <span class="kn">import</span> <span class="n">DatabricksCredentials</span>
+<span class="kn">from</span> <span class="nn">prefect_databricks.flows</span> <span class="kn">import</span> <span class="n">jobs_runs_submit_and_wait_for_completion</span>
+<span class="kn">from</span> <span class="nn">prefect_databricks.models.jobs</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AutoScale</span><span class="p">,</span>
+    <span class="n">AwsAttributes</span><span class="p">,</span>
+    <span class="n">JobTaskSettings</span><span class="p">,</span>
+    <span class="n">NotebookTask</span><span class="p">,</span>
+    <span class="n">NewCluster</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nd">@flow</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_submit_and_wait_for_completion_flow</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="o">**</span><span class="n">base_parameters</span><span class="p">):</span>
+    <span class="n">databricks_credentials</span> <span class="o">=</span> <span class="k">await</span> <span class="n">DatabricksCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;BLOCK_NAME&quot;</span><span class="p">)</span>
+
+    <span class="c1"># specify new cluster settings</span>
+    <span class="n">aws_attributes</span> <span class="o">=</span> <span class="n">AwsAttributes</span><span class="p">(</span>
+        <span class="n">availability</span><span class="o">=</span><span class="s2">&quot;SPOT&quot;</span><span class="p">,</span>
+        <span class="n">zone_id</span><span class="o">=</span><span class="s2">&quot;us-west-2a&quot;</span><span class="p">,</span>
+        <span class="n">ebs_volume_type</span><span class="o">=</span><span class="s2">&quot;GENERAL_PURPOSE_SSD&quot;</span><span class="p">,</span>
+        <span class="n">ebs_volume_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">ebs_volume_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">auto_scale</span> <span class="o">=</span> <span class="n">AutoScale</span><span class="p">(</span><span class="n">min_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">new_cluster</span> <span class="o">=</span> <span class="n">NewCluster</span><span class="p">(</span>
+        <span class="n">aws_attributes</span><span class="o">=</span><span class="n">aws_attributes</span><span class="p">,</span>
+        <span class="n">autoscale</span><span class="o">=</span><span class="n">auto_scale</span><span class="p">,</span>
+        <span class="n">node_type_id</span><span class="o">=</span><span class="s2">&quot;m4.large&quot;</span><span class="p">,</span>
+        <span class="n">spark_version</span><span class="o">=</span><span class="s2">&quot;10.4.x-scala2.12&quot;</span><span class="p">,</span>
+        <span class="n">spark_conf</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;spark.speculation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="c1"># specify notebook to use and parameters to pass</span>
+    <span class="n">notebook_task</span> <span class="o">=</span> <span class="n">NotebookTask</span><span class="p">(</span>
+        <span class="n">notebook_path</span><span class="o">=</span><span class="n">notebook_path</span><span class="p">,</span>
+        <span class="n">base_parameters</span><span class="o">=</span><span class="n">base_parameters</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># compile job task settings</span>
+    <span class="n">job_task_settings</span> <span class="o">=</span> <span class="n">JobTaskSettings</span><span class="p">(</span>
+        <span class="n">new_cluster</span><span class="o">=</span><span class="n">new_cluster</span><span class="p">,</span>
+        <span class="n">notebook_task</span><span class="o">=</span><span class="n">notebook_task</span><span class="p">,</span>
+        <span class="n">task_key</span><span class="o">=</span><span class="s2">&quot;prefect-task&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">multi_task_runs</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_submit_and_wait_for_completion</span><span class="p">(</span>
+        <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span>
+        <span class="n">run_name</span><span class="o">=</span><span class="s2">&quot;prefect-job&quot;</span><span class="p">,</span>
+        <span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">job_task_settings</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">multi_task_runs</span>
+</code></pre></div></p>
+
+      <details class="quote">
+        <summary>Source code in <code>prefect_databricks/flows.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Submit jobs runs and wait for completion&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Triggers a Databricks jobs runs and waits for the&quot;</span>
+    <span class="s2">&quot;triggered runs to complete.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_submit_and_wait_for_completion</span><span class="p">(</span>
+    <span class="n">databricks_credentials</span><span class="p">:</span> <span class="n">DatabricksCredentials</span><span class="p">,</span>
+    <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RunSubmitTaskSettings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_wait_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+    <span class="n">poll_frequency_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">git_source</span><span class="p">:</span> <span class="n">GitSource</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">idempotency_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">access_control_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AccessControlRequest</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">jobs_runs_submit_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flow that triggers a job run and waits for the triggered run to complete.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        databricks_credentials:</span>
+<span class="sd">            Credentials to use for authentication with Databricks.</span>
+<span class="sd">        tasks: Tasks to run, e.g.</span>
+<span class="sd">            ```</span>
+<span class="sd">            [</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;task_key&quot;: &quot;Sessionize&quot;,</span>
+<span class="sd">                    &quot;description&quot;: &quot;Extracts session data from events&quot;,</span>
+<span class="sd">                    &quot;depends_on&quot;: [],</span>
+<span class="sd">                    &quot;existing_cluster_id&quot;: &quot;0923-164208-meows279&quot;,</span>
+<span class="sd">                    &quot;spark_jar_task&quot;: {</span>
+<span class="sd">                        &quot;main_class_name&quot;: &quot;com.databricks.Sessionize&quot;,</span>
+<span class="sd">                        &quot;parameters&quot;: [&quot;--data&quot;, &quot;dbfs:/path/to/data.json&quot;],</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;libraries&quot;: [{&quot;jar&quot;: &quot;dbfs:/mnt/databricks/Sessionize.jar&quot;}],</span>
+<span class="sd">                    &quot;timeout_seconds&quot;: 86400,</span>
+<span class="sd">                },</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;task_key&quot;: &quot;Orders_Ingest&quot;,</span>
+<span class="sd">                    &quot;description&quot;: &quot;Ingests order data&quot;,</span>
+<span class="sd">                    &quot;depends_on&quot;: [],</span>
+<span class="sd">                    &quot;existing_cluster_id&quot;: &quot;0923-164208-meows279&quot;,</span>
+<span class="sd">                    &quot;spark_jar_task&quot;: {</span>
+<span class="sd">                        &quot;main_class_name&quot;: &quot;com.databricks.OrdersIngest&quot;,</span>
+<span class="sd">                        &quot;parameters&quot;: [&quot;--data&quot;, &quot;dbfs:/path/to/order-data.json&quot;],</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;libraries&quot;: [{&quot;jar&quot;: &quot;dbfs:/mnt/databricks/OrderIngest.jar&quot;}],</span>
+<span class="sd">                    &quot;timeout_seconds&quot;: 86400,</span>
+<span class="sd">                },</span>
+<span class="sd">                {</span>
+<span class="sd">                    &quot;task_key&quot;: &quot;Match&quot;,</span>
+<span class="sd">                    &quot;description&quot;: &quot;Matches orders with user sessions&quot;,</span>
+<span class="sd">                    &quot;depends_on&quot;: [</span>
+<span class="sd">                        {&quot;task_key&quot;: &quot;Orders_Ingest&quot;},</span>
+<span class="sd">                        {&quot;task_key&quot;: &quot;Sessionize&quot;},</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &quot;new_cluster&quot;: {</span>
+<span class="sd">                        &quot;spark_version&quot;: &quot;7.3.x-scala2.12&quot;,</span>
+<span class="sd">                        &quot;node_type_id&quot;: &quot;i3.xlarge&quot;,</span>
+<span class="sd">                        &quot;spark_conf&quot;: {&quot;spark.speculation&quot;: True},</span>
+<span class="sd">                        &quot;aws_attributes&quot;: {</span>
+<span class="sd">                            &quot;availability&quot;: &quot;SPOT&quot;,</span>
+<span class="sd">                            &quot;zone_id&quot;: &quot;us-west-2a&quot;,</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;autoscale&quot;: {&quot;min_workers&quot;: 2, &quot;max_workers&quot;: 16},</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;notebook_task&quot;: {</span>
+<span class="sd">                        &quot;notebook_path&quot;: &quot;/Users/user.name@databricks.com/Match&quot;,</span>
+<span class="sd">                        &quot;base_parameters&quot;: {&quot;name&quot;: &quot;John Doe&quot;, &quot;age&quot;: &quot;35&quot;},</span>
+<span class="sd">                    },</span>
+<span class="sd">                    &quot;timeout_seconds&quot;: 86400,</span>
+<span class="sd">                },</span>
+<span class="sd">            ]</span>
+<span class="sd">            ```</span>
+<span class="sd">        run_name:</span>
+<span class="sd">            An optional name for the run. The default value is `Untitled`, e.g. `A</span>
+<span class="sd">            multitask job run`.</span>
+<span class="sd">        git_source:</span>
+<span class="sd">            This functionality is in Public Preview.  An optional specification for</span>
+<span class="sd">            a remote repository containing the notebooks used by this</span>
+<span class="sd">            job&#39;s notebook tasks. Key-values:</span>
+<span class="sd">            - git_url:</span>
+<span class="sd">                URL of the repository to be cloned by this job. The maximum</span>
+<span class="sd">                length is 300 characters, e.g.</span>
+<span class="sd">                `https://github.com/databricks/databricks-cli`.</span>
+<span class="sd">            - git_provider:</span>
+<span class="sd">                Unique identifier of the service used to host the Git</span>
+<span class="sd">                repository. The value is case insensitive, e.g. `github`.</span>
+<span class="sd">            - git_branch:</span>
+<span class="sd">                Name of the branch to be checked out and used by this job.</span>
+<span class="sd">                This field cannot be specified in conjunction with git_tag</span>
+<span class="sd">                or git_commit. The maximum length is 255 characters, e.g.</span>
+<span class="sd">                `main`.</span>
+<span class="sd">            - git_tag:</span>
+<span class="sd">                Name of the tag to be checked out and used by this job. This</span>
+<span class="sd">                field cannot be specified in conjunction with git_branch or</span>
+<span class="sd">                git_commit. The maximum length is 255 characters, e.g.</span>
+<span class="sd">                `release-1.0.0`.</span>
+<span class="sd">            - git_commit:</span>
+<span class="sd">                Commit to be checked out and used by this job. This field</span>
+<span class="sd">                cannot be specified in conjunction with git_branch or</span>
+<span class="sd">                git_tag. The maximum length is 64 characters, e.g.</span>
+<span class="sd">                `e0056d01`.</span>
+<span class="sd">            - git_snapshot:</span>
+<span class="sd">                Read-only state of the remote repository at the time the job was run.</span>
+<span class="sd">                            This field is only included on job runs.</span>
+<span class="sd">        timeout_seconds:</span>
+<span class="sd">            An optional timeout applied to each run of this job. The default</span>
+<span class="sd">            behavior is to have no timeout, e.g. `86400`.</span>
+<span class="sd">        idempotency_token:</span>
+<span class="sd">            An optional token that can be used to guarantee the idempotency of job</span>
+<span class="sd">            run requests. If a run with the provided token already</span>
+<span class="sd">            exists, the request does not create a new run but returns</span>
+<span class="sd">            the ID of the existing run instead. If a run with the</span>
+<span class="sd">            provided token is deleted, an error is returned.  If you</span>
+<span class="sd">            specify the idempotency token, upon failure you can retry</span>
+<span class="sd">            until the request succeeds. Databricks guarantees that</span>
+<span class="sd">            exactly one run is launched with that idempotency token.</span>
+<span class="sd">            This token must have at most 64 characters.  For more</span>
+<span class="sd">            information, see [How to ensure idempotency for</span>
+<span class="sd">            jobs](https://kb.databricks.com/jobs/jobs-idempotency.html),</span>
+<span class="sd">            e.g. `8f018174-4792-40d5-bcbc-3e6a527352c8`.</span>
+<span class="sd">        access_control_list:</span>
+<span class="sd">            List of permissions to set on the job.</span>
+<span class="sd">        max_wait_seconds: Maximum number of seconds to wait for the entire flow to complete.</span>
+<span class="sd">        poll_frequency_seconds: Number of seconds to wait in between checks for</span>
+<span class="sd">            run completion.</span>
+<span class="sd">        **jobs_runs_submit_kwargs: Additional keyword arguments to pass to `jobs_runs_submit`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary of task keys to its corresponding notebook output.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Submit jobs runs and wait.</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from prefect import flow</span>
+<span class="sd">        from prefect_databricks import DatabricksCredentials</span>
+<span class="sd">        from prefect_databricks.flows import jobs_runs_submit_and_wait_for_completion</span>
+<span class="sd">        from prefect_databricks.models.jobs import (</span>
+<span class="sd">            AutoScale,</span>
+<span class="sd">            AwsAttributes,</span>
+<span class="sd">            JobTaskSettings,</span>
+<span class="sd">            NotebookTask,</span>
+<span class="sd">            NewCluster,</span>
+<span class="sd">        )</span>
+
+<span class="sd">        @flow</span>
+<span class="sd">        async def jobs_runs_submit_and_wait_for_completion_flow(notebook_path, **base_parameters):</span>
+<span class="sd">            databricks_credentials = await DatabricksCredentials.load(&quot;BLOCK_NAME&quot;)</span>
+
+<span class="sd">            # specify new cluster settings</span>
+<span class="sd">            aws_attributes = AwsAttributes(</span>
+<span class="sd">                availability=&quot;SPOT&quot;,</span>
+<span class="sd">                zone_id=&quot;us-west-2a&quot;,</span>
+<span class="sd">                ebs_volume_type=&quot;GENERAL_PURPOSE_SSD&quot;,</span>
+<span class="sd">                ebs_volume_count=3,</span>
+<span class="sd">                ebs_volume_size=100,</span>
+<span class="sd">            )</span>
+<span class="sd">            auto_scale = AutoScale(min_workers=1, max_workers=2)</span>
+<span class="sd">            new_cluster = NewCluster(</span>
+<span class="sd">                aws_attributes=aws_attributes,</span>
+<span class="sd">                autoscale=auto_scale,</span>
+<span class="sd">                node_type_id=&quot;m4.large&quot;,</span>
+<span class="sd">                spark_version=&quot;10.4.x-scala2.12&quot;,</span>
+<span class="sd">                spark_conf={&quot;spark.speculation&quot;: True},</span>
+<span class="sd">            )</span>
+
+<span class="sd">            # specify notebook to use and parameters to pass</span>
+<span class="sd">            notebook_task = NotebookTask(</span>
+<span class="sd">                notebook_path=notebook_path,</span>
+<span class="sd">                base_parameters=base_parameters,</span>
+<span class="sd">            )</span>
+
+<span class="sd">            # compile job task settings</span>
+<span class="sd">            job_task_settings = JobTaskSettings(</span>
+<span class="sd">                new_cluster=new_cluster,</span>
+<span class="sd">                notebook_task=notebook_task,</span>
+<span class="sd">                task_key=&quot;prefect-task&quot;</span>
+<span class="sd">            )</span>
+
+<span class="sd">            multi_task_runs = await jobs_runs_submit_and_wait_for_completion(</span>
+<span class="sd">                databricks_credentials=databricks_credentials,</span>
+<span class="sd">                run_name=&quot;prefect-job&quot;,</span>
+<span class="sd">                tasks=[job_task_settings]</span>
+<span class="sd">            )</span>
+
+<span class="sd">            return multi_task_runs</span>
+<span class="sd">        ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_run_logger</span><span class="p">()</span>
+
+    <span class="n">multi_task_jobs_runs_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_submit</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+        <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span>
+        <span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">,</span>
+        <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">,</span>
+        <span class="n">git_source</span><span class="o">=</span><span class="n">git_source</span><span class="p">,</span>
+        <span class="n">timeout_seconds</span><span class="o">=</span><span class="n">timeout_seconds</span><span class="p">,</span>
+        <span class="n">idempotency_token</span><span class="o">=</span><span class="n">idempotency_token</span><span class="p">,</span>
+        <span class="n">access_control_list</span><span class="o">=</span><span class="n">access_control_list</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">jobs_runs_submit_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">multi_task_jobs_runs</span> <span class="o">=</span> <span class="k">await</span> <span class="n">multi_task_jobs_runs_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">multi_task_jobs_runs_id</span> <span class="o">=</span> <span class="n">multi_task_jobs_runs</span><span class="p">[</span><span class="s2">&quot;run_id&quot;</span><span class="p">]</span>
+
+    <span class="n">seconds_waited_for_run_completion</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">seconds_waited_for_run_completion</span> <span class="o">&lt;=</span> <span class="n">max_wait_seconds</span><span class="p">:</span>
+        <span class="n">jobs_runs_metadata_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_get</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+            <span class="n">run_id</span><span class="o">=</span><span class="n">multi_task_jobs_runs_id</span><span class="p">,</span>
+            <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span>
+            <span class="n">wait_for</span><span class="o">=</span><span class="p">[</span><span class="n">multi_task_jobs_runs_future</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">jobs_runs_metadata</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_metadata_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+        <span class="n">jobs_runs_state</span> <span class="o">=</span> <span class="n">jobs_runs_metadata</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span>
+        <span class="n">jobs_runs_life_cycle_state</span> <span class="o">=</span> <span class="n">jobs_runs_state</span><span class="p">[</span><span class="s2">&quot;life_cycle_state&quot;</span><span class="p">]</span>
+        <span class="n">jobs_runs_state_message</span> <span class="o">=</span> <span class="n">jobs_runs_state</span><span class="p">[</span><span class="s2">&quot;state_message&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">jobs_runs_life_cycle_state</span> <span class="o">==</span> <span class="n">RunLifeCycleState</span><span class="o">.</span><span class="n">terminated</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="n">jobs_runs_result_state</span> <span class="o">=</span> <span class="n">jobs_runs_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result_state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">jobs_runs_result_state</span> <span class="o">==</span> <span class="n">RunResultState</span><span class="o">.</span><span class="n">success</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="n">task_notebook_outputs</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">jobs_runs_metadata</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+                    <span class="n">task_key</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;task_key&quot;</span><span class="p">]</span>
+                    <span class="n">task_run_id</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;run_id&quot;</span><span class="p">]</span>
+                    <span class="n">task_run_output_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_get_output</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+                        <span class="n">run_id</span><span class="o">=</span><span class="n">task_run_id</span><span class="p">,</span>
+                        <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span>
+                        <span class="n">wait_for</span><span class="o">=</span><span class="p">[</span><span class="n">jobs_runs_metadata_future</span><span class="p">],</span>
+                    <span class="p">)</span>
+                    <span class="n">task_run_output</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task_run_output_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                    <span class="n">task_run_notebook_output</span> <span class="o">=</span> <span class="n">task_run_output</span><span class="p">[</span><span class="s2">&quot;notebook_output&quot;</span><span class="p">]</span>
+                    <span class="n">task_notebook_outputs</span><span class="p">[</span><span class="n">task_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">task_run_notebook_output</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;Databricks Jobs Runs Submit (</span><span class="si">%s</span><span class="s2"> ID </span><span class="si">%s</span><span class="s2">) completed successfully!&quot;</span><span class="p">,</span>
+                    <span class="n">run_name</span><span class="p">,</span>
+                    <span class="n">multi_task_jobs_runs_id</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">task_notebook_outputs</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">DatabricksJobTerminated</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Databricks Jobs Runs Submit &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2"> ID </span><span class="si">{</span><span class="n">multi_task_jobs_runs_id</span><span class="si">}</span><span class="s2">) &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;terminated with result state, </span><span class="si">{</span><span class="n">jobs_runs_result_state</span><span class="si">}</span><span class="s2">: &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">jobs_runs_state_message</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">jobs_runs_life_cycle_state</span> <span class="o">==</span> <span class="n">RunLifeCycleState</span><span class="o">.</span><span class="n">skipped</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DatabricksJobSkipped</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Databricks Jobs Runs Submit (</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2"> ID &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">multi_task_jobs_runs_id</span><span class="si">}</span><span class="s2">) was skipped: </span><span class="si">{</span><span class="n">jobs_runs_state_message</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">jobs_runs_life_cycle_state</span> <span class="o">==</span> <span class="n">RunLifeCycleState</span><span class="o">.</span><span class="n">internalerror</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DatabricksJobInternalError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Databricks Jobs Runs Submit (</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2"> ID &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">multi_task_jobs_runs_id</span><span class="si">}</span><span class="s2">) &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;encountered an internal error: </span><span class="si">{</span><span class="n">jobs_runs_state_message</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Databricks Jobs Runs Submit (</span><span class="si">%s</span><span class="s2"> ID </span><span class="si">%s</span><span class="s2">) has </span><span class="si">%s</span><span class="s2"> state. &quot;</span>
+                <span class="s2">&quot;Waiting for </span><span class="si">%i</span><span class="s2"> seconds.&quot;</span><span class="p">,</span>
+                <span class="n">run_name</span><span class="p">,</span>
+                <span class="n">multi_task_jobs_runs_id</span><span class="p">,</span>
+                <span class="n">jobs_runs_life_cycle_state</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+                <span class="n">poll_frequency_seconds</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_frequency_seconds</span><span class="p">)</span>
+            <span class="n">seconds_waited_for_run_completion</span> <span class="o">+=</span> <span class="n">poll_frequency_seconds</span>
+
+    <span class="k">raise</span> <span class="n">DatabricksJobRunTimedOut</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Max wait time of </span><span class="si">{</span><span class="n">max_wait_seconds</span><span class="si">}</span><span class="s2"> seconds exceeded while waiting &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;for job run (</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2"> ID </span><span class="si">{</span><span class="n">multi_task_jobs_runs_id</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../rest/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Rest" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Rest
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../models/jobs/" class="md-footer__link md-footer__link--next" aria-label="Next: Jobs" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Jobs
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+    
+  </body>
+</html>
