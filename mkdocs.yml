@@ -51,7 +51,8 @@ nav:
     - Credentials: credentials.md
     - Jobs: jobs.md
     - Rest: rest.md
-    
+    - Flows: flows.md
+  
     - Models:
         - Jobs: models/jobs.md
         

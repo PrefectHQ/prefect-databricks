@@ -3,36 +3,48 @@ Module containing flows for interacting with Databricks
 """
 
 import asyncio
-from typing import TYPE_CHECKING, Dict, List
+from typing import Any, Dict, List
 
 from prefect import flow, get_run_logger
 
+from prefect_databricks import DatabricksCredentials
 from prefect_databricks.jobs import (
     jobs_runs_get,
     jobs_runs_get_output,
     jobs_runs_submit,
 )
-from prefect_databricks.models.jobs import RunLifeCycleState, RunResultState
-
-if TYPE_CHECKING:
-    from prefect_databricks import DatabricksCredentials
-    from prefect_databricks.models import jobs as models
+from prefect_databricks.models.jobs import (
+    AccessControlRequest,
+    GitSource,
+    RunLifeCycleState,
+    RunResultState,
+    RunSubmitTaskSettings,
+)
 
 
 class DatabricksJobTerminated(Exception):
-    """Raised when a Databricks jobs runs submit terminates"""
+    """Raised when Databricks jobs runs submit terminates"""
 
     pass
 
 
 class DatabricksJobSkipped(Exception):
-    """Raised when a Databricks jobs runs submit skips"""
+    """Raised when Databricks jobs runs submit skips"""
 
     pass
 
 
 class DatabricksJobInternalError(Exception):
-    """Raised when a Databricks jobs runs submit encounters internal error"""
+    """Raised when Databricks jobs runs submit encounters internal error"""
+
+    pass
+
+
+class DatabricksJobRunTimedOut(Exception):
+    """
+    Raised when Databricks jobs runs does not complete in the configured max
+    wait seconds
+    """
 
     pass
 
@@ -43,19 +55,135 @@ class DatabricksJobInternalError(Exception):
     "triggered runs to complete.",
 )
 async def jobs_runs_submit_and_wait_for_completion(
-    databricks_credentials: "DatabricksCredentials",
-    tasks: List["models.RunSubmitTaskSettings"] = None,
+    databricks_credentials: DatabricksCredentials,
+    tasks: List[RunSubmitTaskSettings] = None,
     run_name: str = None,
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
-    **jobs_runs_submit_kwargs,
+    git_source: GitSource = None,
+    timeout_seconds: int = None,
+    idempotency_token: str = None,
+    access_control_list: List[AccessControlRequest] = None,
+    **jobs_runs_submit_kwargs: Dict[str, Any],
 ) -> Dict:
     """
     Flow that triggers a job run and waits for the triggered run to complete.
 
     Args:
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        tasks: Tasks to run, e.g.
+            ```
+            [
+                {
+                    "task_key": "Sessionize",
+                    "description": "Extracts session data from events",
+                    "depends_on": [],
+                    "existing_cluster_id": "0923-164208-meows279",
+                    "spark_jar_task": {
+                        "main_class_name": "com.databricks.Sessionize",
+                        "parameters": ["--data", "dbfs:/path/to/data.json"],
+                    },
+                    "libraries": [{"jar": "dbfs:/mnt/databricks/Sessionize.jar"}],
+                    "timeout_seconds": 86400,
+                },
+                {
+                    "task_key": "Orders_Ingest",
+                    "description": "Ingests order data",
+                    "depends_on": [],
+                    "existing_cluster_id": "0923-164208-meows279",
+                    "spark_jar_task": {
+                        "main_class_name": "com.databricks.OrdersIngest",
+                        "parameters": ["--data", "dbfs:/path/to/order-data.json"],
+                    },
+                    "libraries": [{"jar": "dbfs:/mnt/databricks/OrderIngest.jar"}],
+                    "timeout_seconds": 86400,
+                },
+                {
+                    "task_key": "Match",
+                    "description": "Matches orders with user sessions",
+                    "depends_on": [
+                        {"task_key": "Orders_Ingest"},
+                        {"task_key": "Sessionize"},
+                    ],
+                    "new_cluster": {
+                        "spark_version": "7.3.x-scala2.12",
+                        "node_type_id": "i3.xlarge",
+                        "spark_conf": {"spark.speculation": True},
+                        "aws_attributes": {
+                            "availability": "SPOT",
+                            "zone_id": "us-west-2a",
+                        },
+                        "autoscale": {"min_workers": 2, "max_workers": 16},
+                    },
+                    "notebook_task": {
+                        "notebook_path": "/Users/user.name@databricks.com/Match",
+                        "base_parameters": {"name": "John Doe", "age": "35"},
+                    },
+                    "timeout_seconds": 86400,
+                },
+            ]
+            ```
+        run_name:
+            An optional name for the run. The default value is `Untitled`, e.g. `A
+            multitask job run`.
+        git_source:
+            This functionality is in Public Preview.  An optional specification for
+            a remote repository containing the notebooks used by this
+            job's notebook tasks. Key-values:
+            - git_url:
+                URL of the repository to be cloned by this job. The maximum
+                length is 300 characters, e.g.
+                `https://github.com/databricks/databricks-cli`.
+            - git_provider:
+                Unique identifier of the service used to host the Git
+                repository. The value is case insensitive, e.g. `github`.
+            - git_branch:
+                Name of the branch to be checked out and used by this job.
+                This field cannot be specified in conjunction with git_tag
+                or git_commit. The maximum length is 255 characters, e.g.
+                `main`.
+            - git_tag:
+                Name of the tag to be checked out and used by this job. This
+                field cannot be specified in conjunction with git_branch or
+                git_commit. The maximum length is 255 characters, e.g.
+                `release-1.0.0`.
+            - git_commit:
+                Commit to be checked out and used by this job. This field
+                cannot be specified in conjunction with git_branch or
+                git_tag. The maximum length is 64 characters, e.g.
+                `e0056d01`.
+            - git_snapshot:
+                Read-only state of the remote repository at the time the job was run.
+                            This field is only included on job runs.
+        timeout_seconds:
+            An optional timeout applied to each run of this job. The default
+            behavior is to have no timeout, e.g. `86400`.
+        idempotency_token:
+            An optional token that can be used to guarantee the idempotency of job
+            run requests. If a run with the provided token already
+            exists, the request does not create a new run but returns
+            the ID of the existing run instead. If a run with the
+            provided token is deleted, an error is returned.  If you
+            specify the idempotency token, upon failure you can retry
+            until the request succeeds. Databricks guarantees that
+            exactly one run is launched with that idempotency token.
+            This token must have at most 64 characters.  For more
+            information, see [How to ensure idempotency for
+            jobs](https://kb.databricks.com/jobs/jobs-idempotency.html),
+            e.g. `8f018174-4792-40d5-bcbc-3e6a527352c8`.
+        access_control_list:
+            List of permissions to set on the job.
+        max_wait_seconds: Maximum number of seconds to wait for job to complete.
+        poll_frequency_seconds: Number of seconds to wait in between checks for
+            run completion.
+        **jobs_runs_submit_kwargs: Additional keyword arguments to pass to `jobs_runs_submit`.
+
+    Returns:
+        A dictionary of task keys to its corresponding notebook output.
 
     Examples:
+
 
     """  # noqa
     logger = get_run_logger()
@@ -64,6 +192,10 @@ async def jobs_runs_submit_and_wait_for_completion(
         databricks_credentials=databricks_credentials,
         tasks=tasks,
         run_name=run_name,
+        git_source=git_source,
+        timeout_seconds=timeout_seconds,
+        idempotency_token=idempotency_token,
+        access_control_list=access_control_list,
         **jobs_runs_submit_kwargs,
     )
     multi_task_jobs_runs = await multi_task_jobs_runs_future.result()
@@ -79,11 +211,10 @@ async def jobs_runs_submit_and_wait_for_completion(
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
         jobs_runs_state = jobs_runs_metadata["state"]
         jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
+        jobs_runs_state_message = jobs_runs_state["state_message"]
 
         if jobs_runs_life_cycle_state == RunLifeCycleState.terminated.value:
-            jobs_runs_result_state = jobs_runs_life_cycle_state.get(
-                "result_state", None
-            )
+            jobs_runs_result_state = jobs_runs_state.get("result_state", None)
             if jobs_runs_result_state == RunResultState.success.value:
                 task_notebook_outputs = {}
                 for task in jobs_runs_metadata["task"]:
@@ -104,23 +235,31 @@ async def jobs_runs_submit_and_wait_for_completion(
                 return task_notebook_outputs
             else:
                 raise DatabricksJobTerminated(
-                    f"Databricks Jobs Runs Submit (ID {multi_task_jobs_runs_id}) "
-                    f"terminated with result state: {jobs_runs_result_state}"
+                    f"Databricks Jobs Runs Submit "
+                    f"({run_name} ID {multi_task_jobs_runs_id}) "
+                    f"terminated with result state, {jobs_runs_result_state}: "
+                    f"{jobs_runs_state_message}"
                 )
         elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
             logger.warning(
-                "Databricks Jobs Runs Submit (ID %s) was skipped.",
+                "Databricks Jobs Runs Submit (%s ID %s) was skipped: %s",
+                run_name,
                 multi_task_jobs_runs_id,
+                jobs_runs_state_message,
             )
         elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
             logger.warning(
-                "Databricks Jobs Runs Submit (ID %s) encountered an internal error.",
+                "Databricks Jobs Runs Submit (%s ID %s) "
+                "encountered an internal error: %s.",
+                run_name,
                 multi_task_jobs_runs_id,
+                jobs_runs_state_message,
             )
         else:
             logger.info(
-                "Databricks Jobs Runs Submit (ID %s) has %s state. "
+                "Databricks Jobs Runs Submit (%s ID %s) has %s state. "
                 "Waiting for %i seconds.",
+                run_name,
                 multi_task_jobs_runs_id,
                 jobs_runs_life_cycle_state.lower(),
                 poll_frequency_seconds,
@@ -128,7 +267,7 @@ async def jobs_runs_submit_and_wait_for_completion(
             await asyncio.sleep(poll_frequency_seconds)
             seconds_waited_for_run_completion += poll_frequency_seconds
 
-    raise TimeoutError(
+    raise DatabricksJobRunTimedOut(
         f"Max wait time of {max_wait_seconds} seconds exceeded while waiting "
-        f"for job run with ID {multi_task_jobs_runs_id}"
+        f"for job run ({run_name} ID {multi_task_jobs_runs_id})"
     )
