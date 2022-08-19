@@ -5,7 +5,12 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any, Dict, List, Literal, Optional, Union
+
+try:
+    from typing import Any, Dict, List, Literal, Optional, Union
+except ImportError:
+    from typing import Any, Dict, List, Optional, Union
+    from typing_extensions import Literal
 
 from pydantic import BaseModel, Extra, Field, constr
 
