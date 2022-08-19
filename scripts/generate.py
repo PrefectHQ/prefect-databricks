@@ -67,4 +67,5 @@ populate_collection_repo(
     overwrite=overwrite,
     preprocess_fn=preprocess_fn,
     repo_directory=REPO_DIRECTORY,
+    regenerate_module_files=False,
 )
