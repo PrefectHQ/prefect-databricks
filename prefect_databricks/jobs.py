@@ -3,19 +3,18 @@ This is a module containing tasks for interacting with:
 Databricks jobs
 """
 
-# It was auto-generated using prefect-collection-generator so
+# This module was auto-generated using prefect-collection-generator so
 # manually editing this file is not recommended. If this module
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-08-16T00:40:16.899525
+# Updated at: 2022-08-19T21:28:18.215890
 
 from typing import TYPE_CHECKING, Any, Dict, List, Union  # noqa
 
-import httpx
 from prefect import task
 
-from prefect_databricks.rest import HTTPMethod, execute_endpoint
+from prefect_databricks.rest import HTTPMethod, _unpack_contents, execute_endpoint
 
 if TYPE_CHECKING:
     from prefect_databricks import DatabricksCredentials
@@ -280,29 +279,15 @@ async def jobs_create(
         "access_control_list": access_control_list,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -356,29 +341,15 @@ async def jobs_list(
         "expand_tasks": expand_tasks,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.GET,
-            params=params,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -423,29 +394,15 @@ async def jobs_get(
         "job_id": job_id,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.GET,
-            params=params,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -648,29 +605,15 @@ async def jobs_reset(
         "new_settings": new_settings,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -882,29 +825,15 @@ async def jobs_update(
         "fields_to_remove": fields_to_remove,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -949,29 +878,15 @@ async def jobs_delete(
         "job_id": job_id,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1121,29 +1036,15 @@ async def jobs_run_now(
         "pipeline_params": pipeline_params,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1301,29 +1202,15 @@ async def jobs_runs_submit(
         "access_control_list": access_control_list,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1414,29 +1301,15 @@ async def jobs_runs_list(
         "start_time_to": start_time_to,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.GET,
-            params=params,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1485,29 +1358,15 @@ async def jobs_runs_get(
         "include_history": include_history,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.GET,
-            params=params,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1555,29 +1414,15 @@ async def jobs_runs_export(
         "views_to_export": views_to_export,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.GET,
-            params=params,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1622,29 +1467,15 @@ async def jobs_runs_cancel(
         "run_id": run_id,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1690,29 +1521,15 @@ async def jobs_runs_cancel_all(
         "job_id": job_id,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1765,29 +1582,15 @@ async def jobs_runs_get_output(
         "run_id": run_id,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.GET,
-            params=params,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.GET,
+        params=params,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -1832,29 +1635,15 @@ async def jobs_runs_delete(
         "run_id": run_id,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
 
 
 @task
@@ -2006,26 +1795,12 @@ async def jobs_runs_repair(
         "pipeline_params": pipeline_params,
     }
 
-    try:
-        response = await execute_endpoint.fn(
-            endpoint,
-            databricks_credentials,
-            http_method=HTTPMethod.POST,
-            json=json_payload,
-        )
-        response.raise_for_status()
-    except httpx.HTTPStatusError as exc:
-        helpful_error_response = (responses or {}).get(response.status_code, "")
-        try:
-            helpful_error_response += f"JSON response: {response.json()}"
-        except Exception:
-            pass
-        if helpful_error_response:
-            raise httpx.HTTPStatusError(
-                helpful_error_response, request=exc.request, response=exc.response
-            ) from exc
-        else:
-            raise
+    response = await execute_endpoint.fn(
+        endpoint,
+        databricks_credentials,
+        http_method=HTTPMethod.POST,
+        json=json_payload,
+    )
 
-    result = response.json()
-    return result
+    contents = _unpack_contents(response, responses)
+    return contents
