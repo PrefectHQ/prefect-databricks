@@ -174,7 +174,7 @@ async def jobs_runs_submit_and_wait_for_completion(
             e.g. `8f018174-4792-40d5-bcbc-3e6a527352c8`.
         access_control_list:
             List of permissions to set on the job.
-        max_wait_seconds: Maximum number of seconds to wait for job to complete.
+        max_wait_seconds: Maximum number of seconds to wait for the entire flow to complete.
         poll_frequency_seconds: Number of seconds to wait in between checks for
             run completion.
         **jobs_runs_submit_kwargs: Additional keyword arguments to pass to `jobs_runs_submit`.
@@ -295,19 +295,15 @@ async def jobs_runs_submit_and_wait_for_completion(
                     f"{jobs_runs_state_message}"
                 )
         elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
-            logger.warning(
-                "Databricks Jobs Runs Submit (%s ID %s) was skipped: %s",
-                run_name,
-                multi_task_jobs_runs_id,
-                jobs_runs_state_message,
+            raise DatabricksJobSkipped(
+                f"Databricks Jobs Runs Submit ({run_name} ID "
+                f"{multi_task_jobs_runs_id}) was skipped: {jobs_runs_state_message}.",
             )
         elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
-            logger.warning(
-                "Databricks Jobs Runs Submit (%s ID %s) "
-                "encountered an internal error: %s.",
-                run_name,
-                multi_task_jobs_runs_id,
-                jobs_runs_state_message,
+            raise DatabricksJobInternalError(
+                f"Databricks Jobs Runs Submit ({run_name} ID "
+                f"{multi_task_jobs_runs_id}) "
+                f"encountered an internal error: {jobs_runs_state_message}.",
             )
         else:
             logger.info(
