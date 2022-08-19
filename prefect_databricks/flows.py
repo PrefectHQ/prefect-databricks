@@ -89,16 +89,14 @@ async def jobs_runs_submit_and_wait_for_completion(
                 for task in jobs_runs_metadata["task"]:
                     task_key = task["task_key"]
                     task_run_id = task["run_id"]
-                    task_run_notebook_output_future = jobs_runs_get_output.submit(
+                    task_run_output_future = jobs_runs_get_output.submit(
                         run_id=task_run_id,
                         databricks_credentials=databricks_credentials,
                         wait_for=[jobs_runs_metadata_future],
                     )
-                    task_notebook_outputs[
-                        task_key
-                    ] = await task_run_notebook_output_future.result()[
-                        "notebook_output"
-                    ]
+                    task_run_output = await task_run_output_future.result()
+                    task_run_notebook_output = task_run_output["notebook_output"]
+                    task_notebook_outputs[task_key] = task_run_notebook_output
                 logger.info(
                     "Databricks Jobs Runs Submit (ID %s) completed successfully!",
                     multi_task_jobs_runs_id,
@@ -121,10 +119,10 @@ async def jobs_runs_submit_and_wait_for_completion(
             )
         else:
             logger.info(
-                "Databricks Jobs Runs Submit (ID %s) has status %s. "
+                "Databricks Jobs Runs Submit (ID %s) has %s state. "
                 "Waiting for %i seconds.",
                 multi_task_jobs_runs_id,
-                RunLifeCycleState(jobs_runs_life_cycle_state).name,
+                jobs_runs_life_cycle_state.lower(),
                 poll_frequency_seconds,
             )
             await asyncio.sleep(poll_frequency_seconds)
