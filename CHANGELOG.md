@@ -19,6 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## 0.1.2
+
+Released on TBD
+
+### Edited
+
+- `jobs_runs_submit_and_wait_for_completion` flow - [#16](https://github.com/PrefectHQ/prefect-databricks/pull/16)
+
+
 ## 0.1.1
 
 Released on August 19th, 2022.
