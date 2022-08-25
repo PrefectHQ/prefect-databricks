@@ -262,9 +262,16 @@ async def jobs_runs_submit_and_wait_for_completion(
             wait_for=[multi_task_jobs_runs_future],
         )
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
+        jobs_runs_run_page_url = ""
+        if "run_page_url" in jobs_runs_metadata:
+            jobs_runs_run_page_url = jobs_runs_metadata["run_page_url"]
+        jobs_runs_state = jobs_runs_metadata["state"]
+        if "tasks" in jobs_runs_metadata:
+            jobs_runs_tasks = jobs_runs_metadata["tasks"]
         jobs_runs_state = jobs_runs_metadata["state"]
         jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
         jobs_runs_state_message = jobs_runs_state["state_message"]
+        logger.info("Databricks Jobs Runs: %s", jobs_runs_run_page_url)
 
         if jobs_runs_life_cycle_state == RunLifeCycleState.terminated.value:
             jobs_runs_result_state = jobs_runs_state.get("result_state", None)
@@ -279,7 +286,11 @@ async def jobs_runs_submit_and_wait_for_completion(
                         wait_for=[jobs_runs_metadata_future],
                     )
                     task_run_output = await task_run_output_future.result()
-                    task_run_notebook_output = task_run_output["notebook_output"]
+                    task_run_notebook_output = {}
+
+                    if "notebook_output" in task_run_output:
+                        task_run_notebook_output = task_run_output["notebook_output"]
+
                     task_notebook_outputs[task_key] = task_run_notebook_output
                 logger.info(
                     "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
@@ -314,6 +325,24 @@ async def jobs_runs_submit_and_wait_for_completion(
                 jobs_runs_life_cycle_state.lower(),
                 poll_frequency_seconds,
             )
+            for runs_task in jobs_runs_tasks:
+                if "run_id" not in runs_task or "state" not in runs_task:
+                    continue
+                runs_task_id = runs_task["run_id"]
+                runs_task_run_page_url = ""
+                if "run_page_url" in runs_task:
+                    runs_task_run_page_url = runs_task["run_page_url"]
+                runs_task_state = runs_task["state"]
+                runs_task_life_cycle_state = runs_task_state["life_cycle_state"]
+                runs_task_state_message = runs_task_state["state_message"]
+
+                logger.info(
+                    "Databricks Jobs Runs Task (ID %s) has '%s', '%s'. %s",
+                    runs_task_id,
+                    runs_task_life_cycle_state.lower(),
+                    runs_task_state_message,
+                    runs_task_run_page_url,
+                )
             await asyncio.sleep(poll_frequency_seconds)
             seconds_waited_for_run_completion += poll_frequency_seconds
 
