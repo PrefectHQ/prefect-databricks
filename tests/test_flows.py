@@ -1,4 +1,6 @@
+import logging
 import re
+import unittest
 
 import pytest
 from httpx import Response
@@ -11,6 +13,7 @@ from prefect_databricks.flows import (
     DatabricksJobSkipped,
     DatabricksJobTerminated,
     jobs_runs_submit_and_wait_for_completion,
+    log_state,
 )
 
 
@@ -36,7 +39,85 @@ def common_mocks(respx_mock):
     ).mock(return_value=Response(200, json={"run_id": 36108}))
 
 
+def successful_job_path(request, route):
+    if route.call_count == 0:
+        return Response(
+            200,
+            json={
+                "run_id": 36108,
+                "state": {
+                    "life_cycle_state": "RUNNING",
+                    "state_message": "",
+                    "result_state": "",
+                },
+                "tasks": [
+                    {
+                        "run_id": 36260,
+                        "task_key": "prefect-task",
+                        "state": {
+                            "life_cycle_state": "PENDING",
+                            "result_state": "",
+                            "state_message": "",
+                        },
+                    }
+                ],
+            },
+        )
+    elif route.call_count == 1:
+        return Response(
+            200,
+            json={
+                "run_id": 36108,
+                "state": {
+                    "life_cycle_state": "RUNNING",
+                    "state_message": "",
+                    "result_state": "",
+                },
+                "tasks": [
+                    {
+                        "run_id": 36260,
+                        "task_key": "prefect-task",
+                        "state": {
+                            "life_cycle_state": "RUNNING",
+                            "result_state": "",
+                            "state_message": "In run",
+                        },
+                    }
+                ],
+            },
+        )
+    else:
+        return Response(
+            200,
+            json={
+                "run_id": 36108,
+                "state": {
+                    "life_cycle_state": "TERMINATED",
+                    "state_message": "",
+                    "result_state": "SUCCESS",
+                },
+                "tasks": [
+                    {
+                        "run_id": 36260,
+                        "task_key": "prefect-task",
+                        "state": {
+                            "life_cycle_state": "TERMINATED",
+                            "result_state": "",
+                            "state_message": "SUCCESS",
+                        },
+                    }
+                ],
+            },
+        )
+
+
 class TestJobsRunsSubmitAndWaitForCompletion:
+    async def test_log_entered_when_mismatched_state(self):
+        logger = logging.getLogger("prefect")
+        with unittest.mock.patch.object(logger, "info") as mock_log:
+            log_state({}, "1234", {}, "", mock_log)
+            assert mock_log.info.call_count == 1
+
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
         respx_mock.get(
@@ -83,19 +164,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         respx_mock.get(
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
-        ).mock(
-            return_value=Response(
-                200,
-                json={
-                    "state": {
-                        "life_cycle_state": "TERMINATED",
-                        "state_message": "",
-                        "result_state": "SUCCESS",
-                    },
-                    "tasks": [{"run_id": 36260, "task_key": "prefect-task"}],
-                },
-            )
-        )
+        ).mock(side_effect=successful_job_path)
 
         respx_mock.get(
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
@@ -116,6 +185,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
                     "libraries": [{"whl": "test.whl"}],
                 }
             ],
+            poll_frequency_seconds=1,
         )
         assert result == {"prefect-task": {}}
 

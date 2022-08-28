@@ -18,6 +18,10 @@ if TYPE_CHECKING:
 
 
 class HTTPMethod(Enum):
+    """
+    Enum for HTTP Verbs
+    """
+
     GET = "get"
     POST = "post"
     PUT = "put"

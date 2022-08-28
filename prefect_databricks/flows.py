@@ -255,6 +255,10 @@ async def jobs_runs_submit_and_wait_for_completion(
     multi_task_jobs_runs_id = multi_task_jobs_runs["run_id"]
 
     seconds_waited_for_run_completion = 0
+
+    job_status_info = {}
+    task_status_info = {}
+
     while seconds_waited_for_run_completion <= max_wait_seconds:
         jobs_runs_metadata_future = await jobs_runs_get.submit(
             run_id=multi_task_jobs_runs_id,
@@ -262,16 +266,36 @@ async def jobs_runs_submit_and_wait_for_completion(
             wait_for=[multi_task_jobs_runs_future],
         )
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
-        jobs_runs_run_page_url = ""
-        if "run_page_url" in jobs_runs_metadata:
-            jobs_runs_run_page_url = jobs_runs_metadata["run_page_url"]
+        jobs_runs_run_id = jobs_runs_metadata.get("run_id", "")
+        jobs_runs_run_page_url = jobs_runs_metadata.get("run_page_url", "")
         jobs_runs_state = jobs_runs_metadata["state"]
-        if "tasks" in jobs_runs_metadata:
-            jobs_runs_tasks = jobs_runs_metadata["tasks"]
-        jobs_runs_state = jobs_runs_metadata["state"]
+
+        log_state(
+            job_status_info,
+            jobs_runs_run_id,
+            jobs_runs_state,
+            jobs_runs_run_page_url,
+            logger,
+            False,
+        )
+
+        jobs_runs_tasks = jobs_runs_metadata.get("tasks", [])
+
+        for runs_task in jobs_runs_tasks:
+            task_run_id = runs_task.get("run_id", "")
+            task_run_page_url = runs_task.get("run_page_url", "")
+            task_runs_state = runs_task.get("state", {})
+
+            log_state(
+                task_status_info,
+                task_run_id,
+                task_runs_state,
+                task_run_page_url,
+                logger,
+            )
+
         jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
         jobs_runs_state_message = jobs_runs_state["state_message"]
-        logger.info("Databricks Jobs Runs: %s", jobs_runs_run_page_url)
 
         if jobs_runs_life_cycle_state == RunLifeCycleState.terminated.value:
             jobs_runs_result_state = jobs_runs_state.get("result_state", None)
@@ -286,11 +310,9 @@ async def jobs_runs_submit_and_wait_for_completion(
                         wait_for=[jobs_runs_metadata_future],
                     )
                     task_run_output = await task_run_output_future.result()
-                    task_run_notebook_output = {}
-
-                    if "notebook_output" in task_run_output:
-                        task_run_notebook_output = task_run_output["notebook_output"]
-
+                    task_run_notebook_output = task_run_output.get(
+                        "notebook_output", {}
+                    )
                     task_notebook_outputs[task_key] = task_run_notebook_output
                 logger.info(
                     "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
@@ -317,32 +339,7 @@ async def jobs_runs_submit_and_wait_for_completion(
                 f"encountered an internal error: {jobs_runs_state_message}.",
             )
         else:
-            logger.info(
-                "Databricks Jobs Runs Submit (%s ID %s) has %s state. "
-                "Waiting for %i seconds.",
-                run_name,
-                multi_task_jobs_runs_id,
-                jobs_runs_life_cycle_state.lower(),
-                poll_frequency_seconds,
-            )
-            for runs_task in jobs_runs_tasks:
-                if "run_id" not in runs_task or "state" not in runs_task:
-                    continue
-                runs_task_id = runs_task["run_id"]
-                runs_task_run_page_url = ""
-                if "run_page_url" in runs_task:
-                    runs_task_run_page_url = runs_task["run_page_url"]
-                runs_task_state = runs_task["state"]
-                runs_task_life_cycle_state = runs_task_state["life_cycle_state"]
-                runs_task_state_message = runs_task_state["state_message"]
-
-                logger.info(
-                    "Databricks Jobs Runs Task (ID %s) has '%s', '%s'. %s",
-                    runs_task_id,
-                    runs_task_life_cycle_state.lower(),
-                    runs_task_state_message,
-                    runs_task_run_page_url,
-                )
+            logger.info("Waiting for %s seconds.", poll_frequency_seconds)
             await asyncio.sleep(poll_frequency_seconds)
             seconds_waited_for_run_completion += poll_frequency_seconds
 
@@ -350,3 +347,64 @@ async def jobs_runs_submit_and_wait_for_completion(
         f"Max wait time of {max_wait_seconds} seconds exceeded while waiting "
         f"for job run ({run_name} ID {multi_task_jobs_runs_id})"
     )
+
+
+def log_state(array: Dict, run_id, state: Dict, run_page_url, logger, is_task=True):
+    """
+    Adds the new state of a job or task to its collection and logs the output
+     if it changes
+
+    Args:
+        array: The array of the Job or Task collection
+        run_id: Id of the run in databricks for the Job or Task
+        state: State object of the run in databricks for the Job or Task
+        run_page_url: Url of the run in databricks for the Job or Task in
+            the databricks UI
+        logger: logger instance to log with
+        is_task: Bool indicating if is Job or Task
+
+    Returns:
+        void
+
+    """
+
+    string_run_id = str(run_id)
+
+    if string_run_id not in array:
+        array[string_run_id] = {}
+
+    run_type = "Task" if is_task else "Job"
+
+    new_item = {}
+    new_item["run_page_url"] = run_page_url
+    new_item["run_id"] = run_id
+    new_item["state"] = state
+
+    life_cycle_state = state.get("life_cycle_state", "")
+    state_message = state.get("state_message", "")
+    result_state = state.get("result_state", "")
+
+    if "state" in array[string_run_id]:
+        existing_state = array[string_run_id]["state"]
+        existing_life_cycle_state = existing_state.get("life_cycle_state", "")
+        existing_state_message = existing_state.get("state_message", "")
+        existing_result_state = existing_state.get("result_state", "")
+
+        if (
+            life_cycle_state == existing_life_cycle_state
+            and state_message == existing_state_message
+            and result_state == existing_result_state
+        ):
+            return
+
+    logger.info(
+        "%s Run '%s' transitioned state. '%s', '%s' with message '%s':  %s",
+        run_type,
+        run_id,
+        life_cycle_state,
+        result_state,
+        state_message,
+        run_page_url,
+    )
+
+    array[string_run_id] = new_item
