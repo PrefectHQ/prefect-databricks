@@ -23,9 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Released on TBD
 
-### Edited
+### Added
 
-- `jobs_runs_submit_and_wait_for_completion` flow - [#16](https://github.com/PrefectHQ/prefect-databricks/pull/16)
+- Logging of job runs tasks status within `jobs_runs_submit_and_wait_for_completion` - [#16](https://github.com/PrefectHQ/prefect-databricks/pull/16)
 
 
 ## 0.1.1
