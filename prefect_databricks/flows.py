@@ -351,7 +351,7 @@ async def jobs_runs_submit_and_wait_for_completion(
 
 def log_state(array: Dict, run_id, state: Dict, run_page_url, logger, is_task=True):
     """
-    Adds the new state of a job or task to its collection and logs the output
+    Stores the states of a job or task to its collection and logs the output
     if it changes
 
     Args:
