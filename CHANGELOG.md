@@ -25,7 +25,7 @@ Released on TBD
 
 ### Added
 
-- Logging of job runs tasks status within `jobs_runs_submit_and_wait_for_completion` - [#16](https://github.com/PrefectHQ/prefect-databricks/pull/16
+- Logging of job runs tasks status within `jobs_runs_submit_and_wait_for_completion` - [#16](https://github.com/PrefectHQ/prefect-databricks/pull/16).
 
 ### Fixed
 
