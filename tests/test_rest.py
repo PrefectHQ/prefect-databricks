@@ -46,7 +46,7 @@ class AnotherBaseModel(BaseModel):
     some_bool: bool
 
 
-class BaseModel(BaseModel):
+class ExampleBaseModel(BaseModel):
     class Config:
         extra = Extra.allow
         allow_mutation = False
