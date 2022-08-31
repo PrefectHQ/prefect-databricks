@@ -3,6 +3,7 @@ Module containing flows for interacting with Databricks
 """
 
 import asyncio
+from logging import Logger
 from typing import Any, Dict, List
 
 from prefect import flow, get_run_logger
@@ -270,7 +271,7 @@ async def jobs_runs_submit_and_wait_for_completion(
         jobs_runs_run_page_url = jobs_runs_metadata.get("run_page_url", "")
         jobs_runs_state = jobs_runs_metadata["state"]
 
-        log_state(
+        __log_state(
             job_status_info,
             jobs_runs_run_id,
             jobs_runs_state,
@@ -286,7 +287,7 @@ async def jobs_runs_submit_and_wait_for_completion(
             task_run_page_url = runs_task.get("run_page_url", "")
             task_runs_state = runs_task.get("state", {})
 
-            log_state(
+            __log_state(
                 task_status_info,
                 task_run_id,
                 task_runs_state,
@@ -349,7 +350,14 @@ async def jobs_runs_submit_and_wait_for_completion(
     )
 
 
-def log_state(array: Dict, run_id, state: Dict, run_page_url, logger, is_task=True):
+def __log_state(
+    array: Dict[str, Any],
+    run_id: str,
+    state: Dict[str, Any],
+    run_page_url: str,
+    logger: Logger,
+    is_task: bool = True,
+):
     """
     Stores the states of a job or task to its collection and logs the output
     if it changes

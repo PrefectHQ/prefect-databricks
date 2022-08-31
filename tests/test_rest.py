@@ -81,7 +81,7 @@ def test_serialize_model():
 
     actual = serialize_model(
         {
-            "base_model": BaseModel(
+            "base_model": ExampleBaseModel(
                 some_string="abc",
                 some_int=1,
                 unexpected_value=["super", "unexpected"],

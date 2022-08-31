@@ -1,6 +1,4 @@
-import logging
 import re
-import unittest
 
 import pytest
 from httpx import Response
@@ -13,7 +11,6 @@ from prefect_databricks.flows import (
     DatabricksJobSkipped,
     DatabricksJobTerminated,
     jobs_runs_submit_and_wait_for_completion,
-    log_state,
 )
 
 
@@ -112,12 +109,6 @@ def successful_job_path(request, route):
 
 
 class TestJobsRunsSubmitAndWaitForCompletion:
-    async def test_log_entered_when_mismatched_state(self):
-        logger = logging.getLogger("prefect")
-        with unittest.mock.patch.object(logger, "info") as mock_log:
-            log_state({}, "1234", {}, "", mock_log)
-            assert mock_log.info.call_count == 1
-
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
         respx_mock.get(
