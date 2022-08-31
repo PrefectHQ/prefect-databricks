@@ -355,12 +355,12 @@ def log_state(array: Dict, run_id, state: Dict, run_page_url, logger, is_task=Tr
     if it changes
 
     Args:
-        array: The array of the Job or Task collection
-        run_id: Id of the run in databricks for the Job or Task
-        state: State object of the run in databricks for the Job or Task
-        run_page_url: Url of the run in databricks for the Job or Task in
-            the databricks UI
-        logger: logger instance to log with
+        array: The array of the Job or Task collection.
+        run_id: Id of the run in Databricks for the Job or Task.
+        state: State object of the run in Databricks for the Job or Task.
+        run_page_url: URL of the run in Databricks for the Job or Task in
+            the Databricks UI.
+        logger: Logger instance to log with.
         is_task: Bool indicating if is Job or Task
 
     Returns:
