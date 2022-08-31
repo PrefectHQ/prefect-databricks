@@ -363,9 +363,6 @@ def log_state(array: Dict, run_id, state: Dict, run_page_url, logger, is_task=Tr
         logger: Logger instance to log with.
         is_task: Bool indicating if is Job or Task
 
-    Returns:
-        void
-
     """
 
     string_run_id = str(run_id)
