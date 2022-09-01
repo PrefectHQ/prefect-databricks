@@ -36,6 +36,78 @@ def common_mocks(respx_mock):
     ).mock(return_value=Response(200, json={"run_id": 36108}))
 
 
+def successful_job_path(request, route):
+    if route.call_count == 0:
+        return Response(
+            200,
+            json={
+                "run_id": 36108,
+                "state": {
+                    "life_cycle_state": "RUNNING",
+                    "state_message": "",
+                    "result_state": "",
+                },
+                "tasks": [
+                    {
+                        "run_id": 36260,
+                        "task_key": "prefect-task",
+                        "state": {
+                            "life_cycle_state": "PENDING",
+                            "result_state": "",
+                            "state_message": "",
+                        },
+                    }
+                ],
+            },
+        )
+    elif route.call_count == 1:
+        return Response(
+            200,
+            json={
+                "run_id": 36108,
+                "state": {
+                    "life_cycle_state": "RUNNING",
+                    "state_message": "",
+                    "result_state": "",
+                },
+                "tasks": [
+                    {
+                        "run_id": 36260,
+                        "task_key": "prefect-task",
+                        "state": {
+                            "life_cycle_state": "RUNNING",
+                            "result_state": "",
+                            "state_message": "In run",
+                        },
+                    }
+                ],
+            },
+        )
+    else:
+        return Response(
+            200,
+            json={
+                "run_id": 36108,
+                "state": {
+                    "life_cycle_state": "TERMINATED",
+                    "state_message": "",
+                    "result_state": "SUCCESS",
+                },
+                "tasks": [
+                    {
+                        "run_id": 36260,
+                        "task_key": "prefect-task",
+                        "state": {
+                            "life_cycle_state": "TERMINATED",
+                            "result_state": "",
+                            "state_message": "SUCCESS",
+                        },
+                    }
+                ],
+            },
+        )
+
+
 class TestJobsRunsSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
@@ -75,6 +147,38 @@ class TestJobsRunsSubmitAndWaitForCompletion:
             ],
         )
         assert result == {"prefect-task": {"cell": "output"}}
+
+    @pytest.mark.respx(assert_all_called=True)
+    async def test_run_non_notebook_success(
+        self, common_mocks, respx_mock, databricks_credentials
+    ):
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(side_effect=successful_job_path)
+
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(return_value=Response(200, json={"metadata": {"cell": "output"}}))
+
+        result = await jobs_runs_submit_and_wait_for_completion(
+            databricks_credentials=databricks_credentials,
+            run_name="prefect-job",
+            tasks=[
+                {
+                    "task_key": "prefect-job",
+                    "spark_python_task": {
+                        "python_file": "test.py",
+                        "parameters": ["test"],
+                    },
+                    "existing_cluster_id": "test-test-test",
+                    "libraries": [{"whl": "test.whl"}],
+                }
+            ],
+            poll_frequency_seconds=1,
+        )
+        assert result == {"prefect-task": {}}
 
     @pytest.mark.respx(assert_all_called=True)
     @pytest.mark.parametrize("result_state", ["FAILED", "TIMEDOUT", "CANCELED"])

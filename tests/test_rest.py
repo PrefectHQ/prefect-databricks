@@ -40,21 +40,29 @@ def test_strip_kwargs():
     assert strip_kwargs(**dict(a=[])) == {"a": []}
 
 
-class TestAnotherBaseModel(BaseModel):
+class AnotherBaseModel(BaseModel):
 
     some_float: float
     some_bool: bool
 
 
-class TestBaseModel(BaseModel):
+class ExampleBaseModel(BaseModel):
     class Config:
         extra = Extra.allow
         allow_mutation = False
 
     some_string: str
     some_int: int
-    another_base_model: TestAnotherBaseModel
-    other_base_models: List[TestAnotherBaseModel]
+    another_base_model: AnotherBaseModel
+    other_base_models: List[AnotherBaseModel]
+
+
+def test_http_matches_type():
+    assert HTTPMethod.DELETE.value == "delete"
+    assert HTTPMethod.GET.value == "get"
+    assert HTTPMethod.PATCH.value == "patch"
+    assert HTTPMethod.POST.value == "post"
+    assert HTTPMethod.PUT.value == "put"
 
 
 def test_serialize_model():
@@ -73,14 +81,14 @@ def test_serialize_model():
 
     actual = serialize_model(
         {
-            "base_model": TestBaseModel(
+            "base_model": ExampleBaseModel(
                 some_string="abc",
                 some_int=1,
                 unexpected_value=["super", "unexpected"],
-                another_base_model=TestAnotherBaseModel(some_float=2.8, some_bool=True),
+                another_base_model=AnotherBaseModel(some_float=2.8, some_bool=True),
                 other_base_models=[
-                    TestAnotherBaseModel(some_float=8.8, some_bool=False),
-                    TestAnotherBaseModel(some_float=1.8, some_bool=True),
+                    AnotherBaseModel(some_float=8.8, some_bool=False),
+                    AnotherBaseModel(some_float=1.8, some_bool=True),
                 ],
             )
         }
