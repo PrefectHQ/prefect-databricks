@@ -257,8 +257,8 @@ async def jobs_runs_submit_and_wait_for_completion(
 
     seconds_waited_for_run_completion = 0
 
-    job_status_info = {}
-    task_status_info = {}
+    jobs_status = {}
+    tasks_status = {}
 
     while seconds_waited_for_run_completion <= max_wait_seconds:
         jobs_runs_metadata_future = await jobs_runs_get.submit(
@@ -267,32 +267,19 @@ async def jobs_runs_submit_and_wait_for_completion(
             wait_for=[multi_task_jobs_runs_future],
         )
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
-        jobs_runs_run_id = jobs_runs_metadata.get("run_id", "")
-        jobs_runs_run_page_url = jobs_runs_metadata.get("run_page_url", "")
-        jobs_runs_state = jobs_runs_metadata["state"]
+        jobs_runs_state = jobs_runs_metadata.get("state", {})
 
-        __log_state(
-            job_status_info,
-            jobs_runs_run_id,
-            jobs_runs_state,
-            jobs_runs_run_page_url,
-            logger,
-            False,
+        jobs_status = __update_and_log_state_changes(
+            jobs_status, jobs_runs_metadata, logger, "Job"
         )
 
-        jobs_runs_tasks = jobs_runs_metadata.get("tasks", [])
+        jobs_runs_metadata_tasks = jobs_runs_metadata.get("tasks", [])
 
-        for runs_task in jobs_runs_tasks:
-            task_run_id = runs_task.get("run_id", "")
-            task_run_page_url = runs_task.get("run_page_url", "")
-            task_runs_state = runs_task.get("state", {})
+        for task_metadata in jobs_runs_metadata_tasks:
+            task_run_id = task_metadata.get("run_id", "")
 
-            __log_state(
-                task_status_info,
-                task_run_id,
-                task_runs_state,
-                task_run_page_url,
-                logger,
+            tasks_status = __update_and_log_state_changes(
+                tasks_status, task_metadata, logger, "Task"
             )
 
         jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
@@ -350,35 +337,36 @@ async def jobs_runs_submit_and_wait_for_completion(
     )
 
 
-def __log_state(
-    array: Dict[str, Any],
-    run_id: str,
-    state: Dict[str, Any],
-    run_page_url: str,
+def __update_and_log_state_changes(
+    job_or_task_states: Dict[str, Any],
+    job_or_task_metadata: Dict[str, Any],
     logger: Logger,
-    run_type: Literal["Task", "Job"] = "Task",
-):
+    run_type: str = "Task",
+) -> Dict[str, Any]:
     """
     Stores the states of a job or task to its collection and logs the output
     if it changes
 
     Args:
-        array: The array of the job or task collection.
-        run_id: Id of the run in Databricks for the job or task.
-        state: State object of the run in Databricks for the job or task.
-        run_page_url: URL of the run in Databricks for the job or task in
-            the Databricks UI.
+        job_or_task_states: The dictionary of job or task states.
+        job_or_task_metadata: Metadata object containing run, url and state
         logger: Logger instance to log with.
-        is_task: Bool indicating if is job or task
+        run_type: String indicating if is job or task, defaults to Task
 
+    Returns
+        A copy of the job_or_task_states dictionary with any state updates
     """
+
+    run_id = job_or_task_metadata.get("run_id", "")
+    run_page_url = job_or_task_metadata.get("run_page_url", "")
+    state = job_or_task_metadata.get("state", {})
 
     string_run_id = str(run_id)
 
-    if string_run_id not in array:
-        array[string_run_id] = {}
+    job_or_task_states_copy = job_or_task_states.copy()
 
-    run_type = "Task" if is_task else "Job"
+    if string_run_id not in job_or_task_states_copy:
+        job_or_task_states_copy[string_run_id] = {}
 
     new_item = {}
     new_item["run_page_url"] = run_page_url
@@ -389,8 +377,8 @@ def __log_state(
     state_message = state.get("state_message", "")
     result_state = state.get("result_state", "")
 
-    if "state" in array[string_run_id]:
-        existing_state = array[string_run_id]["state"]
+    if "state" in job_or_task_states_copy[string_run_id]:
+        existing_state = job_or_task_states_copy[string_run_id]["state"]
         existing_life_cycle_state = existing_state.get("life_cycle_state", "")
         existing_state_message = existing_state.get("state_message", "")
         existing_result_state = existing_state.get("result_state", "")
@@ -400,7 +388,7 @@ def __log_state(
             and state_message == existing_state_message
             and result_state == existing_result_state
         ):
-            return
+            return job_or_task_states_copy
 
     logger.info(
         "%s Run '%s' transitioned state. '%s', '%s' with message '%s':  %s",
@@ -412,4 +400,5 @@ def __log_state(
         run_page_url,
     )
 
-    array[string_run_id] = new_item
+    job_or_task_states_copy[string_run_id] = new_item
+    return job_or_task_states_copy
