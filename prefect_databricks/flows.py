@@ -356,7 +356,7 @@ def __log_state(
     state: Dict[str, Any],
     run_page_url: str,
     logger: Logger,
-    is_task: bool = True,
+    run_type: Literal["Task", "Job"] = "Task",
 ):
     """
     Stores the states of a job or task to its collection and logs the output
