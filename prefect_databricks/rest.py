@@ -2,12 +2,14 @@
 This is a module containing generic REST tasks.
 """
 
-# It was auto-generated using prefect-collection-generator so
+# This module was auto-generated using prefect-collection-generator so
 # manually editing this file is not recommended.
 
+import json
 from enum import Enum
-from typing import TYPE_CHECKING, Any, Dict
+from typing import TYPE_CHECKING, Any, Dict, Optional, Union
 
+import httpx
 from prefect import task
 from pydantic import BaseModel
 
@@ -16,6 +18,10 @@ if TYPE_CHECKING:
 
 
 class HTTPMethod(Enum):
+    """
+    Available HTTP request methods.
+    """
+
     GET = "get"
     POST = "post"
     PUT = "put"
@@ -72,10 +78,10 @@ async def execute_endpoint(
     http_method: HTTPMethod = HTTPMethod.GET,
     params: Dict[str, Any] = None,
     json: Dict[str, Any] = None,
-    **kwargs: Dict[str, Any]
-) -> Dict[str, Any]:
+    **kwargs: Dict[str, Any],
+) -> httpx.Response:
     """
-    Generic function for executing GraphQL operations.
+    Generic function for executing REST endpoints.
 
     Args:
         endpoint: The endpoint route.
@@ -86,7 +92,7 @@ async def execute_endpoint(
         **kwargs: Additional keyword arguments to pass.
 
     Returns:
-        A dict of the returned fields.
+        The httpx.Response from interacting with the endpoint.
 
     Examples:
         Lists jobs on the Databricks instance.
@@ -94,7 +100,8 @@ async def execute_endpoint(
         from prefect import flow
         from prefect_databricks import DatabricksCredentials
         from prefect_databricks.rest import execute_endpoint
-        @flow
+
+        @flow()
         def example_execute_endpoint_flow():
             endpoint = "/2.1/jobs/list"
             databricks_credentials = DatabricksCredentials.load("my-block")
@@ -108,7 +115,8 @@ async def execute_endpoint(
                 databricks_credentials,
                 params=params
             )
-            return response.json()
+
+        example_execute_endpoint_flow()
         ```
     """
     if isinstance(http_method, HTTPMethod):
@@ -128,3 +136,31 @@ async def execute_endpoint(
         )
 
     return response
+
+
+def _unpack_contents(
+    response: httpx.Response, responses: Optional[Dict[int, str]] = None
+) -> Union[Dict[str, Any], bytes]:
+    """
+    Helper method to unpack the contents from the httpx.Response,
+    reporting errors in a helpful manner, if any.
+    """
+    try:
+        response.raise_for_status()
+    except httpx.HTTPStatusError as exc:
+        helpful_error_response = (responses or {}).get(response.status_code, "")
+        try:
+            helpful_error_response += f"JSON response: {response.json()}"
+        except Exception:
+            pass
+        if helpful_error_response:
+            raise httpx.HTTPStatusError(
+                helpful_error_response, request=exc.request, response=exc.response
+            ) from exc
+        else:
+            raise
+
+    try:
+        return response.json()
+    except json.JSONDecodeError:
+        return response.content

@@ -25,7 +25,10 @@ async def test_execute_endpoint(params, http_method, respx_mock):
     if http_method == "post":
         execute_kwargs["json"] = {"key": "val"}
 
-    credentials = DatabricksCredentials(databricks_instance="databricks_instance")
+    credentials = DatabricksCredentials(
+        databricks_instance="databricks_instance",
+        token="token_value",
+    )
     response = await execute_endpoint.fn(
         url, credentials, http_method=http_method, params=params, **execute_kwargs
     )

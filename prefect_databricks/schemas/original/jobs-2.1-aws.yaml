@@ -857,6 +857,51 @@ components:
         destination:
           description: 'DBFS destination. Example: `dbfs:/my/path`'
           type: string
+    DbtOutput:
+      properties:
+        artifacts_headers:
+          description: An optional map of headers to send when retrieving the artifact
+            from the `artifacts_link`.
+          type: object
+        artifacts_link:
+          description: A pre-signed URL to download the (compressed) dbt artifacts.
+            This link is valid for a limited time (30 minutes). This information is
+            only available after the run has finished.
+          type: string
+    DbtTask:
+      properties:
+        commands:
+          description: A list of dbt commands to execute. All commands must start
+            with `dbt`. This parameter must not be empty. A maximum of up to 10 commands
+            can be provided.
+          example:
+          - dbt deps
+          - dbt seed
+          - dbt run --models 123
+          type: array
+        profiles_directory:
+          description: Optional (relative) path to the profiles directory. Can only
+            be specified if no warehouse_id is specified. If no warehouse_id is specified
+            and this folder is unset, the root directory is used.
+          type: string
+        project_directory:
+          description: Optional (relative) path to the project directory, if no value
+            is provided, the root of the git repository is used.
+          type: string
+        schema:
+          description: Optional schema to write to. This parameter is only used when
+            a warehouse_id is also provided. If not provided, the `default` schema
+            is used.
+          type: string
+        warehouse_id:
+          description: ID of the SQL warehouse to connect to. If provided, we automatically
+            generate and provide the profile and connection details to dbt. It can
+            be overridden on a per-command basis by using the `--profiles-dir` command
+            line argument.
+          example: 30dade0507d960d1
+          type: string
+      required:
+      - commands
     DockerBasicAuth:
       properties:
         password:
@@ -1285,8 +1330,16 @@ components:
           $ref: '#/components/schemas/SparkSubmitTask'
           description: If spark_submit_task, indicates that this job must be launched
             by the spark submit script.
+        sql_task:
+          $ref: '#/components/schemas/SqlTask'
+          description: If sql_task, indicates that this job must execute a SQL task.
+            It requires both Databricks SQL and a Serverless SQL warehouse.
     JobTaskSettings:
       properties:
+        dbt_task:
+          $ref: '#/components/schemas/DbtTask'
+          description: If dbt_task, indicates that this must execute a dbt task. It
+            requires both Databricks SQL and the ability to use a Serverless SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         description:
@@ -1364,6 +1417,10 @@ components:
           $ref: '#/components/schemas/SparkSubmitTask'
           description: If spark_submit_task, indicates that this task must be launched
             by the spark submit script.
+        sql_task:
+          $ref: '#/components/schemas/SqlTask'
+          description: If sql_task, indicates that this job must execute a SQL task.
+            It requires both Databricks SQL and a Serverless SQL warehouse.
         task_key:
           $ref: '#/components/schemas/TaskKey'
         timeout_seconds:
@@ -2179,6 +2236,14 @@ components:
       type: object
     RunParameters:
       properties:
+        dbt_commands:
+          description: 'An array of commands to execute for jobs with the dbt task,
+            for example `"dbt_commands": ["dbt deps", "dbt seed", "dbt run"]`'
+          example:
+          - dbt deps
+          - dbt seed
+          - dbt run
+          type: array
         jar_params:
           description: 'A list of parameters for jobs with Spark JAR tasks, for example
             `"jar_params": ["john doe", "35"]`. The parameters are used to invoke
@@ -2275,6 +2340,14 @@ components:
           items:
             type: string
           type: array
+        sql_params:
+          description: 'A map from keys to values for SQL tasks, for example `"sql_params":
+            {"name": "john doe", "age": "35"}`. The SQL alert task does not support
+            custom parameters.'
+          example:
+            age: '35'
+            name: john doe
+          type: object
     RunResultState:
       description: '* `SUCCESS`: The task completed successfully.
 
@@ -2443,6 +2516,10 @@ components:
           $ref: '#/components/schemas/SparkSubmitTask'
           description: If spark_submit_task, indicates that this task must be launched
             by the spark submit script.
+        sql_task:
+          $ref: '#/components/schemas/SqlTask'
+          description: If sql_task, indicates that this job must execute a SQL task.
+            It requires both Databricks SQL and a Serverless SQL warehouse.
         task_key:
           $ref: '#/components/schemas/TaskKey'
         timeout_seconds:
@@ -2478,6 +2555,10 @@ components:
           description: The cluster used for this run. If the run is specified to use
             a new cluster, this field is set once the Jobs service has requested a
             cluster for the run.
+        dbt_task:
+          $ref: '#/components/schemas/DbtTask'
+          description: If dbt_task, indicates that this must execute a dbt task. It
+            requires both Databricks SQL and the ability to use a Serverless SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         description:
@@ -2553,6 +2634,10 @@ components:
           $ref: '#/components/schemas/SparkSubmitTask'
           description: If spark_submit_task, indicates that this job must be launched
             by the spark submit script.
+        sql_task:
+          $ref: '#/components/schemas/SqlTask'
+          description: If sql_task, indicates that this job must execute a SQL task.
+            It requires both Databricks SQL and a Serverless SQL warehouse.
         start_time:
           description: The time at which this run was started in epoch milliseconds
             (milliseconds since 1/1/1970 UTC). This may not be the time when the job
@@ -2705,8 +2790,10 @@ components:
             type: string
           type: array
         python_file:
-          description: The URI of the Python file to be executed. DBFS and S3 paths
-            are supported. This field is required.
+          description: The Python file to be executed. Cloud file URIs (such as dbfs:/,
+            s3:/, adls:/, gcs:/) and workspace paths are supported. For python files
+            stored in the Databricks workspace, the path must be absolute and begin
+            with `/Repos`. This field is required.
           example: dbfs:/path/to/file.py
           type: string
       required:
@@ -2835,10 +2922,10 @@ components:
       properties:
         alert:
           $ref: '#/components/schemas/SqlTaskAlert'
-          description: If alert, indicates that this job must execute a SQL alert.
+          description: If alert, indicates that this job must refresh a SQL alert.
         dashboard:
           $ref: '#/components/schemas/SqlTaskDashboard'
-          description: If dashboard, indicates that this job must execute a SQL dashboard.
+          description: If dashboard, indicates that this job must refresh a SQL dashboard.
         parameters:
           description: Parameters to be used for each run of this job. The SQL alert
             task does not support custom parameters.
@@ -3642,6 +3729,10 @@ paths:
             application/json:
               schema:
                 properties:
+                  dbt_output:
+                    $ref: '#/components/schemas/DbtOutput'
+                    description: The output of a dbt task, if available.
+                    example: ''
                   error:
                     description: An error message indicating why a task failed or
                       why output is not available. The message is unstructured, and
@@ -3685,6 +3776,10 @@ paths:
                       Databricks restricts this API to return the first 5 MB of the
                       output. To return a larger result, use the [ClusterLogConf](https://docs.databricks.com/dev-tools/api/latest/clusters.html#clusterlogconf)
                       field to configure log storage for the job cluster.
+                    example: ''
+                  sql_output:
+                    $ref: '#/components/schemas/SqlOutput'
+                    description: The output of a SQL task, if available.
                     example: ''
                 type: object
           description: Run output was retrieved successfully.
