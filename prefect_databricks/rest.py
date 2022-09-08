@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 class HTTPMethod(Enum):
     """
-    Enum for HTTP Verbs
+    Available HTTP request methods.
     """
 
     GET = "get"

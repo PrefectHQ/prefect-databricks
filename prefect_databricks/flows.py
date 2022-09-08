@@ -52,8 +52,9 @@ class DatabricksJobRunTimedOut(Exception):
 
 @flow(
     name="Submit jobs runs and wait for completion",
-    description="Triggers a Databricks jobs runs and waits for the"
-    "triggered runs to complete.",
+    description=(
+        "Triggers a Databricks jobs runs and waits for thetriggered runs to complete."
+    ),
 )
 async def jobs_runs_submit_and_wait_for_completion(
     databricks_credentials: DatabricksCredentials,
@@ -310,7 +311,7 @@ async def jobs_runs_submit_and_wait_for_completion(
                 return task_notebook_outputs
             else:
                 raise DatabricksJobTerminated(
-                    f"Databricks Jobs Runs Submit "
+                    "Databricks Jobs Runs Submit "
                     f"({run_name} ID {multi_task_jobs_runs_id}) "
                     f"terminated with result state, {jobs_runs_result_state}: "
                     f"{jobs_runs_state_message}"

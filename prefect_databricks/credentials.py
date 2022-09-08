@@ -1,6 +1,6 @@
 """Credential classes used to perform authenticated interactions with Databricks"""
 
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from httpx import AsyncClient
 from prefect.blocks.core import Block
@@ -28,17 +28,18 @@ class DatabricksCredentials(Block):
     _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/5GTHI1PH2dTiantfps6Fnc/1c750fab7f4c14ea1b93a62b9fea6a94/databricks_logo_icon_170295.png?h=250"  # noqa
 
     databricks_instance: str
-    token: Optional[SecretStr] = None
+    token: SecretStr
+    client_kwargs: Optional[Dict[str, Any]] = None
 
     def get_client(self) -> AsyncClient:
         """
-        Gets an authenticated Databricks REST AsyncClient.
+        Gets an Databricks REST AsyncClient.
 
         Returns:
-            An authenticated Databricks REST AsyncClient
+            An Databricks REST AsyncClient.
 
         Example:
-            Gets an authenticated Databricks REST AsyncClient.
+            Gets a Databricks REST AsyncClient.
             ```python
             from prefect import flow
             from prefect_databricks import DatabricksCredentials
@@ -55,10 +56,9 @@ class DatabricksCredentials(Block):
         """
         base_url = f"https://{self.databricks_instance}/api/"
 
-        if self.token is not None:
-            headers = {"Authorization": f"Bearer {self.token.get_secret_value()}"}
-        else:
-            headers = None
-
-        client = AsyncClient(base_url=base_url, headers=headers)
+        client_kwargs = self.client_kwargs or {}
+        client_kwargs["headers"] = {
+            "Authorization": f"Bearer {self.token.get_secret_value()}"
+        }
+        client = AsyncClient(base_url=base_url, **client_kwargs)
         return client
