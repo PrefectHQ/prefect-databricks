@@ -44,7 +44,6 @@ def test_strip_kwargs():
 
 
 class TestAnotherBaseModel(BaseModel):
-
     some_float: float
     some_bool: bool
 
