@@ -50,6 +50,13 @@ class DatabricksJobRunTimedOut(Exception):
     pass
 
 
+TERMINAL_STATUS_CODES = (
+    RunLifeCycleState.terminated.value,
+    RunLifeCycleState.skipped.value,
+    RunLifeCycleState.internalerror.value,
+)
+
+
 @flow(
     name="Submit jobs runs and wait for completion",
     description="Triggers a Databricks jobs runs and waits for the"
@@ -242,6 +249,7 @@ async def jobs_runs_submit_and_wait_for_completion(
     """  # noqa
     logger = get_run_logger()
 
+    # submit the jobs runs
     multi_task_jobs_runs_future = await jobs_runs_submit.submit(
         databricks_credentials=databricks_credentials,
         tasks=tasks,
@@ -255,89 +263,62 @@ async def jobs_runs_submit_and_wait_for_completion(
     multi_task_jobs_runs = await multi_task_jobs_runs_future.result()
     multi_task_jobs_runs_id = multi_task_jobs_runs["run_id"]
 
-    seconds_waited_for_run_completion = 0
-
-    jobs_status = {}
-    tasks_status = {}
-
-    while seconds_waited_for_run_completion <= max_wait_seconds:
-        jobs_runs_metadata_future = await jobs_runs_get.submit(
-            run_id=multi_task_jobs_runs_id,
-            databricks_credentials=databricks_credentials,
-            wait_for=[multi_task_jobs_runs_future],
-        )
-        jobs_runs_metadata = await jobs_runs_metadata_future.result()
-        jobs_runs_state = jobs_runs_metadata.get("state", {})
-
-        jobs_status = __update_and_log_state_changes(
-            jobs_status, jobs_runs_metadata, logger, "Job"
-        )
-
-        jobs_runs_metadata_tasks = jobs_runs_metadata.get("tasks", [])
-
-        for task_metadata in jobs_runs_metadata_tasks:
-            task_run_id = task_metadata.get("run_id", "")
-
-            tasks_status = __update_and_log_state_changes(
-                tasks_status, task_metadata, logger, "Task"
-            )
-
-        jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
-        jobs_runs_state_message = jobs_runs_state["state_message"]
-
-        if jobs_runs_life_cycle_state == RunLifeCycleState.terminated.value:
-            jobs_runs_result_state = jobs_runs_state.get("result_state", None)
-            if jobs_runs_result_state == RunResultState.success.value:
-                task_notebook_outputs = {}
-                for task in jobs_runs_metadata["tasks"]:
-                    task_key = task["task_key"]
-                    task_run_id = task["run_id"]
-                    task_run_output_future = await jobs_runs_get_output.submit(
-                        run_id=task_run_id,
-                        databricks_credentials=databricks_credentials,
-                        wait_for=[jobs_runs_metadata_future],
-                    )
-                    task_run_output = await task_run_output_future.result()
-                    task_run_notebook_output = task_run_output.get(
-                        "notebook_output", {}
-                    )
-                    task_notebook_outputs[task_key] = task_run_notebook_output
-                logger.info(
-                    "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
-                    run_name,
-                    multi_task_jobs_runs_id,
-                )
-                return task_notebook_outputs
-            else:
-                raise DatabricksJobTerminated(
-                    f"Databricks Jobs Runs Submit "
-                    f"({run_name} ID {multi_task_jobs_runs_id}) "
-                    f"terminated with result state, {jobs_runs_result_state}: "
-                    f"{jobs_runs_state_message}"
-                )
-        elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
-            raise DatabricksJobSkipped(
-                f"Databricks Jobs Runs Submit ({run_name} ID "
-                f"{multi_task_jobs_runs_id}) was skipped: {jobs_runs_state_message}.",
-            )
-        elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
-            raise DatabricksJobInternalError(
-                f"Databricks Jobs Runs Submit ({run_name} ID "
-                f"{multi_task_jobs_runs_id}) "
-                f"encountered an internal error: {jobs_runs_state_message}.",
-            )
-        else:
-            logger.info("Waiting for %s seconds.", poll_frequency_seconds)
-            await asyncio.sleep(poll_frequency_seconds)
-            seconds_waited_for_run_completion += poll_frequency_seconds
-
-    raise DatabricksJobRunTimedOut(
-        f"Max wait time of {max_wait_seconds} seconds exceeded while waiting "
-        f"for job run ({run_name} ID {multi_task_jobs_runs_id})"
+    # wait for all the jobs runs to complete in a separate flow
+    # for a cleaner radar interface
+    jobs_runs_state, jobs_runs_metadata = await jobs_runs_wait_for_completion(
+        run_name=run_name,
+        multi_task_jobs_runs_id=multi_task_jobs_runs_id,
+        databricks_credentials=databricks_credentials,
+        max_wait_seconds=max_wait_seconds,
+        poll_frequency_seconds=poll_frequency_seconds,
     )
 
+    # fetch the state results
+    jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
+    jobs_runs_state_message = jobs_runs_state["state_message"]
 
-def __update_and_log_state_changes(
+    # return results or raise error
+    if jobs_runs_life_cycle_state == RunLifeCycleState.terminated.value:
+        jobs_runs_result_state = jobs_runs_state.get("result_state", None)
+        if jobs_runs_result_state == RunResultState.success.value:
+            task_notebook_outputs = {}
+            for task in jobs_runs_metadata["tasks"]:
+                task_key = task["task_key"]
+                task_run_id = task["run_id"]
+                task_run_output_future = await jobs_runs_get_output.submit(
+                    run_id=task_run_id,
+                    databricks_credentials=databricks_credentials,
+                )
+                task_run_output = await task_run_output_future.result()
+                task_run_notebook_output = task_run_output.get("notebook_output", {})
+                task_notebook_outputs[task_key] = task_run_notebook_output
+            logger.info(
+                "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
+                run_name,
+                multi_task_jobs_runs_id,
+            )
+            return task_notebook_outputs
+        else:
+            raise DatabricksJobTerminated(
+                f"Databricks Jobs Runs Submit "
+                f"({run_name} ID {multi_task_jobs_runs_id}) "
+                f"terminated with result state, {jobs_runs_result_state}: "
+                f"{jobs_runs_state_message}"
+            )
+    elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
+        raise DatabricksJobSkipped(
+            f"Databricks Jobs Runs Submit ({run_name} ID "
+            f"{multi_task_jobs_runs_id}) was skipped: {jobs_runs_state_message}.",
+        )
+    elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
+        raise DatabricksJobInternalError(
+            f"Databricks Jobs Runs Submit ({run_name} ID "
+            f"{multi_task_jobs_runs_id}) "
+            f"encountered an internal error: {jobs_runs_state_message}.",
+        )
+
+
+def _update_and_log_state_changes(
     job_or_task_states: Dict[str, Any],
     job_or_task_metadata: Dict[str, Any],
     logger: Logger,
@@ -345,7 +326,7 @@ def __update_and_log_state_changes(
 ) -> Dict[str, Any]:
     """
     Stores the states of a job or task to its collection and logs the output
-    if it changes
+    if it changes.
 
     Args:
         job_or_task_states: The dictionary of job or task states.
@@ -391,7 +372,11 @@ def __update_and_log_state_changes(
             return job_or_task_states_copy
 
     logger.info(
-        "%s Run '%s' transitioned state. '%s', '%s' with message '%s':  %s",
+        "%s Run '%s' states updated!\n"
+        "Life cycle: '%s'\n"
+        "Result: '%s'\n"
+        "Message '%s'\n"
+        "Url: %s\n",
         run_type,
         run_id,
         life_cycle_state,
@@ -402,3 +387,54 @@ def __update_and_log_state_changes(
 
     job_or_task_states_copy[string_run_id] = new_item
     return job_or_task_states_copy
+
+
+@flow(
+    name="Wait for completion of jobs runs",
+    description="Waits for the jobs runs to finish running",
+)
+async def jobs_runs_wait_for_completion(
+    run_name: str,
+    multi_task_jobs_runs_id: int,
+    databricks_credentials: DatabricksCredentials,
+    max_wait_seconds: int = 900,
+    poll_frequency_seconds: int = 10,
+):
+    logger = get_run_logger()
+
+    seconds_waited_for_run_completion = 0
+    wait_for = []
+
+    jobs_status = {}
+    tasks_status = {}
+    while seconds_waited_for_run_completion <= max_wait_seconds:
+        jobs_runs_metadata_future = await jobs_runs_get.submit(
+            run_id=multi_task_jobs_runs_id,
+            databricks_credentials=databricks_credentials,
+            wait_for=wait_for,
+        )
+        wait_for = [jobs_runs_metadata_future]
+
+        jobs_runs_metadata = await jobs_runs_metadata_future.result()
+        jobs_status = _update_and_log_state_changes(
+            jobs_status, jobs_runs_metadata, logger, "Job"
+        )
+        jobs_runs_metadata_tasks = jobs_runs_metadata.get("tasks", [])
+        for task_metadata in jobs_runs_metadata_tasks:
+            tasks_status = _update_and_log_state_changes(
+                tasks_status, task_metadata, logger, "Task"
+            )
+
+        jobs_runs_state = jobs_runs_metadata.get("state", {})
+        jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
+        if jobs_runs_life_cycle_state in TERMINAL_STATUS_CODES:
+            return jobs_runs_state, jobs_runs_metadata
+
+        logger.info("Waiting for %s seconds.", poll_frequency_seconds)
+        await asyncio.sleep(poll_frequency_seconds)
+        seconds_waited_for_run_completion += poll_frequency_seconds
+
+    raise DatabricksJobRunTimedOut(
+        f"Max wait time of {max_wait_seconds} seconds exceeded while waiting "
+        f"for job run ({run_name} ID {multi_task_jobs_runs_id})"
+    )
