@@ -205,7 +205,7 @@ async def jobs_runs_submit_and_wait_for_completion(
         )
 
         @flow
-        async def jobs_runs_submit_and_wait_for_completion_flow(notebook_path, **base_parameters):
+        def jobs_runs_submit_and_wait_for_completion_flow(notebook_path, **base_parameters):
             databricks_credentials = await DatabricksCredentials.load("BLOCK_NAME")
 
             # specify new cluster settings
@@ -238,7 +238,7 @@ async def jobs_runs_submit_and_wait_for_completion(
                 task_key="prefect-task"
             )
 
-            multi_task_runs = await jobs_runs_submit_and_wait_for_completion(
+            multi_task_runs = jobs_runs_submit_and_wait_for_completion(
                 databricks_credentials=databricks_credentials,
                 run_name="prefect-job",
                 tasks=[job_task_settings]
@@ -400,6 +400,42 @@ async def jobs_runs_wait_for_completion(
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
 ):
+    """
+    Flow that triggers a job run and waits for the triggered run to complete.
+
+    Args:
+        run_name: The name of the jobs runs task.
+        multi_task_jobs_run_id: The ID of the jobs runs task to watch.
+        databricks_credentials:
+            Credentials to use for authentication with Databricks.
+        max_wait_seconds:
+            Maximum number of seconds to wait for the entire flow to complete.
+        poll_frequency_seconds: Number of seconds to wait in between checks for
+            run completion.
+
+    Returns:
+        jobs_runs_state: A dict containing the jobs runs life cycle state and message.
+        jobs_runs_metadata: A dict containing IDs of the jobs runs tasks.
+
+    Example:
+        Waits for completion on jobs runs.
+        ```python
+        from prefect import flow
+        from prefect_databricks import DatabricksCredentials
+        from prefect_databricks.flows import jobs_runs_wait_for_completion
+
+        @flow
+        def jobs_runs_wait_for_completion_flow():
+            databricks_credentials = DatabricksCredentials.load("BLOCK_NAME")
+            return jobs_runs_wait_for_completion(
+                run_name="my_run_name",
+                multi_task_jobs_run_id=45429,
+                databricks_credentials=databricks_credentials,
+                max_wait_seconds=1800,  # 30 minutes
+                poll_frequency_seconds=120,  # 2 minutes
+            )
+        ```
+    """
     logger = get_run_logger()
 
     seconds_waited_for_run_completion = 0
