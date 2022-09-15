@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-09-10T03:44:25.735092
+# Updated at: 2022-09-15T03:59:40.555045
 
 from typing import Any, Dict, List, Union  # noqa
 
@@ -37,12 +37,12 @@ async def jobs_runs_export(
             Which views to export (CODE, DASHBOARDS, or ALL). Defaults to CODE.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `views: List["models.ViewItem"]`</br>
 
     <h4>API Endpoint:</h4>
     `/2.0/jobs/runs/export`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was exported successfully. |
@@ -297,12 +297,12 @@ async def jobs_create(
             List of permissions to set on the job.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `job_id: int`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/create`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was created successfully. |
@@ -359,13 +359,12 @@ async def jobs_delete(
             The canonical identifier of the job to delete. This field is required,
             e.g. `11223344`.
 
-    Returns:
-        A dict of the response.
+    Returns:Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/delete`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was deleted successfully. |
@@ -413,12 +412,12 @@ async def jobs_get(
             Credentials to use for authentication with Databricks.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `job_id: int`</br>- `creator_user_name: str`</br>- `run_as_user_name: str`</br>- `settings: "models.JobSettings"`</br>- `created_time: int`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/get`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was retrieved successfully. |
@@ -473,12 +472,12 @@ async def jobs_list(
             Whether to include task and cluster details in the response.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `jobs: List["models.Job"]`</br>- `has_more: bool`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/list`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | List of jobs was retrieved successfully. |
@@ -684,13 +683,12 @@ async def jobs_reset(
                 API 2.1 this value is always set to `'MULTI_TASK'`, e.g.
                 `MULTI_TASK`.
 
-    Returns:
-        A dict of the response.
+    Returns:Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/reset`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was overwritten successfully. |
@@ -852,12 +850,12 @@ async def jobs_run_now(
             ```
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `run_id: int`</br>- `number_in_job: int`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/run-now`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was started successfully. |
@@ -913,13 +911,12 @@ async def jobs_runs_cancel(
         run_id:
             This field is required, e.g. `455644833`.
 
-    Returns:
-        A dict of the response.
+    Returns:Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/cancel`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was cancelled successfully. |
@@ -967,13 +964,12 @@ async def jobs_runs_cancel_all(
             The canonical identifier of the job to cancel all runs of. This field is
             required, e.g. `11223344`.
 
-    Returns:
-        A dict of the response.
+    Returns:Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/cancel-all`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | All runs were cancelled successfully. |
@@ -1020,13 +1016,12 @@ async def jobs_runs_delete(
             The canonical identifier of the run for which to retrieve the metadata,
             e.g. `455644833`.
 
-    Returns:
-        A dict of the response.
+    Returns:Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/delete`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was deleted successfully. |
@@ -1077,12 +1072,12 @@ async def jobs_runs_get(
             Whether to include the repair history in the response.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `job_id: int`</br>- `run_id: int`</br>- `number_in_job: int`</br>- `creator_user_name: str`</br>- `original_attempt_run_id: int`</br>- `state: "models.RunState"`</br>- `schedule: "models.CronSchedule"`</br>- `tasks: List["models.RunTask"]`</br>- `job_clusters: List["models.JobCluster"]`</br>- `cluster_spec: "models.ClusterSpec"`</br>- `cluster_instance: "models.ClusterInstance"`</br>- `git_source: "models.GitSource"`</br>- `overriding_parameters: "models.RunParameters"`</br>- `start_time: int`</br>- `setup_duration: int`</br>- `execution_duration: int`</br>- `cleanup_duration: int`</br>- `end_time: int`</br>- `trigger: "models.TriggerType"`</br>- `run_name: str`</br>- `run_page_url: str`</br>- `run_type: "models.RunType"`</br>- `attempt_number: int`</br>- `repair_history: List["models.RepairHistoryItem"]`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/get`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was retrieved successfully. |
@@ -1139,12 +1134,12 @@ async def jobs_runs_get_output(
             Credentials to use for authentication with Databricks.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `notebook_output: "models.NotebookOutput"`</br>- `sql_output: "models.SqlOutput"`</br>- `dbt_output: "models.DbtOutput"`</br>- `logs: str`</br>- `logs_truncated: bool`</br>- `error: str`</br>- `error_trace: str`</br>- `metadata: "models.Run"`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/get-output`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run output was retrieved successfully. |
@@ -1230,12 +1225,12 @@ async def jobs_runs_list(
             _start_time_from_ to filter by a time range.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `runs: List["models.Run"]`</br>- `has_more: bool`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/list`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | List of runs was retrieved successfully. |
@@ -1405,12 +1400,12 @@ async def jobs_runs_repair(
             ```
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `repair_id: int`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/repair`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run repair was initiated. |
@@ -1576,12 +1571,12 @@ async def jobs_runs_submit(
             List of permissions to set on the job.
 
     Returns:
-        A dict of the response.
+        Upon success, a dict of the response. </br>- `run_id: int`</br>
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/submit`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was created and started successfully. |
@@ -1798,13 +1793,12 @@ async def jobs_update(
             ["libraries", "schedule"]
             ```
 
-    Returns:
-        A dict of the response.
+    Returns:Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/update`
 
-    <h4>API Responses:</h4>
+    <h4>API Responses</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was updated successfully. |
