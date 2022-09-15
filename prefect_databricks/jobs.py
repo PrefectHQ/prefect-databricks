@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-09-15T03:59:40.555045
+# Updated at: 2022-09-15T04:01:51.005399
 
 from typing import Any, Dict, List, Union  # noqa
 
@@ -42,7 +42,7 @@ async def jobs_runs_export(
     <h4>API Endpoint:</h4>
     `/2.0/jobs/runs/export`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was exported successfully. |
@@ -302,7 +302,7 @@ async def jobs_create(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/create`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was created successfully. |
@@ -364,7 +364,7 @@ async def jobs_delete(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/delete`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was deleted successfully. |
@@ -417,7 +417,7 @@ async def jobs_get(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/get`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was retrieved successfully. |
@@ -477,7 +477,7 @@ async def jobs_list(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/list`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | List of jobs was retrieved successfully. |
@@ -688,7 +688,7 @@ async def jobs_reset(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/reset`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was overwritten successfully. |
@@ -855,7 +855,7 @@ async def jobs_run_now(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/run-now`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was started successfully. |
@@ -916,7 +916,7 @@ async def jobs_runs_cancel(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/cancel`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was cancelled successfully. |
@@ -969,7 +969,7 @@ async def jobs_runs_cancel_all(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/cancel-all`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | All runs were cancelled successfully. |
@@ -1021,7 +1021,7 @@ async def jobs_runs_delete(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/delete`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was deleted successfully. |
@@ -1077,7 +1077,7 @@ async def jobs_runs_get(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/get`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was retrieved successfully. |
@@ -1139,7 +1139,7 @@ async def jobs_runs_get_output(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/get-output`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run output was retrieved successfully. |
@@ -1230,7 +1230,7 @@ async def jobs_runs_list(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/list`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | List of runs was retrieved successfully. |
@@ -1405,7 +1405,7 @@ async def jobs_runs_repair(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/repair`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run repair was initiated. |
@@ -1576,7 +1576,7 @@ async def jobs_runs_submit(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/submit`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Run was created and started successfully. |
@@ -1798,7 +1798,7 @@ async def jobs_update(
     <h4>API Endpoint:</h4>
     `/2.1/jobs/update`
 
-    <h4>API Responses</h4>
+    <h4>API Responses:</h4>
     | Response | Description |
     | --- | --- |
     | 200 | Job was updated successfully. |
