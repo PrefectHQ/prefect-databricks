@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-09-15T04:01:51.005399
+# Updated at: 2022-09-15T04:03:32.067772
 
 from typing import Any, Dict, List, Union  # noqa
 
@@ -359,7 +359,8 @@ async def jobs_delete(
             The canonical identifier of the job to delete. This field is required,
             e.g. `11223344`.
 
-    Returns:Upon success, an empty dict.
+    Returns:
+        Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/delete`
@@ -683,7 +684,8 @@ async def jobs_reset(
                 API 2.1 this value is always set to `'MULTI_TASK'`, e.g.
                 `MULTI_TASK`.
 
-    Returns:Upon success, an empty dict.
+    Returns:
+        Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/reset`
@@ -911,7 +913,8 @@ async def jobs_runs_cancel(
         run_id:
             This field is required, e.g. `455644833`.
 
-    Returns:Upon success, an empty dict.
+    Returns:
+        Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/cancel`
@@ -964,7 +967,8 @@ async def jobs_runs_cancel_all(
             The canonical identifier of the job to cancel all runs of. This field is
             required, e.g. `11223344`.
 
-    Returns:Upon success, an empty dict.
+    Returns:
+        Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/cancel-all`
@@ -1016,7 +1020,8 @@ async def jobs_runs_delete(
             The canonical identifier of the run for which to retrieve the metadata,
             e.g. `455644833`.
 
-    Returns:Upon success, an empty dict.
+    Returns:
+        Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/runs/delete`
@@ -1793,7 +1798,8 @@ async def jobs_update(
             ["libraries", "schedule"]
             ```
 
-    Returns:Upon success, an empty dict.
+    Returns:
+        Upon success, an empty dict.
 
     <h4>API Endpoint:</h4>
     `/2.1/jobs/update`
