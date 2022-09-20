@@ -1644,7 +1644,7 @@ components:
             can be provisioned and optimized for memory or compute intensive workloads
             A list of available node types can be retrieved by using the [List node
             types](https://docs.databricks.com/dev-tools/api/latest/clusters.html#list-node-types)
-            API call. This field is required.
+            API call. This field is required, unless `instance_pool_id` is specified.
           type: string
         num_workers:
           description: If num_workers, number of worker nodes that this cluster must

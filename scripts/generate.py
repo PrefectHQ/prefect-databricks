@@ -48,6 +48,16 @@ def preprocess_fn(schema: Dict[str, Any], parent_key=None) -> Dict[str, Any]:
     for key, value in schema.items():
         if isinstance(value, dict):
             value = preprocess_fn(value, parent_key=key)
+
+        if parent_key == "NewCluster" and "node_type_id" in value:
+            if isinstance(value, dict):
+                description = value["node_type_id"]["description"]
+                updated_description = description.replace(
+                    "This field is required.",
+                    "This field is required, unless `instance_pool_id` is specified.",
+                )
+                value["node_type_id"]["description"] = updated_description
+
         if key == "required":
             if isinstance(value, list):
                 if parent_key == "NewCluster" and "node_type_id" in value:
