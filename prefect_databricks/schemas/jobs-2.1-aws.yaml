@@ -992,7 +992,10 @@ components:
 
         An optional specification for a remote repository containing the notebooks
         used by this job''s notebook tasks.'
-      example: null
+      example:
+        git_branch: main
+        git_provider: gitHub
+        git_url: https://github.com/databricks/databricks-cli
       oneOf:
       - required:
         - git_url
@@ -1181,7 +1184,10 @@ components:
 
             An optional specification for a remote repository containing the notebooks
             used by this job''s notebook tasks.'
-          example: null
+          example:
+            git_branch: main
+            git_provider: gitHub
+            git_url: https://github.com/databricks/databricks-cli
         job_clusters:
           description: A list of job cluster specifications that can be shared and
             reused by tasks of this job. Libraries cannot be declared in a shared
@@ -1294,6 +1300,7 @@ components:
                 age: '35'
                 name: John Doe
               notebook_path: /Users/user.name@databricks.com/Match
+              source: WORKSPACE
             retry_on_timeout: false
             task_key: Match
             timeout_seconds: 86400
@@ -1770,6 +1777,19 @@ components:
           required:
           - true
           type: string
+        source:
+          description: Optional location type of the notebook. When set to `WORKSPACE`,
+            the notebook will be retrieved from the local Databricks workspace. When
+            set to `GIT`, the notebook will be retrieved from a Git repository defined
+            in `git_source`. If the value is empty, the task will use `GIT` if `git_source`
+            is defined and `WORKSPACE` otherwise.
+          enum:
+          - WORKSPACE
+          - GIT
+          example: WORKSPACE
+          required:
+          - false
+          type: string
       required:
       - notebook_path
     ParameterPair:
@@ -2002,6 +2022,10 @@ components:
 
             An optional specification for a remote repository containing the notebooks
             used by this job''s notebook tasks.'
+          example:
+            git_branch: main
+            git_provider: gitHub
+            git_url: https://github.com/databricks/databricks-cli
         job_clusters:
           description: A list of job cluster specifications that can be shared and
             reused by tasks of this job. Libraries cannot be declared in a shared
@@ -2139,6 +2163,7 @@ components:
               spark_version: 7.3.x-scala2.12
             notebook_task:
               notebook_path: /Users/user.name@databricks.com/Match
+              source: WORKSPACE
             run_id: 2112897
             run_page_url: https://my-workspace.cloud.databricks.com/#job/39832/run/21
             setup_duration: 0
@@ -2393,6 +2418,10 @@ components:
 
             An optional specification for a remote repository containing the notebooks
             used by this job''s notebook tasks.'
+          example:
+            git_branch: main
+            git_provider: gitHub
+            git_url: https://github.com/databricks/databricks-cli
         idempotency_token:
           description: 'An optional token that can be used to guarantee the idempotency
             of job run requests. If a run with the provided token already exists,
@@ -2462,6 +2491,7 @@ components:
                 age: '35'
                 name: John Doe
               notebook_path: /Users/user.name@databricks.com/Match
+              source: WORKSPACE
             task_key: Match
             timeout_seconds: 86400
           items:
@@ -2592,6 +2622,10 @@ components:
 
             An optional specification for a remote repository containing the notebooks
             used by this job''s notebook tasks.'
+          example:
+            git_branch: main
+            git_provider: gitHub
+            git_url: https://github.com/databricks/databricks-cli
         libraries:
           description: An optional list of libraries to be installed on the cluster
             that executes the job. The default value is an empty list.

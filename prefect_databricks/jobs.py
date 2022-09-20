@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-09-15T04:03:32.067772
+# Updated at: 2022-09-20T23:03:18.442393
 
 from typing import Any, Dict, List, Union  # noqa
 
@@ -159,6 +159,7 @@ async def jobs_create(
                     },
                     "notebook_task": {
                         "notebook_path": "/Users/user.name@databricks.com/Match",
+                        "source": "WORKSPACE",
                         "base_parameters": {"name": "John Doe", "age": "35"},
                     },
                     "timeout_seconds": 86400,
@@ -263,7 +264,14 @@ async def jobs_create(
         git_source:
             This functionality is in Public Preview.  An optional specification for
             a remote repository containing the notebooks used by this
-            job's notebook tasks. Key-values:
+            job's notebook tasks, e.g.
+            ```
+            {
+                "git_url": "https://github.com/databricks/databricks-cli",
+                "git_branch": "main",
+                "git_provider": "gitHub",
+            }
+            ``` Key-values:
             - git_url:
                 URL of the repository to be cloned by this job. The maximum
                 length is 300 characters, e.g.
@@ -609,6 +617,7 @@ async def jobs_reset(
                         },
                         "notebook_task": {
                             "notebook_path": "/Users/user.name@databricks.com/Match",
+                            "source": "WORKSPACE",
                             "base_parameters": {
                                 "name": "John Doe",
                                 "age": "35",
@@ -677,7 +686,14 @@ async def jobs_reset(
             - git_source:
                 This functionality is in Public Preview.  An optional
                 specification for a remote repository containing the
-                notebooks used by this job's notebook tasks.
+                notebooks used by this job's notebook tasks, e.g.
+                ```
+                {
+                    "git_url": "https://github.com/databricks/databricks-cli",
+                    "git_branch": "main",
+                    "git_provider": "gitHub",
+                }
+                ```
             - format:
                 Used to tell what is the format of the job. This field is
                 ignored in Create/Update/Reset calls. When using the Jobs
@@ -1518,6 +1534,7 @@ async def jobs_runs_submit(
                     },
                     "notebook_task": {
                         "notebook_path": "/Users/user.name@databricks.com/Match",
+                        "source": "WORKSPACE",
                         "base_parameters": {"name": "John Doe", "age": "35"},
                     },
                     "timeout_seconds": 86400,
@@ -1530,7 +1547,14 @@ async def jobs_runs_submit(
         git_source:
             This functionality is in Public Preview.  An optional specification for
             a remote repository containing the notebooks used by this
-            job's notebook tasks. Key-values:
+            job's notebook tasks, e.g.
+            ```
+            {
+                "git_url": "https://github.com/databricks/databricks-cli",
+                "git_branch": "main",
+                "git_provider": "gitHub",
+            }
+            ``` Key-values:
             - git_url:
                 URL of the repository to be cloned by this job. The maximum
                 length is 300 characters, e.g.
@@ -1717,6 +1741,7 @@ async def jobs_update(
                         },
                         "notebook_task": {
                             "notebook_path": "/Users/user.name@databricks.com/Match",
+                            "source": "WORKSPACE",
                             "base_parameters": {
                                 "name": "John Doe",
                                 "age": "35",
@@ -1785,7 +1810,14 @@ async def jobs_update(
             - git_source:
                 This functionality is in Public Preview.  An optional
                 specification for a remote repository containing the
-                notebooks used by this job's notebook tasks.
+                notebooks used by this job's notebook tasks, e.g.
+                ```
+                {
+                    "git_url": "https://github.com/databricks/databricks-cli",
+                    "git_branch": "main",
+                    "git_provider": "gitHub",
+                }
+                ```
             - format:
                 Used to tell what is the format of the job. This field is
                 ignored in Create/Update/Reset calls. When using the Jobs
