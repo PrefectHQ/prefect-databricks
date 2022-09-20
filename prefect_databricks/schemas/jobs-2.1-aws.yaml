@@ -1701,7 +1701,6 @@ components:
           type: array
       required:
       - spark_version
-      - node_type_id
     NodeType:
       properties:
         description:
