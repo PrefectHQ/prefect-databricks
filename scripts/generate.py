@@ -37,16 +37,31 @@ routes = None
 overwrite = True
 
 
-def preprocess_fn(schema: Dict[str, Any]) -> Dict[str, Any]:
+def preprocess_fn(schema: Dict[str, Any], parent_key=None) -> Dict[str, Any]:
     """
     Preprocess the schema so it adheres to datamodel_code_generator
     standards; if not, pydantic models will not be auto-generated.
+
+    Also, makes node_type_id optional in NewCluster model.
+    https://github.com/PrefectHQ/prefect/issues/5890
     """
     for key, value in schema.items():
         if isinstance(value, dict):
-            value = preprocess_fn(value)
+            value = preprocess_fn(value, parent_key=key)
+
+        if parent_key == "NewCluster" and "node_type_id" in value:
+            if isinstance(value, dict):
+                description = value["node_type_id"]["description"]
+                updated_description = description.replace(
+                    "This field is required.",
+                    "This field is required, unless `instance_pool_id` is specified.",
+                )
+                value["node_type_id"]["description"] = updated_description
+
         if key == "required":
             if isinstance(value, list):
+                if parent_key == "NewCluster" and "node_type_id" in value:
+                    value.remove("node_type_id")
                 schema[key] = value
             else:
                 schema[key] = [value]
@@ -60,12 +75,13 @@ def preprocess_fn(schema: Dict[str, Any]) -> Dict[str, Any]:
     return schema
 
 
-populate_collection_repo(
-    service_name,
-    urls,
-    routes=routes,
-    overwrite=overwrite,
-    preprocess_fn=preprocess_fn,
-    repo_directory=REPO_DIRECTORY,
-    regenerate_module_files=False,
-)
+if __name__ == "__main__":
+    populate_collection_repo(
+        service_name,
+        urls,
+        routes=routes,
+        overwrite=overwrite,
+        preprocess_fn=preprocess_fn,
+        repo_directory=REPO_DIRECTORY,
+        regenerate_module_files=False,
+    )
