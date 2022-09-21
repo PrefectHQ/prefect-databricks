@@ -1,10 +1,12 @@
+import sys
 from pathlib import Path
 
 import pytest
 import yaml
-from prefect.utilities.importtools import import_object
 
 TEST_DIR = Path(__file__).resolve().parent
+sys.path.append(str(TEST_DIR / ".." / "scripts"))
+from generate import preprocess_fn  # noqa
 
 
 @pytest.fixture(scope="session")
@@ -13,8 +15,6 @@ def processed_schema():
     with open(path, "r") as f:
         mock_schema = yaml.safe_load(f)
 
-    generate_path = TEST_DIR / ".." / "scripts" / "generate.py"
-    preprocess_fn = import_object(f"{generate_path}:preprocess_fn")
     processed_schema = preprocess_fn(mock_schema)
     return processed_schema
 
