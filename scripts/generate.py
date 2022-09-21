@@ -75,12 +75,13 @@ def preprocess_fn(schema: Dict[str, Any], parent_key=None) -> Dict[str, Any]:
     return schema
 
 
-populate_collection_repo(
-    service_name,
-    urls,
-    routes=routes,
-    overwrite=overwrite,
-    preprocess_fn=preprocess_fn,
-    repo_directory=REPO_DIRECTORY,
-    regenerate_module_files=False,
-)
+if __name__ == "__main__":
+    populate_collection_repo(
+        service_name,
+        urls,
+        routes=routes,
+        overwrite=overwrite,
+        preprocess_fn=preprocess_fn,
+        repo_directory=REPO_DIRECTORY,
+        regenerate_module_files=False,
+    )
