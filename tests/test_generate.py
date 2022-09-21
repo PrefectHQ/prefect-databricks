@@ -19,6 +19,7 @@ def processed_schema():
     return processed_schema
 
 
+@pytest.skip(reason="prefect-collection-generator not released yet")
 class TestPreprocessFn:
     def test_node_type_id(self, processed_schema):
         new_cluster = processed_schema["components"]["schemas"]["NewCluster"]
