@@ -25,7 +25,10 @@ async def test_execute_endpoint(params, http_method, respx_mock):
     if http_method == "post":
         execute_kwargs["json"] = {"key": "val"}
 
-    credentials = DatabricksCredentials(databricks_instance="databricks_instance")
+    credentials = DatabricksCredentials(
+        databricks_instance="databricks_instance",
+        token="token_value",
+    )
     response = await execute_endpoint.fn(
         url, credentials, http_method=http_method, params=params, **execute_kwargs
     )
@@ -40,29 +43,20 @@ def test_strip_kwargs():
     assert strip_kwargs(**dict(a=[])) == {"a": []}
 
 
-class AnotherBaseModel(BaseModel):
-
+class TestAnotherBaseModel(BaseModel):
     some_float: float
     some_bool: bool
 
 
-class ExampleBaseModel(BaseModel):
+class TestBaseModel(BaseModel):
     class Config:
         extra = Extra.allow
         allow_mutation = False
 
     some_string: str
     some_int: int
-    another_base_model: AnotherBaseModel
-    other_base_models: List[AnotherBaseModel]
-
-
-def test_http_matches_type():
-    assert HTTPMethod.DELETE.value == "delete"
-    assert HTTPMethod.GET.value == "get"
-    assert HTTPMethod.PATCH.value == "patch"
-    assert HTTPMethod.POST.value == "post"
-    assert HTTPMethod.PUT.value == "put"
+    another_base_model: TestAnotherBaseModel
+    other_base_models: List[TestAnotherBaseModel]
 
 
 def test_serialize_model():
@@ -81,14 +75,14 @@ def test_serialize_model():
 
     actual = serialize_model(
         {
-            "base_model": ExampleBaseModel(
+            "base_model": TestBaseModel(
                 some_string="abc",
                 some_int=1,
                 unexpected_value=["super", "unexpected"],
-                another_base_model=AnotherBaseModel(some_float=2.8, some_bool=True),
+                another_base_model=TestAnotherBaseModel(some_float=2.8, some_bool=True),
                 other_base_models=[
-                    AnotherBaseModel(some_float=8.8, some_bool=False),
-                    AnotherBaseModel(some_float=1.8, some_bool=True),
+                    TestAnotherBaseModel(some_float=8.8, some_bool=False),
+                    TestAnotherBaseModel(some_float=1.8, some_bool=True),
                 ],
             )
         }
