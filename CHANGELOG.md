@@ -8,8 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- `jobs_runs_wait_for_completion` flow - [#22](https://github.com/PrefectHQ/prefect-databricks/pull/22).
 
 ### Changed
+
+- Migrate lines from `jobs_runs_submit_and_wait_for_completion` into `jobs_runs_wait_for_completion` flow - [#22](https://github.com/PrefectHQ/prefect-databricks/pull/22).
 
 ### Deprecated
 
