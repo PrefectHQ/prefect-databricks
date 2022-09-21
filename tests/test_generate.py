@@ -5,22 +5,29 @@ import pytest
 import yaml
 
 TEST_DIR = Path(__file__).resolve().parent
-sys.path.append(str(TEST_DIR / ".." / "scripts"))
-from generate import preprocess_fn  # noqa
+try:
+    from prefect_collection_generator.rest import populate_collection_repo
+except ImportError:
+    populate_collection_repo = None
 
 
-@pytest.fixture(scope="session")
-def processed_schema():
-    path = TEST_DIR / "mock_schema.yaml"
-    with open(path, "r") as f:
-        mock_schema = yaml.safe_load(f)
-
-    processed_schema = preprocess_fn(mock_schema)
-    return processed_schema
-
-
-@pytest.skip(reason="prefect-collection-generator not released yet")
+@pytest.mark.skipif(
+    condition=populate_collection_repo is None,
+    reason="prefect-collection-generator is not public yet; cannot run on CI",
+)
 class TestPreprocessFn:
+    @pytest.fixture()
+    def processed_schema(self):
+        sys.path.append(str(TEST_DIR / ".." / "scripts"))
+        from generate import preprocess_fn  # noqa
+
+        path = TEST_DIR / "mock_schema.yaml"
+        with open(path, "r") as f:
+            mock_schema = yaml.safe_load(f)
+
+        processed_schema = preprocess_fn(mock_schema)
+        return processed_schema
+
     def test_node_type_id(self, processed_schema):
         new_cluster = processed_schema["components"]["schemas"]["NewCluster"]
         node_type_id = new_cluster["properties"]["node_type_id"]
