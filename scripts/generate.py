@@ -84,4 +84,5 @@ if __name__ == "__main__":
         preprocess_fn=preprocess_fn,
         repo_directory=REPO_DIRECTORY,
         regenerate_module_files=False,
+        group_models_by_module=False,
     )

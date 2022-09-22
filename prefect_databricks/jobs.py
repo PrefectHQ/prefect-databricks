@@ -8,14 +8,14 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-09-20T23:47:48.838739
+# Updated at: 2022-09-22T22:22:24.612937
 
 from typing import Any, Dict, List, Union  # noqa
 
 from prefect import task
 
 from prefect_databricks import DatabricksCredentials
-from prefect_databricks.models import jobs as models
+from prefect_databricks.models import jobs as models  # noqa
 from prefect_databricks.rest import HTTPMethod, _unpack_contents, execute_endpoint
 
 
