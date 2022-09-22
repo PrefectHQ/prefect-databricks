@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-09-22T22:22:24.612937
+# Updated at: 2022-09-22T23:18:40.622474
 
 from typing import Any, Dict, List, Union  # noqa
 
@@ -23,7 +23,7 @@ from prefect_databricks.rest import HTTPMethod, _unpack_contents, execute_endpoi
 async def jobs_runs_export(
     run_id: int,
     databricks_credentials: "DatabricksCredentials",
-    views_to_export: str = None,
+    views_to_export: "models.ViewsToExport" = None,
 ) -> Dict[str, Any]:  # pragma: no cover
     """
     Export and retrieve the job run task.
