@@ -11,8 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- All models from the schema are now regenerated - [#29](https://github.com/PrefectHQ/prefect-databricks/pull/29).
-
 ### Deprecated
 
 ### Removed
@@ -20,6 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Security
+
+## 0.1.3
+
+Released on September 23rd, 2022.
+
+### Fixed
+
+- All models from the schema are now regenerated - [#29](https://github.com/PrefectHQ/prefect-databricks/pull/29).
 
 ## 0.1.2
 
