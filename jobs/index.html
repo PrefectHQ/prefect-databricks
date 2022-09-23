@@ -691,7 +691,7 @@ Databricks jobs</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -726,7 +726,7 @@ tags can be added to the job, e.g.
         <tr>
           <td><code>tasks</code></td>
           <td>
-                <code><span title="typing.List">List</span>[&#39;models.JobTaskSettings&#39;]</code>
+                <code><span title="typing.List">List</span>[<span title="models.JobTaskSettings">JobTaskSettings</span>]</code>
           </td>
           <td><p>A list of task specifications to be executed by this job, e.g.
 <div class="highlight"><pre><span></span><code>[
@@ -796,7 +796,7 @@ tags can be added to the job, e.g.
         <tr>
           <td><code>job_clusters</code></td>
           <td>
-                <code><span title="typing.List">List</span>[&#39;models.JobCluster&#39;]</code>
+                <code><span title="typing.List">List</span>[<span title="models.JobCluster">JobCluster</span>]</code>
           </td>
           <td><p>A list of job cluster specifications that can be shared and reused by
 tasks of this job. Libraries cannot be declared in a shared
@@ -825,7 +825,7 @@ settings, e.g.
         <tr>
           <td><code>email_notifications</code></td>
           <td>
-                <code>&#39;models.JobEmailNotifications&#39;</code>
+                <code><span title="models.JobEmailNotifications">JobEmailNotifications</span></code>
           </td>
           <td><p>An optional set of email addresses that is notified when runs of this
 job begin or complete as well as when this job is deleted.
@@ -876,7 +876,7 @@ behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
         <tr>
           <td><code>schedule</code></td>
           <td>
-                <code>&#39;models.CronSchedule&#39;</code>
+                <code><span title="models.CronSchedule">CronSchedule</span></code>
           </td>
           <td><p>An optional periodic schedule for this job. The default behavior is that
 the job only runs when triggered by clicking “Run Now” in
@@ -924,7 +924,7 @@ to allow only 1 concurrent run, e.g. <code>10</code>.</p></td>
         <tr>
           <td><code>git_source</code></td>
           <td>
-                <code>&#39;models.GitSource&#39;</code>
+                <code><span title="models.GitSource">GitSource</span></code>
           </td>
           <td><p>This functionality is in Public Preview.  An optional specification for
 a remote repository containing the notebooks used by this
@@ -978,7 +978,7 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
         <tr>
           <td><code>access_control_list</code></td>
           <td>
-                <code><span title="typing.List">List</span>[&#39;models.AccessControlRequest&#39;]</code>
+                <code><span title="typing.List">List</span>[<span title="models.AccessControlRequest">AccessControlRequest</span>]</code>
           </td>
           <td><p>List of permissions to set on the job.</p></td>
           <td>
@@ -1624,7 +1624,7 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -1844,7 +1844,7 @@ field is required.</p></td>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -2042,7 +2042,7 @@ field is required.</p></td>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -2291,7 +2291,7 @@ update job settings partially.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -2312,7 +2312,7 @@ e.g. <code>11223344</code>.</p></td>
         <tr>
           <td><code>new_settings</code></td>
           <td>
-                <code>&#39;models.JobSettings&#39;</code>
+                <code><span title="models.JobSettings">JobSettings</span></code>
           </td>
           <td><p>The new settings of the job. These settings completely replace the old
 settings.  Changes to the field
@@ -2999,7 +2999,7 @@ Changes to other fields are applied to future runs only. Key-values:
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -3622,7 +3622,7 @@ running when this request completes.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -3831,7 +3831,7 @@ doesn't prevent new runs from being started.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -4042,7 +4042,7 @@ required, e.g. <code>11223344</code>.</p></td>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -4261,7 +4261,7 @@ e.g. <code>455644833</code>.</p></td>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -4271,7 +4271,7 @@ e.g. <code>455644833</code>.</p></td>
         <tr>
           <td><code>views_to_export</code></td>
           <td>
-                <code>str</code>
+                <code><span title="models.ViewsToExport">ViewsToExport</span></code>
           </td>
           <td><p>Which views to export (CODE, DASHBOARDS, or ALL). Defaults to CODE.</p></td>
           <td>
@@ -4387,7 +4387,7 @@ e.g. <code>455644833</code>.</p></td>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_export</span><span class="p">(</span>
     <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">views_to_export</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">views_to_export</span><span class="p">:</span> <span class="s2">&quot;models.ViewsToExport&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Export and retrieve the job run task.</span>
@@ -4486,7 +4486,7 @@ This field is required.</p></td>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -4721,7 +4721,7 @@ export using the Jobs API, see Runs export.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -4935,7 +4935,7 @@ export using the Jobs API, see Runs export.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -5332,7 +5332,7 @@ original job run.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -5966,7 +5966,7 @@ submitted.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -5976,7 +5976,7 @@ submitted.</p>
         <tr>
           <td><code>tasks</code></td>
           <td>
-                <code><span title="typing.List">List</span>[&#39;models.RunSubmitTaskSettings&#39;]</code>
+                <code><span title="typing.List">List</span>[<span title="models.RunSubmitTaskSettings">RunSubmitTaskSettings</span>]</code>
           </td>
           <td><p>, e.g.
 <div class="highlight"><pre><span></span><code>[
@@ -6048,7 +6048,7 @@ multitask job run</code>.</p></td>
         <tr>
           <td><code>git_source</code></td>
           <td>
-                <code>&#39;models.GitSource&#39;</code>
+                <code><span title="models.GitSource">GitSource</span></code>
           </td>
           <td><p>This functionality is in Public Preview.  An optional specification for
 a remote repository containing the notebooks used by this
@@ -6122,7 +6122,7 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
         <tr>
           <td><code>access_control_list</code></td>
           <td>
-                <code><span title="typing.List">List</span>[&#39;models.AccessControlRequest&#39;]</code>
+                <code><span title="typing.List">List</span>[<span title="models.AccessControlRequest">AccessControlRequest</span>]</code>
           </td>
           <td><p>List of permissions to set on the job.</p></td>
           <td>
@@ -6563,7 +6563,7 @@ endpoint to overwrite all job settings.</p>
         <tr>
           <td><code>databricks_credentials</code></td>
           <td>
-                <code>&#39;DatabricksCredentials&#39;</code>
+                <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
           <td><p>Credentials to use for authentication with Databricks.</p></td>
           <td>
@@ -6584,7 +6584,7 @@ e.g. <code>11223344</code>.</p></td>
         <tr>
           <td><code>new_settings</code></td>
           <td>
-                <code>&#39;models.JobSettings&#39;</code>
+                <code><span title="models.JobSettings">JobSettings</span></code>
           </td>
           <td><p>The new settings for the job. Any top-level fields specified in
 <code>new_settings</code> are completely replaced. Partially updating
