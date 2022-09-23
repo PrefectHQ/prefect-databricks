@@ -2228,10 +2228,10 @@ components:
         ends in the `INTERNAL_ERROR` state, the Jobs service terminates the cluster
         as soon as possible. This state is terminal.'
       enum:
+      - TERMINATED
       - PENDING
       - RUNNING
       - TERMINATING
-      - TERMINATED
       - SKIPPED
       - INTERNAL_ERROR
       type: string
