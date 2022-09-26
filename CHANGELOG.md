@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Type annotations and allowing `run_name=None` - [#31](https://github.com/PrefectHQ/prefect-databricks/pull/31).
+- Type annotations and allowing `run_name=None` - [#32](https://github.com/PrefectHQ/prefect-databricks/pull/32).
 
 ### Security
 
