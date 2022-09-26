@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Type annotations and allowing `run_name=None` - [#32](https://github.com/PrefectHQ/prefect-databricks/pull/32).
+- Type annotations in `jobs_runs_submit_and_wait_for_completion` and allowing `run_name=None` in `jobs_runs_wait_for_completion` flows - [#32](https://github.com/PrefectHQ/prefect-databricks/pull/32).
 
 ### Security
 
