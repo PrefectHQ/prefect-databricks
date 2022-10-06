@@ -1,6 +1,6 @@
 """Credential classes used to perform authenticated interactions with Databricks"""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from httpx import AsyncClient
 from prefect.blocks.core import Block
