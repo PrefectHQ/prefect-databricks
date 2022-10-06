@@ -95,26 +95,21 @@ async def execute_endpoint(
         The httpx.Response from interacting with the endpoint.
 
     Examples:
-        Lists jobs on the Databricks instance.
+        Queries the weather at an airport.
         ```python
         from prefect import flow
-        from prefect_databricks import DatabricksCredentials
-        from prefect_databricks.rest import execute_endpoint
-        @flow
+        from prefect_aviationapi import AviationAPICredentials
+        from prefect_aviationapi.rest import execute_endpoint
+
+        @flow()
         def example_execute_endpoint_flow():
-            endpoint = "/2.1/jobs/list"
-            databricks_credentials = DatabricksCredentials.load("my-block")
-            params = {
-                "limit": 5,
-                "offset": None,
-                "expand_tasks": True,
-            }
-            response = execute_endpoint(
-                endpoint,
-                databricks_credentials,
-                params=params
-            )
+            endpoint = "/weather/metar"
+            aviationapi_credentials = AviationAPICredentials()
+            params = dict(apt="KORD,KSEA")
+            response = execute_endpoint(endpoint, aviationapi_credentials, params=params)
             return response.json()
+
+        example_execute_endpoint_flow()
         ```
     """
     if isinstance(http_method, HTTPMethod):

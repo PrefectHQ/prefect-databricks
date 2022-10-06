@@ -2,7 +2,6 @@
 Module containing flows for interacting with Databricks
 """
 
-import warnings
 import asyncio
 from logging import Logger
 from typing import Any, Dict, List, Optional
@@ -248,13 +247,6 @@ async def jobs_runs_submit_and_wait_for_completion(
             return multi_task_runs
         ```
     """  # noqa
-    warnings.warn(
-        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to "
-        "prefect_databricks.jobs.flows in the next release, but can be imported "
-        "with `from prefect_databricks.jobs import jobs_runs_submit_and_wait_for_completion`",
-        DeprecationWarning
-    )
-
     logger = get_run_logger()
 
     # submit the jobs runs
@@ -444,12 +436,6 @@ async def jobs_runs_wait_for_completion(
             )
         ```
     """
-    warnings.warn(
-        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to "
-        "prefect_databricks.jobs.flows in the next release, but can be imported "
-        "with `from prefect_databricks.jobs import jobs_runs_submit_and_wait_for_completion`",
-        DeprecationWarning
-    )
     logger = get_run_logger()
 
     seconds_waited_for_run_completion = 0
