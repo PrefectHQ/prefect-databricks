@@ -1,4 +1,4 @@
-from ._generated import _DatabricksCredentials
+from ._generated import DatabricksCredentials as _DatabricksCredentials
 
 
 class DatabricksCredentials(_DatabricksCredentials):

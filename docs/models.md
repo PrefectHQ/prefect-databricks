@@ -1,4 +1,4 @@
-::: prefect_databricks.jobs
+::: prefect_databricks.models
     selection:
       members:
         - _generated

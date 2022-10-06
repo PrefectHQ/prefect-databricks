@@ -406,7 +406,7 @@ async def jobs_runs_wait_for_completion(
 
     Args:
         run_name: The name of the jobs runs task.
-        multi_task_jobs_run_id: The ID of the jobs runs task to watch.
+        multi_task_jobs_runs_id: The ID of the jobs runs task to watch.
         databricks_credentials:
             Credentials to use for authentication with Databricks.
         max_wait_seconds:
@@ -429,7 +429,7 @@ async def jobs_runs_wait_for_completion(
         def jobs_runs_wait_for_completion_flow():
             databricks_credentials = DatabricksCredentials.load("BLOCK_NAME")
             return jobs_runs_wait_for_completion(
-                multi_task_jobs_run_id=45429,
+                multi_task_jobs_runs_id=45429,
                 databricks_credentials=databricks_credentials,
                 run_name="my_run_name",
                 max_wait_seconds=1800,  # 30 minutes
