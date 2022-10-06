@@ -2,8 +2,8 @@
 Module containing flows for interacting with Databricks
 """
 
-import warnings
 import asyncio
+import warnings
 from logging import Logger
 from typing import Any, Dict, List, Optional
 
@@ -56,6 +56,7 @@ TERMINAL_STATUS_CODES = (
     RunLifeCycleState.skipped.value,
     RunLifeCycleState.internalerror.value,
 )
+
 
 @flow(
     name="Submit jobs runs and wait for completion",
@@ -249,10 +250,11 @@ async def jobs_runs_submit_and_wait_for_completion(
         ```
     """  # noqa
     warnings.warn(
-        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to "
-        "prefect_databricks.jobs.flows in the next release, but can be imported "
-        "with `from prefect_databricks.jobs import jobs_runs_submit_and_wait_for_completion`",
-        DeprecationWarning
+        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to"
+        " prefect_databricks.jobs.flows in the next release, but can be imported with"
+        " `from prefect_databricks.jobs import"
+        " jobs_runs_submit_and_wait_for_completion`",
+        DeprecationWarning,
     )
 
     logger = get_run_logger()
@@ -445,10 +447,11 @@ async def jobs_runs_wait_for_completion(
         ```
     """
     warnings.warn(
-        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to "
-        "prefect_databricks.jobs.flows in the next release, but can be imported "
-        "with `from prefect_databricks.jobs import jobs_runs_submit_and_wait_for_completion`",
-        DeprecationWarning
+        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to"
+        " prefect_databricks.jobs.flows in the next release, but can be imported with"
+        " `from prefect_databricks.jobs import"
+        " jobs_runs_submit_and_wait_for_completion`",
+        DeprecationWarning,
     )
     logger = get_run_logger()
 

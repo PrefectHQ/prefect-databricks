@@ -93,24 +93,6 @@ async def execute_endpoint(
 
     Returns:
         The httpx.Response from interacting with the endpoint.
-
-    Examples:
-        Queries the weather at an airport.
-        ```python
-        from prefect import flow
-        from prefect_aviationapi import AviationAPICredentials
-        from prefect_aviationapi.rest import execute_endpoint
-
-        @flow()
-        def example_execute_endpoint_flow():
-            endpoint = "/weather/metar"
-            aviationapi_credentials = AviationAPICredentials()
-            params = dict(apt="KORD,KSEA")
-            response = execute_endpoint(endpoint, aviationapi_credentials, params=params)
-            return response.json()
-
-        example_execute_endpoint_flow()
-        ```
     """
     if isinstance(http_method, HTTPMethod):
         http_method = http_method.value
