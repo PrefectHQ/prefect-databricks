@@ -29,7 +29,7 @@ setup(
     extras_require={"dev": dev_requires},
     entry_points={
         "prefect.collections": [
-            "DatabricksCredentials = prefect_databricks.credentials",
+            "prefect_databricks = prefect_databricks",
         ]
     },
     classifiers=[
