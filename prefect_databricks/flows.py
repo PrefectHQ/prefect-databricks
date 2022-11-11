@@ -26,19 +26,13 @@ from prefect_databricks.models.jobs import (
 class DatabricksJobTerminated(Exception):
     """Raised when Databricks jobs runs submit terminates"""
 
-    pass
-
 
 class DatabricksJobSkipped(Exception):
     """Raised when Databricks jobs runs submit skips"""
 
-    pass
-
 
 class DatabricksJobInternalError(Exception):
     """Raised when Databricks jobs runs submit encounters internal error"""
-
-    pass
 
 
 class DatabricksJobRunTimedOut(Exception):
@@ -46,8 +40,6 @@ class DatabricksJobRunTimedOut(Exception):
     Raised when Databricks jobs runs does not complete in the configured max
     wait seconds
     """
-
-    pass
 
 
 TERMINAL_STATUS_CODES = (
