@@ -365,8 +365,6 @@ class ClusterTag(BaseModel):
     An object with key value pairs. The key length must be between 1 and 127 UTF-8 characters, inclusive. The value length must be less than or equal to 255 UTF-8 characters. For a list of all restrictions, see AWS Tag Restrictions: <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-restrictions>
     """
 
-    pass
-
     class Config:
         extra = Extra.allow
 
@@ -938,8 +936,6 @@ class ParameterPair(BaseModel):
     An object with additional information about why a cluster was terminated. The object keys are one of `TerminationParameter` and the value is the termination information.
     """
 
-    pass
-
     class Config:
         extra = Extra.allow
 
@@ -1461,8 +1457,6 @@ class SparkConfPair(BaseModel):
     An arbitrary object where the object key is a configuration propery name and the value is a configuration property value.
     """
 
-    pass
-
     class Config:
         extra = Extra.allow
 
@@ -1475,8 +1469,6 @@ class SparkEnvPair(BaseModel):
 
     An arbitrary object where the object key is an environment variable name and the value is an environment variable value.
     """
-
-    pass
 
     class Config:
         extra = Extra.allow
