@@ -1,4 +1,1 @@
 ::: prefect_databricks.jobs
-    selection:
-      members:
-        - _generated

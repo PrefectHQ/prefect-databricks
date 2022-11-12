@@ -36,24 +36,184 @@ plugins:
       handlers:
         python:
           options:
+            show_submodules: True
             show_root_heading: True
             show_object_full_path: False
-            show_category_heading: True
+            show_category_heading: False
             show_bases: True
             show_signature: False
             heading_level: 1
+            filters: ["!^__[^__]", "!T", "!Response"]
+
 watch:
     - prefect_databricks/
     - README.md
 
 nav:
     - Home: index.md
-    - Flows: flows.md
     
-    - Models:
-        - Jobs: models/jobs.md
-    - Models: models.md
     - Jobs: jobs.md
-    - Rest: rest.md
     - Credentials: credentials.md
     
+    - API Models:
+        - JobCluster: models/job_cluster.md
+        - RunParametersPythonNamedParams: models/run_parameters_python_named_params.md
+        - AccessControlRequestForUser: models/access_control_request_for_user.md
+        - LibraryInstallStatus: models/library_install_status.md
+        - JobsRunsCancelAllResponse200: models/jobs_runs_cancel_all_response_200.md
+        - JobsRunsGetOutputResponse200: models/jobs_runs_get_output_response_200.md
+        - RunParametersNotebookParams: models/run_parameters_notebook_params.md
+        - ClusterSize: models/cluster_size.md
+        - JobSettings: models/job_settings.md
+        - DbtOutput: models/dbt_output.md
+        - ViewItem: models/view_item.md
+        - CronSchedule: models/cron_schedule.md
+        - AccessControlList: models/access_control_list.md
+        - Run: models/run.md
+        - RunState: models/run_state.md
+        - JobsRunsDeleteJsonBody: models/jobs_runs_delete_json_body.md
+        - ClusterEvent: models/cluster_event.md
+        - JobTaskSettings: models/job_task_settings.md
+        - ClusterSpec: models/cluster_spec.md
+        - SqlOutputError: models/sql_output_error.md
+        - SqlTask: models/sql_task.md
+        - RepairRunInput: models/repair_run_input.md
+        - ClusterLogConf: models/cluster_log_conf.md
+        - Library: models/library.md
+        - Error: models/error.md
+        - JobsDeleteJsonBody: models/jobs_delete_json_body.md
+        - ClusterAttributes: models/cluster_attributes.md
+        - JobSettingsFormat: models/job_settings_format.md
+        - JobsRunsCancelJsonBody: models/jobs_runs_cancel_json_body.md
+        - DbtTask: models/dbt_task.md
+        - CronSchedulePauseStatus: models/cron_schedule_pause_status.md
+        - GitSnapshot: models/git_snapshot.md
+        - JobsCreateResponse200: models/jobs_create_response_200.md
+        - JobsDeleteResponse200: models/jobs_delete_response_200.md
+        - JobsRunsSubmitResponse200: models/jobs_runs_submit_response_200.md
+        - PipelineTask: models/pipeline_task.md
+        - NotebookTaskBaseParameters: models/notebook_task_base_parameters.md
+        - SqlDashboardWidgetOutput: models/sql_dashboard_widget_output.md
+        - JobsUpdateResponse200: models/jobs_update_response_200.md
+        - JobsRunsListRunType: models/jobs_runs_list_run_type.md
+        - JobsRunNowJsonBody: models/jobs_run_now_json_body.md
+        - ClusterEventType: models/cluster_event_type.md
+        - Job: models/job.md
+        - AwsAttributesAvailability: models/aws_attributes_availability.md
+        - LogSyncStatus: models/log_sync_status.md
+        - SparkNodeAwsAttributes: models/spark_node_aws_attributes.md
+        - DockerImage: models/docker_image.md
+        - PythonPyPiLibrary: models/python_py_pi_library.md
+        - SqlAlertOutput: models/sql_alert_output.md
+        - SparkPythonTask: models/spark_python_task.md
+        - SparkNode: models/spark_node.md
+        - JobsRunsCancelAllJsonBody: models/jobs_runs_cancel_all_json_body.md
+        - SparkVersion: models/spark_version.md
+        - NewCluster: models/new_cluster.md
+        - DbfsStorageInfo: models/dbfs_storage_info.md
+        - SqlTaskAlert: models/sql_task_alert.md
+        - PythonWheelTaskNamedParameters: models/python_wheel_task_named_parameters.md
+        - JobsRunsDeleteResponse200: models/jobs_runs_delete_response_200.md
+        - TerminationType: models/termination_type.md
+        - AutoScale: models/auto_scale.md
+        - JobsRunsCancelResponse200: models/jobs_runs_cancel_response_200.md
+        - ResizeCause: models/resize_cause.md
+        - SqlStatementOutput: models/sql_statement_output.md
+        - SqlTaskDashboard: models/sql_task_dashboard.md
+        - ClusterInstance: models/cluster_instance.md
+        - RunSubmitTaskSettings: models/run_submit_task_settings.md
+        - TerminationCode: models/termination_code.md
+        - PythonWheelTask: models/python_wheel_task.md
+        - LibraryFullStatus: models/library_full_status.md
+        - NotebookTask: models/notebook_task.md
+        - JobsListResponse200: models/jobs_list_response_200.md
+        - JobsRunsGetResponse200: models/jobs_runs_get_response_200.md
+        - ClusterLibraryStatuses: models/cluster_library_statuses.md
+        - SqlQueryOutput: models/sql_query_output.md
+        - SparkEnvPair: models/spark_env_pair.md
+        - ViewType: models/view_type.md
+        - DbtOutputArtifactsHeaders: models/dbt_output_artifacts_headers.md
+        - RepairHistory: models/repair_history.md
+        - JobsRunsListResponse200: models/jobs_runs_list_response_200.md
+        - JobsUpdateJsonBody: models/jobs_update_json_body.md
+        - EventDetails: models/event_details.md
+        - ListOrder: models/list_order.md
+        - RunSubmitSettings: models/run_submit_settings.md
+        - AwsAttributesEbsVolumeType: models/aws_attributes_ebs_volume_type.md
+        - JobsRunsExportResponse200: models/jobs_runs_export_response_200.md
+        - SparkSubmitTask: models/spark_submit_task.md
+        - ClusterCloudProviderNodeStatus: models/cluster_cloud_provider_node_status.md
+        - ClusterCloudProviderNodeInfo: models/cluster_cloud_provider_node_info.md
+        - RCranLibrary: models/r_cran_library.md
+        - PoolClusterTerminationCode: models/pool_cluster_termination_code.md
+        - SqlTaskQuery: models/sql_task_query.md
+        - ClusterInfo: models/cluster_info.md
+        - TerminationReason: models/termination_reason.md
+        - SqlOutput: models/sql_output.md
+        - CanManage: models/can_manage.md
+        - JobsRunsSubmitJsonBody: models/jobs_runs_submit_json_body.md
+        - RepairHistoryItemType: models/repair_history_item_type.md
+        - S3StorageInfo: models/s3_storage_info.md
+        - RunType: models/run_type.md
+        - JobsCreateJsonBody: models/jobs_create_json_body.md
+        - TaskDependenciesItem: models/task_dependencies_item.md
+        - JobsGetResponse200: models/jobs_get_response_200.md
+        - SparkConfPair: models/spark_conf_pair.md
+        - NotebookOutput: models/notebook_output.md
+        - RunResultState: models/run_result_state.md
+        - DockerBasicAuth: models/docker_basic_auth.md
+        - TriggerType: models/trigger_type.md
+        - JobTask: models/job_task.md
+        - RunTask: models/run_task.md
+        - IsOwner: models/is_owner.md
+        - AccessControlRequestForGroup: models/access_control_request_for_group.md
+        - JobSettingsTags: models/job_settings_tags.md
+        - RunLifeCycleState: models/run_life_cycle_state.md
+        - CanView: models/can_view.md
+        - AccessControlRequestForServicePrincipal: models/access_control_request_for_service_principal.md
+        - RunParametersPipelineParams: models/run_parameters_pipeline_params.md
+        - JobsRunNowResponse200: models/jobs_run_now_response_200.md
+        - ParameterPair: models/parameter_pair.md
+        - ClusterSource: models/cluster_source.md
+        - RunNowInput: models/run_now_input.md
+        - ClusterTag: models/cluster_tag.md
+        - ViewsToExport: models/views_to_export.md
+        - CanManageRun: models/can_manage_run.md
+        - JobsRunsRepairResponse200: models/jobs_runs_repair_response_200.md
+        - MavenLibrary: models/maven_library.md
+        - JobsRunsRepairJsonBody: models/jobs_runs_repair_json_body.md
+        - InitScriptInfo: models/init_script_info.md
+        - RepairHistoryItem: models/repair_history_item.md
+        - RunParametersSqlParams: models/run_parameters_sql_params.md
+        - JobEmailNotifications: models/job_email_notifications.md
+        - RunParameters: models/run_parameters.md
+        - SqlTaskParameters: models/sql_task_parameters.md
+        - NotebookTaskSource: models/notebook_task_source.md
+        - JobsResetResponse200: models/jobs_reset_response_200.md
+        - TerminationParameter: models/termination_parameter.md
+        - ClusterState: models/cluster_state.md
+        - AwsAttributes: models/aws_attributes.md
+        - SqlDashboardWidgetOutputStatus: models/sql_dashboard_widget_output_status.md
+        - NodeType: models/node_type.md
+        - FileStorageInfo: models/file_storage_info.md
+        - SqlDashboardOutput: models/sql_dashboard_output.md
+        - JobsResetJsonBody: models/jobs_reset_json_body.md
+        - SparkJarTask: models/spark_jar_task.md
+    
+    - API Endpoints:
+        - jobs_list: endpoints/jobs_list.md
+        - jobs_runs_list: endpoints/jobs_runs_list.md
+        - jobs_runs_get: endpoints/jobs_runs_get.md
+        - jobs_get: endpoints/jobs_get.md
+        - jobs_run_now: endpoints/jobs_run_now.md
+        - jobs_runs_export: endpoints/jobs_runs_export.md
+        - jobs_runs_get_output: endpoints/jobs_runs_get_output.md
+        - jobs_reset: endpoints/jobs_reset.md
+        - jobs_runs_cancel: endpoints/jobs_runs_cancel.md
+        - jobs_create: endpoints/jobs_create.md
+        - jobs_runs_cancel_all: endpoints/jobs_runs_cancel_all.md
+        - jobs_runs_delete: endpoints/jobs_runs_delete.md
+        - jobs_update: endpoints/jobs_update.md
+        - jobs_runs_repair: endpoints/jobs_runs_repair.md
+        - jobs_delete: endpoints/jobs_delete.md
+        - jobs_runs_submit: endpoints/jobs_runs_submit.md

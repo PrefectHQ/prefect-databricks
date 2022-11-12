@@ -3,23 +3,24 @@ Module containing flows for interacting with Databricks
 """
 
 import asyncio
+import warnings
 from logging import Logger
 from typing import Any, Dict, List, Optional
 
 from prefect import flow, get_run_logger
 
 from prefect_databricks import DatabricksCredentials
-from prefect_databricks.jobs import (
-    jobs_runs_get,
-    jobs_runs_get_output,
-    jobs_runs_submit,
-)
-from prefect_databricks.models.jobs import (
+from prefect_databricks.api_client.models import (
     AccessControlRequest,
     GitSource,
     RunLifeCycleState,
     RunResultState,
     RunSubmitTaskSettings,
+)
+from prefect_databricks.jobs import (
+    jobs_runs_get,
+    jobs_runs_get_output,
+    jobs_runs_submit,
 )
 
 
@@ -248,6 +249,15 @@ async def jobs_runs_submit_and_wait_for_completion(
             return multi_task_runs
         ```
     """  # noqa
+    warnings.warn(
+        "`jobs_runs_submit_and_wait_for_completion` has been moved to the "
+        "`prefect_databricks.jobs` module. `jobs_runs_submit_and_wait_for_completion` "
+        "is available from `prefect_databricks.flows` for backwards compatibility, but "
+        "will be removed in a subsequent release. Please update your code to import ",
+        "`jobs_runs_submit_and_wait_for_completion` from `prefect_databricks.jobs`.",
+        DeprecationWarning,
+    )
+
     logger = get_run_logger()
 
     # submit the jobs runs
@@ -437,6 +447,14 @@ async def jobs_runs_wait_for_completion(
             )
         ```
     """
+    warnings.warn(
+        "`jobs_runs_wait_for_completion` has been moved to the "
+        "`prefect_databricks.jobs` module. `jobs_runs_wait_for_completion` "
+        "is available from `prefect_databricks.flows` for backwards compatibility, but "
+        "will be removed in a subsequent release. Please update your code to import ",
+        "`jobs_runs_wait_for_completion` from `prefect_databricks.jobs`.",
+        DeprecationWarning,
+    )
     logger = get_run_logger()
 
     seconds_waited_for_run_completion = 0

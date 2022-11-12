@@ -10,17 +10,17 @@ from typing import Any, Dict, List, Optional
 from prefect import flow, get_run_logger
 
 from prefect_databricks import DatabricksCredentials
-from prefect_databricks.jobs import (
-    jobs_runs_get,
-    jobs_runs_get_output,
-    jobs_runs_submit,
-)
-from prefect_databricks.models.jobs import (
+from prefect_databricks.api_client.models import (
     AccessControlRequest,
     GitSource,
     RunLifeCycleState,
     RunResultState,
     RunSubmitTaskSettings,
+)
+from prefect_databricks.jobs import (
+    jobs_runs_get,
+    jobs_runs_get_output,
+    jobs_runs_submit,
 )
 
 
@@ -250,10 +250,11 @@ async def jobs_runs_submit_and_wait_for_completion(
         ```
     """  # noqa
     warnings.warn(
-        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to"
-        " prefect_databricks.jobs.flows in the next release, but can be imported with"
-        " `from prefect_databricks.jobs import"
-        " jobs_runs_submit_and_wait_for_completion`",
+        "`jobs_runs_submit_and_wait_for_completion` has been moved to the "
+        "`prefect_databricks.jobs` module. `jobs_runs_submit_and_wait_for_completion` "
+        "is available from `prefect_databricks.flows` for backwards compatibility, but "
+        "will be removed in a subsequent release. Please update your code to import ",
+        "`jobs_runs_submit_and_wait_for_completion` from `prefect_databricks.jobs`.",
         DeprecationWarning,
     )
 
@@ -447,10 +448,11 @@ async def jobs_runs_wait_for_completion(
         ```
     """
     warnings.warn(
-        "The flow `jobs_runs_submit_and_wait_for_completion` will be moved to"
-        " prefect_databricks.jobs.flows in the next release, but can be imported with"
-        " `from prefect_databricks.jobs import"
-        " jobs_runs_submit_and_wait_for_completion`",
+        "`jobs_runs_wait_for_completion` has been moved to the "
+        "`prefect_databricks.jobs` module. `jobs_runs_wait_for_completion` "
+        "is available from `prefect_databricks.flows` for backwards compatibility, but "
+        "will be removed in a subsequent release. Please update your code to import ",
+        "`jobs_runs_wait_for_completion` from `prefect_databricks.jobs`.",
         DeprecationWarning,
     )
     logger = get_run_logger()

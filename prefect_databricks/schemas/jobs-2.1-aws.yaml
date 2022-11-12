@@ -878,6 +878,8 @@ components:
           - dbt deps
           - dbt seed
           - dbt run --models 123
+          items:
+            type: string
           type: array
         profiles_directory:
           description: Optional (relative) path to the profiles directory. Can only
@@ -1037,8 +1039,6 @@ components:
           - gitLabEnterpriseEdition
           - awsCodeCommit
           example: github
-          required:
-          - true
           type: string
         git_snapshot:
           $ref: '#/components/schemas/GitSnapshot'
@@ -1054,9 +1054,10 @@ components:
 
             The maximum length is 300 characters.'
           example: https://github.com/databricks/databricks-cli
-          required:
-          - true
           type: string
+      required:
+      - git_url
+      - git_provider
     GroupName:
       description: 'Group name. There are two built-in groups: `users` for all users,
         and `admins` for administrators.'
@@ -1131,11 +1132,15 @@ components:
           example: false
           type: boolean
         on_failure:
-          description: A list of email addresses to be notified when a run unsuccessfully
-            completes. A run is considered to have completed unsuccessfully if it
-            ends with an `INTERNAL_ERROR` `life_cycle_state` or a `SKIPPED`, `FAILED`,
-            or `TIMED_OUT` result_state. If this is not specified on job creation,
-            reset, or update the list is empty, and notifications are not sent.
+          description: A list of email addresses to notify when a run completes unsuccessfully.
+            A run is considered unsuccessful if it ends with an `INTERNAL_ERROR` `life_cycle_state`
+            or a `SKIPPED`, `FAILED`, or `TIMED_OUT` `result_state`. If not specified
+            on job creation, reset, or update, or the list is empty, then notifications
+            are not sent. Job-level failure notifications are sent only once after
+            the entire job run (including all of its retries) has failed. Notifications
+            are not sent when failed job runs are retried. To receive a failure notification
+            after every failed task (including every failed retry), use task-level
+            notifications instead.
           example:
           - user.name@databricks.com
           items:
@@ -1316,6 +1321,11 @@ components:
           type: integer
     JobTask:
       properties:
+        dbt_task:
+          $ref: '#/components/schemas/DbtTask'
+          description: If dbt_task, indicates that this must execute a dbt task. It
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         notebook_task:
           $ref: '#/components/schemas/NotebookTask'
           description: If notebook_task, indicates that this job must run a notebook.
@@ -1342,13 +1352,14 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
     JobTaskSettings:
       properties:
         dbt_task:
           $ref: '#/components/schemas/DbtTask'
           description: If dbt_task, indicates that this must execute a dbt task. It
-            requires both Databricks SQL and the ability to use a Serverless SQL warehouse.
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         description:
@@ -1429,7 +1440,7 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
         task_key:
           $ref: '#/components/schemas/TaskKey'
         timeout_seconds:
@@ -1644,7 +1655,7 @@ components:
             can be provisioned and optimized for memory or compute intensive workloads
             A list of available node types can be retrieved by using the [List node
             types](https://docs.databricks.com/dev-tools/api/latest/clusters.html#list-node-types)
-            API call. This field is required, unless `instance_pool_id` is specified.
+            API call.
           type: string
         num_workers:
           description: If num_workers, number of worker nodes that this cluster must
@@ -1659,7 +1670,8 @@ components:
           type: integer
         policy_id:
           description: A [cluster policy](https://docs.databricks.com/dev-tools/api/latest/policies.html)
-            ID.
+            ID. Either `node_type_id` or `instance_pool_id` must be specified in the
+            cluster policy if they are not specified in this job cluster object.
           type: string
         spark_conf:
           $ref: '#/components/schemas/SparkConfPair'
@@ -1690,7 +1702,7 @@ components:
         spark_version:
           description: The Spark version of the cluster. A list of available Spark
             versions can be retrieved by using the [Runtime versions](https://docs.databricks.com/dev-tools/api/latest/clusters.html#runtime-versions)
-            API call. This field is required.
+            API call.
           type: string
         ssh_public_keys:
           description: SSH public key contents that are added to each Spark node in
@@ -1773,8 +1785,6 @@ components:
             the path must be absolute and begin with a slash. For notebooks stored
             in a remote repository, the path must be relative. This field is required.
           example: /Users/user.name@databricks.com/notebook_to_run
-          required:
-          - true
           type: string
         source:
           description: Optional location type of the notebook. When set to `WORKSPACE`,
@@ -1786,8 +1796,6 @@ components:
           - WORKSPACE
           - GIT
           example: WORKSPACE
-          required:
-          - false
           type: string
       required:
       - notebook_path
@@ -1940,6 +1948,11 @@ components:
           example: 734650698524280
           format: int64
           type: integer
+        rerun_all_failed_tasks:
+          default: false
+          description: If true, repair all failed tasks. Only one of rerun_tasks or
+            rerun_all_failed_tasks can be used.
+          type: boolean
         rerun_tasks:
           description: The task keys of the task runs to repair.
           example:
@@ -2270,6 +2283,8 @@ components:
           - dbt deps
           - dbt seed
           - dbt run
+          items:
+            type: string
           type: array
         jar_params:
           description: 'A list of parameters for jobs with Spark JAR tasks, for example
@@ -2506,6 +2521,11 @@ components:
       type: object
     RunSubmitTaskSettings:
       properties:
+        dbt_task:
+          $ref: '#/components/schemas/DbtTask'
+          description: If dbt_task, indicates that this must execute a dbt task. It
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         existing_cluster_id:
@@ -2551,7 +2571,7 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
         task_key:
           $ref: '#/components/schemas/TaskKey'
         timeout_seconds:
@@ -2590,7 +2610,8 @@ components:
         dbt_task:
           $ref: '#/components/schemas/DbtTask'
           description: If dbt_task, indicates that this must execute a dbt task. It
-            requires both Databricks SQL and the ability to use a Serverless SQL warehouse.
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         description:
@@ -2673,7 +2694,7 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
         start_time:
           description: The time at which this run was started in epoch milliseconds
             (milliseconds since 1/1/1970 UTC). This may not be the time when the job
@@ -2691,7 +2712,7 @@ components:
       description: "The type of the run.\n* `JOB_RUN` \\- Normal job run. A run created\
         \ with [Run now](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunNow).\
         \  \n* `WORKFLOW_RUN` \\- Workflow run. A run created with [dbutils.notebook.run](https://docs.databricks.com/dev-tools/databricks-utils.html#dbutils-workflow).\n\
-        * `SUBMIT_RUN` \\- Submit run. A run created with [Run now](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunNow)."
+        * `SUBMIT_RUN` \\- Submit run. A run created with [Run Submit](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunsSubmit)."
       enum:
       - JOB_RUN
       - WORKFLOW_RUN
@@ -2974,7 +2995,7 @@ components:
           description: If query, indicates that this job must execute a SQL query.
         warehouse_id:
           description: The canonical identifier of the SQL warehouse. Only serverless
-            warehouse is supported.
+            and pro SQL warehouses are supported.
           type: string
       required:
       - warehouse_id
@@ -3323,8 +3344,7 @@ paths:
               allOf:
               - $ref: '#/components/schemas/JobSettings'
               - $ref: '#/components/schemas/AccessControlList'
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3365,8 +3385,7 @@ paths:
               required:
               - job_id
               type: object
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3470,6 +3489,14 @@ paths:
           example: 0
           minimum: 0
           type: integer
+      - description: A filter on the list based on the exact (case insensitive) job
+          name.
+        in: query
+        name: name
+        required: false
+        schema:
+          example: A%20multitask%20job
+          type: string
       - description: Whether to include task and cluster details in the response.
         in: query
         name: expand_tasks
@@ -3531,8 +3558,7 @@ paths:
               required:
               - job_id
               type: object
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3561,8 +3587,7 @@ paths:
               allOf:
               - $ref: '#/components/schemas/RunNowInput'
               - $ref: '#/components/schemas/RunParameters'
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3610,8 +3635,7 @@ paths:
               required:
               - run_id
               type: object
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3648,8 +3672,7 @@ paths:
               required:
               - job_id
               type: object
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3683,8 +3706,7 @@ paths:
                   format: int64
                   type: integer
               type: object
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3973,8 +3995,7 @@ paths:
               allOf:
               - $ref: '#/components/schemas/RepairRunInput'
               - $ref: '#/components/schemas/RunParameters'
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -3999,10 +4020,9 @@ paths:
       summary: Repair a job run
   /2.1/jobs/runs/submit:
     post:
-      description: "Submit a one-time run. This endpoint allows you to submit a workload\
-        \ directly without creating a job. Runs submitted using this endpoint don\u2019\
-        t display in the UI. Use the `jobs/runs/get` API to check the run state after\
-        \ the job is submitted."
+      description: Submit a one-time run. This endpoint allows you to submit a workload
+        directly without creating a job. Use the `jobs/runs/get` API to check the
+        run state after the job is submitted.
       operationId: JobsRunsSubmit
       requestBody:
         content:
@@ -4011,8 +4031,7 @@ paths:
               allOf:
               - $ref: '#/components/schemas/RunSubmitSettings'
               - $ref: '#/components/schemas/AccessControlList'
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
@@ -4074,8 +4093,7 @@ paths:
               required:
               - job_id
               type: object
-        required:
-        - true
+        required: true
       responses:
         '200':
           content:
