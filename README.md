@@ -18,7 +18,7 @@
 
 ## Welcome!
 
-Prefect integrations interacting with Databricks
+Prefect integrations for interacting with Databricks
 
 The tasks within this collection were created by a code generator using the service's OpenAPI spec.
 
@@ -32,7 +32,7 @@ Requires an installation of Python 3.7+.
 
 We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
 
-These tasks are designed to work with Prefect 2.0. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
+These tasks are designed to work with Prefect 2. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
 
 ### Installation
 
