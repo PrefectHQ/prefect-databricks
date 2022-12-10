@@ -286,6 +286,10 @@ components:
             correctly. Refer to [Autoscaling local storage](https://docs.databricks.com/clusters/configure.html#autoscaling-local-storage)
             for details.'
           type: boolean
+        enable_local_disk_encryption:
+          description: Determines whether encryption of the disks attached to the
+            cluster locally is enabled.
+          type: boolean
         init_scripts:
           description: The configuration for storing init scripts. Any number of destinations
             can be specified. The scripts are executed sequentially in the order provided.
@@ -870,6 +874,13 @@ components:
           type: string
     DbtTask:
       properties:
+        catalog:
+          description: Optional name of the catalog to use. The value is the top level
+            in the 3-level namespace of Unity Catalog (catalog / schema / relation).
+            The catalog value can only be specified if a warehouse_id is specified.
+            Requires dbt-databricks >= 1.1.1.
+          example: main
+          type: string
         commands:
           description: A list of dbt commands to execute. All commands must start
             with `dbt`. This parameter must not be empty. A maximum of up to 10 commands
@@ -1129,11 +1140,15 @@ components:
           example: false
           type: boolean
         on_failure:
-          description: A list of email addresses to be notified when a run unsuccessfully
-            completes. A run is considered to have completed unsuccessfully if it
-            ends with an `INTERNAL_ERROR` `life_cycle_state` or a `SKIPPED`, `FAILED`,
-            or `TIMED_OUT` result_state. If this is not specified on job creation,
-            reset, or update the list is empty, and notifications are not sent.
+          description: A list of email addresses to notify when a run completes unsuccessfully.
+            A run is considered unsuccessful if it ends with an `INTERNAL_ERROR` `life_cycle_state`
+            or a `SKIPPED`, `FAILED`, or `TIMED_OUT` `result_state`. If not specified
+            on job creation, reset, or update, or the list is empty, then notifications
+            are not sent. Job-level failure notifications are sent only once after
+            the entire job run (including all of its retries) has failed. Notifications
+            are not sent when failed job runs are retried. To receive a failure notification
+            after every failed task (including every failed retry), use task-level
+            notifications instead.
           example:
           - user.name@databricks.com
           items:
@@ -1312,8 +1327,18 @@ components:
           example: 86400
           format: int32
           type: integer
+        webhook_notifications:
+          $ref: '#/components/schemas/WebhookNotifications'
+          description: A collection of system notification IDs to notify when runs
+            of this job begin or complete. The default behavior is to not send any
+            system notifications.
     JobTask:
       properties:
+        dbt_task:
+          $ref: '#/components/schemas/DbtTask'
+          description: If dbt_task, indicates that this must execute a dbt task. It
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         notebook_task:
           $ref: '#/components/schemas/NotebookTask'
           description: If notebook_task, indicates that this job must run a notebook.
@@ -1340,13 +1365,14 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
     JobTaskSettings:
       properties:
         dbt_task:
           $ref: '#/components/schemas/DbtTask'
           description: If dbt_task, indicates that this must execute a dbt task. It
-            requires both Databricks SQL and the ability to use a Serverless SQL warehouse.
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         description:
@@ -1427,7 +1453,7 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
         task_key:
           $ref: '#/components/schemas/TaskKey'
         timeout_seconds:
@@ -1436,6 +1462,11 @@ components:
           example: 86400
           format: int32
           type: integer
+        webhook_notifications:
+          $ref: '#/components/schemas/WebhookNotifications'
+          description: A collection of system notification IDs to notify when the
+            run begins or completes. The default behavior is to not send any system
+            notifications.
       required:
       - task_key
     Library:
@@ -1622,6 +1653,10 @@ components:
             correctly - refer to [Autoscaling local storage](https://docs.databricks.com/clusters/configure.html#autoscaling-local-storage)
             for details.'
           type: boolean
+        enable_local_disk_encryption:
+          description: Determines whether encryption of disks locally attached to
+            the cluster is enabled.
+          type: boolean
         init_scripts:
           description: The configuration for storing init scripts. Any number of scripts
             can be specified. The scripts are executed sequentially in the order provided.
@@ -1642,7 +1677,7 @@ components:
             can be provisioned and optimized for memory or compute intensive workloads
             A list of available node types can be retrieved by using the [List node
             types](https://docs.databricks.com/dev-tools/api/latest/clusters.html#list-node-types)
-            API call. This field is required.
+            API call.
           type: string
         num_workers:
           description: If num_workers, number of worker nodes that this cluster must
@@ -1657,7 +1692,8 @@ components:
           type: integer
         policy_id:
           description: A [cluster policy](https://docs.databricks.com/dev-tools/api/latest/policies.html)
-            ID.
+            ID. Either `node_type_id` or `instance_pool_id` must be specified in the
+            cluster policy if they are not specified in this job cluster object.
           type: string
         spark_conf:
           $ref: '#/components/schemas/SparkConfPair'
@@ -1688,7 +1724,7 @@ components:
         spark_version:
           description: The Spark version of the cluster. A list of available Spark
             versions can be retrieved by using the [Runtime versions](https://docs.databricks.com/dev-tools/api/latest/clusters.html#runtime-versions)
-            API call. This field is required.
+            API call.
           type: string
         ssh_public_keys:
           description: SSH public key contents that are added to each Spark node in
@@ -1697,9 +1733,7 @@ components:
           items:
             type: string
           type: array
-      required:
-      - spark_version
-      - node_type_id
+      required: spark_version
     NodeType:
       properties:
         description:
@@ -1937,6 +1971,11 @@ components:
           example: 734650698524280
           format: int64
           type: integer
+        rerun_all_failed_tasks:
+          default: false
+          description: If true, repair all failed tasks. Only one of rerun_tasks or
+            rerun_all_failed_tasks can be used.
+          type: boolean
         rerun_tasks:
           description: The task keys of the task runs to repair.
           example:
@@ -2125,7 +2164,6 @@ components:
             setup_duration: 0
             spark_jar_task:
               main_class_name: com.databricks.OrdersIngest
-              run_as_repl: true
             start_time: 1629989929660
             state:
               life_cycle_state: INTERNAL_ERROR
@@ -2185,7 +2223,6 @@ components:
             setup_duration: 0
             spark_jar_task:
               main_class_name: com.databricks.Sessionize
-              run_as_repl: true
             start_time: 1629989929668
             state:
               life_cycle_state: INTERNAL_ERROR
@@ -2223,7 +2260,11 @@ components:
         * `INTERNAL_ERROR`: An exceptional state that indicates a failure in the Jobs
         service, such as network failure over a long period. If a run on a new cluster
         ends in the `INTERNAL_ERROR` state, the Jobs service terminates the cluster
-        as soon as possible. This state is terminal.'
+        as soon as possible. This state is terminal.
+
+        * `BLOCKED`: The run is blocked on an upstream dependency.
+
+        * `WAITING_FOR_RETRY`: The run is waiting for a retry.'
       enum:
       - TERMINATED
       - PENDING
@@ -2231,6 +2272,8 @@ components:
       - TERMINATING
       - SKIPPED
       - INTERNAL_ERROR
+      - BLOCKED
+      - WAITING_FOR_RETRY
       type: string
     RunNowInput:
       properties:
@@ -2500,9 +2543,19 @@ components:
           example: 86400
           format: int32
           type: integer
+        webhook_notifications:
+          $ref: '#/components/schemas/WebhookNotifications'
+          description: A collection of system notification IDs to notify when runs
+            of this job begin or complete. The default behavior is to not send any
+            system notifications.
       type: object
     RunSubmitTaskSettings:
       properties:
+        dbt_task:
+          $ref: '#/components/schemas/DbtTask'
+          description: If dbt_task, indicates that this must execute a dbt task. It
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         existing_cluster_id:
@@ -2548,7 +2601,7 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
         task_key:
           $ref: '#/components/schemas/TaskKey'
         timeout_seconds:
@@ -2587,7 +2640,8 @@ components:
         dbt_task:
           $ref: '#/components/schemas/DbtTask'
           description: If dbt_task, indicates that this must execute a dbt task. It
-            requires both Databricks SQL and the ability to use a Serverless SQL warehouse.
+            requires both Databricks SQL and the ability to use a serverless or a
+            pro SQL warehouse.
         depends_on:
           $ref: '#/components/schemas/TaskDependencies'
         description:
@@ -2670,7 +2724,7 @@ components:
         sql_task:
           $ref: '#/components/schemas/SqlTask'
           description: If sql_task, indicates that this job must execute a SQL task.
-            It requires both Databricks SQL and a Serverless SQL warehouse.
+            It requires both Databricks SQL and a serverless or a pro SQL warehouse.
         start_time:
           description: The time at which this run was started in epoch milliseconds
             (milliseconds since 1/1/1970 UTC). This may not be the time when the job
@@ -2688,7 +2742,7 @@ components:
       description: "The type of the run.\n* `JOB_RUN` \\- Normal job run. A run created\
         \ with [Run now](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunNow).\
         \  \n* `WORKFLOW_RUN` \\- Workflow run. A run created with [dbutils.notebook.run](https://docs.databricks.com/dev-tools/databricks-utils.html#dbutils-workflow).\n\
-        * `SUBMIT_RUN` \\- Submit run. A run created with [Run now](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunNow)."
+        * `SUBMIT_RUN` \\- Submit run. A run created with [Run Submit](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunsSubmit)."
       enum:
       - JOB_RUN
       - WORKFLOW_RUN
@@ -2971,7 +3025,7 @@ components:
           description: If query, indicates that this job must execute a SQL query.
         warehouse_id:
           description: The canonical identifier of the SQL warehouse. Only serverless
-            warehouse is supported.
+            and pro SQL warehouses are supported.
           type: string
       required:
       - warehouse_id
@@ -3250,6 +3304,43 @@ components:
       - DASHBOARDS
       - ALL
       type: string
+    WebhookNotifications:
+      properties:
+        on_failure:
+          description: An optional list of notification IDs to call when the run fails.
+            A maximum of 3 destinations can be specified for the `on_failure` property.
+          example:
+          - id: 0481e838-0a59-4eff-9541-a4ca6f149574
+          items:
+            properties:
+              id:
+                type: string
+            type: object
+          type: array
+        on_start:
+          description: An optional list of notification IDs to call when the run starts.
+            A maximum of 3 destinations can be specified for the `on_start` property.
+          example:
+          - id: 03dd86e4-57ef-4818-a950-78e41a1d71ab
+          - id: 0481e838-0a59-4eff-9541-a4ca6f149574
+          items:
+            properties:
+              id:
+                type: string
+            type: object
+          type: array
+        on_success:
+          description: An optional list of notification IDs to call when the run completes
+            successfully. A maximum of 3 destinations can be specified for the `on_success`
+            property.
+          example:
+          - id: 03dd86e4-57ef-4818-a950-78e41a1d71ab
+          items:
+            properties:
+              id:
+                type: string
+            type: object
+          type: array
   securitySchemes:
     bearerAuth:
       bearerFormat: api_token
@@ -3465,6 +3556,14 @@ paths:
           example: 0
           minimum: 0
           type: integer
+      - description: A filter on the list based on the exact (case insensitive) job
+          name.
+        in: query
+        name: name
+        required: false
+        schema:
+          example: A%20multitask%20job
+          type: string
       - description: Whether to include task and cluster details in the response.
         in: query
         name: expand_tasks
@@ -3988,10 +4087,9 @@ paths:
       summary: Repair a job run
   /2.1/jobs/runs/submit:
     post:
-      description: "Submit a one-time run. This endpoint allows you to submit a workload\
-        \ directly without creating a job. Runs submitted using this endpoint don\u2019\
-        t display in the UI. Use the `jobs/runs/get` API to check the run state after\
-        \ the job is submitted."
+      description: Submit a one-time run. This endpoint allows you to submit a workload
+        directly without creating a job. Use the `jobs/runs/get` API to check the
+        run state after the job is submitted.
       operationId: JobsRunsSubmit
       requestBody:
         content:

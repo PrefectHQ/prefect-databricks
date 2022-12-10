@@ -8,7 +8,7 @@ Databricks jobs
 # is outdated, rerun scripts/generate.py.
 
 # OpenAPI spec: jobs-2.1-aws.yaml
-# Updated at: 2022-10-04T23:50:19.838014
+# Updated at: 2022-12-10T01:04:37.047265
 
 from typing import Any, Dict, List, Optional, Union  # noqa
 
@@ -83,6 +83,7 @@ async def jobs_create(
     tasks: Optional[List["models.JobTaskSettings"]] = None,
     job_clusters: Optional[List["models.JobCluster"]] = None,
     email_notifications: "models.JobEmailNotifications" = None,
+    webhook_notifications: "models.WebhookNotifications" = None,
     timeout_seconds: Optional[int] = None,
     schedule: "models.CronSchedule" = None,
     max_concurrent_runs: Optional[int] = None,
@@ -213,19 +214,51 @@ async def jobs_create(
                 ["user.name@databricks.com"]
                 ```
             - on_failure:
-                A list of email addresses to be notified when a run
-                unsuccessfully completes. A run is considered to have
-                completed unsuccessfully if it ends with an `INTERNAL_ERROR`
-                `life_cycle_state` or a `SKIPPED`, `FAILED`, or `TIMED_OUT`
-                result_state. If this is not specified on job creation,
-                reset, or update the list is empty, and notifications are
-                not sent, e.g.
+                A list of email addresses to notify when a run completes
+                unsuccessfully. A run is considered unsuccessful if it ends
+                with an `INTERNAL_ERROR` `life_cycle_state` or a `SKIPPED`,
+                `FAILED`, or `TIMED_OUT` `result_state`. If not specified on
+                job creation, reset, or update, or the list is empty, then
+                notifications are not sent. Job-level failure notifications
+                are sent only once after the entire job run (including all
+                of its retries) has failed. Notifications are not sent when
+                failed job runs are retried. To receive a failure
+                notification after every failed task (including every failed
+                retry), use task-level notifications instead, e.g.
                 ```
                 ["user.name@databricks.com"]
                 ```
             - no_alert_for_skipped_runs:
                 If true, do not send email to recipients specified in
                 `on_failure` if the run is skipped.
+        webhook_notifications:
+            A collection of system notification IDs to notify when runs of this job
+            begin or complete. The default behavior is to not send any
+            system notifications. Key-values:
+            - on_start:
+                An optional list of notification IDs to call when the run
+                starts. A maximum of 3 destinations can be specified for the
+                `on_start` property, e.g.
+                ```
+                [
+                    {"id": "03dd86e4-57ef-4818-a950-78e41a1d71ab"},
+                    {"id": "0481e838-0a59-4eff-9541-a4ca6f149574"},
+                ]
+                ```
+            - on_success:
+                An optional list of notification IDs to call when the run
+                completes successfully. A maximum of 3 destinations can be
+                specified for the `on_success` property, e.g.
+                ```
+                [{"id": "03dd86e4-57ef-4818-a950-78e41a1d71ab"}]
+                ```
+            - on_failure:
+                An optional list of notification IDs to call when the run
+                fails. A maximum of 3 destinations can be specified for the
+                `on_failure` property, e.g.
+                ```
+                [{"id": "0481e838-0a59-4eff-9541-a4ca6f149574"}]
+                ```
         timeout_seconds:
             An optional timeout applied to each run of this job. The default
             behavior is to have no timeout, e.g. `86400`.
@@ -333,6 +366,7 @@ async def jobs_create(
         "tasks": tasks,
         "job_clusters": job_clusters,
         "email_notifications": email_notifications,
+        "webhook_notifications": webhook_notifications,
         "timeout_seconds": timeout_seconds,
         "schedule": schedule,
         "max_concurrent_runs": max_concurrent_runs,
@@ -463,6 +497,7 @@ async def jobs_list(
     databricks_credentials: "DatabricksCredentials",
     limit: int = 20,
     offset: int = 0,
+    name: Optional[str] = None,
     expand_tasks: bool = False,
 ) -> Dict[str, Any]:  # pragma: no cover
     """
@@ -477,6 +512,8 @@ async def jobs_list(
         offset:
             The offset of the first job to return, relative to the most recently
             created job.
+        name:
+            A filter on the list based on the exact (case insensitive) job name.
         expand_tasks:
             Whether to include task and cluster details in the response.
 
@@ -506,6 +543,7 @@ async def jobs_list(
     params = {
         "limit": limit,
         "offset": offset,
+        "name": name,
         "expand_tasks": expand_tasks,
     }
 
@@ -659,6 +697,10 @@ async def jobs_reset(
                 An optional set of email addresses that is notified when
                 runs of this job begin or complete as well as when this job
                 is deleted. The default behavior is to not send any emails.
+            - webhook_notifications:
+                A collection of system notification IDs to notify when runs
+                of this job begin or complete. The default behavior is to
+                not send any system notifications.
             - timeout_seconds:
                 An optional timeout applied to each run of this job. The
                 default behavior is to have no timeout, e.g. `86400`.
@@ -1297,6 +1339,7 @@ async def jobs_runs_repair(
     run_id: Optional[int] = None,
     rerun_tasks: Optional[List[str]] = None,
     latest_repair_id: Optional[int] = None,
+    rerun_all_failed_tasks: bool = False,
     jar_params: Optional[List[str]] = None,
     notebook_params: Optional[Dict] = None,
     python_params: Optional[List[str]] = None,
@@ -1327,6 +1370,9 @@ async def jobs_runs_repair(
             repairing a run for the first time, but must be provided on
             subsequent requests to repair the same run, e.g.
             `734650698524280`.
+        rerun_all_failed_tasks:
+            If true, repair all failed tasks. Only one of rerun_tasks or
+            rerun_all_failed_tasks can be used.
         jar_params:
             A list of parameters for jobs with Spark JAR tasks, for example
             `'jar_params': ['john doe', '35']`. The parameters are used
@@ -1447,6 +1493,7 @@ async def jobs_runs_repair(
         "run_id": run_id,
         "rerun_tasks": rerun_tasks,
         "latest_repair_id": latest_repair_id,
+        "rerun_all_failed_tasks": rerun_all_failed_tasks,
         "jar_params": jar_params,
         "notebook_params": notebook_params,
         "python_params": python_params,
@@ -1473,6 +1520,7 @@ async def jobs_runs_submit(
     databricks_credentials: "DatabricksCredentials",
     tasks: Optional[List["models.RunSubmitTaskSettings"]] = None,
     run_name: Optional[str] = None,
+    webhook_notifications: "models.WebhookNotifications" = None,
     git_source: "models.GitSource" = None,
     timeout_seconds: Optional[int] = None,
     idempotency_token: Optional[str] = None,
@@ -1480,9 +1528,8 @@ async def jobs_runs_submit(
 ) -> Dict[str, Any]:  # pragma: no cover
     """
     Submit a one-time run. This endpoint allows you to submit a workload directly
-    without creating a job. Runs submitted using this endpoint don’t display in
-    the UI. Use the `jobs/runs/get` API to check the run state after the job is
-    submitted.
+    without creating a job. Use the `jobs/runs/get` API to check the run state
+    after the job is submitted.
 
     Args:
         databricks_credentials:
@@ -1544,6 +1591,34 @@ async def jobs_runs_submit(
         run_name:
             An optional name for the run. The default value is `Untitled`, e.g. `A
             multitask job run`.
+        webhook_notifications:
+            A collection of system notification IDs to notify when runs of this job
+            begin or complete. The default behavior is to not send any
+            system notifications. Key-values:
+            - on_start:
+                An optional list of notification IDs to call when the run
+                starts. A maximum of 3 destinations can be specified for the
+                `on_start` property, e.g.
+                ```
+                [
+                    {"id": "03dd86e4-57ef-4818-a950-78e41a1d71ab"},
+                    {"id": "0481e838-0a59-4eff-9541-a4ca6f149574"},
+                ]
+                ```
+            - on_success:
+                An optional list of notification IDs to call when the run
+                completes successfully. A maximum of 3 destinations can be
+                specified for the `on_success` property, e.g.
+                ```
+                [{"id": "03dd86e4-57ef-4818-a950-78e41a1d71ab"}]
+                ```
+            - on_failure:
+                An optional list of notification IDs to call when the run
+                fails. A maximum of 3 destinations can be specified for the
+                `on_failure` property, e.g.
+                ```
+                [{"id": "0481e838-0a59-4eff-9541-a4ca6f149574"}]
+                ```
         git_source:
             This functionality is in Public Preview.  An optional specification for
             a remote repository containing the notebooks used by this
@@ -1625,6 +1700,7 @@ async def jobs_runs_submit(
     json_payload = {
         "tasks": tasks,
         "run_name": run_name,
+        "webhook_notifications": webhook_notifications,
         "git_source": git_source,
         "timeout_seconds": timeout_seconds,
         "idempotency_token": idempotency_token,
@@ -1783,6 +1859,10 @@ async def jobs_update(
                 An optional set of email addresses that is notified when
                 runs of this job begin or complete as well as when this job
                 is deleted. The default behavior is to not send any emails.
+            - webhook_notifications:
+                A collection of system notification IDs to notify when runs
+                of this job begin or complete. The default behavior is to
+                not send any system notifications.
             - timeout_seconds:
                 An optional timeout applied to each run of this job. The
                 default behavior is to have no timeout, e.g. `86400`.
