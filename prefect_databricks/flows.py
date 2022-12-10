@@ -1,15 +1,25 @@
 """
 Module containing flows for interacting with Databricks
 """
-
 import asyncio
+import time
 from logging import Logger
-from typing import Any, Dict, List, Optional
+from typing import Any, Awaitable, Callable, Dict, List, Optional
 
 from prefect import flow, get_run_logger
+from prefect.blocks.abstract import JobBlock, JobRun
+from prefect.exceptions import JobRunIsRunning
+from prefect.utilities.asyncutils import sync_compatible
 
 from prefect_databricks import DatabricksCredentials
+from prefect_databricks.exceptions import (
+    DatabricksJobInternalError,
+    DatabricksJobRunTimedOut,
+    DatabricksJobSkipped,
+    DatabricksJobTerminated,
+)
 from prefect_databricks.jobs import (
+    jobs_run_now,
     jobs_runs_get,
     jobs_runs_get_output,
     jobs_runs_submit,
@@ -21,26 +31,6 @@ from prefect_databricks.models.jobs import (
     RunResultState,
     RunSubmitTaskSettings,
 )
-
-
-class DatabricksJobTerminated(Exception):
-    """Raised when Databricks jobs runs submit terminates"""
-
-
-class DatabricksJobSkipped(Exception):
-    """Raised when Databricks jobs runs submit skips"""
-
-
-class DatabricksJobInternalError(Exception):
-    """Raised when Databricks jobs runs submit encounters internal error"""
-
-
-class DatabricksJobRunTimedOut(Exception):
-    """
-    Raised when Databricks jobs runs does not complete in the configured max
-    wait seconds
-    """
-
 
 TERMINAL_STATUS_CODES = (
     RunLifeCycleState.terminated.value,
@@ -468,3 +458,380 @@ async def jobs_runs_wait_for_completion(
         f"Max wait time of {max_wait_seconds} seconds exceeded while waiting "
         f"for job run ({run_name} ID {multi_task_jobs_runs_id})"
     )
+
+
+class DatabricksJob(JobBlock):
+    """
+    Block that holds the information and methods to interact with a Databricks job.
+
+    Example:
+        Triggers a Databricks job, waits for completion, and fetches the results.
+        ```python
+        from prefect import flow
+        from prefect_databricks import DatabricksCredentials, DatabricksJob
+
+        @flow
+        def databricks_job_flow():
+            databricks_credentials = DatabricksCredentials.load("databricks-token")
+            databricks_job = DatabricksJob(
+                databricks_credentials=databricks_credentials,
+                job_id=154217
+            )
+            databricks_job_run = databricks_job.trigger()
+            databricks_job_run.wait_for_completion()
+            databricks_job_run.fetch_results()
+            return databricks_job_run
+
+        databricks_job_flow()
+        ```
+    """
+
+    databricks_credentials: DatabricksCredentials
+    job_id: int
+    timeout_seconds: int = 900
+    interval_seconds: int = 10
+
+    class DatabricksJobRun(JobRun):  # NOT A BLOCK
+        """
+        Class that holds the information and methods to interact
+        with the resulting run of a databricks job.
+        """
+
+        def __init__(self, run_id: int, databricks_job: "DatabricksJob"):
+            self.run_id = run_id
+            self._databricks_job = databricks_job
+            self._databricks_credentials = databricks_job.databricks_credentials
+
+        @property
+        def _log_prefix(self):
+            return f"Databricks job {self._databricks_job.job_id} run {self.run_id}."
+
+        async def _wait_until_state(
+            self,
+            in_final_state_fn: Awaitable[Callable],
+            get_state_fn: Awaitable[Callable],
+            log_state_fn: Callable = None,
+            timeout_seconds: int = 60,
+            interval_seconds: int = 1,
+        ):
+            """
+            Wait until the job run reaches a specific state.
+
+            Args:
+                in_final_state_fn: An async function that accepts a run state
+                    and returns a boolean indicating whether the job run is
+                    in a final state.
+                get_state_fn: An async function that returns
+                    the current state of the job run.
+                log_state_fn: A callable that accepts a run
+                    state and makes it human readable.
+                timeout_seconds: The maximum amount of time, in seconds, to wait
+                    for the job run to reach the final state.
+                interval_seconds: The number of seconds to wait between checks of
+                    the job run's state.
+            """
+            start_time = time.time()
+            last_state = run_state = None
+            while not in_final_state_fn(run_state):
+                run_state = await get_state_fn()
+                if run_state != last_state:
+                    if self.logger is not None:
+                        self.logger.info(
+                            "%s has new state: %s",
+                            self._log_prefix,
+                            log_state_fn(run_state),
+                        )
+                    last_state = run_state
+
+                elapsed_time_seconds = time.time() - start_time
+                if elapsed_time_seconds > timeout_seconds:
+                    raise DatabricksJobRunTimedOut(
+                        f"Max wait time of {timeout_seconds} "
+                        "seconds exceeded while waiting"
+                    )
+                await asyncio.sleep(interval_seconds)
+
+        @sync_compatible
+        async def get_run(self) -> Dict[str, Any]:
+            """
+            Makes a request to the Databricks API to get the run metadata.
+
+            Returns:
+                The run data.
+            """
+            return await jobs_runs_get.fn(
+                self.run_id, databricks_credentials=self._databricks_credentials
+            )
+
+        @sync_compatible
+        async def get_lifecycle_state(self) -> Dict[str, Any]:
+            """
+            Makes a request to the Databricks API to get the run metadata.
+
+            Returns:
+                The run data.
+            """
+            run = await self.get_run()
+            life_cycle_state = run["state"].get("life_cycle_state", "")
+            return life_cycle_state
+
+        @sync_compatible
+        async def wait_for_completion(self) -> None:
+            """
+            Waits for the job run to reach a terminal state.
+            """
+            run = self.get_run()
+            url = run.get("run_page_url", "")
+            self.logger.info(
+                f"{self._log_prefix} waiting for completion; "
+                f"you can view the status of this run at {url}"
+            )
+            await self._wait_until_state(
+                in_final_state_fn=lambda status_code: status_code
+                in TERMINAL_STATUS_CODES,
+                get_state_fn=self.get_lifecycle_state,
+                log_state_fn=RunLifeCycleState,
+                timeout_seconds=self._databricks_job.timeout_seconds,
+                interval_seconds=self._databricks_job.interval_seconds,
+            )
+
+        @sync_compatible
+        async def fetch_results(self, step: Optional[int] = None) -> Dict[str, Any]:
+            """
+            Gets the results from the job run. Since the results
+            may not be ready, use wait_for_completion before calling this method.
+            Args:
+                step: The index of the step in the run to query for artifacts. The
+                    first step in the run has the index 1. If the step parameter is
+                    omitted, then this method will return the artifacts compiled
+                    for the last step in the run.
+            """
+            run = await self.get_run()
+            life_cycle_state = run["state"].get("life_cycle_state", "")
+            state_message = run["state"].get("state_message", "")
+
+            if life_cycle_state == RunLifeCycleState.terminated.value:
+                result_state = run["state"].get("result_state", "")
+                if result_state == RunResultState.success.value:
+                    task_notebook_outputs = {}
+                    for task in run["tasks"]:
+                        task_key = task["task_key"]
+                        task_run_id = task["run_id"]
+                        task_run_output = await jobs_runs_get_output.fn(
+                            run_id=task_run_id,
+                            databricks_credentials=self._databricks_credentials,
+                        )
+                        task_run_notebook_output = task_run_output.get(
+                            "notebook_output", {}
+                        )
+                        task_notebook_outputs[task_key] = task_run_notebook_output
+                    self.logger.info("%s completed successfully!", self._log_prefix)
+                    return task_notebook_outputs
+                else:
+                    raise DatabricksJobTerminated(
+                        f"{self._log_prefix} was terminated with result state "
+                        f"{result_state}: {state_message}."
+                    )
+            elif life_cycle_state == RunLifeCycleState.skipped.value:
+                raise DatabricksJobSkipped(
+                    f"{self._log_prefix} was cancelled: {state_message}.",
+                )
+            elif life_cycle_state == RunLifeCycleState.internalerror.value:
+                raise DatabricksJobInternalError(
+                    f"{self._log_prefix} has encountered an internal error: "
+                    f"{state_message}.",
+                )
+            else:
+                raise JobRunIsRunning(
+                    f"{self._log_prefix} is still running; "
+                    "use wait_for_completion() to wait until results are ready."
+                )
+
+    # beginning of DatabricksJob methods
+    @sync_compatible
+    async def trigger(
+        self,
+        idempotency_token: Optional[str] = None,
+        jar_params: Optional[List[str]] = None,
+        notebook_params: Optional[Dict] = None,
+        python_params: Optional[List[str]] = None,
+        spark_submit_params: Optional[List[str]] = None,
+        python_named_params: Optional[Dict] = None,
+        pipeline_params: Optional[str] = None,
+        sql_params: Optional[Dict] = None,
+        dbt_commands: Optional[List] = None,
+    ) -> DatabricksJobRun:
+        """
+        Triggers a Databricks job.
+
+        Args:
+            databricks_credentials:
+                Credentials to use for authentication with Databricks.
+            job_id:
+                The ID of the job to be executed, e.g. `11223344`.
+            idempotency_token:
+                An optional token to guarantee the idempotency of job run requests. If a
+                run with the provided token already exists, the request does
+                not create a new run but returns the ID of the existing run
+                instead. If a run with the provided token is deleted, an
+                error is returned.  If you specify the idempotency token,
+                upon failure you can retry until the request succeeds.
+                Databricks guarantees that exactly one run is launched with
+                that idempotency token.  This token must have at most 64
+                characters.  For more information, see [How to ensure
+                idempotency for jobs](https://kb.databricks.com/jobs/jobs-
+                idempotency.html), e.g.
+                `8f018174-4792-40d5-bcbc-3e6a527352c8`.
+            jar_params:
+                A list of parameters for jobs with Spark JAR tasks, for example
+                `'jar_params': ['john doe', '35']`. The parameters are used
+                to invoke the main function of the main class specified in
+                the Spark JAR task. If not specified upon `run-now`, it
+                defaults to an empty list. jar_params cannot be specified in
+                conjunction with notebook_params. The JSON representation of
+                this field (for example `{'jar_params':['john doe','35']}`)
+                cannot exceed 10,000 bytes.  Use [Task parameter
+                variables](https://docs.databricks.com/jobs.html
+                parameter-variables) to set parameters containing
+                information about job runs, e.g.
+                ```
+                ["john", "doe", "35"]
+                ```
+            notebook_params:
+                A map from keys to values for jobs with notebook task, for example
+                `'notebook_params': {'name': 'john doe', 'age': '35'}`. The
+                map is passed to the notebook and is accessible through the
+                [dbutils.widgets.get](https://docs.databricks.com/dev-
+                tools/databricks-utils.html
+                dbutils-widgets) function.  If not specified upon `run-now`,
+                the triggered run uses the job’s base parameters.
+                notebook_params cannot be specified in conjunction with
+                jar_params.  Use [Task parameter
+                variables](https://docs.databricks.com/jobs.html
+                parameter-variables) to set parameters containing
+                information about job runs.  The JSON representation of this
+                field (for example `{'notebook_params':{'name':'john
+                doe','age':'35'}}`) cannot exceed 10,000 bytes, e.g.
+                ```
+                {"name": "john doe", "age": "35"}
+                ```
+            python_params:
+                A list of parameters for jobs with Python tasks, for example
+                `'python_params': ['john doe', '35']`. The parameters are
+                passed to Python file as command-line parameters. If
+                specified upon `run-now`, it would overwrite the parameters
+                specified in job setting. The JSON representation of this
+                field (for example `{'python_params':['john doe','35']}`)
+                cannot exceed 10,000 bytes.  Use [Task parameter
+                variables](https://docs.databricks.com/jobs.html
+                parameter-variables) to set parameters containing
+                information about job runs.  Important  These parameters
+                accept only Latin characters (ASCII character set). Using
+                non-ASCII characters returns an error. Examples of invalid,
+                non-ASCII characters are Chinese, Japanese kanjis, and
+                emojis, e.g.
+                ```
+                ["john doe", "35"]
+                ```
+            spark_submit_params:
+                A list of parameters for jobs with spark submit task, for example
+                `'spark_submit_params': ['--class',
+                'org.apache.spark.examples.SparkPi']`. The parameters are
+                passed to spark-submit script as command-line parameters. If
+                specified upon `run-now`, it would overwrite the parameters
+                specified in job setting. The JSON representation of this
+                field (for example `{'python_params':['john doe','35']}`)
+                cannot exceed 10,000 bytes.  Use [Task parameter
+                variables](https://docs.databricks.com/jobs.html
+                parameter-variables) to set parameters containing
+                information about job runs.  Important  These parameters
+                accept only Latin characters (ASCII character set). Using
+                non-ASCII characters returns an error. Examples of invalid,
+                non-ASCII characters are Chinese, Japanese kanjis, and
+                emojis, e.g.
+                ```
+                ["--class", "org.apache.spark.examples.SparkPi"]
+                ```
+            python_named_params:
+                A map from keys to values for jobs with Python wheel task, for example
+                `'python_named_params': {'name': 'task', 'data':
+                'dbfs:/path/to/data.json'}`, e.g.
+                ```
+                {"name": "task", "data": "dbfs:/path/to/data.json"}
+                ```
+            pipeline_params:
+
+            sql_params:
+                A map from keys to values for SQL tasks, for example `'sql_params':
+                {'name': 'john doe', 'age': '35'}`. The SQL alert task does
+                not support custom parameters, e.g.
+                ```
+                {"name": "john doe", "age": "35"}
+                ```
+            dbt_commands:
+                An array of commands to execute for jobs with the dbt task, for example
+                `'dbt_commands': ['dbt deps', 'dbt seed', 'dbt run']`, e.g.
+                ```
+                ["dbt deps", "dbt seed", "dbt run"]
+                ```
+
+        Returns:
+            A representation of the Databricks job run.
+        """
+        jobs_runs_now_kwargs = {
+            "job_id": self.job_id,
+            "idempotency_token": idempotency_token,
+            "jar_params": jar_params,
+            "notebook_params": notebook_params,
+            "python_params": python_params,
+            "spark_submit_params": spark_submit_params,
+            "python_named_params": python_named_params,
+            "pipeline_params": pipeline_params,
+            "sql_params": sql_params,
+            "dbt_commands": dbt_commands,
+        }
+        run_data = await jobs_run_now.fn(**jobs_runs_now_kwargs)
+        run_id = run_data.get("run_id")
+        run = self.DatabricksJobRun(
+            databricks_job=self,
+            run_id=run_id,
+        )
+
+        self.logger.info(
+            f"Databricks job {self.job_id} run {run_id} successfully triggered."
+        )
+        return run
+
+
+@flow
+async def trigger_wait_retry_databricks_job_run(
+    databricks_job: DatabricksJob,
+) -> Dict[str, Any]:
+    """
+    Flow that triggers and waits for a databricks job run, retrying a
+    subset of failed nodes if necessary.
+    Args:
+        databricks_job: Block that holds the information and
+            methods to interact with a databricks job.
+
+    Examples:
+        ```python
+        from prefect import flow
+        from prefect_databricks import DatabricksCredentials, DatabricksJob
+        from prefect_databricks.flows import trigger_wait_retry_databricks_job_run
+
+        @flow
+        def trigger_wait_retry_databricks_job_run_flow():
+            databricks_credentials = DatabricksCredentials.load("databricks-token")
+            databricks_job = DatabricksJob(
+                databricks_credentials=databricks_credentials, job_id=154217
+            )
+            return trigger_wait_retry_databricks_job_run(databricks_job=databricks_job)
+
+        trigger_wait_retry_databricks_job_run_flow()
+        ```
+    """
+    run = await databricks_job.trigger()
+    await run.wait_for_completion()
+    result = await run.fetch_results()
+    return result
