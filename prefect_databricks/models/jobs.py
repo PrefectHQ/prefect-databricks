@@ -2670,7 +2670,7 @@ class ViewItem(BaseModel):
     type: Optional[ViewType] = Field(None, description="Type of the view item.")
 
 
-class AccessControlRequest(BaseModel):
+class AccessControlRequest(AccessControlRequestForUser, AccessControlRequestForGroup):
     """
     See source code for the fields' description.
     """
@@ -2678,8 +2678,6 @@ class AccessControlRequest(BaseModel):
     class Config:
         extra = Extra.allow
         allow_mutation = False
-
-    __root__: Union[AccessControlRequestForUser, AccessControlRequestForGroup]
 
 
 class ClusterAttributes(BaseModel):
