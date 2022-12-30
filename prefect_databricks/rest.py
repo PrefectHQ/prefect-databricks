@@ -46,7 +46,9 @@ def serialize_model(obj: Any) -> Any:
         return {k: serialize_model(v) for k, v in obj.items()}
 
     if isinstance(obj, BaseModel):
-        obj = obj.dict()
+        return {k: serialize_model(v) for k, v in obj.dict().items()}
+    elif isinstance(obj, Enum):
+        return obj.value
     return obj
 
 
