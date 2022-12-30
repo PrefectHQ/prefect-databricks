@@ -170,7 +170,7 @@ class AwsAttributes(BaseModel):
     )
 
 
-class CanManage(Enum):
+class CanManage(str, Enum):
     """
     Permission to manage the job.
     """
@@ -178,7 +178,7 @@ class CanManage(Enum):
     canmanage = "CAN_MANAGE"
 
 
-class CanManageRun(Enum):
+class CanManageRun(str, Enum):
     """
     Permission to run and/or manage runs for the job.
     """
@@ -186,7 +186,7 @@ class CanManageRun(Enum):
     canmanagerun = "CAN_MANAGE_RUN"
 
 
-class CanView(Enum):
+class CanView(str, Enum):
     """
     Permission to view the settings of the job.
     """
@@ -194,7 +194,7 @@ class CanView(Enum):
     canview = "CAN_VIEW"
 
 
-class ClusterCloudProviderNodeStatus(Enum):
+class ClusterCloudProviderNodeStatus(str, Enum):
     """
         * NotEnabledOnSubscription: Node type not available for subscription.
     * NotAvailableInRegion: Node type not available in region.
@@ -205,7 +205,7 @@ class ClusterCloudProviderNodeStatus(Enum):
     not_available_in_region = "NotAvailableInRegion"
 
 
-class ClusterEventType(Enum):
+class ClusterEventType(str, Enum):
     """
         * `CREATING`: Indicates that the cluster is being created.
     * `DID_NOT_EXPAND_DISK`: Indicates that a disk is low on space, but adding disks would put it over the max capacity.
@@ -322,7 +322,7 @@ class ClusterSize(BaseModel):
     )
 
 
-class ClusterSource(Enum):
+class ClusterSource(str, Enum):
     """
         * UI: Cluster created through the UI.
     * JOB: Cluster created by the Databricks job scheduler.
@@ -335,7 +335,7 @@ class ClusterSource(Enum):
     api = "API"
 
 
-class ClusterState(Enum):
+class ClusterState(str, Enum):
     """
         * PENDING: Indicates that a cluster is in the process of being created.
     * RUNNING: Indicates that a cluster has been started and is ready for use.
@@ -713,7 +713,7 @@ class GroupName(BaseModel):
     )
 
 
-class IsOwner(Enum):
+class IsOwner(str, Enum):
     """
     Perimssion that represents ownership of the job.
     """
@@ -776,7 +776,7 @@ class JobEmailNotifications(BaseModel):
     )
 
 
-class LibraryInstallStatus(Enum):
+class LibraryInstallStatus(str, Enum):
     """
         * `PENDING`: No action has yet been taken to install the library. This state should be very short lived.
     * `RESOLVING`: Metadata necessary to install the library is being retrieved from the provided repository. For Jar, Egg, and Whl libraries, this step is a no-op.
@@ -796,7 +796,7 @@ class LibraryInstallStatus(Enum):
     uninstallonrestart = "UNINSTALL_ON_RESTART"
 
 
-class ListOrder(Enum):
+class ListOrder(str, Enum):
     """
         * `DESC`: Descending order.
     * `ASC`: Ascending order.
@@ -1006,7 +1006,7 @@ class PipelineTask(BaseModel):
     )
 
 
-class PoolClusterTerminationCode(Enum):
+class PoolClusterTerminationCode(str, Enum):
     """
         * INSTANCE_POOL_MAX_CAPACITY_FAILURE: The pool max capacity has been reached.
     * INSTANCE_POOL_NOT_FOUND_FAILURE: The pool specified by the cluster is no longer active or doesn’t exist.
@@ -1146,7 +1146,7 @@ class RepairRunInput(BaseModel):
     )
 
 
-class ResizeCause(Enum):
+class ResizeCause(str, Enum):
     """
         * `AUTOSCALE`: Automatically resized based on load.
     * `USER_REQUEST`: User requested a new size.
@@ -1158,7 +1158,7 @@ class ResizeCause(Enum):
     autorecovery = "AUTORECOVERY"
 
 
-class RunLifeCycleState(Enum):
+class RunLifeCycleState(str, Enum):
     """
         * `PENDING`: The run has been triggered. If there is not already an active run of the same job, the cluster and execution context are being prepared. If there is already an active run of the same job, the run immediately transitions into the `SKIPPED` state without preparing any resources.
     * `RUNNING`: The task of this run is being executed.
@@ -1332,7 +1332,7 @@ class RunParameters(BaseModel):
     )
 
 
-class RunResultState(Enum):
+class RunResultState(str, Enum):
     """
         * `SUCCESS`: The task completed successfully.
     * `FAILED`: The task completed with an error.
@@ -1383,7 +1383,7 @@ class RunState(BaseModel):
     )
 
 
-class RunType(Enum):
+class RunType(str, Enum):
     """
         The type of the run.
     * `JOB_RUN` \- Normal job run. A run created with [Run now](https://docs.databricks.com/dev-tools/api/latest/jobs.html#operation/JobsRunNow).
@@ -1785,7 +1785,7 @@ class TaskKey(BaseModel):
     )
 
 
-class TerminationCode(Enum):
+class TerminationCode(str, Enum):
     """
         * USER_REQUEST: A user terminated the cluster directly. Parameters should include a `username` field that indicates the specific user who terminated the cluster.
     * JOB_FINISHED: The cluster was launched by a job, and terminated when the job completed.
@@ -1936,7 +1936,7 @@ class TerminationParameter(BaseModel):
     )
 
 
-class TerminationType(Enum):
+class TerminationType(str, Enum):
     """
         * SUCCESS: Termination succeeded.
     * CLIENT_ERROR: Non-retriable. Client must fix parameters before reattempting the cluster creation.
@@ -1951,7 +1951,7 @@ class TerminationType(Enum):
     cloudfailure = "CLOUD_FAILURE"
 
 
-class TriggerType(Enum):
+class TriggerType(str, Enum):
     """
         * `PERIODIC`: Schedules that periodically trigger runs, such as a cron scheduler.
     * `ONE_TIME`: One time triggers that fire a single run. This occurs you triggered a single run on demand through the UI or the API.
@@ -1977,7 +1977,7 @@ class UserName(BaseModel):
     )
 
 
-class ViewType(Enum):
+class ViewType(str, Enum):
     """
         * `NOTEBOOK`: Notebook view item.
     * `DASHBOARD`: Dashboard view item.
@@ -1987,7 +1987,7 @@ class ViewType(Enum):
     dashboard = "DASHBOARD"
 
 
-class ViewsToExport(Enum):
+class ViewsToExport(str, Enum):
     """
         * `CODE`: Code view of the notebook.
     * `DASHBOARDS`: All dashboard views of the notebook.
@@ -2779,7 +2779,7 @@ class ViewItem(BaseModel):
     type: Optional[ViewType] = Field(None, description="Type of the view item.")
 
 
-class AccessControlRequest(BaseModel):
+class AccessControlRequest(AccessControlRequestForUser, AccessControlRequestForGroup):
     """
     See source code for the fields' description.
     """
@@ -2787,8 +2787,6 @@ class AccessControlRequest(BaseModel):
     class Config:
         extra = Extra.allow
         allow_mutation = False
-
-    __root__: Union[AccessControlRequestForUser, AccessControlRequestForGroup]
 
 
 class ClusterAttributes(BaseModel):
