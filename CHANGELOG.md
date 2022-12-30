@@ -26,7 +26,7 @@ Released on December 30th, 2022.
 ### Fixed
 
 - Type annotations in `jobs_runs_submit_and_wait_for_completion` and allowing `run_name=None` in `jobs_runs_wait_for_completion` flows - [#32](https://github.com/PrefectHQ/prefect-databricks/pull/32).
-- Serialization of ACL permission objects and `AccessControlRequest` - [#49](https://github.com/PrefectHQ/prefect-databricks/issues/49).
+- Serialization of ACL permission objects and `AccessControlRequest` - [#51](https://github.com/PrefectHQ/prefect-databricks/pull/51).
 
 ## 0.1.3
 
