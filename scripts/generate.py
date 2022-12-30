@@ -32,7 +32,7 @@ REPO_DIRECTORY = THIS_DIRECTORY.parent
 
 # UPDATE THESE AS DESIRED
 service_name = "Databricks"
-urls = ["https://docs.databricks.com/_static/api-refs/jobs-2.1-aws.yaml"]
+urls = ["https://docs.databricks.com/_extras/api-refs/jobs-2.1-aws.yaml"]
 routes = None
 overwrite = True
 
