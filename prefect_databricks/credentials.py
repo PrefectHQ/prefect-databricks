@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional
 
 from httpx import AsyncClient
 from prefect.blocks.core import Block
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 
 
 class DatabricksCredentials(Block):
@@ -15,6 +15,7 @@ class DatabricksCredentials(Block):
         databricks_instance:
             Databricks instance used in formatting the endpoint URL.
         token: The token to authenticate with Databricks.
+        client_kwargs: Additional keyword arguments to pass to AsyncClient.
 
     Examples:
         Load stored Databricks credentials:
@@ -27,9 +28,16 @@ class DatabricksCredentials(Block):
     _block_type_name = "Databricks Credentials"
     _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/5GTHI1PH2dTiantfps6Fnc/1c750fab7f4c14ea1b93a62b9fea6a94/databricks_logo_icon_170295.png?h=250"  # noqa
 
-    databricks_instance: str
-    token: SecretStr
-    client_kwargs: Optional[Dict[str, Any]] = None
+    databricks_instance: str = Field(
+        default=...,
+        description="Databricks instance used in formatting the endpoint URL.",
+    )
+    token: SecretStr = Field(
+        default=..., description="The token to authenticate with Databricks."
+    )
+    client_kwargs: Optional[Dict[str, Any]] = Field(
+        default=None, description="Additional keyword arguments to pass to AsyncClient."
+    )
 
     def get_client(self) -> AsyncClient:
         """
