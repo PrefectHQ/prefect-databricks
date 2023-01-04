@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://PrefectHQ.github.io/prefect-databricks/jobs/">
       
+      
+        <link rel="prev" href="../credentials/">
+      
+      
+        <link rel="next" href="../rest/">
+      
       <link rel="icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.2">
     
     
       
@@ -19,15 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7a952b86.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.f56500e0.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#2094f3">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -59,12 +60,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue" data-md-color-accent="blue">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -88,7 +93,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="prefect-databricks" class="md-header__button md-logo" aria-label="prefect-databricks" data-md-component="logo">
       
-  <img src="../img/prefect-logo-white.png" alt="logo">
+  <img src="../img/prefect-logo-mark-solid-white-500.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -110,6 +115,34 @@
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_3">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -151,7 +184,7 @@
         <a href="https://github.com/PrefectHQ/prefect-databricks" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -185,7 +218,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="prefect-databricks" class="md-nav__button md-logo" aria-label="prefect-databricks" data-md-component="logo">
       
-  <img src="../img/prefect-logo-white.png" alt="logo">
+  <img src="../img/prefect-logo-mark-solid-white-500.png" alt="logo">
 
     </a>
     prefect-databricks
@@ -195,7 +228,7 @@
       <a href="https://github.com/PrefectHQ/prefect-databricks" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -277,114 +310,134 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#prefect_databricks.jobs-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.jobs-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_create" class="md-nav__link">
     jobs_create()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_delete" class="md-nav__link">
     jobs_delete()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_get" class="md-nav__link">
     jobs_get()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_list" class="md-nav__link">
     jobs_list()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_reset" class="md-nav__link">
     jobs_reset()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_run_now" class="md-nav__link">
     jobs_run_now()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_cancel" class="md-nav__link">
     jobs_runs_cancel()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_cancel_all" class="md-nav__link">
     jobs_runs_cancel_all()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_delete" class="md-nav__link">
     jobs_runs_delete()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_export" class="md-nav__link">
     jobs_runs_export()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_get" class="md-nav__link">
     jobs_runs_get()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_get_output" class="md-nav__link">
     jobs_runs_get_output()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_list" class="md-nav__link">
     jobs_runs_list()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_repair" class="md-nav__link">
     jobs_runs_repair()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_submit" class="md-nav__link">
     jobs_runs_submit()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_update" class="md-nav__link">
     jobs_update()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -501,114 +554,134 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#prefect_databricks.jobs-classes" class="md-nav__link">
+    Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prefect_databricks.jobs-functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_create" class="md-nav__link">
     jobs_create()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_delete" class="md-nav__link">
     jobs_delete()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_get" class="md-nav__link">
     jobs_get()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_list" class="md-nav__link">
     jobs_list()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_reset" class="md-nav__link">
     jobs_reset()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_run_now" class="md-nav__link">
     jobs_run_now()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_cancel" class="md-nav__link">
     jobs_runs_cancel()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_cancel_all" class="md-nav__link">
     jobs_runs_cancel_all()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_delete" class="md-nav__link">
     jobs_runs_delete()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_export" class="md-nav__link">
     jobs_runs_export()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_get" class="md-nav__link">
     jobs_runs_get()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_get_output" class="md-nav__link">
     jobs_runs_get_output()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_list" class="md-nav__link">
     jobs_runs_list()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_repair" class="md-nav__link">
     jobs_runs_repair()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_runs_submit" class="md-nav__link">
     jobs_runs_submit()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#prefect_databricks.jobs.jobs_update" class="md-nav__link">
     jobs_update()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -626,10 +699,9 @@
                 
                   
 
-  <a href="https://github.com/edit/main/docs/jobs.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <div class="doc doc-object doc-module">
@@ -656,21 +728,21 @@ Databricks jobs</p>
 
 
 
-
-
+<h2 id="prefect_databricks.jobs-classes">Classes</h2>
+<h2 id="prefect_databricks.jobs-functions">Functions</h2>
 
 <div class="doc doc-object doc-function">
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_create" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_create" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_create</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -726,7 +798,7 @@ tags can be added to the job, e.g.
         <tr>
           <td><code>tasks</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="models.JobTaskSettings">JobTaskSettings</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="models.JobTaskSettings">JobTaskSettings</span>]]</code>
           </td>
           <td><p>A list of task specifications to be executed by this job, e.g.
 <div class="highlight"><pre><span></span><code>[
@@ -796,7 +868,7 @@ tags can be added to the job, e.g.
         <tr>
           <td><code>job_clusters</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="models.JobCluster">JobCluster</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="models.JobCluster">JobCluster</span>]]</code>
           </td>
           <td><p>A list of job cluster specifications that can be shared and reused by
 tasks of this job. Libraries cannot be declared in a shared
@@ -846,13 +918,17 @@ The default behavior is to not send any emails. Key-values:
     <div class="highlight"><pre><span></span><code>[&quot;user.name@databricks.com&quot;]
 </code></pre></div>
 - on_failure:
-    A list of email addresses to be notified when a run
-    unsuccessfully completes. A run is considered to have
-    completed unsuccessfully if it ends with an <code>INTERNAL_ERROR</code>
-    <code>life_cycle_state</code> or a <code>SKIPPED</code>, <code>FAILED</code>, or <code>TIMED_OUT</code>
-    result_state. If this is not specified on job creation,
-    reset, or update the list is empty, and notifications are
-    not sent, e.g.
+    A list of email addresses to notify when a run completes
+    unsuccessfully. A run is considered unsuccessful if it ends
+    with an <code>INTERNAL_ERROR</code> <code>life_cycle_state</code> or a <code>SKIPPED</code>,
+    <code>FAILED</code>, or <code>TIMED_OUT</code> <code>result_state</code>. If not specified on
+    job creation, reset, or update, or the list is empty, then
+    notifications are not sent. Job-level failure notifications
+    are sent only once after the entire job run (including all
+    of its retries) has failed. Notifications are not sent when
+    failed job runs are retried. To receive a failure
+    notification after every failed task (including every failed
+    retry), use task-level notifications instead, e.g.
     <div class="highlight"><pre><span></span><code>[&quot;user.name@databricks.com&quot;]
 </code></pre></div>
 - no_alert_for_skipped_runs:
@@ -863,9 +939,42 @@ The default behavior is to not send any emails. Key-values:
           </td>
         </tr>
         <tr>
+          <td><code>webhook_notifications</code></td>
+          <td>
+                <code><span title="models.WebhookNotifications">WebhookNotifications</span></code>
+          </td>
+          <td><p>A collection of system notification IDs to notify when runs of this job
+begin or complete. The default behavior is to not send any
+system notifications. Key-values:
+- on_start:
+    An optional list of notification IDs to call when the run
+    starts. A maximum of 3 destinations can be specified for the
+    <code>on_start</code> property, e.g.
+    <div class="highlight"><pre><span></span><code>[
+    {&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;},
+    {&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;},
+]
+</code></pre></div>
+- on_success:
+    An optional list of notification IDs to call when the run
+    completes successfully. A maximum of 3 destinations can be
+    specified for the <code>on_success</code> property, e.g.
+    <div class="highlight"><pre><span></span><code>[{&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;}]
+</code></pre></div>
+- on_failure:
+    An optional list of notification IDs to call when the run
+    fails. A maximum of 3 destinations can be specified for the
+    <code>on_failure</code> property, e.g.
+    <div class="highlight"><pre><span></span><code>[{&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;}]
+</code></pre></div></p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
           <td><code>timeout_seconds</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>An optional timeout applied to each run of this job. The default
 behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
@@ -901,7 +1010,7 @@ the Jobs UI or sending an API request to <code>runNow</code>. Key-values:
         <tr>
           <td><code>max_concurrent_runs</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>An optional maximum allowed number of concurrent runs of the job.  Set
 this value if you want to be able to execute multiple runs
@@ -966,7 +1075,7 @@ job's notebook tasks, e.g.
         <tr>
           <td><code>format</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td><p>Used to tell what is the format of the job. This field is ignored in
 Create/Update/Reset calls. When using the Jobs API 2.1 this
@@ -978,7 +1087,7 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
         <tr>
           <td><code>access_control_list</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="models.AccessControlRequest">AccessControlRequest</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="models.AccessControlRequest">AccessControlRequest</span>]]</code>
           </td>
           <td><p>List of permissions to set on the job.</p></td>
           <td>
@@ -1311,22 +1420,57 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
 <span class="normal">349</span>
 <span class="normal">350</span>
 <span class="normal">351</span>
-<span class="normal">352</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_create</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Untitled&quot;</span><span class="p">,</span>
     <span class="n">tags</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.JobTaskSettings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">job_clusters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.JobCluster&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tasks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.JobTaskSettings&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_clusters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.JobCluster&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">email_notifications</span><span class="p">:</span> <span class="s2">&quot;models.JobEmailNotifications&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">timeout_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">webhook_notifications</span><span class="p">:</span> <span class="s2">&quot;models.WebhookNotifications&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">schedule</span><span class="p">:</span> <span class="s2">&quot;models.CronSchedule&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">max_concurrent_runs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_concurrent_runs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">git_source</span><span class="p">:</span> <span class="s2">&quot;models.GitSource&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">access_control_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.AccessControlRequest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">access_control_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.AccessControlRequest&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a new job.</span>
 
 <span class="sd">    Args:</span>
@@ -1449,19 +1593,51 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
 <span class="sd">                [&quot;user.name@databricks.com&quot;]</span>
 <span class="sd">                ```</span>
 <span class="sd">            - on_failure:</span>
-<span class="sd">                A list of email addresses to be notified when a run</span>
-<span class="sd">                unsuccessfully completes. A run is considered to have</span>
-<span class="sd">                completed unsuccessfully if it ends with an `INTERNAL_ERROR`</span>
-<span class="sd">                `life_cycle_state` or a `SKIPPED`, `FAILED`, or `TIMED_OUT`</span>
-<span class="sd">                result_state. If this is not specified on job creation,</span>
-<span class="sd">                reset, or update the list is empty, and notifications are</span>
-<span class="sd">                not sent, e.g.</span>
+<span class="sd">                A list of email addresses to notify when a run completes</span>
+<span class="sd">                unsuccessfully. A run is considered unsuccessful if it ends</span>
+<span class="sd">                with an `INTERNAL_ERROR` `life_cycle_state` or a `SKIPPED`,</span>
+<span class="sd">                `FAILED`, or `TIMED_OUT` `result_state`. If not specified on</span>
+<span class="sd">                job creation, reset, or update, or the list is empty, then</span>
+<span class="sd">                notifications are not sent. Job-level failure notifications</span>
+<span class="sd">                are sent only once after the entire job run (including all</span>
+<span class="sd">                of its retries) has failed. Notifications are not sent when</span>
+<span class="sd">                failed job runs are retried. To receive a failure</span>
+<span class="sd">                notification after every failed task (including every failed</span>
+<span class="sd">                retry), use task-level notifications instead, e.g.</span>
 <span class="sd">                ```</span>
 <span class="sd">                [&quot;user.name@databricks.com&quot;]</span>
 <span class="sd">                ```</span>
 <span class="sd">            - no_alert_for_skipped_runs:</span>
 <span class="sd">                If true, do not send email to recipients specified in</span>
 <span class="sd">                `on_failure` if the run is skipped.</span>
+<span class="sd">        webhook_notifications:</span>
+<span class="sd">            A collection of system notification IDs to notify when runs of this job</span>
+<span class="sd">            begin or complete. The default behavior is to not send any</span>
+<span class="sd">            system notifications. Key-values:</span>
+<span class="sd">            - on_start:</span>
+<span class="sd">                An optional list of notification IDs to call when the run</span>
+<span class="sd">                starts. A maximum of 3 destinations can be specified for the</span>
+<span class="sd">                `on_start` property, e.g.</span>
+<span class="sd">                ```</span>
+<span class="sd">                [</span>
+<span class="sd">                    {&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;},</span>
+<span class="sd">                    {&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;},</span>
+<span class="sd">                ]</span>
+<span class="sd">                ```</span>
+<span class="sd">            - on_success:</span>
+<span class="sd">                An optional list of notification IDs to call when the run</span>
+<span class="sd">                completes successfully. A maximum of 3 destinations can be</span>
+<span class="sd">                specified for the `on_success` property, e.g.</span>
+<span class="sd">                ```</span>
+<span class="sd">                [{&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;}]</span>
+<span class="sd">                ```</span>
+<span class="sd">            - on_failure:</span>
+<span class="sd">                An optional list of notification IDs to call when the run</span>
+<span class="sd">                fails. A maximum of 3 destinations can be specified for the</span>
+<span class="sd">                `on_failure` property, e.g.</span>
+<span class="sd">                ```</span>
+<span class="sd">                [{&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;}]</span>
+<span class="sd">                ```</span>
 <span class="sd">        timeout_seconds:</span>
 <span class="sd">            An optional timeout applied to each run of this job. The default</span>
 <span class="sd">            behavior is to have no timeout, e.g. `86400`.</span>
@@ -1569,6 +1745,7 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
         <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="n">tasks</span><span class="p">,</span>
         <span class="s2">&quot;job_clusters&quot;</span><span class="p">:</span> <span class="n">job_clusters</span><span class="p">,</span>
         <span class="s2">&quot;email_notifications&quot;</span><span class="p">:</span> <span class="n">email_notifications</span><span class="p">,</span>
+        <span class="s2">&quot;webhook_notifications&quot;</span><span class="p">:</span> <span class="n">webhook_notifications</span><span class="p">,</span>
         <span class="s2">&quot;timeout_seconds&quot;</span><span class="p">:</span> <span class="n">timeout_seconds</span><span class="p">,</span>
         <span class="s2">&quot;schedule&quot;</span><span class="p">:</span> <span class="n">schedule</span><span class="p">,</span>
         <span class="s2">&quot;max_concurrent_runs&quot;</span><span class="p">:</span> <span class="n">max_concurrent_runs</span><span class="p">,</span>
@@ -1596,14 +1773,14 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_delete" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_delete" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_delete</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -1634,7 +1811,7 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
         <tr>
           <td><code>job_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The canonical identifier of the job to delete. This field is required,
 e.g. <code>11223344</code>.</p></td>
@@ -1694,41 +1871,7 @@ e.g. <code>11223344</code>.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">355</span>
-<span class="normal">356</span>
-<span class="normal">357</span>
-<span class="normal">358</span>
-<span class="normal">359</span>
-<span class="normal">360</span>
-<span class="normal">361</span>
-<span class="normal">362</span>
-<span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">389</span>
 <span class="normal">390</span>
 <span class="normal">391</span>
 <span class="normal">392</span>
@@ -1744,12 +1887,46 @@ e.g. <code>11223344</code>.</p></td>
 <span class="normal">402</span>
 <span class="normal">403</span>
 <span class="normal">404</span>
-<span class="normal">405</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_delete</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Deletes a job.</span>
 
 <span class="sd">    Args:</span>
@@ -1805,14 +1982,14 @@ e.g. <code>11223344</code>.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_get" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_get" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_get</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -1903,41 +2080,7 @@ field is required.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">442</span>
 <span class="normal">443</span>
 <span class="normal">444</span>
 <span class="normal">445</span>
@@ -1953,12 +2096,46 @@ field is required.</p></td>
 <span class="normal">455</span>
 <span class="normal">456</span>
 <span class="normal">457</span>
-<span class="normal">458</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_get</span><span class="p">(</span>
     <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieves the details for a single job.</span>
 
 <span class="sd">    Args:</span>
@@ -2014,14 +2191,14 @@ field is required.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_list" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_list" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_list</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -2069,6 +2246,16 @@ or equal to 25. The default value is 20.</p></td>
 created job.</p></td>
           <td>
                 <code>0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>name</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>A filter on the list based on the exact (case insensitive) job name.</p></td>
+          <td>
+                <code>None</code>
           </td>
         </tr>
         <tr>
@@ -2133,41 +2320,7 @@ created job.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">461</span>
-<span class="normal">462</span>
-<span class="normal">463</span>
-<span class="normal">464</span>
-<span class="normal">465</span>
-<span class="normal">466</span>
-<span class="normal">467</span>
-<span class="normal">468</span>
-<span class="normal">469</span>
-<span class="normal">470</span>
-<span class="normal">471</span>
-<span class="normal">472</span>
-<span class="normal">473</span>
-<span class="normal">474</span>
-<span class="normal">475</span>
-<span class="normal">476</span>
-<span class="normal">477</span>
-<span class="normal">478</span>
-<span class="normal">479</span>
-<span class="normal">480</span>
-<span class="normal">481</span>
-<span class="normal">482</span>
-<span class="normal">483</span>
-<span class="normal">484</span>
-<span class="normal">485</span>
-<span class="normal">486</span>
-<span class="normal">487</span>
-<span class="normal">488</span>
-<span class="normal">489</span>
-<span class="normal">490</span>
-<span class="normal">491</span>
-<span class="normal">492</span>
-<span class="normal">493</span>
-<span class="normal">494</span>
-<span class="normal">495</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">495</span>
 <span class="normal">496</span>
 <span class="normal">497</span>
 <span class="normal">498</span>
@@ -2192,14 +2345,53 @@ created job.</p></td>
 <span class="normal">517</span>
 <span class="normal">518</span>
 <span class="normal">519</span>
-<span class="normal">520</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_list</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
     <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">expand_tasks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieves a list of jobs.</span>
 
 <span class="sd">    Args:</span>
@@ -2211,6 +2403,8 @@ created job.</p></td>
 <span class="sd">        offset:</span>
 <span class="sd">            The offset of the first job to return, relative to the most recently</span>
 <span class="sd">            created job.</span>
+<span class="sd">        name:</span>
+<span class="sd">            A filter on the list based on the exact (case insensitive) job name.</span>
 <span class="sd">        expand_tasks:</span>
 <span class="sd">            Whether to include task and cluster details in the response.</span>
 
@@ -2240,6 +2434,7 @@ created job.</p></td>
     <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">limit</span><span class="p">,</span>
         <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">offset</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
         <span class="s2">&quot;expand_tasks&quot;</span><span class="p">:</span> <span class="n">expand_tasks</span><span class="p">,</span>
     <span class="p">}</span>
 
@@ -2262,14 +2457,14 @@ created job.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_reset" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_reset" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_reset</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -2301,7 +2496,7 @@ update job settings partially.</p>
         <tr>
           <td><code>job_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The canonical identifier of the job to reset. This field is required,
 e.g. <code>11223344</code>.</p></td>
@@ -2433,6 +2628,10 @@ Changes to other fields are applied to future runs only. Key-values:
     An optional set of email addresses that is notified when
     runs of this job begin or complete as well as when this job
     is deleted. The default behavior is to not send any emails.
+- webhook_notifications:
+    A collection of system notification IDs to notify when runs
+    of this job begin or complete. The default behavior is to
+    not send any system notifications.
 - timeout_seconds:
     An optional timeout applied to each run of this job. The
     default behavior is to have no timeout, e.g. <code>86400</code>.
@@ -2528,45 +2727,7 @@ Changes to other fields are applied to future runs only. Key-values:
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">523</span>
-<span class="normal">524</span>
-<span class="normal">525</span>
-<span class="normal">526</span>
-<span class="normal">527</span>
-<span class="normal">528</span>
-<span class="normal">529</span>
-<span class="normal">530</span>
-<span class="normal">531</span>
-<span class="normal">532</span>
-<span class="normal">533</span>
-<span class="normal">534</span>
-<span class="normal">535</span>
-<span class="normal">536</span>
-<span class="normal">537</span>
-<span class="normal">538</span>
-<span class="normal">539</span>
-<span class="normal">540</span>
-<span class="normal">541</span>
-<span class="normal">542</span>
-<span class="normal">543</span>
-<span class="normal">544</span>
-<span class="normal">545</span>
-<span class="normal">546</span>
-<span class="normal">547</span>
-<span class="normal">548</span>
-<span class="normal">549</span>
-<span class="normal">550</span>
-<span class="normal">551</span>
-<span class="normal">552</span>
-<span class="normal">553</span>
-<span class="normal">554</span>
-<span class="normal">555</span>
-<span class="normal">556</span>
-<span class="normal">557</span>
-<span class="normal">558</span>
-<span class="normal">559</span>
-<span class="normal">560</span>
-<span class="normal">561</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">561</span>
 <span class="normal">562</span>
 <span class="normal">563</span>
 <span class="normal">564</span>
@@ -2744,13 +2905,55 @@ Changes to other fields are applied to future runs only. Key-values:
 <span class="normal">736</span>
 <span class="normal">737</span>
 <span class="normal">738</span>
-<span class="normal">739</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">739</span>
+<span class="normal">740</span>
+<span class="normal">741</span>
+<span class="normal">742</span>
+<span class="normal">743</span>
+<span class="normal">744</span>
+<span class="normal">745</span>
+<span class="normal">746</span>
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span>
+<span class="normal">759</span>
+<span class="normal">760</span>
+<span class="normal">761</span>
+<span class="normal">762</span>
+<span class="normal">763</span>
+<span class="normal">764</span>
+<span class="normal">765</span>
+<span class="normal">766</span>
+<span class="normal">767</span>
+<span class="normal">768</span>
+<span class="normal">769</span>
+<span class="normal">770</span>
+<span class="normal">771</span>
+<span class="normal">772</span>
+<span class="normal">773</span>
+<span class="normal">774</span>
+<span class="normal">775</span>
+<span class="normal">776</span>
+<span class="normal">777</span>
+<span class="normal">778</span>
+<span class="normal">779</span>
+<span class="normal">780</span>
+<span class="normal">781</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_reset</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">new_settings</span><span class="p">:</span> <span class="s2">&quot;models.JobSettings&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Overwrites all the settings for a specific job. Use the Update endpoint to</span>
 <span class="sd">    update job settings partially.</span>
 
@@ -2883,6 +3086,10 @@ Changes to other fields are applied to future runs only. Key-values:
 <span class="sd">                An optional set of email addresses that is notified when</span>
 <span class="sd">                runs of this job begin or complete as well as when this job</span>
 <span class="sd">                is deleted. The default behavior is to not send any emails.</span>
+<span class="sd">            - webhook_notifications:</span>
+<span class="sd">                A collection of system notification IDs to notify when runs</span>
+<span class="sd">                of this job begin or complete. The default behavior is to</span>
+<span class="sd">                not send any system notifications.</span>
 <span class="sd">            - timeout_seconds:</span>
 <span class="sd">                An optional timeout applied to each run of this job. The</span>
 <span class="sd">                default behavior is to have no timeout, e.g. `86400`.</span>
@@ -2971,14 +3178,14 @@ Changes to other fields are applied to future runs only. Key-values:
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_run_now" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_run_now" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_run_now</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -3009,7 +3216,7 @@ Changes to other fields are applied to future runs only. Key-values:
         <tr>
           <td><code>job_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The ID of the job to be executed, e.g. <code>11223344</code>.</p></td>
           <td>
@@ -3019,7 +3226,7 @@ Changes to other fields are applied to future runs only. Key-values:
         <tr>
           <td><code>idempotency_token</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td><p>An optional token to guarantee the idempotency of job run requests. If a
 run with the provided token already exists, the request does
@@ -3040,7 +3247,7 @@ idempotency for jobs</a>, e.g.
         <tr>
           <td><code>jar_params</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>A list of parameters for jobs with Spark JAR tasks, for example
 <code>'jar_params': ['john doe', '35']</code>. The parameters are used
@@ -3062,7 +3269,7 @@ information about job runs, e.g.
         <tr>
           <td><code>notebook_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
           <td><p>A map from keys to values for jobs with notebook task, for example
 <code>'notebook_params': {'name': 'john doe', 'age': '35'}</code>. The
@@ -3087,7 +3294,7 @@ doe','age':'35'}}</code>) cannot exceed 10,000 bytes, e.g.
         <tr>
           <td><code>python_params</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>A list of parameters for jobs with Python tasks, for example
 <code>'python_params': ['john doe', '35']</code>. The parameters are
@@ -3112,7 +3319,7 @@ emojis, e.g.
         <tr>
           <td><code>spark_submit_params</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>A list of parameters for jobs with spark submit task, for example
 <code>'spark_submit_params': ['--class',
@@ -3138,7 +3345,7 @@ emojis, e.g.
         <tr>
           <td><code>python_named_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
           <td><p>A map from keys to values for jobs with Python wheel task, for example
 <code>'python_named_params': {'name': 'task', 'data':
@@ -3152,7 +3359,7 @@ emojis, e.g.
         <tr>
           <td><code>pipeline_params</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td></td>
           <td>
@@ -3162,7 +3369,7 @@ emojis, e.g.
         <tr>
           <td><code>sql_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
           <td><p>A map from keys to values for SQL tasks, for example <code>'sql_params':
 {'name': 'john doe', 'age': '35'}</code>. The SQL alert task does
@@ -3176,7 +3383,7 @@ not support custom parameters, e.g.
         <tr>
           <td><code>dbt_commands</code></td>
           <td>
-                <code><span title="typing.List">List</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
           </td>
           <td><p>An array of commands to execute for jobs with the dbt task, for example
 <code>'dbt_commands': ['dbt deps', 'dbt seed', 'dbt run']</code>, e.g.
@@ -3238,49 +3445,7 @@ not support custom parameters, e.g.
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">742</span>
-<span class="normal">743</span>
-<span class="normal">744</span>
-<span class="normal">745</span>
-<span class="normal">746</span>
-<span class="normal">747</span>
-<span class="normal">748</span>
-<span class="normal">749</span>
-<span class="normal">750</span>
-<span class="normal">751</span>
-<span class="normal">752</span>
-<span class="normal">753</span>
-<span class="normal">754</span>
-<span class="normal">755</span>
-<span class="normal">756</span>
-<span class="normal">757</span>
-<span class="normal">758</span>
-<span class="normal">759</span>
-<span class="normal">760</span>
-<span class="normal">761</span>
-<span class="normal">762</span>
-<span class="normal">763</span>
-<span class="normal">764</span>
-<span class="normal">765</span>
-<span class="normal">766</span>
-<span class="normal">767</span>
-<span class="normal">768</span>
-<span class="normal">769</span>
-<span class="normal">770</span>
-<span class="normal">771</span>
-<span class="normal">772</span>
-<span class="normal">773</span>
-<span class="normal">774</span>
-<span class="normal">775</span>
-<span class="normal">776</span>
-<span class="normal">777</span>
-<span class="normal">778</span>
-<span class="normal">779</span>
-<span class="normal">780</span>
-<span class="normal">781</span>
-<span class="normal">782</span>
-<span class="normal">783</span>
-<span class="normal">784</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">784</span>
 <span class="normal">785</span>
 <span class="normal">786</span>
 <span class="normal">787</span>
@@ -3410,21 +3575,63 @@ not support custom parameters, e.g.
 <span class="normal">911</span>
 <span class="normal">912</span>
 <span class="normal">913</span>
-<span class="normal">914</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">914</span>
+<span class="normal">915</span>
+<span class="normal">916</span>
+<span class="normal">917</span>
+<span class="normal">918</span>
+<span class="normal">919</span>
+<span class="normal">920</span>
+<span class="normal">921</span>
+<span class="normal">922</span>
+<span class="normal">923</span>
+<span class="normal">924</span>
+<span class="normal">925</span>
+<span class="normal">926</span>
+<span class="normal">927</span>
+<span class="normal">928</span>
+<span class="normal">929</span>
+<span class="normal">930</span>
+<span class="normal">931</span>
+<span class="normal">932</span>
+<span class="normal">933</span>
+<span class="normal">934</span>
+<span class="normal">935</span>
+<span class="normal">936</span>
+<span class="normal">937</span>
+<span class="normal">938</span>
+<span class="normal">939</span>
+<span class="normal">940</span>
+<span class="normal">941</span>
+<span class="normal">942</span>
+<span class="normal">943</span>
+<span class="normal">944</span>
+<span class="normal">945</span>
+<span class="normal">946</span>
+<span class="normal">947</span>
+<span class="normal">948</span>
+<span class="normal">949</span>
+<span class="normal">950</span>
+<span class="normal">951</span>
+<span class="normal">952</span>
+<span class="normal">953</span>
+<span class="normal">954</span>
+<span class="normal">955</span>
+<span class="normal">956</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_run_now</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">idempotency_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">jar_params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">notebook_params</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">python_params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">spark_submit_params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">python_named_params</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">pipeline_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">sql_params</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dbt_commands</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">idempotency_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">jar_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">notebook_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">python_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">spark_submit_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">python_named_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">pipeline_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sql_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dbt_commands</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run a job and return the `run_id` of the triggered run.</span>
 
 <span class="sd">    Args:</span>
@@ -3593,14 +3800,14 @@ not support custom parameters, e.g.
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_cancel" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_cancel" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_cancel</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -3632,7 +3839,7 @@ running when this request completes.</p>
         <tr>
           <td><code>run_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>This field is required, e.g. <code>455644833</code>.</p></td>
           <td>
@@ -3691,62 +3898,62 @@ running when this request completes.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">917</span>
-<span class="normal">918</span>
-<span class="normal">919</span>
-<span class="normal">920</span>
-<span class="normal">921</span>
-<span class="normal">922</span>
-<span class="normal">923</span>
-<span class="normal">924</span>
-<span class="normal">925</span>
-<span class="normal">926</span>
-<span class="normal">927</span>
-<span class="normal">928</span>
-<span class="normal">929</span>
-<span class="normal">930</span>
-<span class="normal">931</span>
-<span class="normal">932</span>
-<span class="normal">933</span>
-<span class="normal">934</span>
-<span class="normal">935</span>
-<span class="normal">936</span>
-<span class="normal">937</span>
-<span class="normal">938</span>
-<span class="normal">939</span>
-<span class="normal">940</span>
-<span class="normal">941</span>
-<span class="normal">942</span>
-<span class="normal">943</span>
-<span class="normal">944</span>
-<span class="normal">945</span>
-<span class="normal">946</span>
-<span class="normal">947</span>
-<span class="normal">948</span>
-<span class="normal">949</span>
-<span class="normal">950</span>
-<span class="normal">951</span>
-<span class="normal">952</span>
-<span class="normal">953</span>
-<span class="normal">954</span>
-<span class="normal">955</span>
-<span class="normal">956</span>
-<span class="normal">957</span>
-<span class="normal">958</span>
-<span class="normal">959</span>
-<span class="normal">960</span>
-<span class="normal">961</span>
-<span class="normal">962</span>
-<span class="normal">963</span>
-<span class="normal">964</span>
-<span class="normal">965</span>
-<span class="normal">966</span>
-<span class="normal">967</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 959</span>
+<span class="normal"> 960</span>
+<span class="normal"> 961</span>
+<span class="normal"> 962</span>
+<span class="normal"> 963</span>
+<span class="normal"> 964</span>
+<span class="normal"> 965</span>
+<span class="normal"> 966</span>
+<span class="normal"> 967</span>
+<span class="normal"> 968</span>
+<span class="normal"> 969</span>
+<span class="normal"> 970</span>
+<span class="normal"> 971</span>
+<span class="normal"> 972</span>
+<span class="normal"> 973</span>
+<span class="normal"> 974</span>
+<span class="normal"> 975</span>
+<span class="normal"> 976</span>
+<span class="normal"> 977</span>
+<span class="normal"> 978</span>
+<span class="normal"> 979</span>
+<span class="normal"> 980</span>
+<span class="normal"> 981</span>
+<span class="normal"> 982</span>
+<span class="normal"> 983</span>
+<span class="normal"> 984</span>
+<span class="normal"> 985</span>
+<span class="normal"> 986</span>
+<span class="normal"> 987</span>
+<span class="normal"> 988</span>
+<span class="normal"> 989</span>
+<span class="normal"> 990</span>
+<span class="normal"> 991</span>
+<span class="normal"> 992</span>
+<span class="normal"> 993</span>
+<span class="normal"> 994</span>
+<span class="normal"> 995</span>
+<span class="normal"> 996</span>
+<span class="normal"> 997</span>
+<span class="normal"> 998</span>
+<span class="normal"> 999</span>
+<span class="normal">1000</span>
+<span class="normal">1001</span>
+<span class="normal">1002</span>
+<span class="normal">1003</span>
+<span class="normal">1004</span>
+<span class="normal">1005</span>
+<span class="normal">1006</span>
+<span class="normal">1007</span>
+<span class="normal">1008</span>
+<span class="normal">1009</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_cancel</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cancels a job run. The run is canceled asynchronously, so it may still be</span>
 <span class="sd">    running when this request completes.</span>
 
@@ -3802,14 +4009,14 @@ running when this request completes.</p>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_cancel_all" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_cancel_all" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_cancel_all</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -3841,7 +4048,7 @@ doesn't prevent new runs from being started.</p>
         <tr>
           <td><code>job_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The canonical identifier of the job to cancel all runs of. This field is
 required, e.g. <code>11223344</code>.</p></td>
@@ -3901,49 +4108,7 @@ required, e.g. <code>11223344</code>.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 970</span>
-<span class="normal"> 971</span>
-<span class="normal"> 972</span>
-<span class="normal"> 973</span>
-<span class="normal"> 974</span>
-<span class="normal"> 975</span>
-<span class="normal"> 976</span>
-<span class="normal"> 977</span>
-<span class="normal"> 978</span>
-<span class="normal"> 979</span>
-<span class="normal"> 980</span>
-<span class="normal"> 981</span>
-<span class="normal"> 982</span>
-<span class="normal"> 983</span>
-<span class="normal"> 984</span>
-<span class="normal"> 985</span>
-<span class="normal"> 986</span>
-<span class="normal"> 987</span>
-<span class="normal"> 988</span>
-<span class="normal"> 989</span>
-<span class="normal"> 990</span>
-<span class="normal"> 991</span>
-<span class="normal"> 992</span>
-<span class="normal"> 993</span>
-<span class="normal"> 994</span>
-<span class="normal"> 995</span>
-<span class="normal"> 996</span>
-<span class="normal"> 997</span>
-<span class="normal"> 998</span>
-<span class="normal"> 999</span>
-<span class="normal">1000</span>
-<span class="normal">1001</span>
-<span class="normal">1002</span>
-<span class="normal">1003</span>
-<span class="normal">1004</span>
-<span class="normal">1005</span>
-<span class="normal">1006</span>
-<span class="normal">1007</span>
-<span class="normal">1008</span>
-<span class="normal">1009</span>
-<span class="normal">1010</span>
-<span class="normal">1011</span>
-<span class="normal">1012</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1012</span>
 <span class="normal">1013</span>
 <span class="normal">1014</span>
 <span class="normal">1015</span>
@@ -3952,12 +4117,54 @@ required, e.g. <code>11223344</code>.</p></td>
 <span class="normal">1018</span>
 <span class="normal">1019</span>
 <span class="normal">1020</span>
-<span class="normal">1021</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1021</span>
+<span class="normal">1022</span>
+<span class="normal">1023</span>
+<span class="normal">1024</span>
+<span class="normal">1025</span>
+<span class="normal">1026</span>
+<span class="normal">1027</span>
+<span class="normal">1028</span>
+<span class="normal">1029</span>
+<span class="normal">1030</span>
+<span class="normal">1031</span>
+<span class="normal">1032</span>
+<span class="normal">1033</span>
+<span class="normal">1034</span>
+<span class="normal">1035</span>
+<span class="normal">1036</span>
+<span class="normal">1037</span>
+<span class="normal">1038</span>
+<span class="normal">1039</span>
+<span class="normal">1040</span>
+<span class="normal">1041</span>
+<span class="normal">1042</span>
+<span class="normal">1043</span>
+<span class="normal">1044</span>
+<span class="normal">1045</span>
+<span class="normal">1046</span>
+<span class="normal">1047</span>
+<span class="normal">1048</span>
+<span class="normal">1049</span>
+<span class="normal">1050</span>
+<span class="normal">1051</span>
+<span class="normal">1052</span>
+<span class="normal">1053</span>
+<span class="normal">1054</span>
+<span class="normal">1055</span>
+<span class="normal">1056</span>
+<span class="normal">1057</span>
+<span class="normal">1058</span>
+<span class="normal">1059</span>
+<span class="normal">1060</span>
+<span class="normal">1061</span>
+<span class="normal">1062</span>
+<span class="normal">1063</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_cancel_all</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cancels all active runs of a job. The runs are canceled asynchronously, so it</span>
 <span class="sd">    doesn&#39;t prevent new runs from being started.</span>
 
@@ -4014,14 +4221,14 @@ required, e.g. <code>11223344</code>.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_delete" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_delete" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_delete</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -4052,7 +4259,7 @@ required, e.g. <code>11223344</code>.</p></td>
         <tr>
           <td><code>run_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The canonical identifier of the run for which to retrieve the metadata,
 e.g. <code>455644833</code>.</p></td>
@@ -4112,49 +4319,7 @@ e.g. <code>455644833</code>.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1024</span>
-<span class="normal">1025</span>
-<span class="normal">1026</span>
-<span class="normal">1027</span>
-<span class="normal">1028</span>
-<span class="normal">1029</span>
-<span class="normal">1030</span>
-<span class="normal">1031</span>
-<span class="normal">1032</span>
-<span class="normal">1033</span>
-<span class="normal">1034</span>
-<span class="normal">1035</span>
-<span class="normal">1036</span>
-<span class="normal">1037</span>
-<span class="normal">1038</span>
-<span class="normal">1039</span>
-<span class="normal">1040</span>
-<span class="normal">1041</span>
-<span class="normal">1042</span>
-<span class="normal">1043</span>
-<span class="normal">1044</span>
-<span class="normal">1045</span>
-<span class="normal">1046</span>
-<span class="normal">1047</span>
-<span class="normal">1048</span>
-<span class="normal">1049</span>
-<span class="normal">1050</span>
-<span class="normal">1051</span>
-<span class="normal">1052</span>
-<span class="normal">1053</span>
-<span class="normal">1054</span>
-<span class="normal">1055</span>
-<span class="normal">1056</span>
-<span class="normal">1057</span>
-<span class="normal">1058</span>
-<span class="normal">1059</span>
-<span class="normal">1060</span>
-<span class="normal">1061</span>
-<span class="normal">1062</span>
-<span class="normal">1063</span>
-<span class="normal">1064</span>
-<span class="normal">1065</span>
-<span class="normal">1066</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1066</span>
 <span class="normal">1067</span>
 <span class="normal">1068</span>
 <span class="normal">1069</span>
@@ -4162,12 +4327,54 @@ e.g. <code>455644833</code>.</p></td>
 <span class="normal">1071</span>
 <span class="normal">1072</span>
 <span class="normal">1073</span>
-<span class="normal">1074</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1074</span>
+<span class="normal">1075</span>
+<span class="normal">1076</span>
+<span class="normal">1077</span>
+<span class="normal">1078</span>
+<span class="normal">1079</span>
+<span class="normal">1080</span>
+<span class="normal">1081</span>
+<span class="normal">1082</span>
+<span class="normal">1083</span>
+<span class="normal">1084</span>
+<span class="normal">1085</span>
+<span class="normal">1086</span>
+<span class="normal">1087</span>
+<span class="normal">1088</span>
+<span class="normal">1089</span>
+<span class="normal">1090</span>
+<span class="normal">1091</span>
+<span class="normal">1092</span>
+<span class="normal">1093</span>
+<span class="normal">1094</span>
+<span class="normal">1095</span>
+<span class="normal">1096</span>
+<span class="normal">1097</span>
+<span class="normal">1098</span>
+<span class="normal">1099</span>
+<span class="normal">1100</span>
+<span class="normal">1101</span>
+<span class="normal">1102</span>
+<span class="normal">1103</span>
+<span class="normal">1104</span>
+<span class="normal">1105</span>
+<span class="normal">1106</span>
+<span class="normal">1107</span>
+<span class="normal">1108</span>
+<span class="normal">1109</span>
+<span class="normal">1110</span>
+<span class="normal">1111</span>
+<span class="normal">1112</span>
+<span class="normal">1113</span>
+<span class="normal">1114</span>
+<span class="normal">1115</span>
+<span class="normal">1116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_delete</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Deletes a non-active run. Returns an error if the run is active.</span>
 
 <span class="sd">    Args:</span>
@@ -4223,14 +4430,14 @@ e.g. <code>455644833</code>.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_export" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_export" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_export</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -4271,7 +4478,7 @@ e.g. <code>455644833</code>.</p></td>
         <tr>
           <td><code>views_to_export</code></td>
           <td>
-                <code><span title="models.ViewsToExport">ViewsToExport</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="models.ViewsToExport">ViewsToExport</span>]</code>
           </td>
           <td><p>Which views to export (CODE, DASHBOARDS, or ALL). Defaults to CODE.</p></td>
           <td>
@@ -4387,9 +4594,9 @@ e.g. <code>455644833</code>.</p></td>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_export</span><span class="p">(</span>
     <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">views_to_export</span><span class="p">:</span> <span class="s2">&quot;models.ViewsToExport&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">views_to_export</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;models.ViewsToExport&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Export and retrieve the job run task.</span>
 
 <span class="sd">    Args:</span>
@@ -4447,14 +4654,14 @@ e.g. <code>455644833</code>.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_get" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_get" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_get</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -4496,7 +4703,7 @@ This field is required.</p></td>
         <tr>
           <td><code>include_history</code></td>
           <td>
-                <code>bool</code>
+                <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
           <td><p>Whether to include the repair history in the response.</p></td>
           <td>
@@ -4555,49 +4762,7 @@ This field is required.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1077</span>
-<span class="normal">1078</span>
-<span class="normal">1079</span>
-<span class="normal">1080</span>
-<span class="normal">1081</span>
-<span class="normal">1082</span>
-<span class="normal">1083</span>
-<span class="normal">1084</span>
-<span class="normal">1085</span>
-<span class="normal">1086</span>
-<span class="normal">1087</span>
-<span class="normal">1088</span>
-<span class="normal">1089</span>
-<span class="normal">1090</span>
-<span class="normal">1091</span>
-<span class="normal">1092</span>
-<span class="normal">1093</span>
-<span class="normal">1094</span>
-<span class="normal">1095</span>
-<span class="normal">1096</span>
-<span class="normal">1097</span>
-<span class="normal">1098</span>
-<span class="normal">1099</span>
-<span class="normal">1100</span>
-<span class="normal">1101</span>
-<span class="normal">1102</span>
-<span class="normal">1103</span>
-<span class="normal">1104</span>
-<span class="normal">1105</span>
-<span class="normal">1106</span>
-<span class="normal">1107</span>
-<span class="normal">1108</span>
-<span class="normal">1109</span>
-<span class="normal">1110</span>
-<span class="normal">1111</span>
-<span class="normal">1112</span>
-<span class="normal">1113</span>
-<span class="normal">1114</span>
-<span class="normal">1115</span>
-<span class="normal">1116</span>
-<span class="normal">1117</span>
-<span class="normal">1118</span>
-<span class="normal">1119</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1119</span>
 <span class="normal">1120</span>
 <span class="normal">1121</span>
 <span class="normal">1122</span>
@@ -4609,13 +4774,55 @@ This field is required.</p></td>
 <span class="normal">1128</span>
 <span class="normal">1129</span>
 <span class="normal">1130</span>
-<span class="normal">1131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1131</span>
+<span class="normal">1132</span>
+<span class="normal">1133</span>
+<span class="normal">1134</span>
+<span class="normal">1135</span>
+<span class="normal">1136</span>
+<span class="normal">1137</span>
+<span class="normal">1138</span>
+<span class="normal">1139</span>
+<span class="normal">1140</span>
+<span class="normal">1141</span>
+<span class="normal">1142</span>
+<span class="normal">1143</span>
+<span class="normal">1144</span>
+<span class="normal">1145</span>
+<span class="normal">1146</span>
+<span class="normal">1147</span>
+<span class="normal">1148</span>
+<span class="normal">1149</span>
+<span class="normal">1150</span>
+<span class="normal">1151</span>
+<span class="normal">1152</span>
+<span class="normal">1153</span>
+<span class="normal">1154</span>
+<span class="normal">1155</span>
+<span class="normal">1156</span>
+<span class="normal">1157</span>
+<span class="normal">1158</span>
+<span class="normal">1159</span>
+<span class="normal">1160</span>
+<span class="normal">1161</span>
+<span class="normal">1162</span>
+<span class="normal">1163</span>
+<span class="normal">1164</span>
+<span class="normal">1165</span>
+<span class="normal">1166</span>
+<span class="normal">1167</span>
+<span class="normal">1168</span>
+<span class="normal">1169</span>
+<span class="normal">1170</span>
+<span class="normal">1171</span>
+<span class="normal">1172</span>
+<span class="normal">1173</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_get</span><span class="p">(</span>
     <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">include_history</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_history</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve the metadata of a run.</span>
 
 <span class="sd">    Args:</span>
@@ -4674,14 +4881,14 @@ This field is required.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_get_output" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_get_output" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_get_output</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -4780,49 +4987,7 @@ export using the Jobs API, see Runs export.</p>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1134</span>
-<span class="normal">1135</span>
-<span class="normal">1136</span>
-<span class="normal">1137</span>
-<span class="normal">1138</span>
-<span class="normal">1139</span>
-<span class="normal">1140</span>
-<span class="normal">1141</span>
-<span class="normal">1142</span>
-<span class="normal">1143</span>
-<span class="normal">1144</span>
-<span class="normal">1145</span>
-<span class="normal">1146</span>
-<span class="normal">1147</span>
-<span class="normal">1148</span>
-<span class="normal">1149</span>
-<span class="normal">1150</span>
-<span class="normal">1151</span>
-<span class="normal">1152</span>
-<span class="normal">1153</span>
-<span class="normal">1154</span>
-<span class="normal">1155</span>
-<span class="normal">1156</span>
-<span class="normal">1157</span>
-<span class="normal">1158</span>
-<span class="normal">1159</span>
-<span class="normal">1160</span>
-<span class="normal">1161</span>
-<span class="normal">1162</span>
-<span class="normal">1163</span>
-<span class="normal">1164</span>
-<span class="normal">1165</span>
-<span class="normal">1166</span>
-<span class="normal">1167</span>
-<span class="normal">1168</span>
-<span class="normal">1169</span>
-<span class="normal">1170</span>
-<span class="normal">1171</span>
-<span class="normal">1172</span>
-<span class="normal">1173</span>
-<span class="normal">1174</span>
-<span class="normal">1175</span>
-<span class="normal">1176</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1176</span>
 <span class="normal">1177</span>
 <span class="normal">1178</span>
 <span class="normal">1179</span>
@@ -4838,12 +5003,54 @@ export using the Jobs API, see Runs export.</p>
 <span class="normal">1189</span>
 <span class="normal">1190</span>
 <span class="normal">1191</span>
-<span class="normal">1192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1192</span>
+<span class="normal">1193</span>
+<span class="normal">1194</span>
+<span class="normal">1195</span>
+<span class="normal">1196</span>
+<span class="normal">1197</span>
+<span class="normal">1198</span>
+<span class="normal">1199</span>
+<span class="normal">1200</span>
+<span class="normal">1201</span>
+<span class="normal">1202</span>
+<span class="normal">1203</span>
+<span class="normal">1204</span>
+<span class="normal">1205</span>
+<span class="normal">1206</span>
+<span class="normal">1207</span>
+<span class="normal">1208</span>
+<span class="normal">1209</span>
+<span class="normal">1210</span>
+<span class="normal">1211</span>
+<span class="normal">1212</span>
+<span class="normal">1213</span>
+<span class="normal">1214</span>
+<span class="normal">1215</span>
+<span class="normal">1216</span>
+<span class="normal">1217</span>
+<span class="normal">1218</span>
+<span class="normal">1219</span>
+<span class="normal">1220</span>
+<span class="normal">1221</span>
+<span class="normal">1222</span>
+<span class="normal">1223</span>
+<span class="normal">1224</span>
+<span class="normal">1225</span>
+<span class="normal">1226</span>
+<span class="normal">1227</span>
+<span class="normal">1228</span>
+<span class="normal">1229</span>
+<span class="normal">1230</span>
+<span class="normal">1231</span>
+<span class="normal">1232</span>
+<span class="normal">1233</span>
+<span class="normal">1234</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_get_output</span><span class="p">(</span>
     <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve the output and metadata of a single task run. When a notebook task</span>
 <span class="sd">    returns a value through the dbutils.notebook.exit() call, you can use this</span>
 <span class="sd">    endpoint to retrieve that value. Databricks restricts this API to return the</span>
@@ -4907,14 +5114,14 @@ export using the Jobs API, see Runs export.</p>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_list" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_list" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_list</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -4970,7 +5177,7 @@ This field cannot be <code>true</code> when active_only is <code>true</code>.</p
         <tr>
           <td><code>job_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The job for which to list runs. If omitted, the Jobs service lists runs
 from all jobs.</p></td>
@@ -5003,7 +5210,7 @@ limit of 0, the service instead uses the maximum limit.</p></td>
         <tr>
           <td><code>run_type</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td><p>The type of runs to return. For a description of run types, see
 <a href="https://docs.databricks.com/dev-
@@ -5026,7 +5233,7 @@ operation/JobsRunsGet">Run</a>.</p></td>
         <tr>
           <td><code>start_time_from</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Show runs that started <em>at or after</em> this value. The value must be a UTC
 timestamp in milliseconds. Can be combined with
@@ -5038,7 +5245,7 @@ timestamp in milliseconds. Can be combined with
         <tr>
           <td><code>start_time_to</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Show runs that started <em>at or before</em> this value. The value must be a
 UTC timestamp in milliseconds. Can be combined with
@@ -5099,49 +5306,7 @@ UTC timestamp in milliseconds. Can be combined with
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1195</span>
-<span class="normal">1196</span>
-<span class="normal">1197</span>
-<span class="normal">1198</span>
-<span class="normal">1199</span>
-<span class="normal">1200</span>
-<span class="normal">1201</span>
-<span class="normal">1202</span>
-<span class="normal">1203</span>
-<span class="normal">1204</span>
-<span class="normal">1205</span>
-<span class="normal">1206</span>
-<span class="normal">1207</span>
-<span class="normal">1208</span>
-<span class="normal">1209</span>
-<span class="normal">1210</span>
-<span class="normal">1211</span>
-<span class="normal">1212</span>
-<span class="normal">1213</span>
-<span class="normal">1214</span>
-<span class="normal">1215</span>
-<span class="normal">1216</span>
-<span class="normal">1217</span>
-<span class="normal">1218</span>
-<span class="normal">1219</span>
-<span class="normal">1220</span>
-<span class="normal">1221</span>
-<span class="normal">1222</span>
-<span class="normal">1223</span>
-<span class="normal">1224</span>
-<span class="normal">1225</span>
-<span class="normal">1226</span>
-<span class="normal">1227</span>
-<span class="normal">1228</span>
-<span class="normal">1229</span>
-<span class="normal">1230</span>
-<span class="normal">1231</span>
-<span class="normal">1232</span>
-<span class="normal">1233</span>
-<span class="normal">1234</span>
-<span class="normal">1235</span>
-<span class="normal">1236</span>
-<span class="normal">1237</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1237</span>
 <span class="normal">1238</span>
 <span class="normal">1239</span>
 <span class="normal">1240</span>
@@ -5195,20 +5360,62 @@ UTC timestamp in milliseconds. Can be combined with
 <span class="normal">1288</span>
 <span class="normal">1289</span>
 <span class="normal">1290</span>
-<span class="normal">1291</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1291</span>
+<span class="normal">1292</span>
+<span class="normal">1293</span>
+<span class="normal">1294</span>
+<span class="normal">1295</span>
+<span class="normal">1296</span>
+<span class="normal">1297</span>
+<span class="normal">1298</span>
+<span class="normal">1299</span>
+<span class="normal">1300</span>
+<span class="normal">1301</span>
+<span class="normal">1302</span>
+<span class="normal">1303</span>
+<span class="normal">1304</span>
+<span class="normal">1305</span>
+<span class="normal">1306</span>
+<span class="normal">1307</span>
+<span class="normal">1308</span>
+<span class="normal">1309</span>
+<span class="normal">1310</span>
+<span class="normal">1311</span>
+<span class="normal">1312</span>
+<span class="normal">1313</span>
+<span class="normal">1314</span>
+<span class="normal">1315</span>
+<span class="normal">1316</span>
+<span class="normal">1317</span>
+<span class="normal">1318</span>
+<span class="normal">1319</span>
+<span class="normal">1320</span>
+<span class="normal">1321</span>
+<span class="normal">1322</span>
+<span class="normal">1323</span>
+<span class="normal">1324</span>
+<span class="normal">1325</span>
+<span class="normal">1326</span>
+<span class="normal">1327</span>
+<span class="normal">1328</span>
+<span class="normal">1329</span>
+<span class="normal">1330</span>
+<span class="normal">1331</span>
+<span class="normal">1332</span>
+<span class="normal">1333</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_list</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
     <span class="n">active_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">completed_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
-    <span class="n">run_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">expand_tasks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">start_time_from</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">start_time_to</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">start_time_from</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">start_time_to</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    List runs in descending order by start time.</span>
 
 <span class="sd">    Args:</span>
@@ -5302,14 +5509,14 @@ UTC timestamp in milliseconds. Can be combined with
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_repair" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_repair" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_repair</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -5342,7 +5549,7 @@ original job run.</p>
         <tr>
           <td><code>run_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The job run ID of the run to repair. The run must not be in progress,
 e.g. <code>455644833</code>.</p></td>
@@ -5353,7 +5560,7 @@ e.g. <code>455644833</code>.</p></td>
         <tr>
           <td><code>rerun_tasks</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>The task keys of the task runs to repair, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;task0&quot;, &quot;task1&quot;]
@@ -5365,7 +5572,7 @@ e.g. <code>455644833</code>.</p></td>
         <tr>
           <td><code>latest_repair_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The ID of the latest repair. This parameter is not required when
 repairing a run for the first time, but must be provided on
@@ -5376,9 +5583,20 @@ subsequent requests to repair the same run, e.g.
           </td>
         </tr>
         <tr>
+          <td><code>rerun_all_failed_tasks</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>If true, repair all failed tasks. Only one of rerun_tasks or
+rerun_all_failed_tasks can be used.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
           <td><code>jar_params</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>A list of parameters for jobs with Spark JAR tasks, for example
 <code>'jar_params': ['john doe', '35']</code>. The parameters are used
@@ -5400,7 +5618,7 @@ information about job runs, e.g.
         <tr>
           <td><code>notebook_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
           <td><p>A map from keys to values for jobs with notebook task, for example
 <code>'notebook_params': {'name': 'john doe', 'age': '35'}</code>. The
@@ -5425,7 +5643,7 @@ doe','age':'35'}}</code>) cannot exceed 10,000 bytes, e.g.
         <tr>
           <td><code>python_params</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>A list of parameters for jobs with Python tasks, for example
 <code>'python_params': ['john doe', '35']</code>. The parameters are
@@ -5450,7 +5668,7 @@ emojis, e.g.
         <tr>
           <td><code>spark_submit_params</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>A list of parameters for jobs with spark submit task, for example
 <code>'spark_submit_params': ['--class',
@@ -5476,7 +5694,7 @@ emojis, e.g.
         <tr>
           <td><code>python_named_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
           <td><p>A map from keys to values for jobs with Python wheel task, for example
 <code>'python_named_params': {'name': 'task', 'data':
@@ -5490,7 +5708,7 @@ emojis, e.g.
         <tr>
           <td><code>pipeline_params</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td></td>
           <td>
@@ -5500,7 +5718,7 @@ emojis, e.g.
         <tr>
           <td><code>sql_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
           <td><p>A map from keys to values for SQL tasks, for example <code>'sql_params':
 {'name': 'john doe', 'age': '35'}</code>. The SQL alert task does
@@ -5514,7 +5732,7 @@ not support custom parameters, e.g.
         <tr>
           <td><code>dbt_commands</code></td>
           <td>
-                <code><span title="typing.List">List</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
           </td>
           <td><p>An array of commands to execute for jobs with the dbt task, for example
 <code>'dbt_commands': ['dbt deps', 'dbt seed', 'dbt run']</code>, e.g.
@@ -5576,49 +5794,7 @@ not support custom parameters, e.g.
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1294</span>
-<span class="normal">1295</span>
-<span class="normal">1296</span>
-<span class="normal">1297</span>
-<span class="normal">1298</span>
-<span class="normal">1299</span>
-<span class="normal">1300</span>
-<span class="normal">1301</span>
-<span class="normal">1302</span>
-<span class="normal">1303</span>
-<span class="normal">1304</span>
-<span class="normal">1305</span>
-<span class="normal">1306</span>
-<span class="normal">1307</span>
-<span class="normal">1308</span>
-<span class="normal">1309</span>
-<span class="normal">1310</span>
-<span class="normal">1311</span>
-<span class="normal">1312</span>
-<span class="normal">1313</span>
-<span class="normal">1314</span>
-<span class="normal">1315</span>
-<span class="normal">1316</span>
-<span class="normal">1317</span>
-<span class="normal">1318</span>
-<span class="normal">1319</span>
-<span class="normal">1320</span>
-<span class="normal">1321</span>
-<span class="normal">1322</span>
-<span class="normal">1323</span>
-<span class="normal">1324</span>
-<span class="normal">1325</span>
-<span class="normal">1326</span>
-<span class="normal">1327</span>
-<span class="normal">1328</span>
-<span class="normal">1329</span>
-<span class="normal">1330</span>
-<span class="normal">1331</span>
-<span class="normal">1332</span>
-<span class="normal">1333</span>
-<span class="normal">1334</span>
-<span class="normal">1335</span>
-<span class="normal">1336</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1336</span>
 <span class="normal">1337</span>
 <span class="normal">1338</span>
 <span class="normal">1339</span>
@@ -5750,22 +5926,70 @@ not support custom parameters, e.g.
 <span class="normal">1465</span>
 <span class="normal">1466</span>
 <span class="normal">1467</span>
-<span class="normal">1468</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1468</span>
+<span class="normal">1469</span>
+<span class="normal">1470</span>
+<span class="normal">1471</span>
+<span class="normal">1472</span>
+<span class="normal">1473</span>
+<span class="normal">1474</span>
+<span class="normal">1475</span>
+<span class="normal">1476</span>
+<span class="normal">1477</span>
+<span class="normal">1478</span>
+<span class="normal">1479</span>
+<span class="normal">1480</span>
+<span class="normal">1481</span>
+<span class="normal">1482</span>
+<span class="normal">1483</span>
+<span class="normal">1484</span>
+<span class="normal">1485</span>
+<span class="normal">1486</span>
+<span class="normal">1487</span>
+<span class="normal">1488</span>
+<span class="normal">1489</span>
+<span class="normal">1490</span>
+<span class="normal">1491</span>
+<span class="normal">1492</span>
+<span class="normal">1493</span>
+<span class="normal">1494</span>
+<span class="normal">1495</span>
+<span class="normal">1496</span>
+<span class="normal">1497</span>
+<span class="normal">1498</span>
+<span class="normal">1499</span>
+<span class="normal">1500</span>
+<span class="normal">1501</span>
+<span class="normal">1502</span>
+<span class="normal">1503</span>
+<span class="normal">1504</span>
+<span class="normal">1505</span>
+<span class="normal">1506</span>
+<span class="normal">1507</span>
+<span class="normal">1508</span>
+<span class="normal">1509</span>
+<span class="normal">1510</span>
+<span class="normal">1511</span>
+<span class="normal">1512</span>
+<span class="normal">1513</span>
+<span class="normal">1514</span>
+<span class="normal">1515</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_repair</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">run_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">rerun_tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">latest_repair_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">jar_params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">notebook_params</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">python_params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">spark_submit_params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">python_named_params</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">pipeline_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">sql_params</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dbt_commands</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rerun_tasks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">latest_repair_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rerun_all_failed_tasks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">jar_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">notebook_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">python_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">spark_submit_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">python_named_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">pipeline_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sql_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dbt_commands</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Re-run one or more tasks. Tasks are re-run as part of the original job run, use</span>
 <span class="sd">    the current job and task settings, and can be viewed in the history for the</span>
 <span class="sd">    original job run.</span>
@@ -5786,6 +6010,9 @@ not support custom parameters, e.g.
 <span class="sd">            repairing a run for the first time, but must be provided on</span>
 <span class="sd">            subsequent requests to repair the same run, e.g.</span>
 <span class="sd">            `734650698524280`.</span>
+<span class="sd">        rerun_all_failed_tasks:</span>
+<span class="sd">            If true, repair all failed tasks. Only one of rerun_tasks or</span>
+<span class="sd">            rerun_all_failed_tasks can be used.</span>
 <span class="sd">        jar_params:</span>
 <span class="sd">            A list of parameters for jobs with Spark JAR tasks, for example</span>
 <span class="sd">            `&#39;jar_params&#39;: [&#39;john doe&#39;, &#39;35&#39;]`. The parameters are used</span>
@@ -5906,6 +6133,7 @@ not support custom parameters, e.g.
         <span class="s2">&quot;run_id&quot;</span><span class="p">:</span> <span class="n">run_id</span><span class="p">,</span>
         <span class="s2">&quot;rerun_tasks&quot;</span><span class="p">:</span> <span class="n">rerun_tasks</span><span class="p">,</span>
         <span class="s2">&quot;latest_repair_id&quot;</span><span class="p">:</span> <span class="n">latest_repair_id</span><span class="p">,</span>
+        <span class="s2">&quot;rerun_all_failed_tasks&quot;</span><span class="p">:</span> <span class="n">rerun_all_failed_tasks</span><span class="p">,</span>
         <span class="s2">&quot;jar_params&quot;</span><span class="p">:</span> <span class="n">jar_params</span><span class="p">,</span>
         <span class="s2">&quot;notebook_params&quot;</span><span class="p">:</span> <span class="n">notebook_params</span><span class="p">,</span>
         <span class="s2">&quot;python_params&quot;</span><span class="p">:</span> <span class="n">python_params</span><span class="p">,</span>
@@ -5935,22 +6163,21 @@ not support custom parameters, e.g.
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_runs_submit" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_runs_submit" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_runs_submit</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
   
       <p>Submit a one-time run. This endpoint allows you to submit a workload directly
-without creating a job. Runs submitted using this endpoint don’t display in
-the UI. Use the <code>jobs/runs/get</code> API to check the run state after the job is
-submitted.</p>
+without creating a job. Use the <code>jobs/runs/get</code> API to check the run state
+after the job is submitted.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -5976,7 +6203,7 @@ submitted.</p>
         <tr>
           <td><code>tasks</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="models.RunSubmitTaskSettings">RunSubmitTaskSettings</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="models.RunSubmitTaskSettings">RunSubmitTaskSettings</span>]]</code>
           </td>
           <td><p>, e.g.
 <div class="highlight"><pre><span></span><code>[
@@ -6037,10 +6264,43 @@ submitted.</p>
         <tr>
           <td><code>run_name</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td><p>An optional name for the run. The default value is <code>Untitled</code>, e.g. <code>A
 multitask job run</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>webhook_notifications</code></td>
+          <td>
+                <code><span title="models.WebhookNotifications">WebhookNotifications</span></code>
+          </td>
+          <td><p>A collection of system notification IDs to notify when runs of this job
+begin or complete. The default behavior is to not send any
+system notifications. Key-values:
+- on_start:
+    An optional list of notification IDs to call when the run
+    starts. A maximum of 3 destinations can be specified for the
+    <code>on_start</code> property, e.g.
+    <div class="highlight"><pre><span></span><code>[
+    {&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;},
+    {&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;},
+]
+</code></pre></div>
+- on_success:
+    An optional list of notification IDs to call when the run
+    completes successfully. A maximum of 3 destinations can be
+    specified for the <code>on_success</code> property, e.g.
+    <div class="highlight"><pre><span></span><code>[{&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;}]
+</code></pre></div>
+- on_failure:
+    An optional list of notification IDs to call when the run
+    fails. A maximum of 3 destinations can be specified for the
+    <code>on_failure</code> property, e.g.
+    <div class="highlight"><pre><span></span><code>[{&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;}]
+</code></pre></div></p></td>
           <td>
                 <code>None</code>
           </td>
@@ -6090,7 +6350,7 @@ job's notebook tasks, e.g.
         <tr>
           <td><code>timeout_seconds</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>An optional timeout applied to each run of this job. The default
 behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
@@ -6101,7 +6361,7 @@ behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
         <tr>
           <td><code>idempotency_token</code></td>
           <td>
-                <code>str</code>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
           <td><p>An optional token that can be used to guarantee the idempotency of job
 run requests. If a run with the provided token already
@@ -6122,7 +6382,7 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
         <tr>
           <td><code>access_control_list</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="models.AccessControlRequest">AccessControlRequest</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="models.AccessControlRequest">AccessControlRequest</span>]]</code>
           </td>
           <td><p>List of permissions to set on the job.</p></td>
           <td>
@@ -6181,54 +6441,7 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1471</span>
-<span class="normal">1472</span>
-<span class="normal">1473</span>
-<span class="normal">1474</span>
-<span class="normal">1475</span>
-<span class="normal">1476</span>
-<span class="normal">1477</span>
-<span class="normal">1478</span>
-<span class="normal">1479</span>
-<span class="normal">1480</span>
-<span class="normal">1481</span>
-<span class="normal">1482</span>
-<span class="normal">1483</span>
-<span class="normal">1484</span>
-<span class="normal">1485</span>
-<span class="normal">1486</span>
-<span class="normal">1487</span>
-<span class="normal">1488</span>
-<span class="normal">1489</span>
-<span class="normal">1490</span>
-<span class="normal">1491</span>
-<span class="normal">1492</span>
-<span class="normal">1493</span>
-<span class="normal">1494</span>
-<span class="normal">1495</span>
-<span class="normal">1496</span>
-<span class="normal">1497</span>
-<span class="normal">1498</span>
-<span class="normal">1499</span>
-<span class="normal">1500</span>
-<span class="normal">1501</span>
-<span class="normal">1502</span>
-<span class="normal">1503</span>
-<span class="normal">1504</span>
-<span class="normal">1505</span>
-<span class="normal">1506</span>
-<span class="normal">1507</span>
-<span class="normal">1508</span>
-<span class="normal">1509</span>
-<span class="normal">1510</span>
-<span class="normal">1511</span>
-<span class="normal">1512</span>
-<span class="normal">1513</span>
-<span class="normal">1514</span>
-<span class="normal">1515</span>
-<span class="normal">1516</span>
-<span class="normal">1517</span>
-<span class="normal">1518</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1518</span>
 <span class="normal">1519</span>
 <span class="normal">1520</span>
 <span class="normal">1521</span>
@@ -6352,21 +6565,97 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
 <span class="normal">1639</span>
 <span class="normal">1640</span>
 <span class="normal">1641</span>
-<span class="normal">1642</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1642</span>
+<span class="normal">1643</span>
+<span class="normal">1644</span>
+<span class="normal">1645</span>
+<span class="normal">1646</span>
+<span class="normal">1647</span>
+<span class="normal">1648</span>
+<span class="normal">1649</span>
+<span class="normal">1650</span>
+<span class="normal">1651</span>
+<span class="normal">1652</span>
+<span class="normal">1653</span>
+<span class="normal">1654</span>
+<span class="normal">1655</span>
+<span class="normal">1656</span>
+<span class="normal">1657</span>
+<span class="normal">1658</span>
+<span class="normal">1659</span>
+<span class="normal">1660</span>
+<span class="normal">1661</span>
+<span class="normal">1662</span>
+<span class="normal">1663</span>
+<span class="normal">1664</span>
+<span class="normal">1665</span>
+<span class="normal">1666</span>
+<span class="normal">1667</span>
+<span class="normal">1668</span>
+<span class="normal">1669</span>
+<span class="normal">1670</span>
+<span class="normal">1671</span>
+<span class="normal">1672</span>
+<span class="normal">1673</span>
+<span class="normal">1674</span>
+<span class="normal">1675</span>
+<span class="normal">1676</span>
+<span class="normal">1677</span>
+<span class="normal">1678</span>
+<span class="normal">1679</span>
+<span class="normal">1680</span>
+<span class="normal">1681</span>
+<span class="normal">1682</span>
+<span class="normal">1683</span>
+<span class="normal">1684</span>
+<span class="normal">1685</span>
+<span class="normal">1686</span>
+<span class="normal">1687</span>
+<span class="normal">1688</span>
+<span class="normal">1689</span>
+<span class="normal">1690</span>
+<span class="normal">1691</span>
+<span class="normal">1692</span>
+<span class="normal">1693</span>
+<span class="normal">1694</span>
+<span class="normal">1695</span>
+<span class="normal">1696</span>
+<span class="normal">1697</span>
+<span class="normal">1698</span>
+<span class="normal">1699</span>
+<span class="normal">1700</span>
+<span class="normal">1701</span>
+<span class="normal">1702</span>
+<span class="normal">1703</span>
+<span class="normal">1704</span>
+<span class="normal">1705</span>
+<span class="normal">1706</span>
+<span class="normal">1707</span>
+<span class="normal">1708</span>
+<span class="normal">1709</span>
+<span class="normal">1710</span>
+<span class="normal">1711</span>
+<span class="normal">1712</span>
+<span class="normal">1713</span>
+<span class="normal">1714</span>
+<span class="normal">1715</span>
+<span class="normal">1716</span>
+<span class="normal">1717</span>
+<span class="normal">1718</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_runs_submit</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.RunSubmitTaskSettings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">run_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tasks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.RunSubmitTaskSettings&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">webhook_notifications</span><span class="p">:</span> <span class="s2">&quot;models.WebhookNotifications&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">git_source</span><span class="p">:</span> <span class="s2">&quot;models.GitSource&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">timeout_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">idempotency_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">access_control_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.AccessControlRequest&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeout_seconds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">idempotency_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">access_control_list</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="s2">&quot;models.AccessControlRequest&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Submit a one-time run. This endpoint allows you to submit a workload directly</span>
-<span class="sd">    without creating a job. Runs submitted using this endpoint don’t display in</span>
-<span class="sd">    the UI. Use the `jobs/runs/get` API to check the run state after the job is</span>
-<span class="sd">    submitted.</span>
+<span class="sd">    without creating a job. Use the `jobs/runs/get` API to check the run state</span>
+<span class="sd">    after the job is submitted.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        databricks_credentials:</span>
@@ -6428,6 +6717,34 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
 <span class="sd">        run_name:</span>
 <span class="sd">            An optional name for the run. The default value is `Untitled`, e.g. `A</span>
 <span class="sd">            multitask job run`.</span>
+<span class="sd">        webhook_notifications:</span>
+<span class="sd">            A collection of system notification IDs to notify when runs of this job</span>
+<span class="sd">            begin or complete. The default behavior is to not send any</span>
+<span class="sd">            system notifications. Key-values:</span>
+<span class="sd">            - on_start:</span>
+<span class="sd">                An optional list of notification IDs to call when the run</span>
+<span class="sd">                starts. A maximum of 3 destinations can be specified for the</span>
+<span class="sd">                `on_start` property, e.g.</span>
+<span class="sd">                ```</span>
+<span class="sd">                [</span>
+<span class="sd">                    {&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;},</span>
+<span class="sd">                    {&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;},</span>
+<span class="sd">                ]</span>
+<span class="sd">                ```</span>
+<span class="sd">            - on_success:</span>
+<span class="sd">                An optional list of notification IDs to call when the run</span>
+<span class="sd">                completes successfully. A maximum of 3 destinations can be</span>
+<span class="sd">                specified for the `on_success` property, e.g.</span>
+<span class="sd">                ```</span>
+<span class="sd">                [{&quot;id&quot;: &quot;03dd86e4-57ef-4818-a950-78e41a1d71ab&quot;}]</span>
+<span class="sd">                ```</span>
+<span class="sd">            - on_failure:</span>
+<span class="sd">                An optional list of notification IDs to call when the run</span>
+<span class="sd">                fails. A maximum of 3 destinations can be specified for the</span>
+<span class="sd">                `on_failure` property, e.g.</span>
+<span class="sd">                ```</span>
+<span class="sd">                [{&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;}]</span>
+<span class="sd">                ```</span>
 <span class="sd">        git_source:</span>
 <span class="sd">            This functionality is in Public Preview.  An optional specification for</span>
 <span class="sd">            a remote repository containing the notebooks used by this</span>
@@ -6509,6 +6826,7 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
     <span class="n">json_payload</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="n">tasks</span><span class="p">,</span>
         <span class="s2">&quot;run_name&quot;</span><span class="p">:</span> <span class="n">run_name</span><span class="p">,</span>
+        <span class="s2">&quot;webhook_notifications&quot;</span><span class="p">:</span> <span class="n">webhook_notifications</span><span class="p">,</span>
         <span class="s2">&quot;git_source&quot;</span><span class="p">:</span> <span class="n">git_source</span><span class="p">,</span>
         <span class="s2">&quot;timeout_seconds&quot;</span><span class="p">:</span> <span class="n">timeout_seconds</span><span class="p">,</span>
         <span class="s2">&quot;idempotency_token&quot;</span><span class="p">:</span> <span class="n">idempotency_token</span><span class="p">,</span>
@@ -6534,14 +6852,14 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
 
 
 
-<h2 id="prefect_databricks.jobs.jobs_update" class="doc doc-heading">
+<h3 id="prefect_databricks.jobs.jobs_update" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">jobs_update</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
   </span>
 
-</h2>
+</h3>
 
 
   <div class="doc doc-contents ">
@@ -6573,7 +6891,7 @@ endpoint to overwrite all job settings.</p>
         <tr>
           <td><code>job_id</code></td>
           <td>
-                <code>int</code>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>The canonical identifier of the job to update. This field is required,
 e.g. <code>11223344</code>.</p></td>
@@ -6706,6 +7024,10 @@ Changes to other fields are applied to future runs only. Key-values:
     An optional set of email addresses that is notified when
     runs of this job begin or complete as well as when this job
     is deleted. The default behavior is to not send any emails.
+- webhook_notifications:
+    A collection of system notification IDs to notify when runs
+    of this job begin or complete. The default behavior is to
+    not send any system notifications.
 - timeout_seconds:
     An optional timeout applied to each run of this job. The
     default behavior is to have no timeout, e.g. <code>86400</code>.
@@ -6752,7 +7074,7 @@ Changes to other fields are applied to future runs only. Key-values:
         <tr>
           <td><code>fields_to_remove</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>Remove top-level fields in the job settings. Removing nested fields is
 not supported. This field is optional, e.g.
@@ -6814,83 +7136,7 @@ not supported. This field is optional, e.g.
 
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/jobs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1645</span>
-<span class="normal">1646</span>
-<span class="normal">1647</span>
-<span class="normal">1648</span>
-<span class="normal">1649</span>
-<span class="normal">1650</span>
-<span class="normal">1651</span>
-<span class="normal">1652</span>
-<span class="normal">1653</span>
-<span class="normal">1654</span>
-<span class="normal">1655</span>
-<span class="normal">1656</span>
-<span class="normal">1657</span>
-<span class="normal">1658</span>
-<span class="normal">1659</span>
-<span class="normal">1660</span>
-<span class="normal">1661</span>
-<span class="normal">1662</span>
-<span class="normal">1663</span>
-<span class="normal">1664</span>
-<span class="normal">1665</span>
-<span class="normal">1666</span>
-<span class="normal">1667</span>
-<span class="normal">1668</span>
-<span class="normal">1669</span>
-<span class="normal">1670</span>
-<span class="normal">1671</span>
-<span class="normal">1672</span>
-<span class="normal">1673</span>
-<span class="normal">1674</span>
-<span class="normal">1675</span>
-<span class="normal">1676</span>
-<span class="normal">1677</span>
-<span class="normal">1678</span>
-<span class="normal">1679</span>
-<span class="normal">1680</span>
-<span class="normal">1681</span>
-<span class="normal">1682</span>
-<span class="normal">1683</span>
-<span class="normal">1684</span>
-<span class="normal">1685</span>
-<span class="normal">1686</span>
-<span class="normal">1687</span>
-<span class="normal">1688</span>
-<span class="normal">1689</span>
-<span class="normal">1690</span>
-<span class="normal">1691</span>
-<span class="normal">1692</span>
-<span class="normal">1693</span>
-<span class="normal">1694</span>
-<span class="normal">1695</span>
-<span class="normal">1696</span>
-<span class="normal">1697</span>
-<span class="normal">1698</span>
-<span class="normal">1699</span>
-<span class="normal">1700</span>
-<span class="normal">1701</span>
-<span class="normal">1702</span>
-<span class="normal">1703</span>
-<span class="normal">1704</span>
-<span class="normal">1705</span>
-<span class="normal">1706</span>
-<span class="normal">1707</span>
-<span class="normal">1708</span>
-<span class="normal">1709</span>
-<span class="normal">1710</span>
-<span class="normal">1711</span>
-<span class="normal">1712</span>
-<span class="normal">1713</span>
-<span class="normal">1714</span>
-<span class="normal">1715</span>
-<span class="normal">1716</span>
-<span class="normal">1717</span>
-<span class="normal">1718</span>
-<span class="normal">1719</span>
-<span class="normal">1720</span>
-<span class="normal">1721</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1721</span>
 <span class="normal">1722</span>
 <span class="normal">1723</span>
 <span class="normal">1724</span>
@@ -7039,14 +7285,94 @@ not supported. This field is optional, e.g.
 <span class="normal">1867</span>
 <span class="normal">1868</span>
 <span class="normal">1869</span>
-<span class="normal">1870</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
+<span class="normal">1870</span>
+<span class="normal">1871</span>
+<span class="normal">1872</span>
+<span class="normal">1873</span>
+<span class="normal">1874</span>
+<span class="normal">1875</span>
+<span class="normal">1876</span>
+<span class="normal">1877</span>
+<span class="normal">1878</span>
+<span class="normal">1879</span>
+<span class="normal">1880</span>
+<span class="normal">1881</span>
+<span class="normal">1882</span>
+<span class="normal">1883</span>
+<span class="normal">1884</span>
+<span class="normal">1885</span>
+<span class="normal">1886</span>
+<span class="normal">1887</span>
+<span class="normal">1888</span>
+<span class="normal">1889</span>
+<span class="normal">1890</span>
+<span class="normal">1891</span>
+<span class="normal">1892</span>
+<span class="normal">1893</span>
+<span class="normal">1894</span>
+<span class="normal">1895</span>
+<span class="normal">1896</span>
+<span class="normal">1897</span>
+<span class="normal">1898</span>
+<span class="normal">1899</span>
+<span class="normal">1900</span>
+<span class="normal">1901</span>
+<span class="normal">1902</span>
+<span class="normal">1903</span>
+<span class="normal">1904</span>
+<span class="normal">1905</span>
+<span class="normal">1906</span>
+<span class="normal">1907</span>
+<span class="normal">1908</span>
+<span class="normal">1909</span>
+<span class="normal">1910</span>
+<span class="normal">1911</span>
+<span class="normal">1912</span>
+<span class="normal">1913</span>
+<span class="normal">1914</span>
+<span class="normal">1915</span>
+<span class="normal">1916</span>
+<span class="normal">1917</span>
+<span class="normal">1918</span>
+<span class="normal">1919</span>
+<span class="normal">1920</span>
+<span class="normal">1921</span>
+<span class="normal">1922</span>
+<span class="normal">1923</span>
+<span class="normal">1924</span>
+<span class="normal">1925</span>
+<span class="normal">1926</span>
+<span class="normal">1927</span>
+<span class="normal">1928</span>
+<span class="normal">1929</span>
+<span class="normal">1930</span>
+<span class="normal">1931</span>
+<span class="normal">1932</span>
+<span class="normal">1933</span>
+<span class="normal">1934</span>
+<span class="normal">1935</span>
+<span class="normal">1936</span>
+<span class="normal">1937</span>
+<span class="normal">1938</span>
+<span class="normal">1939</span>
+<span class="normal">1940</span>
+<span class="normal">1941</span>
+<span class="normal">1942</span>
+<span class="normal">1943</span>
+<span class="normal">1944</span>
+<span class="normal">1945</span>
+<span class="normal">1946</span>
+<span class="normal">1947</span>
+<span class="normal">1948</span>
+<span class="normal">1949</span>
+<span class="normal">1950</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@task</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">jobs_update</span><span class="p">(</span>
     <span class="n">databricks_credentials</span><span class="p">:</span> <span class="s2">&quot;DatabricksCredentials&quot;</span><span class="p">,</span>
-    <span class="n">job_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">new_settings</span><span class="p">:</span> <span class="s2">&quot;models.JobSettings&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">fields_to_remove</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">fields_to_remove</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add, update, or remove specific settings of an existing job. Use the Reset</span>
 <span class="sd">    endpoint to overwrite all job settings.</span>
 
@@ -7180,6 +7506,10 @@ not supported. This field is optional, e.g.
 <span class="sd">                An optional set of email addresses that is notified when</span>
 <span class="sd">                runs of this job begin or complete as well as when this job</span>
 <span class="sd">                is deleted. The default behavior is to not send any emails.</span>
+<span class="sd">            - webhook_notifications:</span>
+<span class="sd">                A collection of system notification IDs to notify when runs</span>
+<span class="sd">                of this job begin or complete. The default behavior is to</span>
+<span class="sd">                not send any system notifications.</span>
 <span class="sd">            - timeout_seconds:</span>
 <span class="sd">                An optional timeout applied to each run of this job. The</span>
 <span class="sd">                default behavior is to have no timeout, e.g. `86400`.</span>
@@ -7294,42 +7624,6 @@ not supported. This field is optional, e.g.
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../credentials/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Credentials" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Credentials
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../rest/" class="md-footer__link md-footer__link--next" aria-label="Next: Rest" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Rest
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -7351,10 +7645,10 @@ not supported. This field is optional, e.g.
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.12658920.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.37e9125f.min.js"></script>
+      <script src="../assets/javascripts/bundle.5cf534bf.min.js"></script>
       
     
   </body>
