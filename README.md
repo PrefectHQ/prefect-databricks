@@ -1,4 +1,6 @@
 # prefect-databricks
+
+Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to see additional examples and the API reference.
  
 <p align="center">
     <a href="https://pypi.python.org/pypi/prefect-databricks/" alt="PyPI version">
