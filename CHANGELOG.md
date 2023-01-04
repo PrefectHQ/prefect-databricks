@@ -17,10 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Type annotations in `jobs_runs_submit_and_wait_for_completion` and allowing `run_name=None` in `jobs_runs_wait_for_completion` flows - [#32](https://github.com/PrefectHQ/prefect-databricks/pull/32).
-- Serialization of ACL permission objects and `AccessControlRequest` - [#49](https://github.com/PrefectHQ/prefect-databricks/issues/49).
-
 ### Security
+
+## 0.1.4
+
+Released on January 4th, 2023.
+
+### Fixed
+
+- Type annotations in `jobs_runs_submit_and_wait_for_completion` and allowing `run_name=None` in `jobs_runs_wait_for_completion` flows - [#32](https://github.com/PrefectHQ/prefect-databricks/pull/32).
+- Serialization of ACL permission objects and `AccessControlRequest` - [#51](https://github.com/PrefectHQ/prefect-databricks/pull/51).
 
 ## 0.1.3
 
