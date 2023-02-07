@@ -27,6 +27,7 @@ class DatabricksCredentials(Block):
 
     _block_type_name = "Databricks Credentials"
     _logo_url = "https://images.ctfassets.net/gm98wzqotmnx/5GTHI1PH2dTiantfps6Fnc/1c750fab7f4c14ea1b93a62b9fea6a94/databricks_logo_icon_170295.png?h=250"  # noqa
+    _documentation_url = "https://prefecthq.github.io/prefect-databricks/credentials/#prefect_databricks.credentials.DatabricksCredentials"  # noqa
 
     databricks_instance: str = Field(
         default=...,
