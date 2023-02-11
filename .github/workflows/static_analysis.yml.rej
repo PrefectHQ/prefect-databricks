@@ -1,0 +1,9 @@
+diff a/.github/workflows/static_analysis.yml b/.github/workflows/static_analysis.yml	(rejected hunks)
+@@ -25,7 +25,3 @@ jobs:
+       - name: Run pre-commit
+         run: |
+           pre-commit run --show-diff-on-failure --color=always --all-files
+-
+-      - name: Run mkdocs build
+-        run: |
+-          mkdocs build --verbose --clean

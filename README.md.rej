@@ -1,0 +1,121 @@
+diff a/README.md b/README.md	(rejected hunks)
+@@ -1,8 +1,8 @@
+ # prefect-databricks
+ 
+-Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to see additional examples and the API reference.
+-
+ <p align="center">
++    <!--- Insert a cover image here -->
++    <!--- <br> -->
+     <a href="https://pypi.python.org/pypi/prefect-databricks/" alt="PyPI version">
+         <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-databricks?color=0052FF&labelColor=090422"></a>
+     <a href="https://github.com/PrefectHQ/prefect-databricks/" alt="Stars">
+@@ -18,19 +18,26 @@ Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to se
+         <img src="https://img.shields.io/badge/discourse-browse_forum-red.svg?color=0052FF&labelColor=090422&logo=discourse" /></a>
+ </p>
+ 
+-## Welcome!
++Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to see additional examples and the API reference.
+ 
+ Prefect integrations for interacting with Databricks.
+ 
+-## Getting Started
+ 
+-### Python setup
++<!--- ### Add a real-world example of how to use this Collection here
+ 
+-Requires an installation of Python 3.7+.
++Offer some motivation on why this helps.
+ 
+-We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
++After installing `prefect-databricks` and [saving the credentials](#saving-credentials-to-block), you can easily use it within your flows to help you achieve the aforementioned benefits!
+ 
+-These tasks are designed to work with Prefect 2.0. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
++```python
++from prefect import flow, get_run_logger
++```
++
++--->
++
++## Resources
++
++For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
+ 
+ ### Installation
+ 
+@@ -40,36 +47,51 @@ Install `prefect-databricks` with `pip`:
+ pip install prefect-databricks
+ ```
+ 
+-A list of available blocks in `prefect-databricks` and their setup instructions can be found [here](https://PrefectHQ.github.io/prefect-databricks/#blocks-catalog).
++Requires an installation of Python 3.7+.
++
++We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
++
++These tasks are designed to work with Prefect 2.0. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
++
++<!--- ### Saving credentials to block
++
++Note, to use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
+ 
+-### Write and run a flow
++Below is a walkthrough on saving block documents through code.
++
++1. Head over to <SERVICE_URL>.
++2. Login to your <SERVICE> account.
++3. Click "+ Create new secret key".
++4. Copy the generated API key.
++5. Create a short script, replacing the placeholders (or do so in the UI).
+ 
+ ```python
+-from prefect import flow
+-from prefect_databricks.tasks import (
+-    goodbye_prefect_databricks,
+-    hello_prefect_databricks,
+-)
+-
+-# Use `with_options` to customize options on any existing task or flow
+-
+-custom_goodbye_prefect_databricks = goodbye_prefect_databricks.with_options(
+-    name="My custom task name",
+-    retries=2,
+-    retry_delay_seconds=10,
+-)
+-
+-@flow
+-def example_flow():
+-    hello_prefect_databricks
+-    custom_goodbye_prefect_databricks
+-
+-example_flow()
++from prefect_databricks import Block
++Block(api_key="API_KEY_PLACEHOLDER").save("BLOCK_NAME_PLACEHOLDER")
+ ```
+ 
+-For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
++Congrats! You can now easily load the saved block, which holds your credentials:
+ 
+-## Resources
++```python
++from prefect_databricks import Block
++Block.load("BLOCK_NAME_PLACEHOLDER")
++```
++
++!!! info "Registering blocks"
++
++    Register blocks in this module to
++    [view and edit them](https://orion-docs.prefect.io/ui/blocks/)
++    on Prefect Cloud:
++
++    ```bash
++    prefect block register -m prefect_databricks
++    ```
++
++A list of available blocks in `prefect-databricks` and their setup instructions can be found [here](https://PrefectHQ.github.io/prefect-databricks/blocks_catalog).
++
++--->
++
++### Feedback
+ 
+ If you encounter any bugs while using `prefect-databricks`, feel free to open an issue in the [prefect-databricks](https://github.com/PrefectHQ/prefect-databricks) repository.
+ 
