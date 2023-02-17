@@ -28,24 +28,6 @@ The service's REST API documentation can be found [here](https://docs.databricks
 
 ## Getting Started
 
-### Python setup
-
-Requires an installation of Python 3.7+.
-
-We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
-
-These tasks are designed to work with Prefect 2. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
-
-### Installation
-
-Install `prefect-databricks` with `pip`:
-
-```bash
-pip install prefect-databricks
-```
-
-A list of available blocks in `prefect-databricks` and their setup instructions can be found [here](https://PrefectHQ.github.io/prefect-databricks/#blocks-catalog).
-
 ### Lists jobs on the Databricks instance
 
 ```python
@@ -149,9 +131,25 @@ jobs_runs_submit_flow("/Users/username@gmail.com/example.ipynb", name="Marvin")
 
 Note, instead of using the built-in models, you may also input valid JSON. For example, `AutoScale(min_workers=1, max_workers=2)` is equivalent to `{"min_workers": 1, "max_workers": 2}`.
 
+## Resources
+
 For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
 
-## Resources
+### Installation
+
+Install `prefect-databricks` with `pip`:
+
+```bash
+pip install prefect-databricks
+```
+
+Requires an installation of Python 3.7+.
+
+We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
+
+These tasks are designed to work with Prefect 2. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
+
+### Feedback
 
 If you encounter any bugs while using `prefect-databricks`, feel free to open an issue in the [prefect-databricks](https://github.com/PrefectHQ/prefect-databricks) repository.
 
@@ -159,11 +157,12 @@ If you have any questions or issues while using `prefect-databricks`, you can fi
 
 Feel free to star or watch [`prefect-databricks`](https://github.com/PrefectHQ/prefect-databricks) for updates too!
 
-## Contributing
+### Contributing
 
 If you'd like to help contribute to fix an issue or add a feature to `prefect-databricks`, please [propose changes through a pull request from a fork of the repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
 
 Here are the steps:
+
 1. [Fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository)
 2. [Clone the forked repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#cloning-your-forked-repository)
 3. Install the repository and its dependencies:

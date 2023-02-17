@@ -31,6 +31,9 @@ theme:
   font:
     text: Inter
     code: Source Code Pro
+  features:
+    - content.code.copy
+    - content.code.annotate
 extra_css:
     - stylesheets/extra.css
 markdown_extensions:
@@ -43,11 +46,16 @@ markdown_extensions:
         use_pygments: true
     - pymdownx.superfences
     - pymdownx.tabbed
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+
 plugins:
   - search
   - gen-files:
       scripts:
-        - docs/gen_ref_pages.py
+        - docs/gen_home_page.py
+        - docs/gen_examples_catalog.py
+        - docs/gen_blocks_catalog.py
   - mkdocstrings:
       handlers:
         python:
@@ -64,13 +72,15 @@ watch:
 
 nav:
     - Home: index.md
-    - Credentials: credentials.md
-    - Jobs: jobs.md
-    - Rest: rest.md
-    - Flows: flows.md
-  
-    - Models:
-        - Jobs: models/jobs.md
+    - Blocks Catalog: blocks_catalog.md
+    - Examples Catalog: examples_catalog.md
+    - API Reference:
+        - Credentials: credentials.md
+        - Jobs: jobs.md
+        - Rest: rest.md
+        - Flows: flows.md
+        - Models:
+            - Jobs: models/jobs.md
 
 extra:
     social:
