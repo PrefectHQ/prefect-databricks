@@ -1,6 +1,8 @@
 # Integrate Databricks jobs into your dataflow with prefect-databricks
  
 <p align="center">
+    <img src="https://user-images.githubusercontent.com/15331990/219822439-70ec82fb-e93a-4983-bec7-8c8250fbb7ac.png">
+    <br>
     <a href="https://pypi.python.org/pypi/prefect-databricks/" alt="PyPI version">
         <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-databricks?color=0052FF&labelColor=090422"></a>
     <a href="https://github.com/PrefectHQ/prefect-databricks/" alt="Stars">
