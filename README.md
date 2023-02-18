@@ -179,8 +179,8 @@ Congrats! You can now easily load the saved block, which holds your credentials:
 from prefect_databricks import DatabricksCredentials
 
 DatabricksCredentials.load("BLOCK_NAME-PLACEHOLDER")
-
 ```
+
 !!! info "Registering blocks"
 
     Register blocks in this module to
