@@ -1,6 +1,4 @@
-# prefect-databricks
-
-Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to see additional examples and the API reference.
+# Integrate Databricks jobs into your dataflow with prefect-databricks
  
 <p align="center">
     <a href="https://pypi.python.org/pypi/prefect-databricks/" alt="PyPI version">
@@ -18,49 +16,23 @@ Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to se
         <img src="https://img.shields.io/badge/discourse-browse_forum-red.svg?color=0052FF&labelColor=090422&logo=discourse" /></a>
 </p>
 
-## Welcome!
+Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to see additional examples and the API reference.
 
-Prefect integrations for interacting with Databricks
-
-The tasks within this collection were created by a code generator using the service's OpenAPI spec.
-
-The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/latest/index.html).
+The prefect-databricks collection makes it easy to create, run, and manage Databricks jobs in your Prefect flows. Check out the examples below to get started!
 
 ## Getting Started
 
-### Lists jobs on the Databricks instance
+### Integrate with Prefect flows
 
-```python
-from prefect import flow
-from prefect_databricks import DatabricksCredentials
-from prefect_databricks.jobs import jobs_list
+Using Prefect with Databricks allows you to define and orchestrate complex data workflows that can take advantage of the scalability and performance of Databricks.
 
+This can be especially useful for data-intensive tasks such as ETL (extract, transform, load) pipelines, machine learning training and inference, and real-time data processing.
 
-@flow
-def example_execute_endpoint_flow():
-    databricks_credentials = DatabricksCredentials.load("my-block")
-    jobs = jobs_list(
-        databricks_credentials,
-        limit=5
-    )
-    return jobs
+Below is an example of how you can incorporate Databricks notebooks within your Prefect flows.
 
-example_execute_endpoint_flow()
-```
+Be sure to install [prefect-databricks](#installation) and [save to block](#saving-credentials-to-block) to run the examples below!
 
-### Use `with_options` to customize options on any existing task or flow
-
-```python
-custom_example_execute_endpoint_flow = example_execute_endpoint_flow.with_options(
-    name="My custom flow name",
-    retries=2,
-    retry_delay_seconds=10,
-)
-```
-
-### Launch a new cluster and run a Databricks notebook
-
-Notebook named `example.ipynb` on Databricks which accepts a name parameter:
+If you don't have an existing notebook ready on Databricks, you can copy the following, and name it `example.ipynb`. This notebook, accepts a name parameter from the flow and simply prints a message.
 
 ```python
 name = dbutils.widgets.get("name")
@@ -68,12 +40,12 @@ message = f"Don't worry {name}, I got your request! Welcome to prefect-databrick
 print(message)
 ```
 
-Prefect flow that launches a new cluster to run `example.ipynb`:
+Here, the flow launches a new cluster to run `example.ipynb`, waiting for its completion. Replace the placeholders and run.
 
 ```python
 from prefect import flow
 from prefect_databricks import DatabricksCredentials
-from prefect_databricks.jobs import jobs_runs_submit
+from prefect_databricks.flows import jobs_runs_submit_and_wait_for_completion
 from prefect_databricks.models.jobs import (
     AutoScale,
     AwsAttributes,
@@ -84,8 +56,8 @@ from prefect_databricks.models.jobs import (
 
 
 @flow
-def jobs_runs_submit_flow(notebook_path, **base_parameters):
-    databricks_credentials = DatabricksCredentials.load("my-block")
+def jobs_runs_submit_flow(block_name: str, notebook_path: str, **base_parameters):
+    databricks_credentials = DatabricksCredentials.load(block_name)
 
     # specify new cluster settings
     aws_attributes = AwsAttributes(
@@ -117,7 +89,7 @@ def jobs_runs_submit_flow(notebook_path, **base_parameters):
         task_key="prefect-task"
     )
 
-    run = jobs_runs_submit(
+    run = jobs_runs_submit_and_wait_for_completion(
         databricks_credentials=databricks_credentials,
         run_name="prefect-job",
         tasks=[job_task_settings]
@@ -126,14 +98,40 @@ def jobs_runs_submit_flow(notebook_path, **base_parameters):
     return run
 
 
-jobs_runs_submit_flow("/Users/username@gmail.com/example.ipynb", name="Marvin")
+jobs_runs_submit_flow(
+    block_name="BLOCK-NAME-PLACEHOLDER"
+    notebook_path="/Users/<EMAIL_ADDRESS_PLACEHOLDER>/example.ipynb",
+    name="Marvin"
+)
 ```
 
-Note, instead of using the built-in models, you may also input valid JSON. For example, `AutoScale(min_workers=1, max_workers=2)` is equivalent to `{"min_workers": 1, "max_workers": 2}`.
+Upon execution, the notebook run should output:
+
+```
+Don't worry Marvin, I got your request! Welcome to prefect-databricks!
+```
+
+!!! info "Input JSON in the place of objects"
+    
+    Instead of using the built-in models, you may also input valid JSON.
+    
+    For example, the following are equivalent:
+
+    ```python
+    auto_scale=AutoScale(min_workers=1, max_workers=2)
+    ```
+
+    ```python
+    auto_scale={"min_workers": 1, "max_workers": 2}
+    ```
 
 ## Resources
 
 For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!
+
+Note, the tasks within this collection were created by a code generator using the service's OpenAPI spec.
+
+The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/latest/index.html).
 
 ### Installation
 
@@ -148,6 +146,38 @@ Requires an installation of Python 3.7+.
 We recommend using a Python virtual environment manager such as pipenv, conda or virtualenv.
 
 These tasks are designed to work with Prefect 2. For more information about how to use Prefect, please refer to the [Prefect documentation](https://orion-docs.prefect.io/).
+
+### Saving Credentials to Block
+
+To use the `load` method on Blocks, you must already have a block document [saved through code](https://orion-docs.prefect.io/concepts/blocks/#saving-blocks) or [saved through the UI](https://orion-docs.prefect.io/ui/blocks/).
+
+Below is a walkthrough on saving block documents through code; simply create a short script, replacing the placeholders. 
+
+1. Head over to [Databricks](https://accounts.cloud.databricks.com/).
+2. Login to your Databricks account and select a workspace.
+3. On the top right side of the nav bar, click on your account name -> User Settings.
+4. Click Access tokens -> Generate new token -> Generate and copy the token.
+5. Note down your Databricks instance from the browser URL, formatted like `https://<DATABRICKS-INSTANCE>.cloud.databricks.com/`
+6. Create a short script, replacing the placeholders.
+
+```python
+from prefect_databricks import DatabricksCredentials
+
+credentials = DatabricksCredentials(
+    databricks_instance="DATABRICKS-INSTANCE-PLACEHOLDER"
+    token="TOKEN-PLACEHOLDER"
+)
+
+connector.save("BLOCK_NAME-PLACEHOLDER")
+```
+
+Congrats! You can now easily load the saved block, which holds your credentials:
+
+```python
+from prefect_databricks import DatabricksCredentials
+
+DatabricksCredentials.load("BLOCK_NAME-PLACEHOLDER")
+```
 
 ### Feedback
 
