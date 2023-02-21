@@ -26,7 +26,7 @@ The prefect-databricks collection makes it easy to create, run, and manage Datab
 
 ### Integrate with Prefect flows
 
-Using Prefect with Databricks allows you to define and orchestrate complex data workflows that can take advantage of the scalability and performance of Databricks.
+Using Prefect with Databricks allows you to define and orchestrate complex data workflows that take advantage of the scalability and performance of Databricks.
 
 This can be especially useful for data-intensive tasks such as ETL (extract, transform, load) pipelines, machine learning training and inference, and real-time data processing.
 
