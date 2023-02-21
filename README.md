@@ -20,7 +20,7 @@
 
 Visit the full docs [here](https://PrefectHQ.github.io/prefect-databricks) to see additional examples and the API reference.
 
-The prefect-databricks collection makes it easy to create, run, and manage Databricks jobs in your Prefect flows. Check out the examples below to get started!
+The prefect-databricks collection makes it easy to coordiante Databricks jobs with other tools in your data stack using Prefect. Check out the examples below to get started!
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ This can be especially useful for data-intensive tasks such as ETL (extract, tra
 
 Below is an example of how you can incorporate Databricks notebooks within your Prefect flows.
 
-Be sure to install [prefect-databricks](#installation) and [save to block](#saving-credentials-to-block) to run the examples below!
+Be sure to install [prefect-databricks](#installation) and [save a credentials block](#saving-credentials-to-block) to run the examples below!
 
 If you don't have an existing notebook ready on Databricks, you can copy the following, and name it `example.ipynb`. This notebook, accepts a name parameter from the flow and simply prints a message.
 
@@ -42,7 +42,7 @@ message = f"Don't worry {name}, I got your request! Welcome to prefect-databrick
 print(message)
 ```
 
-Here, the flow launches a new cluster to run `example.ipynb`, waiting for its completion. Replace the placeholders and run.
+Here, the flow launches a new cluster to run `example.ipynb` and waits for the completion of the notebook run. Replace the placeholders and run.
 
 ```python
 from prefect import flow
@@ -113,9 +113,9 @@ Upon execution, the notebook run should output:
 Don't worry Marvin, I got your request! Welcome to prefect-databricks!
 ```
 
-!!! info "Input JSON in the place of objects"
+!!! info "Input dictionaries in the place of models"
     
-    Instead of using the built-in models, you may also input valid JSON.
+    Instead of using the built-in models, you may also input a valid dictionary.
     
     For example, the following are equivalent:
 
