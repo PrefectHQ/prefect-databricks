@@ -217,26 +217,24 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
                 task_notebook_outputs[task_key] = task_run_notebook_output
             logger.info(
                 "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
-                run_name,
                 job_id,
             )
             return task_notebook_outputs
         else:
             raise DatabricksJobTerminated(
-                f"Databricks Jobs Runs Submit "
-                f"({run_name} ID {job_id}) "
+                f"Databricks Jobs Runs Submit ID {job_id}"
                 f"terminated with result state, {jobs_runs_result_state}: "
                 f"{jobs_runs_state_message}"
             )
     elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
         raise DatabricksJobSkipped(
-            f"Databricks Jobs Runs Submit ({run_name} ID "
-            f"{job_id}) was skipped: {jobs_runs_state_message}.",
+            f"Databricks Jobs Runs Submit ID "
+            f"{job_id} was skipped: {jobs_runs_state_message}.",
         )
     elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
         raise DatabricksJobInternalError(
-            f"Databricks Jobs Runs Submit ({run_name} ID "
-            f"{multi_task_jobs_runs_id}) "
+            f"Databricks Jobs Runs Submit ID "
+            f"{job_id} "
             f"encountered an internal error: {jobs_runs_state_message}.",
         )
 
