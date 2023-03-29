@@ -195,7 +195,6 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         max_wait_seconds=max_wait_seconds,
         poll_frequency_seconds=poll_frequency_seconds,
     )
-    print(jobs_runs_metadata)
 
     # fetch the state results
     jobs_runs_life_cycle_state = jobs_runs_state["life_cycle_state"]
@@ -215,8 +214,6 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
             )
             task_run_output = await task_run_output_future.result()
             task_run_notebook_output = task_run_output.get("notebook_output", {})
-            print(task_run_notebook_output)
-            # task_notebook_outputs[task_key] = task_run_notebook_output
             logger.info(
                 "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
                 job_id,
