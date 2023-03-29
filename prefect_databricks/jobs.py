@@ -923,7 +923,7 @@ async def jobs_run_now(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "/2.1/jobs/run-now"  # noqa
+    endpoint = "2.1/jobs/run-now"  # noqa
 
     responses = {
         200: "Run was started successfully.",  # noqa
@@ -1148,7 +1148,7 @@ async def jobs_runs_get(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "/2.1/jobs/runs/get"  # noqa
+    endpoint = "/2.0/jobs/runs/get"  # noqa
 
     responses = {
         200: "Run was retrieved successfully.",  # noqa
@@ -1210,7 +1210,7 @@ async def jobs_runs_get_output(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "/2.1/jobs/runs/get-output"  # noqa
+    endpoint = "/2.0/jobs/runs/get-output"  # noqa
 
     responses = {
         200: "Run output was retrieved successfully.",  # noqa
