@@ -404,17 +404,7 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
         ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
 
         result = await jobs_runs_submit_by_id_and_wait_for_completion(
-            databricks_credentials=databricks_credentials,
-            run_name="prefect-job",
-            tasks=[
-                {
-                    "notebook_task": {
-                        "notebook_path": "path",
-                        "base_parameters": {"param": "a"},
-                    },
-                    "task_key": "key",
-                }
-            ],
+            databricks_credentials=databricks_credentials, job_id="prefect-job"
         )
         assert result == {"prefect-task": {"cell": "output"}}
 
