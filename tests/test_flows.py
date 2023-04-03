@@ -371,7 +371,7 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
         respx_mock.get(
-            "https://dbc-1d3d172b-59e4.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(

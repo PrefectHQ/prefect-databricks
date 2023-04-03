@@ -10,10 +10,10 @@ from prefect import flow, get_run_logger
 
 from prefect_databricks import DatabricksCredentials
 from prefect_databricks.jobs import (
+    jobs_run_now,
     jobs_runs_get,
     jobs_runs_get_output,
     jobs_runs_submit,
-    jobs_run_now,
 )
 from prefect_databricks.models.jobs import (
     AccessControlRequest,
@@ -214,26 +214,26 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
             )
             task_run_output = await task_run_output_future.result()
             task_run_notebook_output = task_run_output.get("notebook_output", {})
+            task_notebook_outputs[task_run_id] = task_run_notebook_output
             logger.info(
-                "Databricks Jobs Runs Submit (%s ID %s) completed successfully!",
-                job_id,
+                f"Databricks Jobs Runs Submit {jobs_runs_id} completed successfully!",
             )
             return task_notebook_outputs
         else:
             raise DatabricksJobTerminated(
-                f"Databricks Jobs Runs Submit ID {job_id}"
+                f"Databricks Jobs Runs Submit ID {jobs_runs_id}"
                 f"terminated with result state, {jobs_runs_result_state}: "
                 f"{jobs_runs_state_message}"
             )
     elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
         raise DatabricksJobSkipped(
             f"Databricks Jobs Runs Submit ID "
-            f"{job_id} was skipped: {jobs_runs_state_message}.",
+            f"{jobs_runs_id} was skipped: {jobs_runs_state_message}.",
         )
     elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
         raise DatabricksJobInternalError(
             f"Databricks Jobs Runs Submit ID "
-            f"{job_id} "
+            f"{jobs_runs_id} "
             f"encountered an internal error: {jobs_runs_state_message}.",
         )
 

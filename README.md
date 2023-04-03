@@ -1,3 +1,12 @@
+# prefect-databricks
+
+## Welcome!
+
+Prefect integrations interacting with Databricks
+
+The tasks within this collection were created by a code generator using the service's OpenAPI spec.
+
+The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/latest/index.html).
 # Integrate Databricks jobs into your dataflow with prefect-databricks
  
 <p align="center">
@@ -105,6 +114,29 @@ jobs_runs_submit_flow(
     notebook_path="/Users/<EMAIL_ADDRESS_PLACEHOLDER>/example.ipynb",
     name="Marvin"
 )
+```
+
+Another example in which you do have an existing Databricks job and wish to trigger it by inputting the job id is below.
+```python
+from prefect import flow
+
+from prefect_databricks import DatabricksCredentials
+from prefect_databricks.flows import (
+    jobs_runs_submit_by_id_and_wait_for_completion,
+)
+
+
+@flow
+def existing_job_submit(block_name: str, job_id):
+    databricks_credentials = DatabricksCredentials.load(block_name)
+
+    run = jobs_runs_submit_by_id_and_wait_for_completion(
+        databricks_credentials=databricks_credentials, job_id=job_id
+    )
+
+    return run
+
+existing_job_submit(block_name="db-creds", job_id="YOUR-JOB-NAME")
 ```
 
 Upon execution, the notebook run should output:
