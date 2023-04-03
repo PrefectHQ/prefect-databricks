@@ -116,7 +116,28 @@ jobs_runs_submit_flow(
 )
 ```
 
+Upon execution, the notebook run should output:
+
+```
+Don't worry Marvin, I got your request! Welcome to prefect-databricks!
+```
+
+!!! info "Input dictionaries in the place of models"
+    
+    Instead of using the built-in models, you may also input a valid dictionary.
+    
+    For example, the following are equivalent:
+
+    ```python
+    auto_scale=AutoScale(min_workers=1, max_workers=2)
+    ```
+
+    ```python
+    auto_scale={"min_workers": 1, "max_workers": 2}
+    ```
+
 Another example in which you do have an existing Databricks job and wish to trigger it by inputting the job id is below.
+
 ```python
 from prefect import flow
 
@@ -138,26 +159,6 @@ def existing_job_submit(block_name: str, job_id):
 
 existing_job_submit(block_name="db-creds", job_id="YOUR-JOB-NAME")
 ```
-
-Upon execution, the notebook run should output:
-
-```
-Don't worry Marvin, I got your request! Welcome to prefect-databricks!
-```
-
-!!! info "Input dictionaries in the place of models"
-    
-    Instead of using the built-in models, you may also input a valid dictionary.
-    
-    For example, the following are equivalent:
-
-    ```python
-    auto_scale=AutoScale(min_workers=1, max_workers=2)
-    ```
-
-    ```python
-    auto_scale={"min_workers": 1, "max_workers": 2}
-    ```
 
 ## Resources
 
