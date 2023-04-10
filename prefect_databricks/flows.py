@@ -380,7 +380,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         python_named_params:
             A map from keys to values for jobs with Python wheel task, for example
             "python_named_params": {"name": "task", "data": "dbfs:/path/to/data.json"}.
-        pipeline_params (Optional[str], optional): Defaults to None.
+        pipeline_params: Defaults to None.
         sql_params:
             A map from keys to values for SQL tasks, for example "sql_params":
             {"name": "john doe", "age": "35"}. The SQL alert task does not support
