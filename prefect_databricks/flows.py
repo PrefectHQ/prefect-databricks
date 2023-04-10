@@ -395,7 +395,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         DatabricksJobInternalError: Raised when the Databricks job run encounters an internal error.
 
     Returns:
-        Dict: _description_
+        Dict: A dictionary containing information about the completed job run.
 
     Example:
         ```python
