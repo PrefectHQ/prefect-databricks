@@ -1,12 +1,3 @@
-# prefect-databricks
-
-## Welcome!
-
-Prefect integrations interacting with Databricks
-
-The tasks within this collection were created by a code generator using the service's OpenAPI spec.
-
-The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/latest/index.html).
 # Integrate Databricks jobs into your dataflow with prefect-databricks
  
 <p align="center">
@@ -136,7 +127,7 @@ Don't worry Marvin, I got your request! Welcome to prefect-databricks!
     auto_scale={"min_workers": 1, "max_workers": 2}
     ```
 
-Another example in which you do have an existing Databricks job and wish to trigger it by inputting the job id is below.
+If you have an existing Databricks job, you can run it using `jobs_runs_submit_by_id_and_wait_for_completion`:
 
 ```python
 from prefect import flow
@@ -148,8 +139,8 @@ from prefect_databricks.flows import (
 
 
 @flow
-def existing_job_submit(block_name: str, job_id):
-    databricks_credentials = DatabricksCredentials.load(block_name)
+def existing_job_submit(databricks_credentials_block_name: str, job_id):
+    databricks_credentials = DatabricksCredentials.load(name=block_name)
 
     run = jobs_runs_submit_by_id_and_wait_for_completion(
         databricks_credentials=databricks_credentials, job_id=job_id
@@ -157,7 +148,7 @@ def existing_job_submit(block_name: str, job_id):
 
     return run
 
-existing_job_submit(block_name="db-creds", job_id="YOUR-JOB-NAME")
+existing_job_submit(databricks_credentials_block_name="db-creds", job_id="YOUR-JOB-NAME")
 ```
 
 ## Resources
