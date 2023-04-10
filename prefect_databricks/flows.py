@@ -333,20 +333,20 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     Args:
         databricks_credentials (DatabricksCredentials):
             Credentials to use for authentication with Databricks.
-        job_id (Optional[int], optional): _description_. Id of the databricks job.
-        idempotency_token (Optional[str], optional): _description_. Defaults to None.
-        jar_params (Optional[List[str]], optional):
+        job_id: Id of the databricks job.
+        idempotency_token: _description_. Defaults to None.
+        jar_params:
             A list of parameters for jobs with Spark JAR tasks, for example "jar_params"
             : ["john doe", "35"]. The parameters are used to invoke the main function of
             the main class specified in the Spark JAR task. If not specified upon run-
             now, it defaults to an empty list. jar_params cannot be specified in
             conjunction with notebook_params. The JSON representation of this field (for
             example {"jar_params": ["john doe","35"]}) cannot exceed 10,000 bytes.
-        max_wait_seconds (int, optional):
+        max_wait_seconds:
             Maximum number of seconds to wait for the entire flow to complete.
         poll_frequency_seconds: Number of seconds to wait in between checks for
             run completion.
-        notebook_params (Optional[Dict], optional):
+        notebook_params:
             A map from keys to values for jobs with notebook task, for example
             "notebook_params": {"name": "john doe", "age": "35"}. The map is
             passed to the notebook and is accessible through the dbutils.widgets.get
@@ -356,7 +356,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
             information about job runs. The JSON representation of this field
             (for example {"notebook_params":{"name":"john doe","age":"35"}}) cannot
             exceed 10,000 bytes.
-        python_params (Optional[List[str]], optional):
+        python_params:
             A list of parameters for jobs with Python tasks, for example "python_params"
             :["john doe", "35"]. The parameters are passed to Python file as command-
             line parameters. If specified upon run-now, it would overwrite the
@@ -366,7 +366,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
             about job runs. These parameters accept only Latin characters (ASCII
             character set). Using non-ASCII characters returns an error. Examples of
             invalid, non-ASCII characters are Chinese, Japanese kanjis, and emojis.
-        spark_submit_params (Optional[List[str]], optional):
+        spark_submit_params:
             A list of parameters for jobs with spark submit task, for example
             "spark_submit_params": ["--class", "org.apache.spark.examples.SparkPi"].
             The parameters are passed to spark-submit script as command-line parameters.
@@ -377,15 +377,15 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
             job runs. These parameters accept only Latin characters (ASCII character
             set). Using non-ASCII characters returns an error. Examples of invalid,
             non-ASCII characters are Chinese, Japanese kanjis, and emojis.
-        python_named_params (Optional[Dict], optional):
+        python_named_params:
             A map from keys to values for jobs with Python wheel task, for example
             "python_named_params": {"name": "task", "data": "dbfs:/path/to/data.json"}.
         pipeline_params (Optional[str], optional): Defaults to None.
-        sql_params (Optional[Dict], optional):
+        sql_params:
             A map from keys to values for SQL tasks, for example "sql_params":
             {"name": "john doe", "age": "35"}. The SQL alert task does not support
             custom parameters.
-        dbt_commands (Optional[List], optional):
+        dbt_commands:
             An array of commands to execute for jobs with the dbt task,
             for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]
 

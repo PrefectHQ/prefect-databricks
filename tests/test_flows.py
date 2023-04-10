@@ -292,7 +292,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
             "encountered an internal error: testing."
         )
         with pytest.raises(DatabricksJobInternalError, match=match):
-            await jobs_runs_submit_and_wait_for_completion(
+            await jobs_runs_submit_by_id_and_wait_for_completion(
                 databricks_credentials=databricks_credentials,
                 run_name="prefect-job",
                 tasks=[
@@ -389,7 +389,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
 class TestJobsRunsIdSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=False)
     async def test_run_now_success(
-        self, common_mocks, run_now_mocks, respx_mock, databricks_credentials
+        self, run_now_mocks, respx_mock, databricks_credentials
     ):
         respx_mock.get(
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
@@ -407,7 +407,7 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
                 },
             )
         )
-        respx_mock.get(
+        respx_mock.post(
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/run-now?job_id=11223344",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
@@ -422,3 +422,46 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
             databricks_credentials=databricks_credentials, job_id=11223344
         )
         assert result == {36108: {"cell": "output"}}
+
+    @pytest.mark.respx(assert_all_called=False)
+    async def test_run_now_internal_error(
+        self, run_now_mocks, respx_mock, databricks_credentials
+    ):
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(
+            return_value=Response(
+                200,
+                json={
+                    "state": {
+                        "life_cycle_state": "INTERNAL_ERROR",
+                        "state_message": "testing",
+                    },
+                    "tasks": [{"run_id": 36260, "task_key": "prefect-task"}],
+                },
+            )
+        )
+
+        match = re.escape(  # escape to handle the parentheses
+            "Databricks Jobs Runs Submit (prefect-job ID 36108) "
+            "encountered an internal error: testing."
+        )
+        with pytest.raises(DatabricksJobInternalError, match=match):
+            await jobs_runs_submit_by_id_and_wait_for_completion(
+                databricks_credentials=databricks_credentials,
+                run_name="prefect-job",
+                tasks=[
+                    {
+                        "notebook_task": {
+                            "notebook_path": "path",
+                            "base_parameters": {"param": "a"},
+                        },
+                        "task_key": "key",
+                    }
+                ],
+            )
+        with pytest.raises(DatabricksJobInternalError, match=match):
+            await jobs_runs_submit_by_id_and_wait_for_completion(
+                databricks_credentials=databricks_credentials, job_id="11223344"
+            )
