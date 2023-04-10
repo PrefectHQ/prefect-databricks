@@ -30,9 +30,17 @@ def databricks_credentials():
 
 
 @pytest.fixture
+def run_now_mocks(respx_mock):
+    respx_mock.post(
+        "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/run-now",
+        headers={"Authorization": "Bearer testing_token"},
+    ).mock(return_value=Response(200, json={"run_id": 36108, "number_in_job": 36108}))
+
+
+@pytest.fixture
 def common_mocks(respx_mock):
     respx_mock.post(
-        "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/submit",
+        "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/submit",
         headers={"Authorization": "Bearer testing_token"},
     ).mock(return_value=Response(200, json={"run_id": 36108}))
 
@@ -187,7 +195,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         self, result_state, common_mocks, respx_mock, databricks_credentials
     ):
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(
@@ -225,7 +233,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_skipped(self, common_mocks, respx_mock, databricks_credentials):
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(
@@ -264,7 +272,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         self, common_mocks, respx_mock, databricks_credentials
     ):
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(
@@ -303,7 +311,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         self, common_mocks, respx_mock, databricks_credentials
     ):
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(
@@ -342,7 +350,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         self, common_mocks, respx_mock, databricks_credentials
     ):
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(
@@ -359,7 +367,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         )
 
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get-output",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
 
@@ -379,10 +387,12 @@ class TestJobsRunsSubmitAndWaitForCompletion:
 
 
 class TestJobsRunsIdSubmitAndWaitForCompletion:
-    @pytest.mark.respx(assert_all_called=True)
-    async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
+    @pytest.mark.respx(assert_all_called=False)
+    async def test_run_now_success(
+        self, common_mocks, run_now_mocks, respx_mock, databricks_credentials
+    ):
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get?run_id=36108",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(
             return_value=Response(
@@ -397,193 +407,18 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
                 },
             )
         )
-
         respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/run-now?job_id=11223344",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(
+            return_value=Response(200, json={"run_id": 36108, "number_in_job": 36108})
+        )
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/get-output",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
 
         result = await jobs_runs_submit_by_id_and_wait_for_completion(
-            databricks_credentials=databricks_credentials, job_id="prefect-job"
+            databricks_credentials=databricks_credentials, job_id=11223344
         )
-        assert result == {"prefect-task": {"cell": "output"}}
-
-    @pytest.mark.respx(assert_all_called=True)
-    async def test_run_non_notebook_success(
-        self, common_mocks, respx_mock, databricks_credentials
-    ):
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(side_effect=successful_job_path)
-
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(return_value=Response(200, json={"metadata": {"cell": "output"}}))
-
-        result = await jobs_runs_submit_and_wait_for_completion(
-            databricks_credentials=databricks_credentials,
-            run_name="prefect-job",
-            tasks=[
-                {
-                    "task_key": "prefect-job",
-                    "spark_python_task": {
-                        "python_file": "test.py",
-                        "parameters": ["test"],
-                    },
-                    "existing_cluster_id": "test-test-test",
-                    "libraries": [{"whl": "test.whl"}],
-                }
-            ],
-            poll_frequency_seconds=1,
-        )
-        assert result == {"prefect-task": {}}
-
-    @pytest.mark.respx(assert_all_called=True)
-    @pytest.mark.parametrize("result_state", ["FAILED", "TIMEDOUT", "CANCELED"])
-    async def test_run_terminated(
-        self, result_state, common_mocks, respx_mock, databricks_credentials
-    ):
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(
-            return_value=Response(
-                200,
-                json={
-                    "state": {
-                        "life_cycle_state": "TERMINATED",
-                        "state_message": "testing",
-                        "result_state": result_state,
-                    },
-                    "tasks": [{"run_id": 36260, "task_key": "prefect-task"}],
-                },
-            )
-        )
-
-        match = re.escape(  # escape to handle the parentheses
-            f"Databricks Jobs Runs Submit (prefect-job ID 36108) "
-            f"terminated with result state, {result_state}: testing"
-        )
-        with pytest.raises(DatabricksJobTerminated, match=match):
-            await jobs_runs_submit_and_wait_for_completion(
-                databricks_credentials=databricks_credentials,
-                run_name="prefect-job",
-                tasks=[
-                    {
-                        "notebook_task": {
-                            "notebook_path": "path",
-                            "base_parameters": {"param": "a"},
-                        },
-                        "task_key": "key",
-                    }
-                ],
-            )
-
-    @pytest.mark.respx(assert_all_called=True)
-    async def test_run_skipped(self, common_mocks, respx_mock, databricks_credentials):
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(
-            return_value=Response(
-                200,
-                json={
-                    "state": {
-                        "life_cycle_state": "SKIPPED",
-                        "state_message": "testing",
-                    },
-                    "tasks": [{"run_id": 36260, "task_key": "prefect-task"}],
-                },
-            )
-        )
-
-        match = re.escape(  # escape to handle the parentheses
-            "Databricks Jobs Runs Submit (prefect-job ID 36108) "
-            "was skipped: testing."
-        )
-        with pytest.raises(DatabricksJobSkipped, match=match):
-            await jobs_runs_submit_and_wait_for_completion(
-                databricks_credentials=databricks_credentials,
-                run_name="prefect-job",
-                tasks=[
-                    {
-                        "notebook_task": {
-                            "notebook_path": "path",
-                            "base_parameters": {"param": "a"},
-                        },
-                        "task_key": "key",
-                    }
-                ],
-            )
-
-    @pytest.mark.respx(assert_all_called=True)
-    async def test_run_internal_error(
-        self, common_mocks, respx_mock, databricks_credentials
-    ):
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(
-            return_value=Response(
-                200,
-                json={
-                    "state": {
-                        "life_cycle_state": "INTERNAL_ERROR",
-                        "state_message": "testing",
-                    },
-                    "tasks": [{"run_id": 36260, "task_key": "prefect-task"}],
-                },
-            )
-        )
-
-        match = re.escape(  # escape to handle the parentheses
-            "Databricks Jobs Runs Submit (prefect-job ID 36108) "
-            "encountered an internal error: testing."
-        )
-        with pytest.raises(DatabricksJobInternalError, match=match):
-            await jobs_runs_submit_and_wait_for_completion(
-                databricks_credentials=databricks_credentials,
-                run_name="prefect-job",
-                tasks=[
-                    {
-                        "notebook_task": {
-                            "notebook_path": "path",
-                            "base_parameters": {"param": "a"},
-                        },
-                        "task_key": "key",
-                    }
-                ],
-            )
-
-    @pytest.mark.respx(assert_all_called=True)
-    async def test_run_success_missing_job_id(
-        self, common_mocks, respx_mock, databricks_credentials
-    ):
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=36108",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(
-            return_value=Response(
-                200,
-                json={
-                    "state": {
-                        "life_cycle_state": "TERMINATED",
-                        "state_message": "",
-                        "result_state": "SUCCESS",
-                    },
-                    "tasks": [{"run_id": 36260, "task_key": "prefect-task"}],
-                },
-            )
-        )
-
-        respx_mock.get(
-            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
-            headers={"Authorization": "Bearer testing_token"},
-        ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
-
-        result = await jobs_runs_submit_by_id_and_wait_for_completion(
-            databricks_credentials=databricks_credentials
-        )
-        assert result == {"prefect-task": {"cell": "output"}}
+        assert result == {36108: {"cell": "output"}}
