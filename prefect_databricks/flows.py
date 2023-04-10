@@ -407,7 +407,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
 
 
         @flow
-        def submit_exising_job(block_name: str, job_id):
+        def submit_existing_job(block_name: str, job_id):
             databricks_credentials = DatabricksCredentials.load(block_name)
 
             run = jobs_runs_submit_by_id_and_wait_for_completion(
