@@ -1,12 +1,3 @@
-# prefect-databricks
-
-## Welcome!
-
-Prefect integrations interacting with Databricks
-
-The tasks within this collection were created by a code generator using the service's OpenAPI spec.
-
-The service's REST API documentation can be found [here](https://docs.databricks.com/dev-tools/api/latest/index.html).
 # Integrate Databricks jobs into your dataflow with prefect-databricks
  
 <p align="center">
