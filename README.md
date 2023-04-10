@@ -136,7 +136,7 @@ Don't worry Marvin, I got your request! Welcome to prefect-databricks!
     auto_scale={"min_workers": 1, "max_workers": 2}
     ```
 
-Another example in which you do have an existing Databricks job and wish to trigger it by inputting the job id is below.
+If you have an existing Databricks job, you can run it using `jobs_runs_submit_by_id_and_wait_for_completion`:
 
 ```python
 from prefect import flow
