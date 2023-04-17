@@ -391,12 +391,12 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
             for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]
 
     Raises:
-        DatabricksJobTerminated: _description_
-        DatabricksJobSkipped: _description_
-        DatabricksJobInternalError: _description_
+        DatabricksJobTerminated: Raised when the Databricks job run is terminated with a non-successful result state.
+        DatabricksJobSkipped: Raised when the Databricks job run is skipped.
+        DatabricksJobInternalError: Raised when the Databricks job run encounters an internal error.
 
     Returns:
-        Dict: _description_
+        Dict: A dictionary containing information about the completed job run.
 
     Example:
         ```python
