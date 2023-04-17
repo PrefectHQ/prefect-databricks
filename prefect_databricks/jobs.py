@@ -1138,7 +1138,7 @@ async def jobs_runs_get(
         Upon success, a dict of the response. </br>- `job_id: int`</br>- `run_id: int`</br>- `number_in_job: int`</br>- `creator_user_name: str`</br>- `original_attempt_run_id: int`</br>- `state: "models.RunState"`</br>- `schedule: "models.CronSchedule"`</br>- `tasks: List["models.RunTask"]`</br>- `job_clusters: List["models.JobCluster"]`</br>- `cluster_spec: "models.ClusterSpec"`</br>- `cluster_instance: "models.ClusterInstance"`</br>- `git_source: "models.GitSource"`</br>- `overriding_parameters: "models.RunParameters"`</br>- `start_time: int`</br>- `setup_duration: int`</br>- `execution_duration: int`</br>- `cleanup_duration: int`</br>- `end_time: int`</br>- `trigger: "models.TriggerType"`</br>- `run_name: str`</br>- `run_page_url: str`</br>- `run_type: "models.RunType"`</br>- `attempt_number: int`</br>- `repair_history: List["models.RepairHistoryItem"]`</br>
 
     <h4>API Endpoint:</h4>
-    `/2.0/jobs/runs/get`
+    `/2.1/jobs/runs/get`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1148,7 +1148,7 @@ async def jobs_runs_get(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "/2.0/jobs/runs/get"  # noqa
+    endpoint = "/2.1/jobs/runs/get"  # noqa
 
     responses = {
         200: "Run was retrieved successfully.",  # noqa
@@ -1210,7 +1210,7 @@ async def jobs_runs_get_output(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "/2.0/jobs/runs/get-output"  # noqa
+    endpoint = "/2.1/jobs/runs/get-output"  # noqa
 
     responses = {
         200: "Run output was retrieved successfully.",  # noqa
