@@ -1678,7 +1678,7 @@ async def jobs_runs_submit(
         Upon success, a dict of the response. </br>- `run_id: int`</br>
 
     <h4>API Endpoint:</h4>
-    `/2.0/jobs/runs/submit`
+    `/2.1/jobs/runs/submit`
 
     <h4>API Responses:</h4>
     | Response | Description |
@@ -1688,7 +1688,7 @@ async def jobs_runs_submit(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "/2.0/jobs/runs/submit"  # noqa
+    endpoint = "/2.1/jobs/runs/submit"  # noqa
 
     responses = {
         200: "Run was created and started successfully.",  # noqa

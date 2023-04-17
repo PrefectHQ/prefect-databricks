@@ -42,7 +42,7 @@ def run_now_mocks(respx_mock):
 @pytest.fixture
 def common_mocks(respx_mock):
     respx_mock.post(
-        "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.0/jobs/runs/submit",
+        "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/submit",
         headers={"Authorization": "Bearer testing_token"},
     ).mock(return_value=Response(200, json={"run_id": 11223344}))
 

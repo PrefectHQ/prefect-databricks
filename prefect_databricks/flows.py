@@ -327,7 +327,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     pipeline_params: Optional[str] = None,
     sql_params: Optional[Dict] = None,
     dbt_commands: Optional[List] = None,
-    **jobs_runs_submit_kwargs,
+    **jobs_runs_submit_kwargs: Dict[str, Any],
 ) -> Dict:
     """flow that triggers an existing job and waits for its completion
 
