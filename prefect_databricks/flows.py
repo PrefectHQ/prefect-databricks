@@ -255,7 +255,6 @@ async def jobs_runs_submit_and_wait_for_completion(
     jobs_runs_state, jobs_runs_metadata = await jobs_runs_wait_for_completion(
         multi_task_jobs_runs_id=multi_task_jobs_runs_id,
         databricks_credentials=databricks_credentials,
-        submit_by_id=False,
         run_name=run_name,
         max_wait_seconds=max_wait_seconds,
         poll_frequency_seconds=poll_frequency_seconds,
@@ -451,7 +450,6 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     jobs_runs_state, jobs_runs_metadata = await jobs_runs_wait_for_completion(
         multi_task_jobs_runs_id=job_run_id,
         databricks_credentials=databricks_credentials,
-        submit_by_id=True,
         max_wait_seconds=max_wait_seconds,
         poll_frequency_seconds=poll_frequency_seconds,
     )
@@ -499,7 +497,6 @@ def _update_and_log_state_changes(
     job_or_task_states: Dict[str, Any],
     job_or_task_metadata: Dict[str, Any],
     logger: Logger,
-    submit_by_id: bool,
     run_type: str = "Task",
 ) -> Dict[str, Any]:
     """
@@ -573,7 +570,6 @@ def _update_and_log_state_changes(
 async def jobs_runs_wait_for_completion(
     multi_task_jobs_runs_id: int,
     databricks_credentials: DatabricksCredentials,
-    submit_by_id: bool,
     run_name: Optional[str] = None,
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
@@ -631,12 +627,12 @@ async def jobs_runs_wait_for_completion(
 
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
         jobs_status = _update_and_log_state_changes(
-            jobs_status, jobs_runs_metadata, logger, submit_by_id, b"Job"
+            jobs_status, jobs_runs_metadata, logger, b"Job"
         )
         jobs_runs_metadata_tasks = jobs_runs_metadata.get("tasks", [])
         for task_metadata in jobs_runs_metadata_tasks:
             tasks_status = _update_and_log_state_changes(
-                tasks_status, task_metadata, logger, submit_by_id, "Task"
+                tasks_status, task_metadata, logger, "Task"
             )
 
         jobs_runs_state = jobs_runs_metadata.get("state", {})
