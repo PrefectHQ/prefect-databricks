@@ -923,7 +923,7 @@ async def jobs_run_now(
     | 401 | The request was unauthorized. |
     | 500 | The request was not handled correctly due to a server error. |
     """  # noqa
-    endpoint = "2.1/jobs/run-now"  # noqa
+    endpoint = "/2.1/jobs/run-now"  # noqa
 
     responses = {
         200: "Run was started successfully.",  # noqa

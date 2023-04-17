@@ -255,6 +255,7 @@ async def jobs_runs_submit_and_wait_for_completion(
     jobs_runs_state, jobs_runs_metadata = await jobs_runs_wait_for_completion(
         multi_task_jobs_runs_id=multi_task_jobs_runs_id,
         databricks_credentials=databricks_credentials,
+        submit_by_id=False,
         run_name=run_name,
         max_wait_seconds=max_wait_seconds,
         poll_frequency_seconds=poll_frequency_seconds,
@@ -314,7 +315,7 @@ async def jobs_runs_submit_and_wait_for_completion(
 )
 async def jobs_runs_submit_by_id_and_wait_for_completion(
     databricks_credentials: DatabricksCredentials,
-    job_id: Optional[int] = None,
+    job_id: int = None,
     idempotency_token: Optional[str] = None,
     jar_params: Optional[List[str]] = None,
     max_wait_seconds: int = 900,
@@ -326,7 +327,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     pipeline_params: Optional[str] = None,
     sql_params: Optional[Dict] = None,
     dbt_commands: Optional[List] = None,
-    **jobs_runs_submit_kwargs: Dict[str, Any],
+    **jobs_runs_submit_kwargs,
 ) -> Dict:
     """flow that triggers an existing job and waits for its completion
 
@@ -440,13 +441,14 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     )
 
     jobs_runs = await jobs_runs_future.result()
-    jobs_runs_id = jobs_runs["run_id"]
+    job_run_id = jobs_runs["run_id"]
 
     # wait for all the jobs runs to complete in a separate flow
     # for a cleaner radar interface
     jobs_runs_state, jobs_runs_metadata = await jobs_runs_wait_for_completion(
-        multi_task_jobs_runs_id=jobs_runs_id,
+        multi_task_jobs_runs_id=job_run_id,
         databricks_credentials=databricks_credentials,
+        submit_by_id=True,
         max_wait_seconds=max_wait_seconds,
         poll_frequency_seconds=poll_frequency_seconds,
     )
@@ -461,31 +463,31 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         if jobs_runs_result_state == RunResultState.success.value:
             task_notebook_outputs = {}
             task_run_output_future = await jobs_runs_get_output.submit(
-                run_id=jobs_runs_id,
+                run_id=job_run_id,
                 databricks_credentials=databricks_credentials,
             )
             task_run_output = await task_run_output_future.result()
             task_run_notebook_output = task_run_output.get("notebook_output", {})
-            task_notebook_outputs[jobs_runs_id] = task_run_notebook_output
+            task_notebook_outputs[job_id] = task_run_notebook_output
             logger.info(
-                f"Databricks Jobs Runs Submit {jobs_runs_id} completed successfully!",
+                f"Databricks Jobs Runs Submit {job_id} completed successfully!",
             )
             return task_notebook_outputs
         else:
             raise DatabricksJobTerminated(
-                f"Databricks Jobs Runs Submit ID {jobs_runs_id}"
+                f"Databricks Jobs Runs Submit ID {job_id} "
                 f"terminated with result state, {jobs_runs_result_state}: "
                 f"{jobs_runs_state_message}"
             )
     elif jobs_runs_life_cycle_state == RunLifeCycleState.skipped.value:
         raise DatabricksJobSkipped(
             f"Databricks Jobs Runs Submit ID "
-            f"{jobs_runs_id} was skipped: {jobs_runs_state_message}.",
+            f"{job_id} was skipped: {jobs_runs_state_message}.",
         )
     elif jobs_runs_life_cycle_state == RunLifeCycleState.internalerror.value:
         raise DatabricksJobInternalError(
             f"Databricks Jobs Runs Submit ID "
-            f"{jobs_runs_id} "
+            f"{job_id} "
             f"encountered an internal error: {jobs_runs_state_message}.",
         )
 
@@ -494,6 +496,7 @@ def _update_and_log_state_changes(
     job_or_task_states: Dict[str, Any],
     job_or_task_metadata: Dict[str, Any],
     logger: Logger,
+    submit_by_id: bool,
     run_type: str = "Task",
 ) -> Dict[str, Any]:
     """
@@ -509,7 +512,6 @@ def _update_and_log_state_changes(
     Returns
         A copy of the job_or_task_states dictionary with any state updates
     """
-
     run_id = job_or_task_metadata.get("run_id", "")
     run_page_url = job_or_task_metadata.get("run_page_url", "")
     state = job_or_task_metadata.get("state", {})
@@ -568,6 +570,7 @@ def _update_and_log_state_changes(
 async def jobs_runs_wait_for_completion(
     multi_task_jobs_runs_id: int,
     databricks_credentials: DatabricksCredentials,
+    submit_by_id: bool,
     run_name: Optional[str] = None,
     max_wait_seconds: int = 900,
     poll_frequency_seconds: int = 10,
@@ -625,12 +628,12 @@ async def jobs_runs_wait_for_completion(
 
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
         jobs_status = _update_and_log_state_changes(
-            jobs_status, jobs_runs_metadata, logger, "Job"
+            jobs_status, jobs_runs_metadata, logger, submit_by_id, b"Job"
         )
         jobs_runs_metadata_tasks = jobs_runs_metadata.get("tasks", [])
         for task_metadata in jobs_runs_metadata_tasks:
             tasks_status = _update_and_log_state_changes(
-                tasks_status, task_metadata, logger, "Task"
+                tasks_status, task_metadata, logger, submit_by_id, "Task"
             )
 
         jobs_runs_state = jobs_runs_metadata.get("state", {})
