@@ -331,8 +331,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     """flow that triggers an existing job and waits for its completion
 
     Args:
-        databricks_credentials (DatabricksCredentials):
-            Credentials to use for authentication with Databricks.
+        databricks_credentials: Credentials to use for authentication with Databricks.
         job_id: Id of the databricks job.
         idempotency_token: _description_. Defaults to None.
         jar_params:
