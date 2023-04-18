@@ -314,7 +314,7 @@ async def jobs_runs_submit_and_wait_for_completion(
 )
 async def jobs_runs_submit_by_id_and_wait_for_completion(
     databricks_credentials: DatabricksCredentials,
-    job_id: int = None,
+    job_id: int,
     idempotency_token: Optional[str] = None,
     jar_params: Optional[List[str]] = None,
     max_wait_seconds: int = 900,
