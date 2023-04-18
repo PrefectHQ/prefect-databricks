@@ -627,7 +627,7 @@ async def jobs_runs_wait_for_completion(
 
         jobs_runs_metadata = await jobs_runs_metadata_future.result()
         jobs_status = _update_and_log_state_changes(
-            jobs_status, jobs_runs_metadata, logger, b"Job"
+            jobs_status, jobs_runs_metadata, logger, "Job"
         )
         jobs_runs_metadata_tasks = jobs_runs_metadata.get("tasks", [])
         for task_metadata in jobs_runs_metadata_tasks:
