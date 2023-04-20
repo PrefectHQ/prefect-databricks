@@ -333,7 +333,19 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     Args:
         databricks_credentials: Credentials to use for authentication with Databricks.
         job_id: Id of the databricks job.
-        idempotency_token: _description_. Defaults to None.
+        idempotency_token:
+            An optional token that can be used to guarantee the idempotency of job
+            run requests. If a run with the provided token already
+            exists, the request does not create a new run but returns
+            the ID of the existing run instead. If a run with the
+            provided token is deleted, an error is returned.  If you
+            specify the idempotency token, upon failure you can retry
+            until the request succeeds. Databricks guarantees that
+            exactly one run is launched with that idempotency token.
+            This token must have at most 64 characters.  For more
+            information, see [How to ensure idempotency for
+            jobs](https://kb.databricks.com/jobs/jobs-idempotency.html),
+            e.g. `8f018174-4792-40d5-bcbc-3e6a527352c8`.
         jar_params:
             A list of parameters for jobs with Spark JAR tasks, for example "jar_params"
             : ["john doe", "35"]. The parameters are used to invoke the main function of
@@ -379,7 +391,12 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         python_named_params:
             A map from keys to values for jobs with Python wheel task, for example
             "python_named_params": {"name": "task", "data": "dbfs:/path/to/data.json"}.
-        pipeline_params: Defaults to None.
+        pipeline_params:
+            If `full_refresh` is set to true, trigger a full refresh on the
+            delta live table e.g.
+            ```
+                "pipeline_params": {"full_refresh": true}
+            ```
         sql_params:
             A map from keys to values for SQL tasks, for example "sql_params":
             {"name": "john doe", "age": "35"}. The SQL alert task does not support
