@@ -127,6 +127,30 @@ Don't worry Marvin, I got your request! Welcome to prefect-databricks!
     auto_scale={"min_workers": 1, "max_workers": 2}
     ```
 
+If you have an existing Databricks job, you can run it using `jobs_runs_submit_by_id_and_wait_for_completion`:
+
+```python
+from prefect import flow
+
+from prefect_databricks import DatabricksCredentials
+from prefect_databricks.flows import (
+    jobs_runs_submit_by_id_and_wait_for_completion,
+)
+
+
+@flow
+def existing_job_submit(databricks_credentials_block_name: str, job_id):
+    databricks_credentials = DatabricksCredentials.load(name=block_name)
+
+    run = jobs_runs_submit_by_id_and_wait_for_completion(
+        databricks_credentials=databricks_credentials, job_id=job_id
+    )
+
+    return run
+
+existing_job_submit(databricks_credentials_block_name="db-creds", job_id="YOUR-JOB-NAME")
+```
+
 ## Resources
 
 For more tips on how to use tasks and flows in a Collection, check out [Using Collections](https://orion-docs.prefect.io/collections/usage/)!

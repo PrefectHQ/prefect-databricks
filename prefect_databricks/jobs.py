@@ -784,7 +784,7 @@ async def jobs_reset(
 @task
 async def jobs_run_now(
     databricks_credentials: "DatabricksCredentials",
-    job_id: Optional[int] = None,
+    job_id: int,
     idempotency_token: Optional[str] = None,
     jar_params: Optional[List[str]] = None,
     notebook_params: Optional[Dict] = None,
@@ -894,6 +894,11 @@ async def jobs_run_now(
             {"name": "task", "data": "dbfs:/path/to/data.json"}
             ```
         pipeline_params:
+            If `full_refresh` is set to true, trigger a full refresh on the
+            delta live table e.g.
+            ```
+                "pipeline_params": {"full_refresh": true}
+            ```
 
         sql_params:
             A map from keys to values for SQL tasks, for example `'sql_params':
