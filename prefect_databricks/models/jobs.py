@@ -806,6 +806,15 @@ class ListOrder(str, Enum):
     asc = "ASC"
 
 
+class RuntimeEngine(str, Enum):
+    """
+    Permission to view the settings of the job.
+    """
+
+    standard = "STANDARD"
+    photon = "PHOTON"
+
+
 class LogSyncStatus(BaseModel):
     """
     See source code for the fields' description.
@@ -2455,7 +2464,17 @@ class NewCluster(BaseModel):
             " versions](https://docs.databricks.com/dev-tools/api/latest/clusters.html#runtime-versions)"
             " API call."
         ),
-    )
+    ),
+    runtime_engine: Optional[RuntimeEngine] = Field (
+        None,
+        description=(
+            "Decides which runtime engine to be use, e.g. Standard vs. Photon. If "
+            "unspecified, the runtime engine is inferred from spark_version. "
+            "see https://docs.databricks.com/api-explorer/workspace/jobs/create "
+            " for more details"
+        )
+    ) ,
+
     ssh_public_keys: Optional[List[str]] = Field(
         None,
         description=(
