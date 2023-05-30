@@ -2472,7 +2472,7 @@ class NewCluster(BaseModel):
             "unspecified, the runtime engine is inferred from spark_version. "
             "see https://docs.databricks.com/api-explorer/workspace/jobs/create "
             " for more details"
-        )
+        ),
     )
     ssh_public_keys: Optional[List[str]] = Field(
         None,
