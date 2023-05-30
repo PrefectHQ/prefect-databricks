@@ -19,6 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## 0.1.5
+
+Released on May 30th, 2023.
+
+### Added
+
+- `jobs_runs_submit_by_id_and_wait_for_completion` flow - [#65](https://github.com/PrefectHQ/prefect-databricks/pull/65)
+- `runtime_engine` attribute to `NewCluster` model - [#70](https://github.com/PrefectHQ/prefect-databricks/pull/70)
+
 ## 0.1.4
 
 Released on January 4th, 2023.
