@@ -2465,7 +2465,7 @@ class NewCluster(BaseModel):
             " API call."
         ),
     )
-    runtime_engine: Optional[RuntimeEngine] = Field (
+    runtime_engine: Optional[RuntimeEngine] = Field(
         None,
         description=(
             "Decides which runtime engine to be use, e.g. Standard vs. Photon. If "
@@ -2474,7 +2474,6 @@ class NewCluster(BaseModel):
             " for more details"
         )
     )
-
     ssh_public_keys: Optional[List[str]] = Field(
         None,
         description=(
