@@ -808,7 +808,7 @@ class ListOrder(str, Enum):
 
 class RuntimeEngine(str, Enum):
     """
-    Permission to view the settings of the job.
+    Decides which runtime engine to be use, e.g. Standard vs. Photon. If unspecified, the runtime engine is inferred from spark_version.
     """
 
     standard = "STANDARD"
