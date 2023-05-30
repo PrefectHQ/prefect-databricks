@@ -2464,7 +2464,7 @@ class NewCluster(BaseModel):
             " versions](https://docs.databricks.com/dev-tools/api/latest/clusters.html#runtime-versions)"
             " API call."
         ),
-    ),
+    )
     runtime_engine: Optional[RuntimeEngine] = Field (
         None,
         description=(
@@ -2473,7 +2473,7 @@ class NewCluster(BaseModel):
             "see https://docs.databricks.com/api-explorer/workspace/jobs/create "
             " for more details"
         )
-    ) ,
+    )
 
     ssh_public_keys: Optional[List[str]] = Field(
         None,
