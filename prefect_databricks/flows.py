@@ -479,13 +479,16 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         jobs_runs_result_state = jobs_runs_state.get("result_state", None)
         if jobs_runs_result_state == RunResultState.success.value:
             task_notebook_outputs = {}
-            task_run_output_future = await jobs_runs_get_output.submit(
-                run_id=job_run_id,
-                databricks_credentials=databricks_credentials,
-            )
-            task_run_output = await task_run_output_future.result()
-            task_run_notebook_output = task_run_output.get("notebook_output", {})
-            task_notebook_outputs[job_id] = task_run_notebook_output
+            for task in jobs_runs_metadata["tasks"]:
+                task_key = task["task_key"]
+                task_run_id = task["run_id"]
+                task_run_output_future = await jobs_runs_get_output.submit(
+                    run_id=task_run_id,
+                    databricks_credentials=databricks_credentials,
+                )
+                task_run_output = await task_run_output_future.result()
+                task_run_notebook_output = task_run_output.get("notebook_output", {})
+                task_notebook_outputs[task_key] = task_run_notebook_output
             logger.info(
                 f"Databricks Jobs Runs Submit {job_id} completed successfully!",
             )
