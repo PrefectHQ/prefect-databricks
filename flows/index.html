@@ -17,7 +17,7 @@
         <link rel="next" href="../models/jobs/">
       
       <link rel="icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -865,7 +865,11 @@ wait seconds</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -875,7 +879,9 @@ wait seconds</p>
           <td>
                 <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.RunSubmitTaskSettings" href="../models/jobs/#prefect_databricks.models.jobs.RunSubmitTaskSettings">RunSubmitTaskSettings</a>]</code>
           </td>
-          <td><p>Tasks to run, e.g.
+          <td>
+            <div class="doc-md-description">
+              <p>Tasks to run, e.g.
 <div class="highlight"><pre><span></span><code>[
     {
         &quot;task_key&quot;: &quot;Sessionize&quot;,
@@ -925,7 +931,9 @@ wait seconds</p>
         &quot;timeout_seconds&quot;: 86400,
     },
 ]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -935,8 +943,12 @@ wait seconds</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An optional name for the run. The default value is <code>Untitled</code>, e.g. <code>A
-multitask job run</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An optional name for the run. The default value is <code>Untitled</code>, e.g. <code>A
+multitask job run</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -946,7 +958,9 @@ multitask job run</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.GitSource" href="../models/jobs/#prefect_databricks.models.jobs.GitSource">GitSource</a>]</code>
           </td>
-          <td><p>This functionality is in Public Preview.  An optional specification for
+          <td>
+            <div class="doc-md-description">
+              <p>This functionality is in Public Preview.  An optional specification for
 a remote repository containing the notebooks used by this
 job's notebook tasks. Key-values:
 - git_url:
@@ -973,7 +987,9 @@ job's notebook tasks. Key-values:
     <code>e0056d01</code>.
 - git_snapshot:
     Read-only state of the remote repository at the time the job was run.
-                This field is only included on job runs.</p></td>
+                This field is only included on job runs.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -983,8 +999,12 @@ job's notebook tasks. Key-values:
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>An optional timeout applied to each run of this job. The default
-behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An optional timeout applied to each run of this job. The default
+behavior is to have no timeout, e.g. <code>86400</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -994,7 +1014,9 @@ behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An optional token that can be used to guarantee the idempotency of job
+          <td>
+            <div class="doc-md-description">
+              <p>An optional token that can be used to guarantee the idempotency of job
 run requests. If a run with the provided token already
 exists, the request does not create a new run but returns
 the ID of the existing run instead. If a run with the
@@ -1005,7 +1027,9 @@ exactly one run is launched with that idempotency token.
 This token must have at most 64 characters.  For more
 information, see <a href="https://kb.databricks.com/jobs/jobs-idempotency.html">How to ensure idempotency for
 jobs</a>,
-e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
+e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1015,7 +1039,11 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.AccessControlRequest" href="../models/jobs/#prefect_databricks.models.jobs.AccessControlRequest">AccessControlRequest</a>]]</code>
           </td>
-          <td><p>List of permissions to set on the job.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of permissions to set on the job.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1025,7 +1053,11 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Maximum number of seconds to wait for the entire flow to complete.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Maximum number of seconds to wait for the entire flow to complete.</p>
+            </div>
+          </td>
           <td>
                 <code>900</code>
           </td>
@@ -1035,8 +1067,12 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of seconds to wait in between checks for
-run completion.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of seconds to wait in between checks for
+run completion.</p>
+            </div>
+          </td>
           <td>
                 <code>10</code>
           </td>
@@ -1046,7 +1082,11 @@ run completion.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Additional keyword arguments to pass to <code>jobs_runs_submit</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Additional keyword arguments to pass to <code>jobs_runs_submit</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -1067,7 +1107,11 @@ run completion.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span></code>
           </td>
-          <td><p>A dictionary of task keys to its corresponding notebook output.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary of task keys to its corresponding notebook output.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1669,7 +1713,11 @@ run completion.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1679,7 +1727,11 @@ run completion.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Id of the databricks job.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Id of the databricks job.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1689,7 +1741,9 @@ run completion.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An optional token that can be used to guarantee the idempotency of job
+          <td>
+            <div class="doc-md-description">
+              <p>An optional token that can be used to guarantee the idempotency of job
 run requests. If a run with the provided token already
 exists, the request does not create a new run but returns
 the ID of the existing run instead. If a run with the
@@ -1700,7 +1754,9 @@ exactly one run is launched with that idempotency token.
 This token must have at most 64 characters.  For more
 information, see <a href="https://kb.databricks.com/jobs/jobs-idempotency.html">How to ensure idempotency for
 jobs</a>,
-e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
+e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1710,12 +1766,16 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with Spark JAR tasks, for example "jar_params"
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with Spark JAR tasks, for example "jar_params"
 : ["john doe", "35"]. The parameters are used to invoke the main function of
 the main class specified in the Spark JAR task. If not specified upon run-
 now, it defaults to an empty list. jar_params cannot be specified in
 conjunction with notebook_params. The JSON representation of this field (for
-example {"jar_params": ["john doe","35"]}) cannot exceed 10,000 bytes.</p></td>
+example {"jar_params": ["john doe","35"]}) cannot exceed 10,000 bytes.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1725,7 +1785,11 @@ example {"jar_params": ["john doe","35"]}) cannot exceed 10,000 bytes.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Maximum number of seconds to wait for the entire flow to complete.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Maximum number of seconds to wait for the entire flow to complete.</p>
+            </div>
+          </td>
           <td>
                 <code>900</code>
           </td>
@@ -1735,8 +1799,12 @@ example {"jar_params": ["john doe","35"]}) cannot exceed 10,000 bytes.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of seconds to wait in between checks for
-run completion.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of seconds to wait in between checks for
+run completion.</p>
+            </div>
+          </td>
           <td>
                 <code>10</code>
           </td>
@@ -1746,7 +1814,9 @@ run completion.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for jobs with notebook task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for jobs with notebook task, for example
 "notebook_params": {"name": "john doe", "age": "35"}. The map is
 passed to the notebook and is accessible through the dbutils.widgets.get
 function. If not specified upon run-now, the triggered run uses the job’s
@@ -1754,7 +1824,9 @@ base parameters. notebook_params cannot be specified in conjunction with
 jar_params. Use Task parameter variables to set parameters containing
 information about job runs. The JSON representation of this field
 (for example {"notebook_params":{"name":"john doe","age":"35"}}) cannot
-exceed 10,000 bytes.</p></td>
+exceed 10,000 bytes.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1764,7 +1836,9 @@ exceed 10,000 bytes.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with Python tasks, for example "python_params"
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with Python tasks, for example "python_params"
 :["john doe", "35"]. The parameters are passed to Python file as command-
 line parameters. If specified upon run-now, it would overwrite the
 parameters specified in job setting. The JSON representation of this field
@@ -1772,7 +1846,9 @@ parameters specified in job setting. The JSON representation of this field
 Use Task parameter variables to set parameters containing information
 about job runs. These parameters accept only Latin characters (ASCII
 character set). Using non-ASCII characters returns an error. Examples of
-invalid, non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p></td>
+invalid, non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1782,7 +1858,9 @@ invalid, non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with spark submit task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with spark submit task, for example
 "spark_submit_params": ["--class", "org.apache.spark.examples.SparkPi"].
 The parameters are passed to spark-submit script as command-line parameters.
 If specified upon run-now, it would overwrite the parameters specified in
@@ -1791,7 +1869,9 @@ job setting. The JSON representation of this field (for example
 Use Task parameter variables to set parameters containing information about
 job runs. These parameters accept only Latin characters (ASCII character
 set). Using non-ASCII characters returns an error. Examples of invalid,
-non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p></td>
+non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1801,8 +1881,12 @@ non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for jobs with Python wheel task, for example
-"python_named_params": {"name": "task", "data": "dbfs:/path/to/data.json"}.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for jobs with Python wheel task, for example
+"python_named_params": {"name": "task", "data": "dbfs:/path/to/data.json"}.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1812,10 +1896,14 @@ non-ASCII characters are Chinese, Japanese kanjis, and emojis.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>If <code>full_refresh</code> is set to true, trigger a full refresh on the
+          <td>
+            <div class="doc-md-description">
+              <p>If <code>full_refresh</code> is set to true, trigger a full refresh on the
 delta live table e.g.
 <div class="highlight"><pre><span></span><code>    &quot;pipeline_params&quot;: {&quot;full_refresh&quot;: true}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1825,9 +1913,13 @@ delta live table e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for SQL tasks, for example "sql_params":
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for SQL tasks, for example "sql_params":
 {"name": "john doe", "age": "35"}. The SQL alert task does not support
-custom parameters.</p></td>
+custom parameters.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1837,8 +1929,12 @@ custom parameters.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
           </td>
-          <td><p>An array of commands to execute for jobs with the dbt task,
-for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An array of commands to execute for jobs with the dbt task,
+for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1859,20 +1955,32 @@ for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.flows.DatabricksJobTerminated" href="#prefect_databricks.flows.DatabricksJobTerminated">DatabricksJobTerminated</a></code>
           </td>
-          <td><p>Raised when the Databricks job run is terminated with a non-successful
-result state.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Raised when the Databricks job run is terminated with a non-successful
+result state.</p>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.flows.DatabricksJobSkipped" href="#prefect_databricks.flows.DatabricksJobSkipped">DatabricksJobSkipped</a></code>
           </td>
-          <td><p>Raised when the Databricks job run is skipped.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Raised when the Databricks job run is skipped.</p>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.flows.DatabricksJobInternalError" href="#prefect_databricks.flows.DatabricksJobInternalError">DatabricksJobInternalError</a></code>
           </td>
-          <td><p>Raised when the Databricks job run encounters an internal error.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Raised when the Databricks job run encounters an internal error.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1890,7 +1998,11 @@ result state.</p></td>
 <td><code>Dict</code></td>          <td>
                 <code><span title="typing.Dict">Dict</span></code>
           </td>
-          <td><p>A dictionary containing information about the completed job run.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary containing information about the completed job run.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2121,7 +2233,10 @@ result state.</p></td>
 <span class="normal">506</span>
 <span class="normal">507</span>
 <span class="normal">508</span>
-<span class="normal">509</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span><span class="p">(</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Submit existing job runs and wait for completion&quot;</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="p">(</span>
         <span class="s2">&quot;Triggers a Databricks jobs runs and waits for the &quot;</span>
@@ -2295,13 +2410,16 @@ result state.</p></td>
         <span class="n">jobs_runs_result_state</span> <span class="o">=</span> <span class="n">jobs_runs_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result_state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">jobs_runs_result_state</span> <span class="o">==</span> <span class="n">RunResultState</span><span class="o">.</span><span class="n">success</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
             <span class="n">task_notebook_outputs</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">task_run_output_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_get_output</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
-                <span class="n">run_id</span><span class="o">=</span><span class="n">job_run_id</span><span class="p">,</span>
-                <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="n">task_run_output</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task_run_output_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-            <span class="n">task_run_notebook_output</span> <span class="o">=</span> <span class="n">task_run_output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notebook_output&quot;</span><span class="p">,</span> <span class="p">{})</span>
-            <span class="n">task_notebook_outputs</span><span class="p">[</span><span class="n">job_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">task_run_notebook_output</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">jobs_runs_metadata</span><span class="p">[</span><span class="s2">&quot;tasks&quot;</span><span class="p">]:</span>
+                <span class="n">task_key</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;task_key&quot;</span><span class="p">]</span>
+                <span class="n">task_run_id</span> <span class="o">=</span> <span class="n">task</span><span class="p">[</span><span class="s2">&quot;run_id&quot;</span><span class="p">]</span>
+                <span class="n">task_run_output_future</span> <span class="o">=</span> <span class="k">await</span> <span class="n">jobs_runs_get_output</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span>
+                    <span class="n">run_id</span><span class="o">=</span><span class="n">task_run_id</span><span class="p">,</span>
+                    <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">task_run_output</span> <span class="o">=</span> <span class="k">await</span> <span class="n">task_run_output_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                <span class="n">task_run_notebook_output</span> <span class="o">=</span> <span class="n">task_run_output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notebook_output&quot;</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="n">task_notebook_outputs</span><span class="p">[</span><span class="n">task_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">task_run_notebook_output</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Databricks Jobs Runs Submit </span><span class="si">{</span><span class="n">job_id</span><span class="si">}</span><span class="s2"> completed successfully!&quot;</span><span class="p">,</span>
             <span class="p">)</span>
@@ -2363,7 +2481,11 @@ result state.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>The name of the jobs runs task.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The name of the jobs runs task.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2372,7 +2494,11 @@ result state.</p></td>
           <td><code>multi_task_jobs_run_id</code></td>
           <td>
           </td>
-          <td><p>The ID of the jobs runs task to watch.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The ID of the jobs runs task to watch.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2382,7 +2508,11 @@ result state.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2392,7 +2522,11 @@ result state.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Maximum number of seconds to wait for the entire flow to complete.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Maximum number of seconds to wait for the entire flow to complete.</p>
+            </div>
+          </td>
           <td>
                 <code>900</code>
           </td>
@@ -2402,8 +2536,12 @@ result state.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of seconds to wait in between checks for
-run completion.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of seconds to wait in between checks for
+run completion.</p>
+            </div>
+          </td>
           <td>
                 <code>10</code>
           </td>
@@ -2423,12 +2561,20 @@ run completion.</p></td>
         <tr>
 <td><code>jobs_runs_state</code></td>          <td>
           </td>
-          <td><p>A dict containing the jobs runs life cycle state and message.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dict containing the jobs runs life cycle state and message.</p>
+            </div>
+          </td>
         </tr>
         <tr>
 <td><code>jobs_runs_metadata</code></td>          <td>
           </td>
-          <td><p>A dict containing IDs of the jobs runs tasks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dict containing IDs of the jobs runs tasks.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2454,10 +2600,7 @@ run completion.</p></td>
 </details>
       <details class="quote">
         <summary>Source code in <code>prefect_databricks/flows.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">582</span>
-<span class="normal">583</span>
-<span class="normal">584</span>
-<span class="normal">585</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">585</span>
 <span class="normal">586</span>
 <span class="normal">587</span>
 <span class="normal">588</span>
@@ -2538,7 +2681,10 @@ run completion.</p></td>
 <span class="normal">663</span>
 <span class="normal">664</span>
 <span class="normal">665</span>
-<span class="normal">666</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span><span class="p">(</span>
+<span class="normal">666</span>
+<span class="normal">667</span>
+<span class="normal">668</span>
+<span class="normal">669</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@flow</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Wait for completion of jobs runs&quot;</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Waits for the jobs runs to finish running&quot;</span><span class="p">,</span>
 <span class="p">)</span>
@@ -2781,7 +2927,7 @@ run completion.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
     
   </body>

@@ -17,7 +17,7 @@
         <link rel="next" href="../credentials/">
       
       <link rel="icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -578,7 +578,27 @@
 <span class="n">example_get_client_flow</span><span class="p">()</span>
 </code></pre></div></p>
 <h2 id="flows-module"><a class="autorefs autorefs-internal" href="../flows/#prefect_databricks.flows">Flows Module</a></h2>
-<p>Waits for completion on jobs runs.
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
+<span class="kn">from</span> <span class="nn">prefect_databricks</span> <span class="kn">import</span> <span class="n">DatabricksCredentials</span>
+<span class="kn">from</span> <span class="nn">prefect_databricks.flows</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">jobs_runs_submit_by_id_and_wait_for_completion</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="nd">@flow</span>
+<span class="k">def</span> <span class="nf">submit_existing_job</span><span class="p">(</span><span class="n">block_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
+    <span class="n">databricks_credentials</span> <span class="o">=</span> <span class="n">DatabricksCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">block_name</span><span class="p">)</span>
+
+    <span class="n">run</span> <span class="o">=</span> <span class="n">jobs_runs_submit_by_id_and_wait_for_completion</span><span class="p">(</span>
+        <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="n">job_id</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">run</span>
+
+
+<span class="n">submit_existing_job</span><span class="p">(</span><span class="n">block_name</span><span class="o">=</span><span class="s2">&quot;db-creds&quot;</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="n">db_job_id</span><span class="p">)</span>
+</code></pre></div>
+Waits for completion on jobs runs.
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
 <span class="kn">from</span> <span class="nn">prefect_databricks</span> <span class="kn">import</span> <span class="n">DatabricksCredentials</span>
 <span class="kn">from</span> <span class="nn">prefect_databricks.flows</span> <span class="kn">import</span> <span class="n">jobs_runs_wait_for_completion</span>
@@ -641,26 +661,6 @@ Submit jobs runs and wait.
         <span class="n">tasks</span><span class="o">=</span><span class="p">[</span><span class="n">job_task_settings</span><span class="p">]</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">multi_task_runs</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">prefect</span> <span class="kn">import</span> <span class="n">flow</span>
-<span class="kn">from</span> <span class="nn">prefect_databricks</span> <span class="kn">import</span> <span class="n">DatabricksCredentials</span>
-<span class="kn">from</span> <span class="nn">prefect_databricks.flows</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">jobs_runs_submit_by_id_and_wait_for_completion</span><span class="p">,</span>
-<span class="p">)</span>
-
-
-<span class="nd">@flow</span>
-<span class="k">def</span> <span class="nf">submit_existing_job</span><span class="p">(</span><span class="n">block_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">job_id</span><span class="p">):</span>
-    <span class="n">databricks_credentials</span> <span class="o">=</span> <span class="n">DatabricksCredentials</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">block_name</span><span class="p">)</span>
-
-    <span class="n">run</span> <span class="o">=</span> <span class="n">jobs_runs_submit_by_id_and_wait_for_completion</span><span class="p">(</span>
-        <span class="n">databricks_credentials</span><span class="o">=</span><span class="n">databricks_credentials</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="n">job_id</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">run</span>
-
-
-<span class="n">submit_existing_job</span><span class="p">(</span><span class="n">block_name</span><span class="o">=</span><span class="s2">&quot;db-creds&quot;</span><span class="p">,</span> <span class="n">job_id</span><span class="o">=</span><span class="n">db_job_id</span><span class="p">)</span>
 </code></pre></div></p>
 <h2 id="rest-module"><a class="autorefs autorefs-internal" href="../rest/#prefect_databricks.rest">Rest Module</a></h2>
 <p>Lists jobs on the Databricks instance.
@@ -828,7 +828,7 @@ Submit jobs runs and wait.
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
     
   </body>

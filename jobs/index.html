@@ -17,7 +17,7 @@
         <link rel="next" href="../rest/">
       
       <link rel="icon" href="../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -849,7 +849,11 @@ Databricks jobs</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -859,7 +863,11 @@ Databricks jobs</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An optional name for the job, e.g. <code>A multitask job</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An optional name for the job, e.g. <code>A multitask job</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;Untitled&#39;</code>
           </td>
@@ -869,12 +877,16 @@ Databricks jobs</p>
           <td>
                 <code><span title="typing.Dict">Dict</span></code>
           </td>
-          <td><p>A map of tags associated with the job. These are forwarded to the
+          <td>
+            <div class="doc-md-description">
+              <p>A map of tags associated with the job. These are forwarded to the
 cluster as cluster tags for jobs clusters, and are subject
 to the same limitations as cluster tags. A maximum of 25
 tags can be added to the job, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;cost-center&quot;: &quot;engineering&quot;, &quot;team&quot;: &quot;jobs&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -884,7 +896,9 @@ tags can be added to the job, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.JobTaskSettings" href="../models/jobs/#prefect_databricks.models.jobs.JobTaskSettings">JobTaskSettings</a>]]</code>
           </td>
-          <td><p>A list of task specifications to be executed by this job, e.g.
+          <td>
+            <div class="doc-md-description">
+              <p>A list of task specifications to be executed by this job, e.g.
 <div class="highlight"><pre><span></span><code>[
     {
         &quot;task_key&quot;: &quot;Sessionize&quot;,
@@ -944,7 +958,9 @@ tags can be added to the job, e.g.
         &quot;retry_on_timeout&quot;: False,
     },
 ]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -954,7 +970,9 @@ tags can be added to the job, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.JobCluster" href="../models/jobs/#prefect_databricks.models.jobs.JobCluster">JobCluster</a>]]</code>
           </td>
-          <td><p>A list of job cluster specifications that can be shared and reused by
+          <td>
+            <div class="doc-md-description">
+              <p>A list of job cluster specifications that can be shared and reused by
 tasks of this job. Libraries cannot be declared in a shared
 job cluster. You must declare dependent libraries in task
 settings, e.g.
@@ -973,7 +991,9 @@ settings, e.g.
         },
     }
 ]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -983,7 +1003,9 @@ settings, e.g.
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.JobEmailNotifications" href="../models/jobs/#prefect_databricks.models.jobs.JobEmailNotifications">JobEmailNotifications</a></code>
           </td>
-          <td><p>An optional set of email addresses that is notified when runs of this
+          <td>
+            <div class="doc-md-description">
+              <p>An optional set of email addresses that is notified when runs of this
 job begin or complete as well as when this job is deleted.
 The default behavior is to not send any emails. Key-values:
 - on_start:
@@ -1017,7 +1039,9 @@ The default behavior is to not send any emails. Key-values:
 </code></pre></div>
 - no_alert_for_skipped_runs:
     If true, do not send email to recipients specified in
-    <code>on_failure</code> if the run is skipped.</p></td>
+    <code>on_failure</code> if the run is skipped.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1027,7 +1051,9 @@ The default behavior is to not send any emails. Key-values:
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.WebhookNotifications" href="../models/jobs/#prefect_databricks.models.jobs.WebhookNotifications">WebhookNotifications</a></code>
           </td>
-          <td><p>A collection of system notification IDs to notify when runs of this job
+          <td>
+            <div class="doc-md-description">
+              <p>A collection of system notification IDs to notify when runs of this job
 begin or complete. The default behavior is to not send any
 system notifications. Key-values:
 - on_start:
@@ -1050,7 +1076,9 @@ system notifications. Key-values:
     fails. A maximum of 3 destinations can be specified for the
     <code>on_failure</code> property, e.g.
     <div class="highlight"><pre><span></span><code>[{&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;}]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1060,8 +1088,12 @@ system notifications. Key-values:
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>An optional timeout applied to each run of this job. The default
-behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An optional timeout applied to each run of this job. The default
+behavior is to have no timeout, e.g. <code>86400</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1071,7 +1103,9 @@ behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.CronSchedule" href="../models/jobs/#prefect_databricks.models.jobs.CronSchedule">CronSchedule</a></code>
           </td>
-          <td><p>An optional periodic schedule for this job. The default behavior is that
+          <td>
+            <div class="doc-md-description">
+              <p>An optional periodic schedule for this job. The default behavior is that
 the job only runs when triggered by clicking “Run Now” in
 the Jobs UI or sending an API request to <code>runNow</code>. Key-values:
 - quartz_cron_expression:
@@ -1086,7 +1120,9 @@ the Jobs UI or sending an API request to <code>runNow</code>. Key-values:
     for details. This field is required, e.g. <code>Europe/London</code>.
 - pause_status:
     Indicate whether this schedule is paused or not, e.g.
-    <code>PAUSED</code>.</p></td>
+    <code>PAUSED</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1096,7 +1132,9 @@ the Jobs UI or sending an API request to <code>runNow</code>. Key-values:
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>An optional maximum allowed number of concurrent runs of the job.  Set
+          <td>
+            <div class="doc-md-description">
+              <p>An optional maximum allowed number of concurrent runs of the job.  Set
 this value if you want to be able to execute multiple runs
 of the same job concurrently. This is useful for example if
 you trigger your job on a frequent schedule and want to
@@ -1109,7 +1147,9 @@ won’t kill any of the active runs. However, from then on,
 new runs are skipped unless there are fewer than 3 active
 runs.  This value cannot exceed 1000. Setting this value to
 0 causes all new runs to be skipped. The default behavior is
-to allow only 1 concurrent run, e.g. <code>10</code>.</p></td>
+to allow only 1 concurrent run, e.g. <code>10</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1119,7 +1159,9 @@ to allow only 1 concurrent run, e.g. <code>10</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.GitSource" href="../models/jobs/#prefect_databricks.models.jobs.GitSource">GitSource</a></code>
           </td>
-          <td><p>This functionality is in Public Preview.  An optional specification for
+          <td>
+            <div class="doc-md-description">
+              <p>This functionality is in Public Preview.  An optional specification for
 a remote repository containing the notebooks used by this
 job's notebook tasks, e.g.
 <code>{
@@ -1151,7 +1193,9 @@ job's notebook tasks, e.g.
     <code>e0056d01</code>.
 - git_snapshot:
     Read-only state of the remote repository at the time the job was run.
-                This field is only included on job runs.</p></td>
+                This field is only included on job runs.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1161,9 +1205,13 @@ job's notebook tasks, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Used to tell what is the format of the job. This field is ignored in
+          <td>
+            <div class="doc-md-description">
+              <p>Used to tell what is the format of the job. This field is ignored in
 Create/Update/Reset calls. When using the Jobs API 2.1 this
-value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.</p></td>
+value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1173,7 +1221,11 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.AccessControlRequest" href="../models/jobs/#prefect_databricks.models.jobs.AccessControlRequest">AccessControlRequest</a>]]</code>
           </td>
-          <td><p>List of permissions to set on the job.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of permissions to set on the job.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1194,7 +1246,11 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>job_id: int</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>job_id: int</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1887,7 +1943,11 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1897,8 +1957,12 @@ value is always set to <code>'MULTI_TASK'</code>, e.g. <code>MULTI_TASK</code>.<
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The canonical identifier of the job to delete. This field is required,
-e.g. <code>11223344</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the job to delete. This field is required,
+e.g. <code>11223344</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1919,7 +1983,11 @@ e.g. <code>11223344</code>.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, an empty dict.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, an empty dict.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2096,8 +2164,12 @@ e.g. <code>11223344</code>.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The canonical identifier of the job to retrieve information about. This
-field is required.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the job to retrieve information about. This
+field is required.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2107,7 +2179,11 @@ field is required.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2128,7 +2204,11 @@ field is required.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>job_id: int</code></br>- <code>creator_user_name: str</code></br>- <code>run_as_user_name: str</code></br>- <code>settings: "models.JobSettings"</code></br>- <code>created_time: int</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>job_id: int</code></br>- <code>creator_user_name: str</code></br>- <code>run_as_user_name: str</code></br>- <code>settings: "models.JobSettings"</code></br>- <code>created_time: int</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2305,7 +2385,11 @@ field is required.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2315,8 +2399,12 @@ field is required.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The number of jobs to return. This value must be greater than 0 and less
-or equal to 25. The default value is 20.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of jobs to return. This value must be greater than 0 and less
+or equal to 25. The default value is 20.</p>
+            </div>
+          </td>
           <td>
                 <code>20</code>
           </td>
@@ -2326,8 +2414,12 @@ or equal to 25. The default value is 20.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The offset of the first job to return, relative to the most recently
-created job.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The offset of the first job to return, relative to the most recently
+created job.</p>
+            </div>
+          </td>
           <td>
                 <code>0</code>
           </td>
@@ -2337,7 +2429,11 @@ created job.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A filter on the list based on the exact (case insensitive) job name.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A filter on the list based on the exact (case insensitive) job name.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2347,7 +2443,11 @@ created job.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to include task and cluster details in the response.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to include task and cluster details in the response.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2368,7 +2468,11 @@ created job.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>jobs: List["models.Job"]</code></br>- <code>has_more: bool</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>jobs: List["models.Job"]</code></br>- <code>has_more: bool</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2572,7 +2676,11 @@ update job settings partially.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2582,8 +2690,12 @@ update job settings partially.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The canonical identifier of the job to reset. This field is required,
-e.g. <code>11223344</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the job to reset. This field is required,
+e.g. <code>11223344</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2593,7 +2705,9 @@ e.g. <code>11223344</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.JobSettings" href="../models/jobs/#prefect_databricks.models.jobs.JobSettings">JobSettings</a></code>
           </td>
-          <td><p>The new settings of the job. These settings completely replace the old
+          <td>
+            <div class="doc-md-description">
+              <p>The new settings of the job. These settings completely replace the old
 settings.  Changes to the field
 <code>JobSettings.timeout_seconds</code> are applied to active runs.
 Changes to other fields are applied to future runs only. Key-values:
@@ -2754,7 +2868,9 @@ Changes to other fields are applied to future runs only. Key-values:
     Used to tell what is the format of the job. This field is
     ignored in Create/Update/Reset calls. When using the Jobs
     API 2.1 this value is always set to <code>'MULTI_TASK'</code>, e.g.
-    <code>MULTI_TASK</code>.</p></td>
+    <code>MULTI_TASK</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2775,7 +2891,11 @@ Changes to other fields are applied to future runs only. Key-values:
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, an empty dict.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, an empty dict.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3292,7 +3412,11 @@ Changes to other fields are applied to future runs only. Key-values:
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3302,7 +3426,11 @@ Changes to other fields are applied to future runs only. Key-values:
           <td>
                 <code>int</code>
           </td>
-          <td><p>The ID of the job to be executed, e.g. <code>11223344</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The ID of the job to be executed, e.g. <code>11223344</code>.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3312,7 +3440,9 @@ Changes to other fields are applied to future runs only. Key-values:
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An optional token to guarantee the idempotency of job run requests. If a
+          <td>
+            <div class="doc-md-description">
+              <p>An optional token to guarantee the idempotency of job run requests. If a
 run with the provided token already exists, the request does
 not create a new run but returns the ID of the existing run
 instead. If a run with the provided token is deleted, an
@@ -3323,7 +3453,9 @@ that idempotency token.  This token must have at most 64
 characters.  For more information, see <a href="https://kb.databricks.com/jobs/jobs-
 idempotency.html">How to ensure
 idempotency for jobs</a>, e.g.
-<code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
+<code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3333,7 +3465,9 @@ idempotency for jobs</a>, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with Spark JAR tasks, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with Spark JAR tasks, for example
 <code>'jar_params': ['john doe', '35']</code>. The parameters are used
 to invoke the main function of the main class specified in
 the Spark JAR task. If not specified upon <code>run-now</code>, it
@@ -3345,7 +3479,9 @@ parameter-variables">Task parameter
 variables</a> to set parameters containing
 information about job runs, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;john&quot;, &quot;doe&quot;, &quot;35&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3355,7 +3491,9 @@ information about job runs, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for jobs with notebook task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for jobs with notebook task, for example
 <code>'notebook_params': {'name': 'john doe', 'age': '35'}</code>. The
 map is passed to the notebook and is accessible through the
 <a href="https://docs.databricks.com/dev-
@@ -3370,7 +3508,9 @@ information about job runs.  The JSON representation of this
 field (for example <code>{'notebook_params':{'name':'john
 doe','age':'35'}}</code>) cannot exceed 10,000 bytes, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;name&quot;: &quot;john doe&quot;, &quot;age&quot;: &quot;35&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3380,7 +3520,9 @@ doe','age':'35'}}</code>) cannot exceed 10,000 bytes, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with Python tasks, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with Python tasks, for example
 <code>'python_params': ['john doe', '35']</code>. The parameters are
 passed to Python file as command-line parameters. If
 specified upon <code>run-now</code>, it would overwrite the parameters
@@ -3395,7 +3537,9 @@ non-ASCII characters returns an error. Examples of invalid,
 non-ASCII characters are Chinese, Japanese kanjis, and
 emojis, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;john doe&quot;, &quot;35&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3405,7 +3549,9 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with spark submit task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with spark submit task, for example
 <code>'spark_submit_params': ['--class',
 'org.apache.spark.examples.SparkPi']</code>. The parameters are
 passed to spark-submit script as command-line parameters. If
@@ -3421,7 +3567,9 @@ non-ASCII characters returns an error. Examples of invalid,
 non-ASCII characters are Chinese, Japanese kanjis, and
 emojis, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;--class&quot;, &quot;org.apache.spark.examples.SparkPi&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3431,11 +3579,15 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for jobs with Python wheel task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for jobs with Python wheel task, for example
 <code>'python_named_params': {'name': 'task', 'data':
 'dbfs:/path/to/data.json'}</code>, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;name&quot;: &quot;task&quot;, &quot;data&quot;: &quot;dbfs:/path/to/data.json&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3445,10 +3597,14 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>If <code>full_refresh</code> is set to true, trigger a full refresh on the
+          <td>
+            <div class="doc-md-description">
+              <p>If <code>full_refresh</code> is set to true, trigger a full refresh on the
 delta live table e.g.
 <div class="highlight"><pre><span></span><code>    &quot;pipeline_params&quot;: {&quot;full_refresh&quot;: true}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3458,11 +3614,15 @@ delta live table e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for SQL tasks, for example <code>'sql_params':
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for SQL tasks, for example <code>'sql_params':
 {'name': 'john doe', 'age': '35'}</code>. The SQL alert task does
 not support custom parameters, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;name&quot;: &quot;john doe&quot;, &quot;age&quot;: &quot;35&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3472,10 +3632,14 @@ not support custom parameters, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
           </td>
-          <td><p>An array of commands to execute for jobs with the dbt task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>An array of commands to execute for jobs with the dbt task, for example
 <code>'dbt_commands': ['dbt deps', 'dbt seed', 'dbt run']</code>, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;dbt deps&quot;, &quot;dbt seed&quot;, &quot;dbt run&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3496,7 +3660,11 @@ not support custom parameters, e.g.
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>run_id: int</code></br>- <code>number_in_job: int</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>run_id: int</code></br>- <code>number_in_job: int</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3928,7 +4096,11 @@ running when this request completes.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3938,7 +4110,11 @@ running when this request completes.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>This field is required, e.g. <code>455644833</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This field is required, e.g. <code>455644833</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3959,7 +4135,11 @@ running when this request completes.</p>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, an empty dict.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, an empty dict.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4137,7 +4317,11 @@ doesn't prevent new runs from being started.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4147,8 +4331,12 @@ doesn't prevent new runs from being started.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The canonical identifier of the job to cancel all runs of. This field is
-required, e.g. <code>11223344</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the job to cancel all runs of. This field is
+required, e.g. <code>11223344</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4169,7 +4357,11 @@ required, e.g. <code>11223344</code>.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, an empty dict.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, an empty dict.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4348,7 +4540,11 @@ required, e.g. <code>11223344</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4358,8 +4554,12 @@ required, e.g. <code>11223344</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The canonical identifier of the run for which to retrieve the metadata,
-e.g. <code>455644833</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the run for which to retrieve the metadata,
+e.g. <code>455644833</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4380,7 +4580,11 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, an empty dict.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, an empty dict.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4557,7 +4761,11 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The canonical identifier for the run. This field is required.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier for the run. This field is required.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4567,7 +4775,11 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4577,7 +4789,11 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.ViewsToExport" href="../models/jobs/#prefect_databricks.models.jobs.ViewsToExport">ViewsToExport</a>]</code>
           </td>
-          <td><p>Which views to export (CODE, DASHBOARDS, or ALL). Defaults to CODE.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Which views to export (CODE, DASHBOARDS, or ALL). Defaults to CODE.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4598,7 +4814,11 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>views: List["models.ViewItem"]</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>views: List["models.ViewItem"]</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4781,8 +5001,12 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The canonical identifier of the run for which to retrieve the metadata.
-This field is required.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the run for which to retrieve the metadata.
+This field is required.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4792,7 +5016,11 @@ This field is required.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4802,7 +5030,11 @@ This field is required.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Whether to include the repair history in the response.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to include the repair history in the response.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4823,7 +5055,11 @@ This field is required.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>job_id: int</code></br>- <code>run_id: int</code></br>- <code>number_in_job: int</code></br>- <code>creator_user_name: str</code></br>- <code>original_attempt_run_id: int</code></br>- <code>state: "models.RunState"</code></br>- <code>schedule: "models.CronSchedule"</code></br>- <code>tasks: List["models.RunTask"]</code></br>- <code>job_clusters: List["models.JobCluster"]</code></br>- <code>cluster_spec: "models.ClusterSpec"</code></br>- <code>cluster_instance: "models.ClusterInstance"</code></br>- <code>git_source: "models.GitSource"</code></br>- <code>overriding_parameters: "models.RunParameters"</code></br>- <code>start_time: int</code></br>- <code>setup_duration: int</code></br>- <code>execution_duration: int</code></br>- <code>cleanup_duration: int</code></br>- <code>end_time: int</code></br>- <code>trigger: "models.TriggerType"</code></br>- <code>run_name: str</code></br>- <code>run_page_url: str</code></br>- <code>run_type: "models.RunType"</code></br>- <code>attempt_number: int</code></br>- <code>repair_history: List["models.RepairHistoryItem"]</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>job_id: int</code></br>- <code>run_id: int</code></br>- <code>number_in_job: int</code></br>- <code>creator_user_name: str</code></br>- <code>original_attempt_run_id: int</code></br>- <code>state: "models.RunState"</code></br>- <code>schedule: "models.CronSchedule"</code></br>- <code>tasks: List["models.RunTask"]</code></br>- <code>job_clusters: List["models.JobCluster"]</code></br>- <code>cluster_spec: "models.ClusterSpec"</code></br>- <code>cluster_instance: "models.ClusterInstance"</code></br>- <code>git_source: "models.GitSource"</code></br>- <code>overriding_parameters: "models.RunParameters"</code></br>- <code>start_time: int</code></br>- <code>setup_duration: int</code></br>- <code>execution_duration: int</code></br>- <code>cleanup_duration: int</code></br>- <code>end_time: int</code></br>- <code>trigger: "models.TriggerType"</code></br>- <code>run_name: str</code></br>- <code>run_page_url: str</code></br>- <code>run_type: "models.RunType"</code></br>- <code>attempt_number: int</code></br>- <code>repair_history: List["models.RepairHistoryItem"]</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -5017,7 +5253,11 @@ export using the Jobs API, see Runs export.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The canonical identifier for the run. This field is required.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier for the run. This field is required.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -5027,7 +5267,11 @@ export using the Jobs API, see Runs export.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -5048,7 +5292,11 @@ export using the Jobs API, see Runs export.</p>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>notebook_output: "models.NotebookOutput"</code></br>- <code>sql_output: "models.SqlOutput"</code></br>- <code>dbt_output: "models.DbtOutput"</code></br>- <code>logs: str</code></br>- <code>logs_truncated: bool</code></br>- <code>error: str</code></br>- <code>error_trace: str</code></br>- <code>metadata: "models.Run"</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>notebook_output: "models.NotebookOutput"</code></br>- <code>sql_output: "models.SqlOutput"</code></br>- <code>dbt_output: "models.DbtOutput"</code></br>- <code>logs: str</code></br>- <code>logs_truncated: bool</code></br>- <code>error: str</code></br>- <code>error_trace: str</code></br>- <code>metadata: "models.Run"</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -5241,7 +5489,11 @@ export using the Jobs API, see Runs export.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -5251,10 +5503,14 @@ export using the Jobs API, see Runs export.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>If active_only is <code>true</code>, only active runs are included in the results;
+          <td>
+            <div class="doc-md-description">
+              <p>If active_only is <code>true</code>, only active runs are included in the results;
 otherwise, lists both active and completed runs. An active
 run is a run in the <code>PENDING</code>, <code>RUNNING</code>, or <code>TERMINATING</code>.
-This field cannot be <code>true</code> when completed_only is <code>true</code>.</p></td>
+This field cannot be <code>true</code> when completed_only is <code>true</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -5264,9 +5520,13 @@ This field cannot be <code>true</code> when completed_only is <code>true</code>.
           <td>
                 <code>bool</code>
           </td>
-          <td><p>If completed_only is <code>true</code>, only completed runs are included in the
+          <td>
+            <div class="doc-md-description">
+              <p>If completed_only is <code>true</code>, only completed runs are included in the
 results; otherwise, lists both active and completed runs.
-This field cannot be <code>true</code> when active_only is <code>true</code>.</p></td>
+This field cannot be <code>true</code> when active_only is <code>true</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -5276,8 +5536,12 @@ This field cannot be <code>true</code> when active_only is <code>true</code>.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The job for which to list runs. If omitted, the Jobs service lists runs
-from all jobs.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The job for which to list runs. If omitted, the Jobs service lists runs
+from all jobs.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5287,7 +5551,11 @@ from all jobs.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The offset of the first run to return, relative to the most recent run.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The offset of the first run to return, relative to the most recent run.</p>
+            </div>
+          </td>
           <td>
                 <code>0</code>
           </td>
@@ -5297,9 +5565,13 @@ from all jobs.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The number of runs to return. This value must be greater than 0 and less
+          <td>
+            <div class="doc-md-description">
+              <p>The number of runs to return. This value must be greater than 0 and less
 than 25. The default value is 25. If a request specifies a
-limit of 0, the service instead uses the maximum limit.</p></td>
+limit of 0, the service instead uses the maximum limit.</p>
+            </div>
+          </td>
           <td>
                 <code>25</code>
           </td>
@@ -5309,10 +5581,14 @@ limit of 0, the service instead uses the maximum limit.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>The type of runs to return. For a description of run types, see
+          <td>
+            <div class="doc-md-description">
+              <p>The type of runs to return. For a description of run types, see
 <a href="https://docs.databricks.com/dev-
 tools/api/latest/jobs.html
-operation/JobsRunsGet">Run</a>.</p></td>
+operation/JobsRunsGet">Run</a>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5322,7 +5598,11 @@ operation/JobsRunsGet">Run</a>.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to include task and cluster details in the response.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to include task and cluster details in the response.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -5332,9 +5612,13 @@ operation/JobsRunsGet">Run</a>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Show runs that started <em>at or after</em> this value. The value must be a UTC
+          <td>
+            <div class="doc-md-description">
+              <p>Show runs that started <em>at or after</em> this value. The value must be a UTC
 timestamp in milliseconds. Can be combined with
-<em>start_time_to</em> to filter by a time range.</p></td>
+<em>start_time_to</em> to filter by a time range.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5344,9 +5628,13 @@ timestamp in milliseconds. Can be combined with
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Show runs that started <em>at or before</em> this value. The value must be a
+          <td>
+            <div class="doc-md-description">
+              <p>Show runs that started <em>at or before</em> this value. The value must be a
 UTC timestamp in milliseconds. Can be combined with
-<em>start_time_from</em> to filter by a time range.</p></td>
+<em>start_time_from</em> to filter by a time range.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5367,7 +5655,11 @@ UTC timestamp in milliseconds. Can be combined with
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>runs: List["models.Run"]</code></br>- <code>has_more: bool</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>runs: List["models.Run"]</code></br>- <code>has_more: bool</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -5638,7 +5930,11 @@ original job run.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -5648,8 +5944,12 @@ original job run.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The job run ID of the run to repair. The run must not be in progress,
-e.g. <code>455644833</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The job run ID of the run to repair. The run must not be in progress,
+e.g. <code>455644833</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5659,9 +5959,13 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>The task keys of the task runs to repair, e.g.
+          <td>
+            <div class="doc-md-description">
+              <p>The task keys of the task runs to repair, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;task0&quot;, &quot;task1&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5671,10 +5975,14 @@ e.g. <code>455644833</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The ID of the latest repair. This parameter is not required when
+          <td>
+            <div class="doc-md-description">
+              <p>The ID of the latest repair. This parameter is not required when
 repairing a run for the first time, but must be provided on
 subsequent requests to repair the same run, e.g.
-<code>734650698524280</code>.</p></td>
+<code>734650698524280</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5684,8 +5992,12 @@ subsequent requests to repair the same run, e.g.
           <td>
                 <code>bool</code>
           </td>
-          <td><p>If true, repair all failed tasks. Only one of rerun_tasks or
-rerun_all_failed_tasks can be used.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>If true, repair all failed tasks. Only one of rerun_tasks or
+rerun_all_failed_tasks can be used.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -5695,7 +6007,9 @@ rerun_all_failed_tasks can be used.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with Spark JAR tasks, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with Spark JAR tasks, for example
 <code>'jar_params': ['john doe', '35']</code>. The parameters are used
 to invoke the main function of the main class specified in
 the Spark JAR task. If not specified upon <code>run-now</code>, it
@@ -5707,7 +6021,9 @@ parameter-variables">Task parameter
 variables</a> to set parameters containing
 information about job runs, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;john&quot;, &quot;doe&quot;, &quot;35&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5717,7 +6033,9 @@ information about job runs, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for jobs with notebook task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for jobs with notebook task, for example
 <code>'notebook_params': {'name': 'john doe', 'age': '35'}</code>. The
 map is passed to the notebook and is accessible through the
 <a href="https://docs.databricks.com/dev-
@@ -5732,7 +6050,9 @@ information about job runs.  The JSON representation of this
 field (for example <code>{'notebook_params':{'name':'john
 doe','age':'35'}}</code>) cannot exceed 10,000 bytes, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;name&quot;: &quot;john doe&quot;, &quot;age&quot;: &quot;35&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5742,7 +6062,9 @@ doe','age':'35'}}</code>) cannot exceed 10,000 bytes, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with Python tasks, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with Python tasks, for example
 <code>'python_params': ['john doe', '35']</code>. The parameters are
 passed to Python file as command-line parameters. If
 specified upon <code>run-now</code>, it would overwrite the parameters
@@ -5757,7 +6079,9 @@ non-ASCII characters returns an error. Examples of invalid,
 non-ASCII characters are Chinese, Japanese kanjis, and
 emojis, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;john doe&quot;, &quot;35&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5767,7 +6091,9 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>A list of parameters for jobs with spark submit task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A list of parameters for jobs with spark submit task, for example
 <code>'spark_submit_params': ['--class',
 'org.apache.spark.examples.SparkPi']</code>. The parameters are
 passed to spark-submit script as command-line parameters. If
@@ -5783,7 +6109,9 @@ non-ASCII characters returns an error. Examples of invalid,
 non-ASCII characters are Chinese, Japanese kanjis, and
 emojis, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;--class&quot;, &quot;org.apache.spark.examples.SparkPi&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5793,11 +6121,15 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for jobs with Python wheel task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for jobs with Python wheel task, for example
 <code>'python_named_params': {'name': 'task', 'data':
 'dbfs:/path/to/data.json'}</code>, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;name&quot;: &quot;task&quot;, &quot;data&quot;: &quot;dbfs:/path/to/data.json&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5807,7 +6139,11 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td></td>
+          <td>
+            <div class="doc-md-description">
+              
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5817,11 +6153,15 @@ emojis, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>]</code>
           </td>
-          <td><p>A map from keys to values for SQL tasks, for example <code>'sql_params':
+          <td>
+            <div class="doc-md-description">
+              <p>A map from keys to values for SQL tasks, for example <code>'sql_params':
 {'name': 'john doe', 'age': '35'}</code>. The SQL alert task does
 not support custom parameters, e.g.
 <div class="highlight"><pre><span></span><code>{&quot;name&quot;: &quot;john doe&quot;, &quot;age&quot;: &quot;35&quot;}
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5831,10 +6171,14 @@ not support custom parameters, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
           </td>
-          <td><p>An array of commands to execute for jobs with the dbt task, for example
+          <td>
+            <div class="doc-md-description">
+              <p>An array of commands to execute for jobs with the dbt task, for example
 <code>'dbt_commands': ['dbt deps', 'dbt seed', 'dbt run']</code>, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;dbt deps&quot;, &quot;dbt seed&quot;, &quot;dbt run&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -5855,7 +6199,11 @@ not support custom parameters, e.g.
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>repair_id: int</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>repair_id: int</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -6292,7 +6640,11 @@ after the job is submitted.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -6302,7 +6654,9 @@ after the job is submitted.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.RunSubmitTaskSettings" href="../models/jobs/#prefect_databricks.models.jobs.RunSubmitTaskSettings">RunSubmitTaskSettings</a>]]</code>
           </td>
-          <td><p>, e.g.
+          <td>
+            <div class="doc-md-description">
+              <p>, e.g.
 <div class="highlight"><pre><span></span><code>[
     {
         &quot;task_key&quot;: &quot;Sessionize&quot;,
@@ -6353,7 +6707,9 @@ after the job is submitted.</p>
         &quot;timeout_seconds&quot;: 86400,
     },
 ]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6363,8 +6719,12 @@ after the job is submitted.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An optional name for the run. The default value is <code>Untitled</code>, e.g. <code>A
-multitask job run</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An optional name for the run. The default value is <code>Untitled</code>, e.g. <code>A
+multitask job run</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6374,7 +6734,9 @@ multitask job run</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.WebhookNotifications" href="../models/jobs/#prefect_databricks.models.jobs.WebhookNotifications">WebhookNotifications</a></code>
           </td>
-          <td><p>A collection of system notification IDs to notify when runs of this job
+          <td>
+            <div class="doc-md-description">
+              <p>A collection of system notification IDs to notify when runs of this job
 begin or complete. The default behavior is to not send any
 system notifications. Key-values:
 - on_start:
@@ -6397,7 +6759,9 @@ system notifications. Key-values:
     fails. A maximum of 3 destinations can be specified for the
     <code>on_failure</code> property, e.g.
     <div class="highlight"><pre><span></span><code>[{&quot;id&quot;: &quot;0481e838-0a59-4eff-9541-a4ca6f149574&quot;}]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6407,7 +6771,9 @@ system notifications. Key-values:
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.GitSource" href="../models/jobs/#prefect_databricks.models.jobs.GitSource">GitSource</a></code>
           </td>
-          <td><p>This functionality is in Public Preview.  An optional specification for
+          <td>
+            <div class="doc-md-description">
+              <p>This functionality is in Public Preview.  An optional specification for
 a remote repository containing the notebooks used by this
 job's notebook tasks, e.g.
 <code>{
@@ -6439,7 +6805,9 @@ job's notebook tasks, e.g.
     <code>e0056d01</code>.
 - git_snapshot:
     Read-only state of the remote repository at the time the job was run.
-                This field is only included on job runs.</p></td>
+                This field is only included on job runs.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6449,8 +6817,12 @@ job's notebook tasks, e.g.
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>An optional timeout applied to each run of this job. The default
-behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An optional timeout applied to each run of this job. The default
+behavior is to have no timeout, e.g. <code>86400</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6460,7 +6832,9 @@ behavior is to have no timeout, e.g. <code>86400</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An optional token that can be used to guarantee the idempotency of job
+          <td>
+            <div class="doc-md-description">
+              <p>An optional token that can be used to guarantee the idempotency of job
 run requests. If a run with the provided token already
 exists, the request does not create a new run but returns
 the ID of the existing run instead. If a run with the
@@ -6471,7 +6845,9 @@ exactly one run is launched with that idempotency token.
 This token must have at most 64 characters.  For more
 information, see <a href="https://kb.databricks.com/jobs/jobs-idempotency.html">How to ensure idempotency for
 jobs</a>,
-e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
+e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6481,7 +6857,11 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.AccessControlRequest" href="../models/jobs/#prefect_databricks.models.jobs.AccessControlRequest">AccessControlRequest</a>]]</code>
           </td>
-          <td><p>List of permissions to set on the job.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of permissions to set on the job.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -6502,7 +6882,11 @@ e.g. <code>8f018174-4792-40d5-bcbc-3e6a527352c8</code>.</p></td>
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, a dict of the response. </br>- <code>run_id: int</code></br></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, a dict of the response. </br>- <code>run_id: int</code></br></p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -6980,7 +7364,11 @@ endpoint to overwrite all job settings.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.DatabricksCredentials" href="../credentials/#prefect_databricks.credentials.DatabricksCredentials">DatabricksCredentials</a></code>
           </td>
-          <td><p>Credentials to use for authentication with Databricks.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Credentials to use for authentication with Databricks.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -6990,8 +7378,12 @@ endpoint to overwrite all job settings.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The canonical identifier of the job to update. This field is required,
-e.g. <code>11223344</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The canonical identifier of the job to update. This field is required,
+e.g. <code>11223344</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -7001,7 +7393,9 @@ e.g. <code>11223344</code>.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs" href="../models/jobs/#prefect_databricks.models.jobs">models</a>.<a class="autorefs autorefs-internal" title="prefect_databricks.models.jobs.JobSettings" href="../models/jobs/#prefect_databricks.models.jobs.JobSettings">JobSettings</a></code>
           </td>
-          <td><p>The new settings for the job. Any top-level fields specified in
+          <td>
+            <div class="doc-md-description">
+              <p>The new settings for the job. Any top-level fields specified in
 <code>new_settings</code> are completely replaced. Partially updating
 nested fields is not supported.  Changes to the field
 <code>JobSettings.timeout_seconds</code> are applied to active runs.
@@ -7163,7 +7557,9 @@ Changes to other fields are applied to future runs only. Key-values:
     Used to tell what is the format of the job. This field is
     ignored in Create/Update/Reset calls. When using the Jobs
     API 2.1 this value is always set to <code>'MULTI_TASK'</code>, e.g.
-    <code>MULTI_TASK</code>.</p></td>
+    <code>MULTI_TASK</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -7173,10 +7569,14 @@ Changes to other fields are applied to future runs only. Key-values:
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>Remove top-level fields in the job settings. Removing nested fields is
+          <td>
+            <div class="doc-md-description">
+              <p>Remove top-level fields in the job settings. Removing nested fields is
 not supported. This field is optional, e.g.
 <div class="highlight"><pre><span></span><code>[&quot;libraries&quot;, &quot;schedule&quot;]
-</code></pre></div></p></td>
+</code></pre></div></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -7197,7 +7597,11 @@ not supported. This field is optional, e.g.
           <td>
                 <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>Upon success, an empty dict.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Upon success, an empty dict.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -7850,7 +8254,7 @@ not supported. This field is optional, e.g.
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
     
   </body>
