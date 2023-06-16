@@ -425,7 +425,7 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
         result = await jobs_runs_submit_by_id_and_wait_for_completion(
             databricks_credentials=databricks_credentials, job_id=11223344
         )
-        assert result == {'prefect-task': {'cell': 'output'}}
+        assert result == {"prefect-task": {"cell": "output"}}
 
     @pytest.mark.respx(assert_all_called=False)
     @pytest.mark.parametrize("result_state", ["FAILED", "TIMEDOUT", "CANCELED"])
