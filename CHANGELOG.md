@@ -19,6 +19,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## 0.1.6
+
+Released on June 16th, 2023.
+
+### Fixed
+
+- Fixes errors when running multi-task jobs by retrieving output from each task individually - [#75](https://github.com/PrefectHQ/prefect-databricks/pull/75)
+
 ## 0.1.5
 
 Released on May 30th, 2023.
