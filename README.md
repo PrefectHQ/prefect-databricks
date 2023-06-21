@@ -7,7 +7,7 @@
         <img alt="PyPI" src="https://img.shields.io/pypi/v/prefect-databricks?color=0052FF&labelColor=090422"></a>
     <a href="https://github.com/PrefectHQ/prefect-databricks/" alt="Stars">
         <img src="https://img.shields.io/github/stars/PrefectHQ/prefect-databricks?color=0052FF&labelColor=090422" /></a>
-    <a href="https://pepy.tech/badge/prefect-databricks/" alt="Downloads">
+    <a href="https://pypistats.org/packages/prefect-databricks/" alt="Downloads">
         <img src="https://img.shields.io/pypi/dm/prefect-databricks?color=0052FF&labelColor=090422" /></a>
     <a href="https://github.com/PrefectHQ/prefect-databricks/pulse" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/PrefectHQ/prefect-databricks?color=0052FF&labelColor=090422" /></a>
@@ -208,7 +208,7 @@ DatabricksCredentials.load("BLOCK_NAME-PLACEHOLDER")
 !!! info "Registering blocks"
 
     Register blocks in this module to
-    [view and edit them](https://orion-docs.prefect.io/ui/blocks/)
+    [view and edit them](https://docs.prefect.io/ui/blocks/)
     on Prefect Cloud:
 
     ```bash
