@@ -4,7 +4,12 @@ from typing import Any, Dict, Optional
 
 from httpx import AsyncClient
 from prefect.blocks.core import Block
-from pydantic import Field, SecretStr
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import Field, SecretStr
+else:
+    from pydantic import Field, SecretStr
 
 
 class DatabricksCredentials(Block):

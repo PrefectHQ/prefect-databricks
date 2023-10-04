@@ -2,7 +2,12 @@ from typing import List
 
 import httpx
 import pytest
-from pydantic import BaseModel, Extra
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import BaseModel, Extra
+else:
+    from pydantic import BaseModel, Extra
 
 from prefect_databricks import DatabricksCredentials
 from prefect_databricks.rest import (

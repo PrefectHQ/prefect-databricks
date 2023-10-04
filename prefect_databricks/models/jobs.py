@@ -7,7 +7,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import BaseModel, Extra, Field
+else:
+    from pydantic import BaseModel, Extra, Field
+
 from typing_extensions import Literal
 
 

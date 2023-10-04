@@ -11,7 +11,12 @@ from typing import TYPE_CHECKING, Any, Dict, Optional, Union
 
 import httpx
 from prefect import task
-from pydantic import BaseModel
+from pydantic import VERSION as PYDANTIC_VERSION
+
+if PYDANTIC_VERSION.startswith("2."):
+    from pydantic.v1 import BaseModel
+else:
+    from pydantic import BaseModel
 
 if TYPE_CHECKING:
     from prefect_databricks import DatabricksCredentials
