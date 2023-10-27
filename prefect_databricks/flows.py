@@ -181,7 +181,7 @@ async def jobs_runs_submit_and_wait_for_completion(
         max_wait_seconds: Maximum number of seconds to wait for the entire flow to complete.
         poll_frequency_seconds: Number of seconds to wait in between checks for
             run completion.
-        job_submission_handler: an optional callable to intercept job submission
+        job_submission_handler: An optional callable to intercept job submission
         **jobs_runs_submit_kwargs: Additional keyword arguments to pass to `jobs_runs_submit`.
     Returns:
         A dictionary of task keys to its corresponding notebook output.
