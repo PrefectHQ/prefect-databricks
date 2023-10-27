@@ -133,11 +133,6 @@ def successful_job_path(request, route):
         )
 
 
-class JobSubmissionDummyHandler(object):
-    def handle(self, result):
-        self.result = result
-
-
 class TestJobsRunsSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
