@@ -451,7 +451,7 @@ class TestJobsRunsSubmitAndWaitForCompletion:
                     "task_key": "key",
                 }
             ],
-            job_submission_handler=partial(handler, global_state),
+            job_submission_handler=partial(handler, state=global_state),
         )
         assert result == {"prefect-task": {"cell": "output"}}
         assert "result" in global_state
