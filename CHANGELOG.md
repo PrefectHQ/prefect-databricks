@@ -19,6 +19,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## 0.2.1
+Released October 27th, 2023.
+
+### Added
+- Optional handler to intercept job submission - [#89](https://github.com/PrefectHQ/prefect-databricks/pull/89)
+
+## 0.2.0
+
+Released October 4th, 2023.
+
+### Added
+- Conditional imports to support operating with pydantic>2 installed - [#87](https://github.com/PrefectHQ/prefect-databricks/pull/87)
+
 ## 0.1.6
 
 Released on June 16th, 2023.
