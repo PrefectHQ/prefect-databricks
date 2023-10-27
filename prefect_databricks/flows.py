@@ -412,7 +412,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         dbt_commands:
             An array of commands to execute for jobs with the dbt task,
             for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]
-        job_submission_handler: an optional callable to intercept job submission
+        job_submission_handler: An optional callable to intercept job submission
 
     Raises:
         DatabricksJobTerminated:
