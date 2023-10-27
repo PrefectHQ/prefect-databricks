@@ -438,7 +438,6 @@ class TestJobsRunsSubmitAndWaitForCompletion:
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
-        handler = JobSubmissionDummyHandler()
         result = await jobs_runs_submit_and_wait_for_completion(
             databricks_credentials=databricks_credentials,
             run_name="prefect-job",
