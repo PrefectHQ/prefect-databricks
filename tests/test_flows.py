@@ -1,4 +1,5 @@
 import re
+from functools import partial
 
 import pytest
 from httpx import Response
@@ -45,6 +46,19 @@ def common_mocks(respx_mock):
         "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/submit",
         headers={"Authorization": "Bearer testing_token"},
     ).mock(return_value=Response(200, json={"run_id": 11223344}))
+
+
+@pytest.fixture
+def global_state():
+    return {}
+
+
+def sync_handler(result, state):
+    state["result"] = result
+
+
+async def async_handler(result, state):
+    state["result"] = result
 
 
 def successful_job_path(request, route):
@@ -392,9 +406,16 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         )
         assert result == {"prefect-task": {"cell": "output"}}
 
+    @pytest.mark.parametrize(
+        "handler",
+        [
+            sync_handler,
+            async_handler,
+        ],
+    )
     @pytest.mark.respx(assert_all_called=True)
     async def test_handler_invoked(
-        self, common_mocks, respx_mock, databricks_credentials
+        self, handler, common_mocks, respx_mock, databricks_credentials, global_state
     ):
         respx_mock.get(
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=11223344",  # noqa
@@ -430,10 +451,10 @@ class TestJobsRunsSubmitAndWaitForCompletion:
                     "task_key": "key",
                 }
             ],
-            job_submission_handler=lambda x: handler.handle(x),
+            job_submission_handler=partial(handler, global_state),
         )
         assert result == {"prefect-task": {"cell": "output"}}
-        assert handler.result is not None
+        assert "result" in global_state
 
 
 class TestJobsRunsIdSubmitAndWaitForCompletion:
@@ -594,9 +615,22 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
                 max_wait_seconds=0,
             )
 
+    @pytest.mark.parametrize(
+        "handler",
+        [
+            sync_handler,
+            async_handler,
+        ],
+    )
     @pytest.mark.respx(assert_all_called=False)
     async def test_handler_invoked(
-        self, common_mocks, run_now_mocks, respx_mock, databricks_credentials
+        self,
+        handler,
+        common_mocks,
+        run_now_mocks,
+        respx_mock,
+        databricks_credentials,
+        global_state,
     ):
         respx_mock.post(
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/run-now?job_id=11223344",  # noqa
@@ -626,11 +660,11 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
             "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
             headers={"Authorization": "Bearer testing_token"},
         ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
-        handler = JobSubmissionDummyHandler()
+
         result = await jobs_runs_submit_by_id_and_wait_for_completion(
             databricks_credentials=databricks_credentials,
             job_id=11223344,
-            job_submission_handler=lambda x: handler.handle(x),
+            job_submission_handler=partial(handler, state=global_state),
         )
         assert result == {"prefect-task": {"cell": "output"}}
-        assert handler.result is not None
+        assert "result" in global_state

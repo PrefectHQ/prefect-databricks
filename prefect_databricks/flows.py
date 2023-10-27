@@ -3,6 +3,7 @@ Module containing flows for interacting with Databricks
 """
 
 import asyncio
+import inspect
 from logging import Logger
 from typing import Any, Callable, Dict, List, Optional
 
@@ -180,6 +181,7 @@ async def jobs_runs_submit_and_wait_for_completion(
         max_wait_seconds: Maximum number of seconds to wait for the entire flow to complete.
         poll_frequency_seconds: Number of seconds to wait in between checks for
             run completion.
+        job_submission_handler: an optional callable to intercept job submission
         **jobs_runs_submit_kwargs: Additional keyword arguments to pass to `jobs_runs_submit`.
     Returns:
         A dictionary of task keys to its corresponding notebook output.
@@ -250,7 +252,9 @@ async def jobs_runs_submit_and_wait_for_completion(
 
     multi_task_jobs_runs = await multi_task_jobs_runs_future.result()
     if job_submission_handler:
-        job_submission_handler(multi_task_jobs_runs)
+        result = job_submission_handler(multi_task_jobs_runs)
+        if inspect.isawaitable(result):
+            await result
     multi_task_jobs_runs_id = multi_task_jobs_runs["run_id"]
 
     # wait for all the jobs runs to complete in a separate flow
@@ -408,6 +412,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
         dbt_commands:
             An array of commands to execute for jobs with the dbt task,
             for example "dbt_commands": ["dbt deps", "dbt seed", "dbt run"]
+        job_submission_handler: an optional callable to intercept job submission
 
     Raises:
         DatabricksJobTerminated:
@@ -463,8 +468,11 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     )
 
     jobs_runs = await jobs_runs_future.result()
+
     if job_submission_handler:
-        job_submission_handler(jobs_runs)
+        result = job_submission_handler(jobs_runs)
+        if inspect.isawaitable(result):
+            await result
     job_run_id = jobs_runs["run_id"]
 
     # wait for all the jobs runs to complete in a separate flow
