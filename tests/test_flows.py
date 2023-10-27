@@ -119,6 +119,11 @@ def successful_job_path(request, route):
         )
 
 
+class JobSubmissionDummyHandler(object):
+    def handle(self, result):
+        self.result = result
+
+
 class TestJobsRunsSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=True)
     async def test_run_success(self, common_mocks, respx_mock, databricks_credentials):
@@ -387,6 +392,49 @@ class TestJobsRunsSubmitAndWaitForCompletion:
         )
         assert result == {"prefect-task": {"cell": "output"}}
 
+    @pytest.mark.respx(assert_all_called=True)
+    async def test_handler_invoked(
+        self, common_mocks, respx_mock, databricks_credentials
+    ):
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=11223344",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(
+            return_value=Response(
+                200,
+                json={
+                    "state": {
+                        "life_cycle_state": "TERMINATED",
+                        "state_message": "",
+                        "result_state": "SUCCESS",
+                    },
+                    "tasks": [{"run_id": 11223344, "task_key": "prefect-task"}],
+                },
+            )
+        )
+
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
+        handler = JobSubmissionDummyHandler()
+        result = await jobs_runs_submit_and_wait_for_completion(
+            databricks_credentials=databricks_credentials,
+            run_name="prefect-job",
+            tasks=[
+                {
+                    "notebook_task": {
+                        "notebook_path": "path",
+                        "base_parameters": {"param": "a"},
+                    },
+                    "task_key": "key",
+                }
+            ],
+            job_submission_handler=lambda x: handler.handle(x),
+        )
+        assert result == {"prefect-task": {"cell": "output"}}
+        assert handler.result is not None
+
 
 class TestJobsRunsIdSubmitAndWaitForCompletion:
     @pytest.mark.respx(assert_all_called=False)
@@ -545,3 +593,44 @@ class TestJobsRunsIdSubmitAndWaitForCompletion:
                 job_id=11223344,
                 max_wait_seconds=0,
             )
+
+    @pytest.mark.respx(assert_all_called=False)
+    async def test_handler_invoked(
+        self, common_mocks, run_now_mocks, respx_mock, databricks_credentials
+    ):
+        respx_mock.post(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/run-now?job_id=11223344",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(
+            return_value=Response(
+                200, json={"run_id": 11223344, "number_in_job": 11223344}
+            )
+        )
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get?run_id=11223344",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(
+            return_value=Response(
+                200,
+                json={
+                    "state": {
+                        "life_cycle_state": "TERMINATED",
+                        "state_message": "",
+                        "result_state": "SUCCESS",
+                    },
+                    "tasks": [{"run_id": 11223344, "task_key": "prefect-task"}],
+                },
+            )
+        )
+        respx_mock.get(
+            "https://dbc-abcdefgh-123d.cloud.databricks.com/api/2.1/jobs/runs/get-output",  # noqa
+            headers={"Authorization": "Bearer testing_token"},
+        ).mock(return_value=Response(200, json={"notebook_output": {"cell": "output"}}))
+        handler = JobSubmissionDummyHandler()
+        result = await jobs_runs_submit_by_id_and_wait_for_completion(
+            databricks_credentials=databricks_credentials,
+            job_id=11223344,
+            job_submission_handler=lambda x: handler.handle(x),
+        )
+        assert result == {"prefect-task": {"cell": "output"}}
+        assert handler.result is not None

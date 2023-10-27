@@ -4,7 +4,7 @@ Module containing flows for interacting with Databricks
 
 import asyncio
 from logging import Logger
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 from prefect import flow, get_run_logger
 
@@ -67,6 +67,7 @@ async def jobs_runs_submit_and_wait_for_completion(
     timeout_seconds: Optional[int] = None,
     idempotency_token: Optional[str] = None,
     access_control_list: Optional[List[AccessControlRequest]] = None,
+    job_submission_handler: Optional[Callable] = None,
     **jobs_runs_submit_kwargs: Dict[str, Any],
 ) -> Dict:
     """
@@ -248,6 +249,8 @@ async def jobs_runs_submit_and_wait_for_completion(
     )
 
     multi_task_jobs_runs = await multi_task_jobs_runs_future.result()
+    if job_submission_handler:
+        job_submission_handler(multi_task_jobs_runs)
     multi_task_jobs_runs_id = multi_task_jobs_runs["run_id"]
 
     # wait for all the jobs runs to complete in a separate flow
@@ -326,6 +329,7 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     pipeline_params: Optional[str] = None,
     sql_params: Optional[Dict] = None,
     dbt_commands: Optional[List] = None,
+    job_submission_handler: Optional[Callable] = None,
     **jobs_runs_submit_kwargs: Dict[str, Any],
 ) -> Dict:
     """flow that triggers an existing job and waits for its completion
@@ -459,6 +463,8 @@ async def jobs_runs_submit_by_id_and_wait_for_completion(
     )
 
     jobs_runs = await jobs_runs_future.result()
+    if job_submission_handler:
+        job_submission_handler(jobs_runs)
     job_run_id = jobs_runs["run_id"]
 
     # wait for all the jobs runs to complete in a separate flow
