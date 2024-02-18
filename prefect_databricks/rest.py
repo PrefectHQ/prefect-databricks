@@ -27,10 +27,10 @@ class HTTPMethod(Enum):
     Available HTTP request methods.
     """
 
+    DELETE = "delete"
     GET = "get"
     POST = "post"
     PUT = "put"
-    DELETE = "delete"
     PATCH = "patch"
 
 
